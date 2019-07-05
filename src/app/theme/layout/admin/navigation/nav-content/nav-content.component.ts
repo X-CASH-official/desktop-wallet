@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {NavigationItem} from '../navigation';
 import {DattaConfig} from '../../../../../app-config';
 import {Location} from '@angular/common';
@@ -23,11 +24,10 @@ export class NavContentComponent implements OnInit, AfterViewInit {
   @ViewChild('navbarContent') navbarContent: ElementRef;
   @ViewChild('navbarWrapper') navbarWrapper: ElementRef;
 
-  constructor(public nav: NavigationItem, private zone: NgZone, private location: Location) {
+  constructor(private route: ActivatedRoute, public nav: NavigationItem, private zone: NgZone, private location: Location) {
     this.dattaConfig = DattaConfig.config;
     this.windowWidth = window.innerWidth;
-
-    this.navigation = this.nav.get();
+    this.navigation = this.route.snapshot._routerState.url === "/wallet_menu/main_menu" ? [] : this.nav.get();
     this.prevDisabled = 'disabled';
     this.nextDisabled = '';
     this.scrollWidth = 0;

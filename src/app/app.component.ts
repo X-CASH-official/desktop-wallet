@@ -9,7 +9,11 @@ import {NavigationEnd, Router} from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'datta-able';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router)
+  {
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;  
+  }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
