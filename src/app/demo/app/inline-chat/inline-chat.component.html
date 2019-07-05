@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" [options]="false" cardClass="msg-card mb-0" blockClass="card-body msg-block">
+      <div class="row">
+        <div class="col-lg-3 col-md-12">
+          <div class="h-list-header m-b-5">
+            <div class="input-group">
+              <input type="text" id="msg-friends" class="form-control" placeholder="Search Friend . . .">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class='feather icon-search'></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="h-list-body">
+            <div class="msg-user-list scroll-div">
+              <div class="main-friend-list">
+                <perfect-scrollbar ngClass="datta-scroll" [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 300px)'" [usePSClass]="'datta'" [disabled]="null" [autoPropagation] ="true">
+                  <div *ngFor="let friends of friendsList; let i = index" class="media userlist-box" [ngClass]="{'active': i === 1}" [attr.data-id]="friends.id" [attr.data-status]="{'online': friends.status, 'offline': !friends.status}" [attr.data-username]="friends.name">
+                    <a class="media-left" href="javascript:"><img class="media-object img-radius" src="{{friends.photo}}" alt="{{ friends.name }}"><div class="live-status" *ngIf="friends.new">{{friends.new}}</div></a>
+                    <div class="media-body">
+                      <h6 class="chat-header">{{friends.name}}<small class="d-block" *ngIf="friends.time" [ngClass]="{'text-c-green': friends.status, 'text-c-red': !friends.status}">{{friends.time}}</small></h6>
+                    </div>
+                  </div>
+                </perfect-scrollbar>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-12">
+          <div class="h-list-body">
+            <div class="msg-user-chat scroll-div">
+              <perfect-scrollbar ngClass="datta-scroll" [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 300px)'" [usePSClass]="'datta'" [disabled]="null" [autoPropagation] ="true">
+                <div class="main-friend-chat">
+                  <div class="media chat-messages">
+                    <a class="media-left photo-table" href="javascript:"><img class="media-object img-radius img-radius m-t-5" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image"></a>
+                    <div class="media-body chat-menu-content">
+                      <div class="">
+                        <p class="chat-cont">hello Datta! Will you tell me something</p>
+                        <p class="chat-cont">about yourself?</p>
+                      </div>
+                      <p class="chat-time">8:20 a.m.</p>
+                    </div>
+                  </div>
+                  <div class="media chat-messages">
+                    <div class="media-body chat-menu-reply">
+                      <div class="">
+                        <p class="chat-cont">Ohh! very nice</p>
+                      </div>
+                      <p class="chat-time">8:22 a.m.</p>
+                    </div>
+                  </div>
+                  <div class="media chat-messages">
+                    <a class="media-left photo-table" href="javascript:"><img class="media-object img-radius img-radius m-t-5" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image"></a>
+                    <div class="media-body chat-menu-content">
+                      <div class="">
+                        <p class="chat-cont">can you help me?</p>
+                      </div>
+                      <p class="chat-time">8:20 a.m.</p>
+                    </div>
+                  </div>
+                  <div #newChat [innerHTML]="newReplay"></div>
+                </div>
+              </perfect-scrollbar>
+            </div>
+          </div>
+          <hr>
+          <div class="msg-form">
+            <div class="input-group mb-0">
+              <input type="text" [(ngModel)]="message" class="form-control msg-send-chat" placeholder="Text . . ." (keyup)="sentMsg(1)" (keyup.enter)="sentMsg(0)">
+              <div class="input-group-append">
+                <input type="file" id="imgupload" style="display:none" />
+                <button id="OpenImgUpload" class="btn btn-secondary btn-icon" type="button" data-toggle="tooltip" title="file attachment"><i class="feather icon-paperclip"></i></button>
+              </div>
+              <div class="input-group-append">
+                <button class="btn btn-primary btn-icon btn-msg-send" type="button" [ngClass]="{'btn-danger': message_error === true}" (click)="sentMsg(0)"><i class="feather icon-play"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

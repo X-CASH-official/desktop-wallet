@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-xl-4 col-md-6">
+    <app-card cardTitle="Bar Chart" [options]="false">
+      <div #barBasicChart>
+        <chart id="bar_basic_chart" [type]="'bar'" [data]="barBasicChartData" [options]="barBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <app-card cardTitle="Bar [Stacked] Chart" [options]="false">
+      <div #barStackedChart>
+        <chart id="bar_stacked_chart" [type]="'bar'" [data]="barBasicChartData" [options]="barStackedChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-12">
+    <app-card cardTitle="Bar [Horizontal] Chart" [options]="false">
+      <div #barHorizontalChart>
+        <chart id="bar_horizontal_chart" [type]="'horizontalBar'" [data]="barBasicChartData" [options]="barBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-6 col-md-12">
+    <app-card cardTitle="Line Interpolation Mode Chart" [options]="false">
+      <div #lineIPMChart>
+        <chart id="line_ipm_chart" [type]="'line'" [data]="lineIPMChartData" [options]="lineIPMChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-6 col-md-12">
+    <app-card cardTitle="Area Chart" [options]="false">
+      <div #areaBasicChart>
+        <chart id="area_basic_chart" [type]="'line'" [data]="areaBasicChartData" [options]="areaBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-6 col-md-12">
+    <app-card cardTitle="Area [Fill: origin] Chart" [options]="false">
+      <div #areaFillOriginChart>
+        <chart id="area_fill_origin_chart" [type]="'line'" [data]="areaFillOriginChartData" [options]="areaBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-6 col-md-12">
+    <app-card cardTitle="Area [Fill: end] Chart" [options]="false">
+      <div #areaFillEndChart>
+        <chart id="area_fill_end_chart" [type]="'line'" [data]="areaFillEndChartData" [options]="areaBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <app-card cardTitle="Radar [Area] Chart" [options]="false">
+      <div #areaRadar1Chart>
+        <chart id="area_radar1_chart" [type]="'radar'" [data]="areaRadar1ChartData" [options]="areaBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <app-card cardTitle="Radar [Area] Chart" [options]="false">
+      <div #areaRadar2Chart>
+        <chart id="area_radar2_chart" [type]="'radar'" [data]="areaRadar2ChartData" [options]="areaBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <app-card cardTitle="Radar [Area] Chart" [options]="false">
+      <div #areaRadar3Chart>
+        <chart id="area_radar3_chart" [type]="'radar'" [data]="areaRadar3ChartData" [options]="areaBasicChartOption"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <app-card cardTitle="Pie Chart" [options]="false">
+      <div #pieChart>
+        <chart id="pie_chart" [type]="'pie'" [data]="pieChartData"></chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <app-card cardTitle="Doughnut Chart" [options]="false">
+      <div #doughnutChart>
+        <chart id="doughnut_chart" [type]="'doughnut'" [data]="pieChartData"></chart>
+      </div>
+    </app-card>
+  </div>
+</div>

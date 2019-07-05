@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Form Validation">
+      <form #validationForm="ngForm" class="editForm" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label" for="email">Email</label>
+                <input class="form-control input-md" id="email" name="email" type="text" placeholder="Enter Email" [ngClass]="{'is-invalid': !email.valid && (email.dirty || email.touched || isSubmit)}" #email="ngModel" required email [(ngModel)]="formInput.email">
+                <label *ngIf="!email.valid && (email.dirty || email.touched || isSubmit)" id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid email address.</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="validation-password" placeholder="Enter Password" [ngClass]="{'is-invalid': !password.valid && (password.dirty || password.touched || isSubmit)}" #password="ngModel" minlength="6" required [(ngModel)]="formInput.password">
+                <label *ngIf="!password.valid && (password.dirty || password.touched || isSubmit)" id="validation-password-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid password.</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Confirm password</label>
+                <input type="password" class="form-control" name="validation-password-confirm" placeholder="Enter Confirm Password" [ngClass]="{'is-invalid': !confirmPassword.valid && (confirmPassword.dirty || confirmPassword.touched || isSubmit)}" #confirmPassword="ngModel" [equalTo]="password" [(ngModel)]="formInput.confirmPassword">
+                <label *ngIf="!confirmPassword.valid && (confirmPassword.dirty || confirmPassword.touched || isSubmit)" id="validation-password-confirm-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid confirm  password.</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Required</label>
+                <input type="text" class="form-control" name="validation-required" placeholder="Enter Value" [ngClass]="{'is-invalid': !requiredInput.valid && (requiredInput.dirty || requiredInput.touched || isSubmit)}" #requiredInput="ngModel" required [(ngModel)]="formInput.requiredInput">
+                <label *ngIf="!requiredInput.valid && (requiredInput.dirty || requiredInput.touched || isSubmit)" id="validation-required-error" class="error jquery-validation-error small form-text invalid-feedback">This field should be required</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">URL</label>
+                <input type="text" class="form-control" name="validation-url" placeholder="Enter Value" [ngClass]="{'is-invalid': !url.valid && (url.dirty || url.touched || isSubmit)}" #url="ngModel" required url [(ngModel)]="formInput.url">
+                <label *ngIf="!url.valid && (url.dirty || url.touched || isSubmit)" id="validation-url-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter valid URL.</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Phone</label>
+                <input type="text" class="form-control" name="validation-phone" placeholder="Enter Contact Number" [ngClass]="{'is-invalid': !phone.valid && (phone.dirty || phone.touched || isSubmit)}" #phone="ngModel" required maxlength="12" minlength="10" phone="IN" [(ngModel)]="formInput.phone">
+                <label *ngIf="!phone.valid && (phone.dirty || phone.touched || isSubmit)" id="validation-phone-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter valid contact number.</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Select</label>
+                <select class="form-control" name="validation-cmbGear" [ngClass]="{'is-invalid': !cmbGear.valid && (cmbGear.dirty || cmbGear.touched || isSubmit)}" #cmbGear="ngModel" required [(ngModel)]="formInput.cmbGear">
+                  <option value>Select gear...</option>
+                  <optgroup label="Climbing">
+                    <option value="pitons">Pitons</option>
+                    <option value="cams">Cams</option>
+                    <option value="nuts">Nuts</option>
+                    <option value="bolts">Bolts</option>
+                    <option value="stoppers">Stoppers</option>
+                    <option value="sling">Sling</option>
+                  </optgroup>
+                  <optgroup label="Skiing">
+                    <option value="skis">Skis</option>
+                    <option value="skins">Skins</option>
+                    <option value="poles">Poles</option>
+                  </optgroup>
+                </select>
+                <label *ngIf="!cmbGear.valid && (cmbGear.dirty || cmbGear.touched || isSubmit)" id="validation-cmbGear-error" class="error jquery-validation-error small form-text invalid-feedback">The Gear selection should be required.</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Address</label>
+                <textarea class="form-control" name="validation-address" [ngClass]="{'is-invalid': !address.valid && (address.dirty || address.touched || isSubmit)}" #address="ngModel" required [(ngModel)]="formInput.address"></textarea>
+                <label *ngIf="!address.valid && (address.dirty || address.touched || isSubmit)" id="validation-address-error" class="error jquery-validation-error small form-text invalid-feedback">The address field should be required.</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button type="button" uiSref="work" class="btn btn-primary btn-raised"  (click)="save(validationForm)"> Next <span style="margin-left:10px;"><i class="feather icon-chevron-right"></i></span></button>
+          </div>
+      </form>
+    </app-card>
+  </div>
+</div>

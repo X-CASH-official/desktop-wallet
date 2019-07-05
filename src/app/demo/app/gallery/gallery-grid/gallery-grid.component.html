@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Image Grid" [options]="false">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6" *ngFor="let img of images; let i = index">
+          <div class="thumbnail mb-4">
+            <div class="thumb">
+              <ks-modal-gallery [id]="img.id" [currentImageConfig]="{description: customFullDescriptionHidden}" [modalImages]="[img]" [dotsConfig]="{visible: false}" [previewConfig]="{visible: false}"></ks-modal-gallery>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-sm-12">
+    <app-card cardTitle="Video Grid" [options]="false">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail mb-4">
+            <div class="thumb">
+              <div class="embed-responsive embed-responsive-4by3">
+                <iframe allowfullscreen="" src="//player.vimeo.com/video/246066429?title=0&amp;byline=0&amp;portrait=0"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail mb-4">
+            <div class="thumb">
+              <div class="embed-responsive embed-responsive-4by3">
+                <iframe allowfullscreen="" src="//player.vimeo.com/video/246066429?title=0&amp;byline=0&amp;portrait=0"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail mb-4">
+            <div class="thumb">
+              <div class="embed-responsive embed-responsive-4by3">
+                <iframe allowfullscreen="" src="//player.vimeo.com/video/246066429?title=0&amp;byline=0&amp;portrait=0"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail mb-4">
+            <div class="thumb">
+              <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/IkyZHPnfFnE"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail mb-4">
+            <div class="thumb">
+              <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/IkyZHPnfFnE"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail mb-4">
+            <div class="thumb">
+              <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/IkyZHPnfFnE"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

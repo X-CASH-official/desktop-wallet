@@ -1,0 +1,17 @@
+<div class="h-list-header">
+  <div class="input-group">
+    <input type="text" id="search-friends" class="form-control" placeholder="Search Friend . . .">
+  </div>
+</div>
+<div class="h-list-body">
+  <a href="javascript:" class="h-close-text" (click)="this.onChatCollapse.emit();"><i class="feather icon-chevrons-right"></i></a>
+  <div class="main-friend-cont scroll-div">
+    <div class="main-friend-list">
+      <perfect-scrollbar ngClass="datta-scroll" [style.max-width]="'350px'" [style.max-height]="'calc(100vh - 85px)'" [usePSClass]="'datta'" [disabled]="null" [autoPropagation] ="true">
+        <ng-container *ngFor="let friends of friendsList">
+          <app-friend (onChatOn)="onChatOn(friends.id)" [friends]="friends"></app-friend>
+        </ng-container>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>

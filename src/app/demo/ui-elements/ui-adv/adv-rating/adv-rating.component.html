@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <app-card cardTitle="1/10 Rating">
+      <p>Use attribute<code>theme</code> as value <code>horizontal</code> to see default rating</p>
+      <div class="box-body f-left">
+        <bar-rating [(rate)]="rateHorizontal" [max]="10" [theme]="'horizontal'"></bar-rating>
+        <span class="current-rating"></span>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <app-card cardTitle="Movie Rating">
+      <p>Use attribute<code>theme</code> as value <code>movie</code> to see movie rating</p>
+      <div class="box-body">
+        <bar-rating [(rate)]="rateMovie" [max]="4" [theme]="'movie'" [showText]="true" [titles]="['Bad', 'Mediocre' , 'Good', 'Awesome']"></bar-rating>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <app-card cardTitle="Square Rating">
+      <p>Use attribute<code>theme</code> as value <code>square</code> to see square rating</p>
+      <div class="box-body">
+        <bar-rating [(rate)]="rateSquare" [max]="5" [theme]="'square'"></bar-rating>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <app-card cardTitle="Read Only rating">
+      <p>Use attribute<code>readOnly</code> as value <code>true</code> to see read only rating</p>
+      <div class="box-body">
+        <bar-rating [(rate)]="rateMovie" [max]="5" [readOnly]="true" [theme]="'movie'" [showText]="true" [titles]="['Strongly Agree', 'Agree' , 'Neither Agree or Disagree', 'Disagree', 'Strongly Disagree']"></bar-rating>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <app-card cardTitle="Star Rating">
+      <p>Use attribute<code>theme</code> as value <code>stars</code> to see star rating</p>
+      <div class="box-body">
+        <bar-rating [(rate)]="rateStar" [max]="8" [theme]="'stars'"></bar-rating>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <app-card cardTitle="Vertical Rating">
+      <p>Use attribute<code>theme</code> as value <code>vertical</code> to see vertical rating</p>
+      <div class="box-body f-left">
+        <bar-rating [(rate)]="rateVertical" [max]="10" [theme]="'vertical'"></bar-rating>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <app-card cardTitle="CSS Default Rating">
+      <p>Use tag<code>bar-rating</code> to see css default stars rating</p>
+      <div class="stars stars-example-css">
+        <bar-rating [(rate)]="rateDefault" [max]="5"></bar-rating>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<form *ngIf="configForm" [formGroup]="configForm">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Input Template</label>
+        <div class="col-sm-9">
+          <div class="radio d-inline" *ngFor="let template of inputTemplateOptions">
+            <input type="radio" checked formControlName="inputTemplate" [value]="template.value" id="template-{{ template.value }}">
+            <label for="template-{{ template.value }}" class="cr">{{ template.label }}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Icons</label>
+        <div class="col-sm-9">
+          <div class="radio d-inline" *ngFor="let iconSet of iconSets">
+            <input type="radio" checked formControlName="iconSet" [value]="iconSet.value" id="icons-{{ iconSet.value }}">
+            <label for="icons-{{ iconSet.value }}" class="cr">{{ iconSet.label }}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="checkbox d-inline">
+          <input type="checkbox" formControlName="closeOnSelect" id="checkbox-1" checked>
+          <label for="checkbox-1" class="cr">Close when a date is selected</label>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="checkbox d-inline">
+          <input type="checkbox" formControlName="disableWeekends" id="checkbox-2" checked>
+          <label for="checkbox-2" class="cr">Disable selection of weekend days</label>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="checkbox d-inline">
+          <input type="checkbox" formControlName="highlightEvenDays" id="checkbox-3" checked>
+          <label for="checkbox-3" class="cr">Highlight even days</label>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="checkbox d-inline">
+          <input type="checkbox" formControlName="disableDatepicker" id="checkbox-4" checked>
+          <label for="checkbox-4" class="cr">Toggle disabled</label>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="checkbox d-inline">
+          <input type="checkbox" formControlName="showDayQuickOptions" id="checkbox-5" checked>
+          <label for="checkbox-5" class="cr">Show Quick Day Options</label>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="checkbox d-inline">
+          <input type="checkbox" formControlName="showEmptyRow" id="checkbox-6" checked>
+          <label for="checkbox-6" class="cr">Show Empty Row</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Display Format</label>
+        <div class="col-sm-10">
+          <select  class="form-control" formControlName="displayFormat" name="display-format" id="display-format">
+            <option *ngFor="let option of displayFormatOptions" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Datepicker Position</label>
+        <div class="col-sm-10">
+          <select  class="form-control" formControlName="position" name="position" id="position">
+            <option *ngFor="let option of positionOptions" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col">
+          <label>
+            Min (Earliest) Date<br>
+          </label>
+          <ic-datepicker formControlName="minDate" [options]="minDateOptions"></ic-datepicker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col">
+          <label>
+            Max (Latest) Date<br>
+          </label>
+          <ic-datepicker formControlName="maxDate" [options]="maxDateOptions"></ic-datepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

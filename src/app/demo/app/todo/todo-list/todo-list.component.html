@@ -1,0 +1,190 @@
+<div class="row">
+  <div class="col-xl-6">
+    <app-card cardTitle="To Do Card List" [options]="false">
+      <div class="input-group mb-3">
+        <input type="text" [(ngModel)]="todoCardMessage" autocomplete="off" name="task-insert" class="form-control" placeholder="Create your task list" required="" (keyup)="todo_card_message_error = false">
+        <div class="input-group-append">
+          <button class="btn btn-icon" [ngClass]="{'btn-danger': todo_card_message_error, 'btn-secondary': !todo_card_message_error}" id="create-task" (click)="addTodoCard()">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <section id="task-container">
+        <ul id="task-list">
+          <li appTodoCardComplete>
+            <p>Lorem Ipsum Dolor Sit Amet</p>
+          </li>
+          <li appTodoCardComplete>
+            <p>Lorem Ipsum Dolor Sit Amet</p>
+          </li>
+          <li appTodoCardComplete>
+            <p>Lorem Ipsum Dolor Sit Amet</p>
+          </li>
+          <li appTodoCardComplete>
+            <p>Lorem Ipsum Dolor Sit Amet</p>
+          </li>
+          <li appTodoCardComplete>
+            <p>Lorem Ipsum Dolor Sit Amet</p>
+          </li>
+          <li appTodoCardComplete>
+            <p>Lorem Ipsum Dolor Sit Amet</p>
+          </li>
+          <span [innerHTML]="newTodoCard"></span>
+        </ul>
+        <div class="text-center">
+          <button id="clear-all-tasks" class="btn btn-primary m-b-0" type="button" (click)="clearAllTodoCardTask()">Clear All Tasks</button>
+        </div>
+      </section>
+    </app-card>
+  </div>
+  <div class="col-xl-6">
+    <app-card cardTitle="To Do List" [options]="false">
+      <div class="input-group mb-3">
+        <input type="text" [(ngModel)]="todoListMessage" autocomplete="off" name="task-insert" class="form-control add_task_todo" placeholder="Create your task list" required="" (keyup)="todo_list_message_error = false">
+        <div class="input-group-append">
+          <button class="btn btn-icon" id="add-btn" [ngClass]="{'btn-danger': todo_list_message_error, 'btn-secondary': !todo_list_message_error}" (click)="addTodoList()">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="new-task">
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck1" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck2" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Industry's standard dummy text ever since the 1500s</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck3" (change)="completeTodoList($event)">
+              <span class="custom-control-label">The point of using Lorem Ipsum is that it has a more-or-less </span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck4" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Contrary to popular belief</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck5" (change)="completeTodoList($event)">
+              <span class="custom-control-label">There are many variations of passages of Lorem Ipsum</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck6" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Sed ut perspiciatis unde omnis iste natus</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck7" (change)="completeTodoList($event)">
+              <span class="custom-control-label"> must explain to you how all this mistaken idea</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <span [innerHTML]="newTodoList"></span>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="To Do List in Modal" [options]="false">
+      <div class="tasks-widget">
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck8" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck9" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Contrary to popular belief</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck10" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck11" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Sed ut perspiciatis unde omnis iste natus</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <span [innerHTML]="newTodoModal"></span>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary btn-add-task m-t-10" (click)="modalDefault.show()">Add New Tasks</button>
+        <app-ui-modal #modalDefault>
+          <div class="app-modal-header">
+            <h4 class="modal-title">Add new todo</h4>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalDefault.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-material">
+                  <div class="right-icon-control">
+                    <form class="form-material" action="javascript:">
+                      <div class="form-group form-primary">
+                        <input type="text" [(ngModel)]="todoModalMessage" autocomplete="off" name="task-insert" class="form-control save_task_todo" placeholder="Create your task list" required="" (keyup)="todo_modal_message_error = false">
+                        <span class="form-bar"></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn" [ngClass]="{'btn-danger': todo_modal_message_error, 'btn-primary': !todo_modal_message_error}" (click)="addTodoModal();">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" #defaultClick (click)="modalDefault.hide()">Close</button>
+          </div>
+        </app-ui-modal>
+      </div>
+    </app-card>
+  </div>
+</div>

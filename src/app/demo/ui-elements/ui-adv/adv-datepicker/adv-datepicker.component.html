@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Datepicker" [options]="false">
+      <div *ngIf="exampleDatepickerConfig">
+        <div class="align-items-center full-height">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <form [formGroup]="exampleDatepickerForm" (ngSubmit)="onSubmit(exampleDatepickerForm)" [ngSwitch]="exampleDatepickerConfig.inputTemplate">
+                <ic-datepicker *ngSwitchCase="'bootstrap'" formControlName="datepicker" [inputTemplate]="bootstrapInputTemplate" [options]="exampleDatepickerConfig"></ic-datepicker>
+                <ic-datepicker *ngSwitchCase="'html'" formControlName="datepicker" [inputTemplate]="htmlInputTemplate" [options]="exampleDatepickerConfig"></ic-datepicker>
+                <ic-datepicker *ngSwitchDefault formControlName="datepicker" [options]="exampleDatepickerConfig"></ic-datepicker>
+                <button (click)="clearDatepicker()" type="button" class="btn btn-block btn-secondary mt-2">Clear</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="config-form-wrapper">
+        <app-datepicker-config-form [exampleDatepickerConfig]="exampleDatepickerConfig" (onConfigChanged)="onConfigChanged($event)"></app-datepicker-config-form>
+      </div>
+
+      <div class="row">
+        <!-- Bootstrap  -->
+        <ng-template #bootstrapInputTemplate let-inputValue="getInputValue()">
+          <div class="form-group">
+            <div class="input-group">
+              <input [value]="inputValue" id="my-datepicker" type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+        <!-- Non-Input -->
+        <ng-template #htmlInputTemplate let-inputValue="getInputValue()">
+          <p class="alert alert-success text-center">
+            <span *ngIf="inputValue">
+              You have selected: {{ inputValue }}
+            </span>
+            <span *ngIf="!inputValue">Click to select a date</span>
+          </p>
+        </ng-template>
+      </div>
+    </app-card>
+  </div>
+</div>

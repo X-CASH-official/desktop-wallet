@@ -1,2 +1,5 @@
-# XCASH_GUI_Wallet
-XCASH_GUI_Wallet
+Run it using  
+`ng serve`
+
+Build it using
+`ng build --prod --aot`

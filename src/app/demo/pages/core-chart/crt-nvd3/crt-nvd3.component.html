@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-6">
+    <app-card cardTitle="Line Chart" [options]="false">
+      <nvd3 [options]="lineChartOptions" [data]="lineChartData"></nvd3>
+    </app-card>
+  </div>
+  <div class="col-md-6">
+    <app-card cardTitle="Discrete Bar Chart" [options]="false">
+      <nvd3 [options]="discreteBarOptions" [data]="discreteBarData"></nvd3>
+    </app-card>
+  </div>
+  <div class="col-md-12">
+    <app-card cardTitle="Stacked/Grouped Multi-Bar Chart" [options]="false">
+      <nvd3 [options]="stackedMultiBarOptions" [data]="stackedMultiBarData"></nvd3>
+    </app-card>
+  </div>
+  <div class="col-md-6">
+    <app-card cardTitle="Regular Pie Chart" [options]="false">
+      <nvd3 [options]="donutChartOption" [data]="donutChartData"></nvd3>
+    </app-card>
+  </div>
+  <div class="col-md-6">
+    <app-card cardTitle="Donut Chart" [options]="false">
+      <nvd3 [options]="pieChartOption" [data]="pieChartData"></nvd3>
+    </app-card>
+  </div>
+</div>
