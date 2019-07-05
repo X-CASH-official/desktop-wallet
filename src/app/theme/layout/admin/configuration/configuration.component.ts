@@ -231,7 +231,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   // change main layout
-  setLayout(layout) {
+  public setLayout(layout) {
     this.isConfig = true;
     this.setNavbarBackground(this.dattaConfig['nav-back-color']);
     this.setBrandBackground(this.dattaConfig['nav-brand-color']);
