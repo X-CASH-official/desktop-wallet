@@ -37,13 +37,7 @@ const NavigationItems = [
         title: 'Dashboard',
         type: 'collapse',
         icon: 'feather icon-home',
-        children: [
-          {
-            id: 'default',
-            title: 'Default',
-            type: 'item',
-            url: '/dashboard/default'
-          },
+        children: [          
           {
             id: 'e-commerce',
             title: 'Ecommerce',

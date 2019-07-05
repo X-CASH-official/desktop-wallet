@@ -10,12 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dashboard/default',
+        redirectTo: 'wallet_menu/main_menu',
         pathMatch: 'full'
       },
       {
-        path: 'dashboard',
-        loadChildren: './demo/dashboard/dashboard.module#DashboardModule'
+        path: 'wallet_menu',
+        loadChildren: './demo/wallet_menu/wallet_menu.module#wallet_menuModule'
       },
       {
         path: 'layout',
@@ -84,6 +84,11 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadChildren: './demo/extra/sample-page/sample-page.module#SamplePageModule'
+      },
+      {
+        path: '**',
+        redirectTo: 'wallet_menu/main_menu',
+        pathMatch: 'full'
       }
     ]
   },
