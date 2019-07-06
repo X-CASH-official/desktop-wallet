@@ -45,7 +45,7 @@ export class main_menuComponent implements OnInit {
     this.formInput = {
       data1: '',
       data2: ''
-    };
+    };    
   }
 
   verify_data(item:string, data:string)

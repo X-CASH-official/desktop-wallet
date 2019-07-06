@@ -125,7 +125,7 @@
       </div>
       <div class="app-modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), create_wallet_1.hide()]">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_1',requiredInput_create_wallet_1.value) === true ? [reset_data(), create_wallet_1.hide(), create_wallet_2.show()] : create_wallet_1.hide()">Next</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_1',requiredInput_create_wallet_1.value) === true ? [reset_data(), create_wallet_1.hide(), create_wallet_2.show()] : reset_data()">Next</button>
       </div>
     </app-ui-modal>
 
@@ -150,7 +150,7 @@
       </div>
       <div class="app-modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), create_wallet_2.hide()]">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_2',requiredInput_create_wallet_2.value) === true ? [reset_data(), create_wallet_2.hide(), create_wallet_3.show()] : create_wallet_2.hide()">Next</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_2',requiredInput_create_wallet_2.value) === true ? [reset_data(), create_wallet_2.hide(), create_wallet_3.show()] : reset_data()">Next</button>
       </div>
     </app-ui-modal>
 
@@ -175,7 +175,7 @@
       </div>
       <div class="app-modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), create_wallet_2.hide()]">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_3',requiredInput_create_wallet_3.value) === true ? [reset_data(), create_wallet_3.hide()] : create_wallet_3.hide()">Create Wallet</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_3',requiredInput_create_wallet_3.value) === true ? [reset_data(), create_wallet_3.hide()] : reset_data()">Create Wallet</button>
       </div>
     </app-ui-modal>
 
@@ -212,7 +212,7 @@
       </div>
       <div class="app-modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_1.hide()]">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="requiredInput_import_wallet_1_mnemonic_seed.value != '' ? verify_data('import_wallet_1',requiredInput_import_wallet_1_mnemonic_seed.value) === true ? [reset_data(), import_wallet_1.hide(), import_wallet_2.show()] : import_wallet_1.hide() : verify_data('import_wallet_1',requiredInput_import_wallet_1_private_key.value) === true ? [reset_data(), import_wallet_1.hide(), import_wallet_1_5.show()] : import_wallet_1.hide()">Next</button>
+        <button type="button" class="btn btn-primary" (click)="requiredInput_import_wallet_1_mnemonic_seed.value != '' ? verify_data('import_wallet_1',requiredInput_import_wallet_1_mnemonic_seed.value) === true ? [reset_data(), import_wallet_1.hide(), import_wallet_2.show()] : reset_data() : verify_data('import_wallet_1',requiredInput_import_wallet_1_private_key.value) === true ? [reset_data(), import_wallet_1.hide(), import_wallet_1_5.show()] : reset_data()">Next</button>
       </div>
     </app-ui-modal>
 
@@ -237,7 +237,7 @@
         </div>
         <div class="app-modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_1_5.hide()]">Cancel</button>
-          <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_1_5',requiredInput_import_wallet_1_5.value) === true ? [reset_data(), import_wallet_1_5.hide(), import_wallet_2.show()] : import_wallet_1_5.hide()">Next</button>
+          <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_1_5',requiredInput_import_wallet_1_5.value) === true ? [reset_data(), import_wallet_1_5.hide(), import_wallet_2.show()] : reset_data()">Next</button>
         </div>
       </app-ui-modal>
 
@@ -262,7 +262,7 @@
           </div>
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_2.hide()]">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_2',requiredInput_import_wallet_2.value) === true ? [reset_data(), import_wallet_2.hide(), import_wallet_3.show()] : import_wallet_2.hide()">Next</button>
+            <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_2',requiredInput_import_wallet_2.value) === true ? [reset_data(), import_wallet_2.hide(), import_wallet_3.show()] : reset_data()">Next</button>
           </div>
         </app-ui-modal>
     
@@ -287,7 +287,7 @@
           </div>
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_2.hide()]">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_3',requiredInput_import_wallet_3.value) === true ? [reset_data(), import_wallet_3.hide()] : import_wallet_3.hide()">Import Wallet</button>
+            <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_3',requiredInput_import_wallet_3.value) === true ? [reset_data(), import_wallet_3.hide()] : reset_data()">Import Wallet</button>
           </div>
         </app-ui-modal>
     <!-- [ Modals ] end -->
