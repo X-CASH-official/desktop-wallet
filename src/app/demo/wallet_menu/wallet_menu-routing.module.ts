@@ -8,6 +8,10 @@ const routes: Routes = [
       {
         path: 'main_menu',
         loadChildren: './main_menu/main_menu.module#main_menuModule'
+      },
+      {
+        path: 'wallet_connection_settings',
+        loadChildren: './wallet_connection_settings/wallet_connection_settings.module#wallet_connection_settingsModule'
       }
     ]
   }
