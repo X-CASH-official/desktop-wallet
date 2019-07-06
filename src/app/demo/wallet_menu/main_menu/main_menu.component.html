@@ -54,7 +54,7 @@
             <div class="card-block">
               <div class="row m-t-30">
                 <div class="col-6 p-r-0">
-                  <a href="javascript:" class="btn btn-primary text-uppercase btn-block f-14" data-toggle="modal" (click)="[reset_data(), create_wallet_1.show()]">Create</a>
+                  <a href="javascript:" class="btn btn-primary text-uppercase btn-block f-14" data-toggle="modal" (click)="[reset_data(), xcashd_load.show()]">Create</a>
                 </div>
                 <div class="col-6">
                     <a href="javascript:" class="btn btn-primary text-uppercase btn-block f-14" (click)="[reset_data(), import_wallet_1.show()]">Import</a>
@@ -290,5 +290,32 @@
             <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_3',requiredInput_import_wallet_3.value) === true ? [reset_data(), import_wallet_3.hide()] : reset_data()">Import Wallet</button>
           </div>
         </app-ui-modal>
+
+
+
+
+
+
+
+
+
+
+        <app-ui-modal #xcashd_load [containerClick]="false" [dialogClass]="'modal-lg'">
+            <div class="app-modal-header">
+              <h5 class="modal-title">Synchronizing The Blockchain</h5>
+            </div>
+            <div class="app-modal-body">
+                <form #validationForm3="ngForm" class="editForm" novalidate>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="mb-4"><ngb-progressbar [showValue]="true" [value]="50"></ngb-progressbar></div>
+                      </div>
+                      </div>
+                      </form>
+            </div>
+            <div class="app-modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), xcashd_load.hide()]">Cancel</button>
+            </div>
+          </app-ui-modal>
     <!-- [ Modals ] end -->
 </div>
