@@ -1123,6 +1123,10 @@ const MAIN_MENU_NAVIGATION_ITEMS = [
 @Injectable()
 export class NavigationItem {
   get(data:string) {
-    return data === "/wallet_menu/main_menu" ? MAIN_MENU_NAVIGATION_ITEMS : NAVIGATION_ITEMS;
+    // Constants
+    const MAIN_MENU_ROUTE:string = "/wallet_menu/main_menu";
+    const WALLET_CONNECTION_SETTINGS_ROUTE:string = "/wallet_menu/wallet_connection_settings";
+
+    return data === MAIN_MENU_ROUTE || data === WALLET_CONNECTION_SETTINGS_ROUTE ? MAIN_MENU_NAVIGATION_ITEMS : NAVIGATION_ITEMS;
   }
 }
