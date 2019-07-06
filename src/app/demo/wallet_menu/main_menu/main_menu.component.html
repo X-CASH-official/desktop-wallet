@@ -54,10 +54,10 @@
             <div class="card-block">
               <div class="row m-t-30">
                 <div class="col-6 p-r-0">
-                  <a href="javascript:" class="btn btn-primary text-uppercase btn-block f-14">Create</a>
+                  <a href="javascript:" class="btn btn-primary text-uppercase btn-block f-14" data-toggle="modal" (click)="[reset_data(), create_wallet_1.show()]">Create</a>
                 </div>
                 <div class="col-6">
-                    <a href="javascript:" class="btn btn-danger text-uppercase btn-block f-14">Import</a>
+                    <a href="javascript:" class="btn btn-primary text-uppercase btn-block f-14" (click)="[reset_data(), import_wallet_1.show()]">Import</a>
                 </div>
               </div>
             </div>
@@ -104,4 +104,191 @@
               </div>
             </div>
     <!-- [ card range1 ] end -->
+
+    <!-- [ Modals ] start -->
+    <app-ui-modal #create_wallet_1 [containerClick]="false" [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h5 class="modal-title">Create A Wallet - Step 1</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="create_wallet_1.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+          <form #validationForm="ngForm" class="editForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="validation-required_create_wallet_1" placeholder="WalletName" [ngClass]="{'is-invalid': !requiredInput_create_wallet_1.valid && requiredInput_create_wallet_1.pristine === false}" #requiredInput_create_wallet_1="ngModel" maxlength="30" pattern="^[a-zA-Z0-9]*$" required [(ngModel)]="formInput.data1">
+                <label *ngIf="!requiredInput_create_wallet_1.valid && (requiredInput_create_wallet_1.pristine === false)" id="validation-required-error_create_wallet_1" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
+                </div>
+                </div>
+                </div>
+                </form>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), create_wallet_1.hide()]">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_1',requiredInput_create_wallet_1.value) === true ? [reset_data(), create_wallet_1.hide(), create_wallet_2.show()] : create_wallet_1.hide()">Next</button>
+      </div>
+    </app-ui-modal>
+
+
+
+    <app-ui-modal #create_wallet_2 [containerClick]="false" [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h5 class="modal-title">Create A Wallet - Step 2</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="create_wallet_2.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+          <form #validationForm2="ngForm" class="editForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <input type="password" class="form-control" name="validation-required_create_wallet_2" placeholder="Password" [ngClass]="{'is-invalid': !requiredInput_create_wallet_2.valid && requiredInput_create_wallet_2.pristine === false}" #requiredInput_create_wallet_2="ngModel" maxlength="30" pattern="^[a-zA-Z0-9]*$" required [(ngModel)]="formInput.data1">
+                <label *ngIf="!requiredInput_create_wallet_2.valid && (requiredInput_create_wallet_2.pristine === false)" id="validation-required-error_create_wallet_2" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
+                </div>
+                </div>
+                </div>
+                </form>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), create_wallet_2.hide()]">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_2',requiredInput_create_wallet_2.value) === true ? [reset_data(), create_wallet_2.hide(), create_wallet_3.show()] : create_wallet_2.hide()">Next</button>
+      </div>
+    </app-ui-modal>
+
+
+
+    <app-ui-modal #create_wallet_3 [containerClick]="false" [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h5 class="modal-title">Create A Wallet - Step 3</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="create_wallet_3.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+          <form #validationForm3="ngForm" class="editForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <input type="password" class="form-control" name="validation-required_create_wallet_3" placeholder="Confirm Password" [ngClass]="{'is-invalid': !requiredInput_create_wallet_3.valid && requiredInput_create_wallet_3.pristine === false}" #requiredInput_create_wallet_3="ngModel" maxlength="30" pattern="^[a-zA-Z0-9]*$" required [(ngModel)]="formInput.data1">
+                <label *ngIf="!requiredInput_create_wallet_3.valid && (requiredInput_create_wallet_3.pristine === false)" id="validation-required-error_create_wallet_3" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
+                </div>
+                </div>
+                </div>
+                </form>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), create_wallet_2.hide()]">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('create_wallet_3',requiredInput_create_wallet_3.value) === true ? [reset_data(), create_wallet_3.hide()] : create_wallet_3.hide()">Create Wallet</button>
+      </div>
+    </app-ui-modal>
+
+
+
+
+
+
+
+
+
+
+    <app-ui-modal #import_wallet_1 [containerClick]="false" [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h5 class="modal-title">Import A Wallet - Step 1</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="import_wallet_1.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+          <form #validationForm_import_wallet_1="ngForm" class="editForm" novalidate>
+              <h5>Enter Mnemonic Seed or Private Key</h5>
+        <div class="row">          
+            <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="validation-required_import_wallet_1_mnemonic_seed" placeholder="Mnemonic Seed" [ngClass]="{'is-invalid': !requiredInput_import_wallet_1_mnemonic_seed.valid && requiredInput_import_wallet_1_mnemonic_seed.pristine === false}" #requiredInput_import_wallet_1_mnemonic_seed="ngModel" pattern="^(?:\b[a-z]+\b[\s]*){25}$" required [(ngModel)]="formInput.data1">
+                <label *ngIf="!requiredInput_import_wallet_1_mnemonic_seed.valid && (requiredInput_import_wallet_1_mnemonic_seed.pristine === false)" id="validation-required-error_import_wallet_1_mnemonic_seed" class="error jquery-validation-error small form-text invalid-feedback">Must be 25 words with no numbers or uppercase letters</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="validation-required_import_wallet_1_private_key" placeholder="Private Key" [ngClass]="{'is-invalid': !requiredInput_import_wallet_1_private_key.valid && requiredInput_import_wallet_1_private_key.pristine === false}" #requiredInput_import_wallet_1_private_key="ngModel" maxlength="64" pattern="^(?:[0-9a-f]{64})$" required [(ngModel)]="formInput.data2">
+                  <label *ngIf="!requiredInput_import_wallet_1_private_key.valid && (requiredInput_import_wallet_1_private_key.pristine === false)" id="validation-required-error_import_wallet_1_private_key" class="error jquery-validation-error small form-text invalid-feedback">Must be a 64 byte length string, with only hexadecimal characters</label>
+                  </div>
+                </div>
+                </div>
+                </form>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_1.hide()]">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="requiredInput_import_wallet_1_mnemonic_seed.value != '' ? verify_data('import_wallet_1',requiredInput_import_wallet_1_mnemonic_seed.value) === true ? [reset_data(), import_wallet_1.hide(), import_wallet_2.show()] : import_wallet_1.hide() : verify_data('import_wallet_1',requiredInput_import_wallet_1_private_key.value) === true ? [reset_data(), import_wallet_1.hide(), import_wallet_1_5.show()] : import_wallet_1.hide()">Next</button>
+      </div>
+    </app-ui-modal>
+
+
+
+    <app-ui-modal #import_wallet_1_5 [containerClick]="false" [dialogClass]="'modal-lg'">
+        <div class="app-modal-header">
+          <h5 class="modal-title">import A Wallet - Step 1.5</h5>
+          <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="import_wallet_1_5.hide()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="app-modal-body">
+            <form #validationForm2="ngForm" class="editForm" novalidate>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="validation-required_import_wallet_1_5" placeholder="View Key" [ngClass]="{'is-invalid': !requiredInput_import_wallet_1_5.valid && requiredInput_import_wallet_1_5.pristine === false}" #requiredInput_import_wallet_1_5="ngModel" maxlength="64" pattern="^(?:[0-9a-f]{64})$" required [(ngModel)]="formInput.data1">
+                  <label *ngIf="!requiredInput_import_wallet_1_5.valid && (requiredInput_import_wallet_1_5.pristine === false)" id="validation-required-error_import_wallet_1_5" class="error jquery-validation-error small form-text invalid-feedback">Must be a 64 byte length string, with only hexadecimal characters</label>
+                  </div>
+                  </div>
+                  </div>
+                  </form>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_1_5.hide()]">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_1_5',requiredInput_import_wallet_1_5.value) === true ? [reset_data(), import_wallet_1_5.hide(), import_wallet_2.show()] : import_wallet_1_5.hide()">Next</button>
+        </div>
+      </app-ui-modal>
+
+
+
+      <app-ui-modal #import_wallet_2 [containerClick]="false" [dialogClass]="'modal-lg'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Import A Wallet - Step 2</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="import_wallet_2.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+              <form #validationForm2="ngForm" class="editForm" novalidate>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="password" class="form-control" name="validation-required_import_wallet_2" placeholder="Password" [ngClass]="{'is-invalid': !requiredInput_import_wallet_2.valid && requiredInput_import_wallet_2.pristine === false}" #requiredInput_import_wallet_2="ngModel" maxlength="30" pattern="^[a-zA-Z0-9]*$" required [(ngModel)]="formInput.data1">
+                    <label *ngIf="!requiredInput_import_wallet_2.valid && (requiredInput_import_wallet_2.pristine === false)" id="validation-required-error_import_wallet_2" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
+                    </div>
+                    </div>
+                    </div>
+                    </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_2.hide()]">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_2',requiredInput_import_wallet_2.value) === true ? [reset_data(), import_wallet_2.hide(), import_wallet_3.show()] : import_wallet_2.hide()">Next</button>
+          </div>
+        </app-ui-modal>
+    
+    
+    
+        <app-ui-modal #import_wallet_3 [containerClick]="false" [dialogClass]="'modal-lg'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Import A Wallet - Step 3</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="import_wallet_3.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+              <form #validationForm3="ngForm" class="editForm" novalidate>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="password" class="form-control" name="validation-required_import_wallet_3" placeholder="Confirm Password" [ngClass]="{'is-invalid': !requiredInput_import_wallet_3.valid && requiredInput_import_wallet_3.pristine === false}" #requiredInput_import_wallet_3="ngModel" maxlength="30" pattern="^[a-zA-Z0-9]*$" required [(ngModel)]="formInput.data1">
+                    <label *ngIf="!requiredInput_import_wallet_3.valid && (requiredInput_import_wallet_3.pristine === false)" id="validation-required-error_import_wallet_3" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
+                    </div>
+                    </div>
+                    </div>
+                    </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), import_wallet_2.hide()]">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="verify_data('import_wallet_3',requiredInput_import_wallet_3.value) === true ? [reset_data(), import_wallet_3.hide()] : import_wallet_3.hide()">Import Wallet</button>
+          </div>
+        </app-ui-modal>
+    <!-- [ Modals ] end -->
 </div>
