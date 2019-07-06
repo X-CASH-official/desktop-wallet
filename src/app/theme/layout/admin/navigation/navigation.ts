@@ -25,7 +25,7 @@ export interface Navigation extends NavigationItem {
   children?: NavigationItem[];
 }
 
-const NavigationItems = [
+const NAVIGATION_ITEMS = [
   {
     id: 'navigation',
     title: 'Navigation',
@@ -1093,9 +1093,36 @@ const NavigationItems = [
   }
 ];
 
+const MAIN_MENU_NAVIGATION_ITEMS = [
+  {
+    id: 'wallet_settings',
+    title: 'Wallet Settings',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'wallet_menu',
+        title: 'Wallet Menu',
+        type: 'item',
+        url: '/wallet_menu/main_menu',
+        classes: 'nav-item',
+        icon: 'feather icon-sidebar'
+      },
+      {
+        id: 'wallet_connection_settings',
+        title: 'Wallet Connection Settings',
+        type: 'item',
+        url: '/wallet_menu/wallet_connection_settings',
+        classes: 'nav-item',
+        icon: 'feather icon-sidebar'
+      }
+    ]
+  }
+];
+
 @Injectable()
 export class NavigationItem {
-  get() {
-    return NavigationItems;
+  get(data:string) {
+    return data === "/wallet_menu/main_menu" ? MAIN_MENU_NAVIGATION_ITEMS : NAVIGATION_ITEMS;
   }
 }

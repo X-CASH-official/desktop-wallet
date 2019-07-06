@@ -16,7 +16,7 @@ export class BreadcrumbComponent implements OnInit {
   public navigationList: any;
 
   constructor(private _router: Router, public nav: NavigationItem, private titleService: Title) {
-    this.navigation = this.nav.get();
+    this.navigation = this.nav.get(window.location.pathname);
     this.setBreadcrumb();
     this.type = 'theme2';
   }
