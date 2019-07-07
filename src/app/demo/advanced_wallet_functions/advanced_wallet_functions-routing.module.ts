@@ -40,6 +40,10 @@ const routes: Routes = [
       {
         path: 'sign_data',
         loadChildren: './sign_data/sign_data.module#sign_dataModule'
+      },
+      {
+        path: 'verify_data',
+        loadChildren: './verify_data/verify_data.module#verify_dataModule'
       }
     ]
   }

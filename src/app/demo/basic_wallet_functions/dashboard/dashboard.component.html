@@ -1,20 +1,98 @@
 <div class="row">
 
    <!-- [ card range1 ] start -->
-   <div class="col-md-6 col-xl-12">
+   <div class="col-md-6 col-xl-12" (click)="unlocked_balance.show()">
       <div class="card table-card">
         <div class="row-table">
           <div class="col-auto theme-bg text-white p-t-50 p-b-50">
             <i class="feather icon-package f-30"></i>
           </div>
           <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
+            <span class="text-uppercase d-block m-b-10">Total X-CASH (click to view unlocked balance)</span>
             <h3 class="f-w-300">{{total_xcash}}</h3>
           </div>
         </div>
       </div>
     </div>
     <!-- [ card range1 ] end -->
+
+    <div class="col-xl-12">
+      <app-card cardTitle="Transaction History" [options]="false" blockClass="table-border-style">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>TX Hash</th>
+              <th>Date and Time</th>
+              <th>Amount</th>
+              <th>Type</th>
+              <th>Settings</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>data1</td>
+              <td>data1</td>
+              <td>data1</td>
+              <td>data1</td>
+              <td><button type="button" class="btn btn-primary" (click)="transaction_settings.show()">Settings</button></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>data2</td>
+              <td>data2</td>
+              <td>data2</td>
+              <td>data2</td>
+              <td><button type="button" class="btn btn-primary" (click)="transaction_settings.show()">Settings</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+
+    <!-- [ Modals ] start -->
+    <app-ui-modal #unlocked_balance [containerClick]="false" [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h5 class="modal-title">Unlocked Balance</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="unlocked_balance.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+          <form #validationForm="ngForm" class="editForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>{{total_unlocked_balance}}</h5>
+                </div>
+                </div>
+                </form>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary" (click)="unlocked_balance.hide()">Close</button>
+      </div>
+    </app-ui-modal>
+
+
+
+    <app-ui-modal #transaction_settings [containerClick]="false" [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h5 class="modal-title">Transaction Setttings</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="transaction_settings.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+          <form #validationForm="ngForm" class="editForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>{{total_transaction_settings}}</h5>
+                </div>
+                </div>
+                </form>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary" (click)="transaction_settings.hide()">Close</button>
+      </div>
+    </app-ui-modal>
 
    
 </div>

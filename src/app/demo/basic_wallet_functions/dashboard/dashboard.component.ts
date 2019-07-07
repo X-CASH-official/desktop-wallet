@@ -9,6 +9,7 @@ export class dashboardComponent implements OnInit {
 
   // Variables
   total_xcash:number = 0;
+  total_unlocked_balance:number = 0;
 
   constructor() { }
 
