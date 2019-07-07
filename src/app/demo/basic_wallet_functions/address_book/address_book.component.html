@@ -49,7 +49,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="validation-required_address_book_create_1" placeholder="Name" [ngClass]="{'is-invalid': !requiredInput_address_book_create_1.valid && requiredInput_address_book_create_1.pristine === false}" #requiredInput_address_book_create_1="ngModel" [maxlength]="variables_and_functions_service.data_length" required [(ngModel)]="data">
+                  <input type="text" class="form-control" name="validation-required_address_book_create_1" placeholder="Name" [ngClass]="{'is-invalid': !requiredInput_address_book_create_1.valid && requiredInput_address_book_create_1.pristine === false}" #requiredInput_address_book_create_1="ngModel" [maxlength]="variables_and_functions_service.text_settings_length" [pattern]="variables_and_functions_service.text_settings" required [(ngModel)]="data">
+                  <label *ngIf="!requiredInput_address_book_create_1.valid && (requiredInput_address_book_create_1.pristine === false)" id="validation-required-error_address_book_create_1" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
                 </div>
                 </div>
                 </div>

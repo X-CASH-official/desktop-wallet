@@ -28,7 +28,7 @@ export class address_bookComponent implements OnInit {
     if (item === "address_book_create_1")
     {
       // verify the wallet name for adding an address book entry
-      return data.length <= this.variables_and_functions_service.data_length;
+      return data.length <= this.variables_and_functions_service.text_settings_length;
     }
     if (item === "address_book_create_2")
     {
