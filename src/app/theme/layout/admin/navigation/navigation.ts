@@ -114,7 +114,7 @@ const NAVIGATION_ITEMS = [
           },
           {
             id: 'create_reserve_proof',
-            title: 'Create Resrve Proof',
+            title: 'Create Reserve Proof',
             type: 'item',
             url: '/advanced_wallet_functions/create_reserve_proof'
           },

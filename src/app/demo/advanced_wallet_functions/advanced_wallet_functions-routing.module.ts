@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: 'create_sub_address',
         loadChildren: './create_sub_address/create_sub_address.module#create_sub_addressModule'
+      },
+      {
+        path: 'get_tx_private_key',
+        loadChildren: './get_tx_private_key/get_tx_private_key.module#get_tx_private_keyModule'
       }
     ]
   }
