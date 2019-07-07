@@ -36,6 +36,10 @@ const routes: Routes = [
       {
         path: 'verify_reserve_proof',
         loadChildren: './verify_reserve_proof/verify_reserve_proof.module#verify_reserve_proofModule'
+      },
+      {
+        path: 'sign_data',
+        loadChildren: './sign_data/sign_data.module#sign_dataModule'
       }
     ]
   }
