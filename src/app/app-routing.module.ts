@@ -22,8 +22,8 @@ const routes: Routes = [
         loadChildren: './demo/basic_wallet_functions/basic_wallet_functions.module#basic_wallet_functionsModule'
       },
       {
-        path: 'widget',
-        loadChildren: './demo/widget/widget.module#WidgetModule'
+        path: 'advanced_wallet_functions',
+        loadChildren: './demo/advanced_wallet_functions/advanced_wallet_functions.module#advanced_wallet_functionsModule'
       },
       {
         path: 'basic',
