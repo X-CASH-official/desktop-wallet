@@ -12,6 +12,10 @@ const routes: Routes = [
       {
         path: 'rescan_blockchain',
         loadChildren: './rescan_blockchain/rescan_blockchain.module#rescan_blockchainModule'
+      },
+      {
+        path: 'create_integrated_address',
+        loadChildren: './create_integrated_address/create_integrated_address.module#create_integrated_addressModule'
       }
     ]
   }
