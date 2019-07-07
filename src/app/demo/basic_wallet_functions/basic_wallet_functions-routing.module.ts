@@ -16,6 +16,10 @@ const routes: Routes = [
       {
         path: 'view_public_address',
         loadChildren: './view_public_address/view_public_address.module#view_public_addressModule'
+      },
+      {
+        path: 'view_private_keys',
+        loadChildren: './view_private_keys/view_private_keys.module#view_private_keysModule'
       }
     ]
   }
