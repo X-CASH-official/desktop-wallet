@@ -12,6 +12,7 @@ export class address_bookComponent implements OnInit {
 
   // Variables
   data:string;
+  settings:boolean = false;
 
   ngOnInit()
   {
@@ -21,6 +22,12 @@ export class address_bookComponent implements OnInit {
   reset_data()
   {
     this.data = "";
+  }
+
+  timer_data()
+  {
+    this.settings = true
+    setTimeout(() => this.settings = false, 5000);
   }
 
   verify_data(item:string, data:string)
