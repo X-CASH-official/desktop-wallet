@@ -12,6 +12,10 @@ const routes: Routes = [
       {
         path: 'send',
         loadChildren: './send/send.module#sendModule'
+      },
+      {
+        path: 'view_public_address',
+        loadChildren: './view_public_address/view_public_address.module#view_public_addressModule'
       }
     ]
   }
