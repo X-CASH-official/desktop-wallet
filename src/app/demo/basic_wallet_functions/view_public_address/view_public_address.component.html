@@ -1,20 +1,27 @@
 <div class="row">
 
-   <!-- [ card range1 ] start -->
-   <div class="col-md-6 col-xl-12">
-      <div class="card table-card">
-        <div class="row-table">
-          <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-            <i class="feather icon-package f-30"></i>
+    <!-- [ card range1 ] start -->
+ 
+       <div class="col-md-6 col-xl-12">
+           <h5>Public Address</h5>
+           <app-alert type="primary" *ngIf="public_address_settings === true">{{data2}}</app-alert>
+           <hr>
+           <div class="card">
+             <div class="card-body">
+                 <div class="col-md-12">
+                 <div class="input-group">
+                     <input type="text" [value]="public_address" class="form-control" readonly>
+                     <span class="input-group-btn">
+                         <button class="btn btn-primary" (click)="[copyMessage(public_address), timer_data('The public address has been copied to the clipboard')]">Copy</button>
+                     </span>
+                 </div>
+                 </div>
+     
+             </div>
+           </div>
           </div>
-          <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
-            <h3 class="f-w-300">{{total_xcash}}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- [ card range1 ] end -->
-
-   
-</div>
+     <!-- [ card range1 ] end -->
+ 
+    
+ </div>
+ 
