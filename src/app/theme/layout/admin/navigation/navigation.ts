@@ -39,10 +39,10 @@ const NAVIGATION_ITEMS = [
         icon: 'feather icon-home',
         children: [          
           {
-            id: 'main_menu',
-            title: 'Main Menu',
+            id: 'dashboard',
+            title: 'Dashboard',
             type: 'item',
-            url: '/basic_wallet_functions/main_menu'
+            url: '/basic_wallet_functions/dashboard'
           },
           {
             id: 'send',

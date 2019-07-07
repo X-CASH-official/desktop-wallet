@@ -18,8 +18,8 @@ const routes: Routes = [
         loadChildren: './demo/wallet_menu/wallet_menu.module#wallet_menuModule'
       },
       {
-        path: 'layout',
-        loadChildren: './demo/layout/layout.module#LayoutModule'
+        path: 'basic_wallet_functions',
+        loadChildren: './demo/basic_wallet_functions/basic_wallet_functions.module#basic_wallet_functionsModule'
       },
       {
         path: 'widget',
