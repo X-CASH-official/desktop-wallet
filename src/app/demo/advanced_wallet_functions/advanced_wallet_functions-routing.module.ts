@@ -24,6 +24,10 @@ const routes: Routes = [
       {
         path: 'get_tx_private_key',
         loadChildren: './get_tx_private_key/get_tx_private_key.module#get_tx_private_keyModule'
+      },
+      {
+        path: 'verify_tx_private_key',
+        loadChildren: './verify_tx_private_key/verify_tx_private_key.module#verify_tx_private_keyModule'
       }
     ]
   }
