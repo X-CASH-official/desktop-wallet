@@ -1,4 +1,4 @@
-import { address_bookModule } from './address_books.module';
+import { address_bookModule } from './address_book.module';
 
 describe('address_bookModule', () => {
   let address_bookModule: address_bookModule;

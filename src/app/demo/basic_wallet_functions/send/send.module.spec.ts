@@ -1,4 +1,4 @@
-import { sendModule } from './sends.module';
+import { sendModule } from './send.module';
 
 describe('sendModule', () => {
   let sendModule: sendModule;

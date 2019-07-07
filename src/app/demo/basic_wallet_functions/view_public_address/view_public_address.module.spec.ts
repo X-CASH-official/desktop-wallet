@@ -1,4 +1,4 @@
-import { view_public_addressModule } from './view_public_addresss.module';
+import { view_public_addressModule } from './view_public_address.module';
 
 describe('view_public_addressModule', () => {
   let view_public_addressModule: view_public_addressModule;

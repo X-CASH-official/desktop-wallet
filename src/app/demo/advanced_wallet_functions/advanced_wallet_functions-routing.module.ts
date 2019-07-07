@@ -8,6 +8,10 @@ const routes: Routes = [
       {
         path: 'change_password',
         loadChildren: './change_password/change_password.module#change_passwordModule'
+      },
+      {
+        path: 'rescan_blockchain',
+        loadChildren: './rescan_blockchain/rescan_blockchain.module#rescan_blockchainModule'
       }
     ]
   }

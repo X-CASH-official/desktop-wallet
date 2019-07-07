@@ -1,4 +1,4 @@
-import { view_private_keysModule } from './view_private_keyss.module';
+import { view_private_keysModule } from './view_private_keys.module';
 
 describe('view_private_keysModule', () => {
   let view_private_keysModule: view_private_keysModule;
