@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: 'view_private_keys',
         loadChildren: './view_private_keys/view_private_keys.module#view_private_keysModule'
+      },
+      {
+        path: 'address_book',
+        loadChildren: './address_book/address_book.module#address_bookModule'
       }
     ]
   }
