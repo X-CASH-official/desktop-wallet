@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path: 'verify_tx_private_key',
         loadChildren: './verify_tx_private_key/verify_tx_private_key.module#verify_tx_private_keyModule'
+      },
+      {
+        path: 'create_reserve_proof',
+        loadChildren: './create_reserve_proof/create_reserve_proof.module#create_reserve_proofModule'
       }
     ]
   }
