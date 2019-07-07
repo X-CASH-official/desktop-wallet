@@ -25,6 +25,7 @@ import {ChatUserListComponent} from './theme/layout/admin/nav-bar/nav-right/chat
 import { FriendComponent } from './theme/layout/admin/nav-bar/nav-right/chat-user-list/friend/friend.component';
 import {ChatMsgComponent} from './theme/layout/admin/nav-bar/nav-right/chat-msg/chat-msg.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
+import {variables_and_functions_service} from './services/variables_and_functions.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,10 @@ import { ConfigurationComponent } from './theme/layout/admin/configuration/confi
     NgbButtonsModule,
     NgbTabsetModule
   ],
-  providers: [NavigationItem],
+  providers: [
+    NavigationItem,
+    variables_and_functions_service
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,21 +1,5 @@
 <div class="row">
 
-  <!-- [ card range1 ] start -->
-  <div class="col-md-6 col-xl-12" (click)="unlocked_balance.show()">
-     <div class="card table-card">
-       <div class="row-table">
-         <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-           <i class="feather icon-package f-30"></i>
-         </div>
-         <div class="col text-center">
-           <span class="text-uppercase d-block m-b-10">Total X-CASH (click to view unlocked balance)</span>
-           <h3 class="f-w-300">{{total_xcash}}</h3>
-         </div>
-       </div>
-     </div>
-   </div>
-   <!-- [ card range1 ] end -->
-
    <div class="col-xl-12">
      <app-card cardTitle="Address Book Entries" [options]="false" blockClass="table-border-style">
        <div class="table-responsive">
@@ -65,8 +49,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="validation-required_address_book_create_1" placeholder="Name" [ngClass]="{'is-invalid': !requiredInput_address_book_create_1.valid && requiredInput_address_book_create_1.pristine === false}" #requiredInput_address_book_create_1="ngModel" maxlength="30" pattern="^[a-zA-Z0-9\s]*$" required [(ngModel)]="formInput.data1">
-                <label *ngIf="!requiredInput_address_book_create_1.valid && (requiredInput_address_book_create_1.pristine === false)" id="validation-required-error_address_book_create_1" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Special Characters<br>Non Latin Characters</label>
+                  <input type="text" class="form-control" name="validation-required_address_book_create_1" placeholder="Name" [ngClass]="{'is-invalid': !requiredInput_address_book_create_1.valid && requiredInput_address_book_create_1.pristine === false}" #requiredInput_address_book_create_1="ngModel" [maxlength]="variables_and_functions_service.data_length" required [(ngModel)]="data">
                 </div>
                 </div>
                 </div>
@@ -90,7 +73,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                  <input type="password" class="form-control" name="validation-required_address_book_create_2" placeholder="Public Address" [ngClass]="{'is-invalid': !requiredInput_address_book_create_2.valid && requiredInput_address_book_create_2.pristine === false}" #requiredInput_address_book_create_2="ngModel" maxlength="30" pattern="^[a-zA-Z0-9]*$" required [(ngModel)]="formInput.data1">
+                  <input type="text" class="form-control" name="validation-required_address_book_create_2" placeholder="Public Integrated or Sub Address" [ngClass]="{'is-invalid': !requiredInput_address_book_create_2.valid && requiredInput_address_book_create_2.pristine === false}" #requiredInput_address_book_create_2="ngModel" [maxlength]="variables_and_functions_service.xcash_integrated_address_length" [pattern]="variables_and_functions_service.xcash_address" required [(ngModel)]="data">
                 <label *ngIf="!requiredInput_address_book_create_2.valid && (requiredInput_address_book_create_2.pristine === false)" id="validation-required-error_address_book_create_2" class="error jquery-validation-error small form-text invalid-feedback">Must be a public address, integrated address or sub address</label>
                 </div>
                 </div>
@@ -99,7 +82,7 @@
       </div>
       <div class="app-modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), address_book_create_2.hide()]">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="verify_data('address_book_create_2',requiredInput_address_book_create_2.value) === true ? [reset_data(), address_book_create_2.hide(), address_book_create_3.show()] : reset_data()">Next</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('address_book_create_2',requiredInput_address_book_create_2.value) === true ? requiredInput_address_book_create_2.value.length !== variables_and_functions_service.xcash_integrated_address_length ? [reset_data(), address_book_create_2.hide(), address_book_create_3.show()] : [reset_data(), address_book_create_2.hide()] : reset_data()">Create Address Book Entry</button>
       </div>
     </app-ui-modal>
 
@@ -115,7 +98,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                  <input type="password" class="form-control" name="validation-required_address_book_create_3" placeholder="Payment ID" [ngClass]="{'is-invalid': !requiredInput_address_book_create_3.valid && requiredInput_address_book_create_3.pristine === false}" #requiredInput_address_book_create_3="ngModel" maxlength="30" pattern="^[a-zA-Z0-9]*$" required [(ngModel)]="formInput.data1">
+                  <input type="text" class="form-control" name="validation-required_address_book_create_3" placeholder="Payment ID (Optional)" [ngClass]="{'is-invalid': !requiredInput_address_book_create_3.valid && requiredInput_address_book_create_3.pristine === false}" #requiredInput_address_book_create_3="ngModel" [maxlength]="variables_and_functions_service.unencrypted_payment_id_length" [pattern]="variables_and_functions_service.payment_id" required [(ngModel)]="data">
                 <label *ngIf="!requiredInput_address_book_create_3.valid && (requiredInput_address_book_create_3.pristine === false)" id="validation-required-error_address_book_create_3" class="error jquery-validation-error small form-text invalid-feedback">Must be a 64 byte length string for an unencrypted payment id, or 16 byte length string for an encrypted payment id</label>
                 </div>
                 </div>
@@ -123,8 +106,8 @@
                 </form>
       </div>
       <div class="app-modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), address_book_create_2.hide()]">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="verify_data('address_book_create_3',requiredInput_address_book_create_3.value) === true ? [reset_data(), address_book_create_3.hide()] : reset_data()">Create Wallet</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), address_book_create_3.hide()]">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="verify_data('address_book_create_3',requiredInput_address_book_create_3.value) === true ? [reset_data(), address_book_create_3.hide()] : reset_data()">Create Address Book Entry</button>
       </div>
     </app-ui-modal>
 
