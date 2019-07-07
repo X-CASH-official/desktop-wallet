@@ -32,6 +32,10 @@ const routes: Routes = [
       {
         path: 'create_reserve_proof',
         loadChildren: './create_reserve_proof/create_reserve_proof.module#create_reserve_proofModule'
+      },
+      {
+        path: 'verify_reserve_proof',
+        loadChildren: './verify_reserve_proof/verify_reserve_proof.module#verify_reserve_proofModule'
       }
     ]
   }
