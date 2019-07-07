@@ -16,6 +16,10 @@ const routes: Routes = [
       {
         path: 'create_integrated_address',
         loadChildren: './create_integrated_address/create_integrated_address.module#create_integrated_addressModule'
+      },
+      {
+        path: 'create_sub_address',
+        loadChildren: './create_sub_address/create_sub_address.module#create_sub_addressModule'
       }
     ]
   }
