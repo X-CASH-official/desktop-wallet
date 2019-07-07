@@ -1,19 +1,67 @@
 <div class="row">
 
    <!-- [ card range1 ] start -->
+
    <div class="col-md-6 col-xl-12">
-      <div class="card table-card">
-        <div class="row-table">
-          <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-            <i class="feather icon-package f-30"></i>
-          </div>
-          <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
-            <h3 class="f-w-300">{{total_xcash}}</h3>
-          </div>
+      <h5>Confirm Your Password</h5>
+      <hr>
+      <div class="card">
+        <div class="card-body">
+            <div class="col-md-4 offset-md-4">
+            <div class="input-group">
+                <input type="password" class="form-control" name="validation-required_confirm_password" placeholder="Confirm Password" [ngClass]="{'is-invalid': !requiredInput_confirm_password.valid && requiredInput_confirm_password.pristine === false}" #requiredInput_confirm_password="ngModel" [maxlength]="variables_and_functions_service.text_settings_length" [pattern]="variables_and_functions_service.text_settings" required [(ngModel)]="data">
+                    <label *ngIf="!requiredInput_confirm_password.valid && (requiredInput_confirm_password.pristine === false)" id="validation-required-error_confirm_password" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" (click)="confirm_password()">View Private Keys</button>
+                </span>
+            </div>
+            </div>
+
         </div>
       </div>
-    </div>
+
+
+<div *ngIf="password_settings === true">
+      <div class="col-md-6 col-xl-12">
+          <h5>Private Key</h5>
+          <app-alert type="primary" *ngIf="private_key_settings === true">{{data2}}</app-alert>
+          <hr>
+          <div class="card">
+            <div class="card-body">
+                <div class="col-md-12">
+                <div class="input-group">
+                    <input type="text" [value]="private_key" class="form-control" readonly>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" (click)="[copyMessage(private_key), timer_data('The private key has been copied to the clipboard')]">Copy</button>
+                    </span>
+                </div>
+                </div>
+    
+            </div>
+          </div>
+          </div>
+
+
+
+          <div class="col-md-6 col-xl-12">
+              <h5>View Key</h5>
+              <app-alert type="primary" *ngIf="view_key_settings === true">{{data2}}</app-alert>
+              <hr>
+              <div class="card">
+                <div class="card-body">
+                    <div class="col-md-12">
+                    <div class="input-group">
+                        <input type="text" [value]="private_key" class="form-control" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" (click)="[copyMessage(private_key), timer_data('The view key has been copied to the clipboard')]">Copy</button>
+                        </span>
+                    </div>
+                    </div>
+        
+                </div>
+              </div> 
+              </div>
+            </div>
     <!-- [ card range1 ] end -->
 
    

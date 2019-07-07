@@ -26,7 +26,7 @@ export class address_bookComponent implements OnInit {
 
   timer_data()
   {
-    this.settings = true
+    this.settings = true;
     setTimeout(() => this.settings = false, 5000);
   }
 
