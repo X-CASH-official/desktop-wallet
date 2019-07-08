@@ -36,4 +36,82 @@ xcash_reserve_proof_amount:RegExp = new RegExp(`\\b(^[0-9]{1,11}.[0-9]{0,5}[1-9]
 reserve_proof = new RegExp("^ReserveProofV1[a-zA-Z0-9]+$");
 signature = new RegExp(`^${this.signature_prefix}[a-zA-Z0-9]{${this.signature_length_settings}}$`);
 text_settings = new RegExp(`^[a-zA-Z0-9]{1,${this.text_settings_length}}$`);
+
+async get_post_request_data(username:string, password:string, url:string, data:string)
+{
+  return new Promise(function(resolve, reject)
+  {
+
+    // Constants
+    const PATH = "/json_rpc";
+     
+    // Variables
+    var headers:any = new Headers();
+    var result:string;
+    var settings:object;
+
+    // append the headers
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+
+    settings = {method:"post", headers: headers, body: data};
+
+    // send the post request
+    fetch(url, settings)
+    .then(res =>
+    {
+      result = res.headers.get('WWW-authenticate');
+      if (!res.ok)
+      {
+        throw Error(res.statusText);
+      }
+      return res;
+    })
+    .then(res => resolve(res))
+    .catch(error => 
+    {
+      if (error == "Error: Unauthorized")
+      {
+        let server_nonce:string;
+        let HA1:string;
+        let HA2:string;
+        let auth_response:string;
+
+        // create the authentication header
+        server_nonce = result.substr(result.indexOf("nonce=")+7,result.indexOf(",stale")-8 - result.indexOf("nonce="));
+        HA1 = CryptoJS.MD5(`${username}:xcash-rpc:${password}`).toString();
+        HA2 = CryptoJS.MD5(`POST:${PATH}`).toString();
+        auth_response = CryptoJS.MD5(`${HA1}:${server_nonce}:00000001:${new Date().getTime().toString()}:auth:${HA2}`);
+       
+        // append the headers
+        headers.append('Authorization', `Digest username="${username}", realm="xcash-rpc", nonce="${server_nonce}", uri="${PATH}", algorithm=MD5, response="${auth_response}", qop=auth, nc=00000001, cnonce="${new Date().getTime().toString()}"`);
+
+        settings = {method:"post", headers: headers, body: data};
+ 
+        // send the post request
+        fetch(url, settings)
+        .then(res => res.text())
+        .then(res => resolve(res.replace("\n","")))
+        .catch(error => resolve(error))
+       }
+       else
+       {
+         resolve(error);
+       }
+    });
+  })
+}
+
+async send_post_request(username:string, password:string, url:string, data:string)
+{
+  // Variables
+  let data2:any;  
+  
+  do
+  {
+    data2 = await this.send_post_request(username, password, url, data);
+    //data2 = await this.send_post_request("username", "password", "http://localhost:18285/json_rpc", '{"jsonrpc":"2.0","id":"0","method":"get_balance"}');
+  } while (data2.includes("Unauthorized"));
+  return JSON.parse(data2);
+}   
 }
