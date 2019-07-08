@@ -36,7 +36,7 @@ export class sendComponent implements OnInit {
 
   ngOnInit()
   {
-    this.reset_data();
+    
   } 
 
   reset_data()

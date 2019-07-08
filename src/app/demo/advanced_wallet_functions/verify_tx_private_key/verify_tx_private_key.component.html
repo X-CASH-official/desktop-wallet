@@ -1,20 +1,62 @@
 <div class="row">
 
-   <!-- [ card range1 ] start -->
-   <div class="col-md-6 col-xl-12">
-      <div class="card table-card">
-        <div class="row-table">
-          <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-            <i class="feather icon-package f-30"></i>
-          </div>
-          <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
-            <h3 class="f-w-300">{{total_xcash}}</h3>
+    <!-- [ card range1 ] start -->
+ 
+    <div class="col-md-6 col-xl-12">
+        <h5>Verify Transaction Private Key</h5>
+        <hr>
+        <div class="card">
+          <div class="card-body">
+
+              <div class="col-md-12">            
+                  <input type="text" class="form-control" name="validation-required_verify_transaction_private_key_transaction_hash" placeholder="Transaction Hash" [ngClass]="{'is-invalid': !requiredInput_verify_transaction_private_key_transaction_hash.valid && requiredInput_verify_transaction_private_key_transaction_hash.pristine === false}" #requiredInput_verify_transaction_private_key_transaction_hash="ngModel" [maxlength]="variables_and_functions_service.private_key_length" [pattern]="variables_and_functions_service.private_key" required [(ngModel)]="data.transaction_hash">
+                  <label *ngIf="!requiredInput_verify_transaction_private_key_transaction_hash.valid && (requiredInput_verify_transaction_private_key_transaction_hash.pristine === false)" id="validation-required-error_verify_transaction_private_key_transaction_hash" class="error jquery-validation-error small form-text invalid-feedback">Must be a 64 byte length string, with only hexadecimal characters</label>
+                 </div>
+
+                  <br><br>
+
+                  <div class="col-md-12">            
+                      <input type="text" class="form-control" name="validation-required_verify_transaction_private_key_transaction_private_key" placeholder="Transaction Private Key" [ngClass]="{'is-invalid': !requiredInput_verify_transaction_private_key_transaction_private_key.valid && requiredInput_verify_transaction_private_key_transaction_private_key.pristine === false}" #requiredInput_verify_transaction_private_key_transaction_private_key="ngModel" [maxlength]="variables_and_functions_service.private_key_length" [pattern]="variables_and_functions_service.private_key" required [(ngModel)]="data.tx_private_key">
+                      <label *ngIf="!requiredInput_verify_transaction_private_key_transaction_private_key.valid && (requiredInput_verify_transaction_private_key_transaction_private_key.pristine === false)" id="validation-required-error_verify_transaction_private_key_transaction_private_key" class="error jquery-validation-error small form-text invalid-feedback">Must be a 64 byte length string, with only hexadecimal characters</label>
+                     </div>
+
+                     <br><br>
+                     <div class="col-md-12">            
+                 <input type="text" class="form-control" name="validation-required_verify_transaction_private_key_public_address" placeholder="Public, Integrated or Sub Address" [ngClass]="{'is-invalid': !requiredInput_verify_transaction_private_key_public_address.valid && requiredInput_verify_transaction_private_key_public_address.pristine === false}" #requiredInput_verify_transaction_private_key_public_address="ngModel" [maxlength]="variables_and_functions_service.xcash_integrated_address_length" [pattern]="variables_and_functions_service.xcash_address" required [(ngModel)]="data.public_address">
+                 <label *ngIf="!requiredInput_verify_transaction_private_key_public_address.valid && (requiredInput_verify_transaction_private_key_public_address.pristine === false)" id="validation-required-error_verify_transaction_private_key_public_address" class="error jquery-validation-error small form-text invalid-feedback">Must be a public address, integrated address or sub address</label>
+                </div>
+
+                      <br><br>
+                        <button class="btn btn-primary" (click)="verify_tx_private_key()">Verify Transaction Private Key</button>
+
+                        <br><br>
+                        <div *ngIf="settings === true">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Stealth Address</th>
+                                  <th>Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>data1</td>
+                                  <td>data1</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">2</th>
+                                  <td>data2</td>
+                                  <td>data2</td>
+                                </tr>
+                                </tbody>
+                              </table>
+                        </div>
+  
           </div>
         </div>
-      </div>
-    </div>
-    <!-- [ card range1 ] end -->
-
-   
-</div>
+       </div>
+     <!-- [ card range1 ] end -->
+ </div>
+ 
