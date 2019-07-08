@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class variables_and_functions_service{

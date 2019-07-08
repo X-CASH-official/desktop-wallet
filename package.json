@@ -37,6 +37,7 @@
     "angular2-tinymce": "^3.3.0",
     "bootstrap": "^4.1.3",
     "core-js": "^2.5.4",
+    "crypto-js": "^3.1.9-1",
     "css-animator": "^2.3.1",
     "d3": "^3.5.17",
     "datatables.net": "^1.10.19",
