@@ -1,20 +1,40 @@
 <div class="row">
 
-   <!-- [ card range1 ] start -->
-   <div class="col-md-6 col-xl-12">
-      <div class="card table-card">
-        <div class="row-table">
-          <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-            <i class="feather icon-package f-30"></i>
-          </div>
-          <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
-            <h3 class="f-w-300">{{total_xcash}}</h3>
+    <!-- [ card range1 ] start -->
+ 
+    <div class="col-md-6 col-xl-12">
+        <h5>Change Password</h5>       
+        <hr>
+        <div class="card">
+          <div class="card-body">
+              <div class="col-md-12">
+              
+                      
+               <button class="btn btn-primary" (click)="xcashd_load.show()">Rescan Blockchain</button>
+  
           </div>
         </div>
-      </div>
-    </div>
-    <!-- [ card range1 ] end -->
+       </div>
+     <!-- [ card range1 ] end -->
 
-   
-</div>
+
+
+     <!-- [ Modals ] start -->
+     <app-ui-modal #xcashd_load [containerClick]="false" [dialogClass]="'modal-lg'">
+        <div class="app-modal-header">
+          <h5 class="modal-title">Synchronizing The Blockchain</h5>
+        </div>
+        <div class="app-modal-body">
+            <form #validationForm3="ngForm" class="editForm" novalidate>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="mb-4"><ngb-progressbar [showValue]="true" [value]="50"></ngb-progressbar></div>
+                  </div>
+                  </div>
+                  </form>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="xcashd_load.hide()">Cancel</button>
+        </div>
+      </app-ui-modal>
+<!-- [ Modals ] end -->
