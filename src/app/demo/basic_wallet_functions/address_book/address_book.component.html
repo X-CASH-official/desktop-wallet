@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="validation-required_address_book_create_2" placeholder="Public Integrated or Sub Address" [ngClass]="{'is-invalid': !requiredInput_address_book_create_2.valid && requiredInput_address_book_create_2.pristine === false}" #requiredInput_address_book_create_2="ngModel" [maxlength]="variables_and_functions_service.xcash_integrated_address_length" [pattern]="variables_and_functions_service.xcash_address" required [(ngModel)]="data">
+                  <input type="text" class="form-control" name="validation-required_address_book_create_2" placeholder="Public, Integrated or Sub Address" [ngClass]="{'is-invalid': !requiredInput_address_book_create_2.valid && requiredInput_address_book_create_2.pristine === false}" #requiredInput_address_book_create_2="ngModel" [maxlength]="variables_and_functions_service.xcash_integrated_address_length" [pattern]="variables_and_functions_service.xcash_address" required [(ngModel)]="data">
                 <label *ngIf="!requiredInput_address_book_create_2.valid && (requiredInput_address_book_create_2.pristine === false)" id="validation-required-error_address_book_create_2" class="error jquery-validation-error small form-text invalid-feedback">Must be a public address, integrated address or sub address</label>
                 </div>
                 </div>
@@ -101,7 +101,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="validation-required_address_book_create_3" placeholder="Payment ID (Optional)" [ngClass]="{'is-invalid': !requiredInput_address_book_create_3.valid && requiredInput_address_book_create_3.pristine === false}" #requiredInput_address_book_create_3="ngModel" [maxlength]="variables_and_functions_service.unencrypted_payment_id_length" [pattern]="variables_and_functions_service.payment_id" required [(ngModel)]="data">
+                  <input type="text" class="form-control" name="validation-required_address_book_create_3" placeholder="Payment ID (Optional)" [ngClass]="{'is-invalid': !requiredInput_address_book_create_3.valid && requiredInput_address_book_create_3.pristine === false}" #requiredInput_address_book_create_3="ngModel" [maxlength]="variables_and_functions_service.unencrypted_payment_id_length" [pattern]="variables_and_functions_service.payment_id" [(ngModel)]="data">
                 <label *ngIf="!requiredInput_address_book_create_3.valid && (requiredInput_address_book_create_3.pristine === false)" id="validation-required-error_address_book_create_3" class="error jquery-validation-error small form-text invalid-feedback">Must be a 64 byte length string for an unencrypted payment id, or 16 byte length string for an encrypted payment id</label>
                 </div>
                 </div>
@@ -135,5 +135,6 @@
       <button type="button" class="btn btn-danger" (click)="address_book_delete.hide()">Delete</button>
     </div>
   </app-ui-modal>
+   <!-- [ Modals ] end -->
   
 </div>

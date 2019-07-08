@@ -1,20 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {variables_and_functions_service} from '../../../services/variables_and_functions.service';
 
-export class FormInput {
-  email: any;
-  password: any;
-  confirmPassword: any;
-  requiredInput: any;
-  url: any;
-  phone: any;
-  cmbGear: any;
-  address: any;
-  file: any;
-  switcher: any;
-}
-
-
 @Component({
   selector: 'app-main_menu',
   templateUrl: './main_menu.component.html',
