@@ -45,7 +45,7 @@ export class sign_dataComponent implements OnInit {
     this.data = "";
   }
 
-  verify_reserve_proof()
+  sign_data()
   {     
     this.settings = true;
     return true;
