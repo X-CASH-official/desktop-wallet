@@ -15,7 +15,7 @@ data:any = {
 };
 settings:boolean = false;
 reserve_proof_settings:boolean = false;
-reserve_proof:string = "XCA";
+reserve_proof:string = "";
 
 constructor(private variables_and_functions_service: variables_and_functions_service) { }
 
