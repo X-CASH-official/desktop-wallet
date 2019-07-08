@@ -1,20 +1,37 @@
 <div class="row">
 
-   <!-- [ card range1 ] start -->
-   <div class="col-md-6 col-xl-12">
-      <div class="card table-card">
-        <div class="row-table">
-          <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-            <i class="feather icon-package f-30"></i>
-          </div>
-          <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
-            <h3 class="f-w-300">{{total_xcash}}</h3>
+    <!-- [ card range1 ] start -->
+ 
+    <div class="col-md-6 col-xl-12">
+        <h5>Get Transaction Private Key</h5>
+        <app-alert type="primary" *ngIf="settings === 'copy_transaction_private_key'">The Transaction Private Key Has Been Copied To the Clipboard Successfully</app-alert>
+        <app-alert type="danger" *ngIf="settings === 'transaction_private_key_error'">Could Not Get the Transaction Private Key</app-alert>
+        <hr>
+        <div class="card">
+          <div class="card-body">
+              <div class="col-md-12">
+              <div class="input-group">
+                 <input type="text" class="form-control" name="validation-required_get_transaction_private_key" placeholder="Transaction Hash" [ngClass]="{'is-invalid': !requiredInput_get_transaction_private_key.valid && requiredInput_get_transaction_private_key.pristine === false}" #requiredInput_get_transaction_private_key="ngModel" [maxlength]="variables_and_functions_service.private_key_length" [pattern]="variables_and_functions_service.private_key" required [(ngModel)]="data">
+                 <label *ngIf="!requiredInput_get_transaction_private_key.valid && (requiredInput_get_transaction_private_key.pristine === false)" id="validation-required-error_get_transaction_private_key" class="error jquery-validation-error small form-text invalid-feedback">Must be a 64 byte length string, with only hexadecimal characters</label>
+                </div>
+              </div>
+
+              <br><br>
+
+              <div class="col-md-12">
+                  <div class="input-group">
+                     <input type="text" class="form-control" [value]="tx_private_key" readonly>
+                     <span class="input-group-btn">
+                        <button class="btn btn-primary" (click)="copyMessage(tx_private_key)">Copy</button>
+                    </span>   
+                    </div>
+                  </div>
+
+                  <br><br>
+                      
+                        <button class="btn btn-primary" (click)="get_tx_private_key()">Get Transaction Private Key</button>
+  
           </div>
         </div>
-      </div>
-    </div>
-    <!-- [ card range1 ] end -->
-
-   
-</div>
+       </div>
+     <!-- [ card range1 ] end -->
