@@ -1,20 +1,44 @@
 <div class="row">
 
-   <!-- [ card range1 ] start -->
-   <div class="col-md-6 col-xl-12">
-      <div class="card table-card">
-        <div class="row-table">
-          <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-            <i class="feather icon-package f-30"></i>
+  <!-- [ card range1 ] start -->
+
+  <div class="col-md-6 col-xl-12">
+      <h5>Verify Transaction Private Key</h5>
+      <hr>
+      <div class="card">
+        <div class="card-body">
+
+          <div class="col-md-12">            
+            <input type="text" class="form-control" name="validation-required_verify_reserve_proof_reserve_proof" placeholder="Reserve Proof" [ngClass]="{'is-invalid': !requiredInput_verify_reserve_proof_reserve_proof.valid && requiredInput_verify_reserve_proof_reserve_proof.pristine === false}" #requiredInput_verify_reserve_proof_reserve_proof="ngModel" [pattern]="variables_and_functions_service.reserve_proof" required [(ngModel)]="data.reserve_proof">
+            <label *ngIf="!requiredInput_verify_reserve_proof_reserve_proof.valid && (requiredInput_verify_reserve_proof_reserve_proof.pristine === false)" id="validation-required-error_verify_reserve_proof_reserve_proof" class="error jquery-validation-error small form-text invalid-feedback">Must be a valid reserve proof</label>
+           </div>
+
+               <br><br>
+               <div class="col-md-12">            
+           <input type="text" class="form-control" name="validation-required_verify_reserve_proof_public_address" placeholder="Public, Integrated or Sub Address" [ngClass]="{'is-invalid': !requiredInput_verify_reserve_proof_public_address.valid && requiredInput_verify_reserve_proof_public_address.pristine === false}" #requiredInput_verify_reserve_proof_public_address="ngModel" [maxlength]="variables_and_functions_service.xcash_integrated_address_length" [pattern]="variables_and_functions_service.xcash_address" required [(ngModel)]="data.public_address">
+           <label *ngIf="!requiredInput_verify_reserve_proof_public_address.valid && (requiredInput_verify_reserve_proof_public_address.pristine === false)" id="validation-required-error_verify_reserve_proof_public_address" class="error jquery-validation-error small form-text invalid-feedback">Must be a public address, integrated address or sub address</label>
           </div>
-          <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
-            <h3 class="f-w-300">{{total_xcash}}</h3>
+
+          <br><br>
+               <div class="col-md-12">            
+           <input type="text" class="form-control" name="validation-required_verify_reserve_proof_message" placeholder="Message (Optional)" [ngClass]="{'is-invalid': !requiredInput_verify_reserve_proof_message.valid && requiredInput_verify_reserve_proof_message.pristine === false}" #requiredInput_verify_reserve_proof_message="ngModel" [(ngModel)]="data.message">
           </div>
+
+                    <br><br>
+                      <button class="btn btn-primary" (click)="verify_reserve_proof()">Verify Transaction Private Key</button>
+
+                      <br><br>
+                      <div *ngIf="reserve_proof_settings === true">
+                      <div *ngIf="settings === true">
+                         <h5>The reserve proof is verified</h5>
+                      </div>
+                      <div *ngIf="settings === false">
+                        <h5>The reserve proof is not verified</h5>
+                     </div>
+                     </div>
+
         </div>
       </div>
-    </div>
-    <!-- [ card range1 ] end -->
-
-   
+     </div>
+   <!-- [ card range1 ] end -->
 </div>
