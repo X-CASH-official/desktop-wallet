@@ -1,36 +1,37 @@
 <div class="row">
 
   <div class="col-xl-12">
-    <app-card cardTitle="Sub Addresses" [options]="false" blockClass="table-border-style">
-       <app-alert type="primary" *ngIf="settings === true">Sub Address Has Been Copied To the Clipboard Successfully</app-alert>
+
+
+    <app-card cardTitle="Full Width Table" cardClass="code-table" blockClass="pb-0">
+        <app-alert type="primary" *ngIf="settings === true">Sub Address Has Been Copied To the Clipboard Successfully</app-alert>
       <div class="table-responsive">
-         <td><button type="button" class="btn btn-primary" (click)="sub_address_create_1.show()">Create</button></td>
-        <table class="table">
+        <table class="table table-hover">
           <thead>
-          <tr>
-            <th>#</th>
-            <th>Label</th>
-            <th>Sub Address</th>
-            <th>Received Funds</th>
-            <th>Copy</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>data1</td>
-            <td>data1</td>
-            <td>data1</td>
-            <td><button type="button" class="btn btn-primary" (click)="[copyMessage(), timer_data()]">Copy</button></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>data2</td>
-            <td>data2</td>
-            <td>data2</td>
-            <td><button type="button" class="btn btn-primary" (click)="[copyMessage(), timer_data()]">Copy</button></td>
-          </tr>
-          </tbody>
+            <tr>
+              <th>#</th>
+              <th>Label</th>
+              <th>Sub Address</th>
+              <th>Received Funds</th>
+              <th>Copy</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>data1</td>
+              <td>data1</td>
+              <td><a href="javascript:" class="label theme-bg f-12 text-white">True</a></td>
+              <td><button type="button" class="btn btn-primary" (click)="[copyMessage(), timer_data()]">Copy</button></td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>data2</td>
+              <td>data2</td>
+              <td><a href="javascript:" class="label theme-bg2 f-12 text-white">False</a></td>
+              <td><button type="button" class="btn btn-primary" (click)="[copyMessage(), timer_data()]">Copy</button></td>
+            </tr>
+            </tbody>
         </table>
       </div>
     </app-card>
