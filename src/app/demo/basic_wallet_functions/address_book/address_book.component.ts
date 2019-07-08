@@ -11,7 +11,7 @@ export class address_bookComponent implements OnInit {
   constructor(private variables_and_functions_service: variables_and_functions_service) { }
 
   // Variables
-  data:string;
+  data:string = "";
   settings:boolean = false;
 
   ngOnInit()

@@ -34,5 +34,5 @@ xcash_amount:RegExp = new RegExp(`\\b(^[0-9]{1,11}.[0-9]{0,5}[1-9]{1}$|^[1-9]{1}
 xcash_reserve_proof_amount:RegExp = new RegExp(`\\b(^[0-9]{1,11}.[0-9]{0,5}[1-9]{1}$|^[1-9]{1}[0-9]{0,10}$|${this.xcash_total_supply}|^ALL$)\\b$`);
 reserve_proof = new RegExp("^ReserveProofV1[a-zA-Z0-9]+$");
 signature = new RegExp(`^${this.signature_prefix}[a-zA-Z0-9]{${this.signature_length_settings}}$`);
-text_settings = new RegExp("^[a-zA-Z0-9]*$");
+text_settings = new RegExp(`^[a-zA-Z0-9]{1,${this.text_settings_length}}$`);
 }
