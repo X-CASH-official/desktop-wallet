@@ -1,20 +1,44 @@
 <div class="row">
 
-   <!-- [ card range1 ] start -->
-   <div class="col-md-6 col-xl-12">
-      <div class="card table-card">
-        <div class="row-table">
-          <div class="col-auto theme-bg text-white p-t-50 p-b-50">
-            <i class="feather icon-package f-30"></i>
+  <!-- [ card range1 ] start -->
+
+  <div class="col-md-6 col-xl-12">
+      <h5>Verify Signature</h5>
+      <hr>
+      <div class="card">
+        <div class="card-body">
+
+          <div class="col-md-12">            
+            <input type="text" class="form-control" name="validation-required_verify_signature_signature" placeholder="Signature" [ngClass]="{'is-invalid': !requiredInput_verify_signature_signature.valid && requiredInput_verify_signature_signature.pristine === false}" #requiredInput_verify_signature_signature="ngModel" [maxlength]="variables_and_functions_service.signature_length" [pattern]="variables_and_functions_service.signature" required [(ngModel)]="data.signature">
+            <label *ngIf="!requiredInput_verify_signature_signature.valid && (requiredInput_verify_signature_signature.pristine === false)" id="validation-required-error_verify_signature_signature" class="error jquery-validation-error small form-text invalid-feedback">Must be a valid signature</label>
+           </div>
+
+               <br><br>
+               <div class="col-md-12">            
+           <input type="text" class="form-control" name="validation-required_verify_signature_public_address" placeholder="Public, Integrated or Sub Address" [ngClass]="{'is-invalid': !requiredInput_verify_signature_public_address.valid && requiredInput_verify_signature_public_address.pristine === false}" #requiredInput_verify_signature_public_address="ngModel" [maxlength]="variables_and_functions_service.xcash_integrated_address_length" [pattern]="variables_and_functions_service.xcash_address" required [(ngModel)]="data.public_address">
+           <label *ngIf="!requiredInput_verify_signature_public_address.valid && (requiredInput_verify_signature_public_address.pristine === false)" id="validation-required-error_verify_signature_public_address" class="error jquery-validation-error small form-text invalid-feedback">Must be a public address, integrated address or sub address</label>
           </div>
-          <div class="col text-center">
-            <span class="text-uppercase d-block m-b-10">Total X-CASH</span>
-            <h3 class="f-w-300">{{total_xcash}}</h3>
+
+          <br><br>
+               <div class="col-md-12">            
+           <input type="text" class="form-control" name="validation-required_verify_signature_message" placeholder="Message (Optional)" [ngClass]="{'is-invalid': !requiredInput_verify_signature_message.valid && requiredInput_verify_signature_message.pristine === false}" #requiredInput_verify_signature_message="ngModel" [(ngModel)]="data.message">
           </div>
+
+                    <br><br>
+                      <button class="btn btn-primary" (click)="verify_signature()">Verify Signature</button>
+
+                      <br><br>
+                      <div *ngIf="signature_settings === true">
+                      <div *ngIf="settings === true">
+                         <h5>The signature is verified</h5>
+                      </div>
+                      <div *ngIf="settings === false">
+                        <h5>The signature is not verified</h5>
+                     </div>
+                     </div>
+
         </div>
       </div>
-    </div>
-    <!-- [ card range1 ] end -->
-
-   
+     </div>
+   <!-- [ card range1 ] end -->
 </div>
