@@ -7,7 +7,7 @@ constructor() { }
 
 // Variables
 password:string = "password";
-get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
+get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balanc"}';
 error:string = '{"error":{"message":"Could not authenticate"}}';
 
 xcash_public_address_prefix:string = "XCA";
@@ -108,21 +108,34 @@ async get_post_request_data(data:string)
   })
 }
 
-async send_post_request(data:string)
+async send_post_request(data:string, error:any)
 {
   // Variables
   let data2:any;
   let count = 0;
+
+  // Constants
+  const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
   
   do
   {
+    if (count !== 0)
+    {
+      await sleep(2000);
+    }
     data2 = await this.get_post_request_data(data);
     count++;
   } while (data2.includes("Unauthorized") && count < 5);
 
   if (count === 5)
   {
+    error.error_settings = true;
     return JSON.parse(this.error);
+  }
+  
+  if (data2.includes("error"))
+  {
+    error.error_settings = true;
   }
   return JSON.parse(data2);
 }  
