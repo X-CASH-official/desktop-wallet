@@ -7,7 +7,7 @@ constructor() { }
 
 // Variables
 password:string = "password";
-get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balanc"}';
+get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
 error:string = '{"error":{"message":"Could not authenticate"}}';
 
 xcash_public_address_prefix:string = "XCA";
@@ -87,7 +87,7 @@ async get_post_request_data(data:string)
         server_nonce = result.substr(result.indexOf("nonce=")+7,result.indexOf(",stale")-8 - result.indexOf("nonce="));
         HA1 = CryptoJS.MD5(`username:xcash-rpc:${password}`).toString();
         HA2 = CryptoJS.MD5(`POST:${PATH}`).toString();
-        auth_response = CryptoJS.MD5(`${HA1}:${server_nonce}:00000001:${new Date().getTime().toString()}:auth:${HA2}`);
+        auth_response = CryptoJS.MD5(`${HA1}:${server_nonce}:00000001:${new Date().getTime().toString()}:auth:${HA2}`).toString();
        
         // append the headers
         headers.append('Authorization', `Digest username="username", realm="xcash-rpc", nonce="${server_nonce}", uri="${PATH}", algorithm=MD5, response="${auth_response}", qop=auth, nc=00000001, cnonce="${new Date().getTime().toString()}"`);
