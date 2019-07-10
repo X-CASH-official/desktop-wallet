@@ -38,6 +38,7 @@
                         <td>{{item.amount | number}}</td>
                         <td *ngIf="item.type === 'in'"><a href="javascript:" class="label theme-bg2 f-12 text-white">In</a></td>
                         <td *ngIf="item.type === 'out'"><a href="javascript:" class="label theme-bg f-12 text-white">Out</a></td>
+                        <td *ngIf="item.type === 'pending'"><a href="javascript:" class="label theme-bg f-12 text-white">Pending</a></td>
                         <td><button type="button" class="btn btn-primary" (click)="[get_transaction_details(count), transaction_settings.show()]">Settings</button></td>
                       </tr>
                 </tbody>

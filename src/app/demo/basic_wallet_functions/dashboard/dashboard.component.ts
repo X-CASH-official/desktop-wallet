@@ -41,8 +41,8 @@ export class dashboardComponent implements OnInit {
     data = await this.variables_and_functions_service.send_post_request(this.variables_and_functions_service.get_balance, this.error);
     if (this.error.error_settings === false)
     {
-      this.total_xcash = data.result.balance;
-      this.total_unlocked_balance = data.result.unlocked_balance;
+      this.total_xcash = this.variables_and_functions_service.xcash_amount_settings(data.result.balance,1);
+      this.total_unlocked_balance = this.variables_and_functions_service.xcash_amount_settings(data.result.unlocked_balance,1);
     }
     else
     {

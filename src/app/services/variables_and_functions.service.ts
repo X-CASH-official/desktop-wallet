@@ -145,7 +145,9 @@ async send_post_request(data:string, error:any)
   if (data2.includes("error"))
   {
     error.error_settings = true;
+    return JSON.parse(data2);
   }
+  error.error_settings = false;
   return JSON.parse(data2);
 }  
 

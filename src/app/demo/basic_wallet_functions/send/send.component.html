@@ -135,8 +135,12 @@
                     <br>
                     <p *ngIf="data.payment_id != ''">Payment ID: {{data.payment_id}}</p>
                     <br>
-                    <p *ngIf="data.public_transaction_settings === true">Transaction Privacy Settings: True</p>
-                    <p *ngIf="data.public_transaction_settings === false">Transaction Privacy Settings: False</p>
+                    <p *ngIf="data.public_transaction_settings === true">Transaction Privacy Settings: Public</p>
+                    <p *ngIf="data.public_transaction_settings === false">Transaction Privacy Settings: Private</p>                   
+                    <br><br>
+                    <p>Please Confirm Your Password to Send the Transaction</p>
+                    <input type="password" class="form-control" name="validation-required_import_wallet_2" placeholder="Password" [ngClass]="{'is-invalid': !requiredInput_import_wallet_2.valid && requiredInput_import_wallet_2.pristine === false}" #requiredInput_import_wallet_2="ngModel" [maxlength]="variables_and_functions_service.text_settings_length" [pattern]="variables_and_functions_service.text_settings" required [(ngModel)]="data.password">
+                    <label *ngIf="!requiredInput_import_wallet_2.valid && (requiredInput_import_wallet_2.pristine === false)" id="validation-required-error_import_wallet_2" class="error jquery-validation-error small form-text invalid-feedback">Can not include:<br>Space<br>Special Characters<br>Non Latin Characters</label>
                     </div>
                     </div>
                     </form>
@@ -170,27 +174,6 @@
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), send_transaction_2.hide()]">Cancel</button>
             <button type="button" class="btn btn-primary" (click)="verify_data('send_transaction_2',requiredInput_send_transaction_2.value) === true ? [send_transaction_2.hide(), send_transaction_3.show()] : reset_data()">Send the Transaction</button>
-          </div>
-        </app-ui-modal>
-    
-    
-    
-        <app-ui-modal #send_transaction_3 [containerClick]="false" [dialogClass]="'modal-lg'">
-          <div class="app-modal-header">
-            <h5 class="modal-title">Send a Transaction - Step 3</h5>
-            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="send_transaction_3.hide()"><span aria-hidden="true">&times;</span></button>
-          </div>
-          <div class="app-modal-body">
-              <form #validationForm3="ngForm" class="editForm" novalidate>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>{{transaction}}</h5>
-                    </div>
-                    </div>
-                    </form>
-          </div>
-          <div class="app-modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), send_transaction_3.hide()]">Close</button>
           </div>
         </app-ui-modal>
        <!-- [ Modals ] end -->    

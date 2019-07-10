@@ -56,6 +56,7 @@ export class sendComponent implements OnInit {
       amount: "",
       fee: "",
       payment_id: "",
+      password: "",
       public_transaction_settings: false
     };  
   }
@@ -94,7 +95,7 @@ export class sendComponent implements OnInit {
       data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
       if (this.error.error_settings === false)
       {
-        this.data.fee = this.variables_and_functions_service.xcash_amount_settings(data2.result.fee_list[0],1);
+        this.data.fee = this.variables_and_functions_service.xcash_amount_settings(data2.result.fee_list[0],1);        
         setTimeout(() => document.getElementById("send_transaction_one_data").click(), 1000); 
       }
       else
@@ -108,32 +109,48 @@ export class sendComponent implements OnInit {
 
   async send()
   {
+    // Variables
+    let data:string;
+    let data2:any; 
+    
+    data = `{"jsonrpc":"2.0","id":"0","method":"change_wallet_password","params":{"old_password":"${this.data.password}","new_password":"${this.data.password}"}}`;
+
+    // Verify the password
+    data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
+    if (this.error.error_settings === true)
+    {
+      this.error_title = "Send";
+      this.error_message = data2.error.message;
+      this.data.password = "";
+      setTimeout(() => document.getElementById("error").click(), 1000); 
+      return;
+    }
+
+    await this.variables_and_functions_service.sleep(100);
+
     // verify that the data is correct for sending the transaction
     if (this.variables_and_functions_service.xcash_address.test(this.data.public_address) && this.variables_and_functions_service.xcash_amount.test(this.data.amount) && this.variables_and_functions_service.payment_id.test(this.data.payment_id))
     {
-       // Variables
-       let data:string;
-       let data2:any;     
        if (this.data.amount === "FULL_BALNCE")
        {
          if (!this.data.public_transaction_settings)
          {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
          }
          else
          {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
          }
        }
        else
        {
          if (!this.data.public_transaction_settings)
          {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
          }
          else
          {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
          }
        }
 
