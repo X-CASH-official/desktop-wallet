@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
 import {variables_and_functions_service} from '../../../services/variables_and_functions.service';
 
 @Component({
@@ -10,6 +9,11 @@ import {variables_and_functions_service} from '../../../services/variables_and_f
 export class get_tx_private_keyComponent implements OnInit {
 
   // Variables
+  error_title:string = "";
+  error_message:string = "";
+  error:any = {
+    error_settings: false
+  } 
   data:string;
   tx_private_key_settings:boolean = true;
   settings:string = "";
@@ -43,8 +47,29 @@ export class get_tx_private_keyComponent implements OnInit {
     setTimeout(() => this.settings = "", 5000);
   }
 
-  get_tx_private_key()
+  async get_tx_private_key()
   {
-    return this.variables_and_functions_service.private_key.test(this.data);
+    if (this.variables_and_functions_service.private_key.test(this.data))
+    {     
+      // Constants
+      const data:string = `{"jsonrpc":"2.0","id":"0","method":"get_tx_key","params":{"txid":"${this.data}"}}`;
+      
+      // Variables
+      let data2:any;
+
+      data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
+      if (this.error.error_settings === false)
+      {
+        this.tx_private_key = data2.result.tx_key; 
+      }
+      else
+      {
+        this.error_title = "Get Transaction Private Key";
+        this.error_message = data2.error.message;
+        setTimeout(() => document.getElementById("error").click(), 1000);        
+      }
+    }
+  }
+    }
   }
 }

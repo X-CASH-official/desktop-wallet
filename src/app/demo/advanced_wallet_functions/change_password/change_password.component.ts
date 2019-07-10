@@ -63,9 +63,7 @@ export class change_passwordComponent implements OnInit {
         this.error_title = "Change Password";
         this.error_message = data2.error.message;
         setTimeout(() => document.getElementById("error").click(), 1000);        
-      }       
-      return true;
+      }
     }
-    return false;
   }
 }
