@@ -7,7 +7,9 @@ constructor() { }
 
 // Variables
 password:string = "password";
+transaction_history:any;
 get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
+get_all_transactions:string = '{"jsonrpc":"2.0","id":"0","method":"get_transfers","params":{"in":true,"out":true,"pending":true,"filter_by_height":true}}';
 error:string = '{"error":{"message":"Could not authenticate"}}';
 
 xcash_public_address_prefix:string = "XCA";
@@ -108,20 +110,22 @@ async get_post_request_data(data:string)
   })
 }
 
+sleep(milliseconds)
+{
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
 async send_post_request(data:string, error:any)
 {
   // Variables
   let data2:any;
   let count = 0;
-
-  // Constants
-  const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
   
   do
   {
     if (count !== 0)
     {
-      await sleep(2000);
+      await this.sleep(2000);
     }
     data2 = await this.get_post_request_data(data);
     count++;
@@ -139,4 +143,9 @@ async send_post_request(data:string, error:any)
   }
   return JSON.parse(data2);
 }  
+
+xcash_amount_settings(count:number, settings:number)
+{
+return settings === 0 ? count * 1000000 : count / 1000000;
+}
 }
