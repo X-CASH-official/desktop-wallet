@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {variables_and_functions_service} from '../../../services/variables_and_functions.service';
 
 @Component({
   selector: 'app-sign_data',
@@ -8,12 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class sign_dataComponent implements OnInit {
 
   // Variables
+  error_title:string = "";
+  error_message:string = "";
+  error:any = {
+    error_settings: false
+  }  
   data:string;
   settings:boolean = false;
   signature_settings:boolean = false;
   signature:string;
 
-  constructor() { }
+  constructor(private variables_and_functions_service: variables_and_functions_service) { }
 
   ngOnInit()
   {
@@ -45,9 +51,25 @@ export class sign_dataComponent implements OnInit {
     this.data = "";
   }
 
-  sign_data()
-  {     
-    this.settings = true;
-    return true;
+  async sign_data()
+  {
+    // Constants
+    const data:string = `{"jsonrpc":"2.0","id":"0","method":"sign","params":{"data":"${this.data}"}}`;
+    
+    // Variables
+    let data2:any;
+
+    data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
+    if (this.error.error_settings === false)
+    {
+      this.settings = true;
+      this.signature = data2.result.signature;
+    }
+    else
+    {
+      this.error_title = "Sign data";
+      this.error_message = data2.error.message;
+      setTimeout(() => document.getElementById("error").click(), 1000);        
+    }   
   }
 }
