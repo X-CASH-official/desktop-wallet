@@ -9,10 +9,15 @@
       <div class="card">
         <div class="card-body">
 
-          <div class="col-md-12">            
+          <div class="col-md-12">  
+              <div class="input-group">          
             <input type="text" class="form-control" name="validation-required_create_reserve_proof_amount" placeholder="Amount" [ngClass]="{'is-invalid': !requiredInput_create_reserve_proof_amount.valid && requiredInput_create_reserve_proof_amount.pristine === false}" #requiredInput_create_reserve_proof_amount="ngModel" [pattern]="variables_and_functions_service.xcash_reserve_proof_amount" required [(ngModel)]="data.amount">
             <label *ngIf="!requiredInput_create_reserve_proof_amount.valid && (requiredInput_create_reserve_proof_amount.pristine === false)" id="validation-required-error_create_reserve_proof_amount" class="error jquery-validation-error small form-text invalid-feedback">Must be between 0.000001 and 100000000000 X-CASH or ALL</label>
-           </div>
+            <span class="input-group-btn">
+              <button class="btn btn-primary" (click)="data.amount = 'ALL'">Full Balance</button>
+            </span>
+          </div>
+          </div>
 
            <br><br>
                <div class="col-md-12">            
@@ -20,7 +25,7 @@
           </div>
 
                     <br><br>
-                      <button class="btn btn-primary" (click)="verify_reserve_proof()">Create Reserve Proof</button>
+                      <button class="btn btn-primary" (click)="create_reserve_proof()">Create Reserve Proof</button>
 
                       <br><br>                      
                       <div *ngIf="settings === true">
@@ -33,4 +38,27 @@
       </div>
      </div>
    <!-- [ card range1 ] end -->
+
+
+
+   <!-- [ Modals ] start -->
+   <app-ui-modal #error [containerClick]="false" [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+      <h5 class="modal-title">{{error_title}}</h5>
+      <button id="error" style="display: none" type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="error.show()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <form #validationForm="ngForm" class="editForm" novalidate>
+      <div class="row">
+          <div class="col-md-12" style="word-wrap: break-word;">
+              <p>{{error_message}}</p>
+              </div>
+              </div>
+              </form>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-primary" (click)="error.hide()">Close</button>
+    </div>
+  </app-ui-modal>
+   <!-- [ Modals ] end --> 
 </div>

@@ -70,6 +70,4 @@ export class get_tx_private_keyComponent implements OnInit {
       }
     }
   }
-    }
-  }
 }
