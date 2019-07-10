@@ -52,10 +52,26 @@ export class view_private_keysComponent implements OnInit {
     }
   }
 
-  async confirm_password()
+  async view_private_keys()
   {
     // Variables
-    let data2:any;    
+    let data:string;
+    let data2:any; 
+    
+    data = `{"jsonrpc":"2.0","id":"0","method":"change_wallet_password","params":{"old_password":"${this.data}","new_password":"${this.data}"}}`;
+ 
+    // Verify the password
+    data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
+    if (this.error.error_settings === true)
+    {
+      this.error_title = "Send";
+      this.error_message = data2.error.message;
+      this.data = "";
+      setTimeout(() => document.getElementById("error").click(), 1000); 
+      return;
+    }
+ 
+    await this.variables_and_functions_service.sleep(100);
 
     data2 = await this.variables_and_functions_service.send_post_request(this.variables_and_functions_service.get_mnemonic_seed, this.error);
     if (this.error.error_settings === false)
