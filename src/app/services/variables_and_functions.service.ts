@@ -13,6 +13,7 @@ get_all_transactions:string = '{"jsonrpc":"2.0","id":"0","method":"get_transfers
 get_public_address:string = '{"jsonrpc":"2.0","id":"0","method":"get_address"}';
 get_view_key:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"view_key"}}';
 get_mnemonic_seed:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"mnemonic"}}';
+rescan_blockchain:string = '{"jsonrpc":"2.0","id":"0","method":"rescan_blockchain"}';
 error:string = '{"error":{"message":"Could not authenticate"}}';
 
 xcash_public_address_prefix:string = "XCA";

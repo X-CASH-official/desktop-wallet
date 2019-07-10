@@ -10,7 +10,7 @@
               <div class="col-md-12">
               
                       
-               <button class="btn btn-primary" (click)="xcashd_load.show()">Rescan Blockchain</button>
+               <button class="btn btn-primary" (click)="rescan_blockchain()">Rescan Blockchain</button>
   
           </div>
         </div>
@@ -19,10 +19,32 @@
 
 
 
-     <!-- [ Modals ] start -->
+       <!-- [ Modals ] start -->
+       <app-ui-modal #error [containerClick]="false" [dialogClass]="'modal-lg'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">{{error_title}}</h5>
+            <button id="error" style="display: none" type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="error.show()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+              <form #validationForm="ngForm" class="editForm" novalidate>
+            <div class="row">
+                <div class="col-md-12" style="word-wrap: break-word;">
+                    <p>{{error_message}}</p>
+                    </div>
+                    </div>
+                    </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary" (click)="error.hide()">Close</button>
+          </div>
+        </app-ui-modal>
+        
+
+
      <app-ui-modal #xcashd_load [containerClick]="false" [dialogClass]="'modal-lg'">
         <div class="app-modal-header">
           <h5 class="modal-title">Synchronizing The Blockchain</h5>
+          <button id="xcashd_load" style="display: none" type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="xcashd_load.show()"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="app-modal-body">
             <form #validationForm3="ngForm" class="editForm" novalidate>
