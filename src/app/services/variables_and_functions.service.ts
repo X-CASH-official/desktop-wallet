@@ -10,6 +10,7 @@ password:string = "password";
 transaction_history:any;
 get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
 get_all_transactions:string = '{"jsonrpc":"2.0","id":"0","method":"get_transfers","params":{"in":true,"out":true,"pending":true,"filter_by_height":true}}';
+get_public_address:string = '{"jsonrpc":"2.0","id":"0","method":"get_address"}';
 error:string = '{"error":{"message":"Could not authenticate"}}';
 
 xcash_public_address_prefix:string = "XCA";
