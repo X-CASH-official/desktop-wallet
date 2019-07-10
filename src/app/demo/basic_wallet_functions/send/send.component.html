@@ -45,7 +45,7 @@
                         <label>Public Transaction</label>
 
                         <br><br>
-                        <button class="btn btn-primary" (click)="send() === true ? send_transaction_1.show() : send_transaction_1.hide()">Send</button>
+                        <button class="btn btn-primary" (click)="get_transaction_fee()">Send</button>
   
           </div>
         </div>
@@ -54,6 +54,27 @@
 
 
      <!-- [ Modals ] start -->
+     <app-ui-modal #error [containerClick]="false" [dialogClass]="'modal-lg'">
+        <div class="app-modal-header">
+          <h5 class="modal-title">{{error_title}}</h5>
+          <button id="error" style="display: none" type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="error.show()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="app-modal-body">
+            <form #validationForm="ngForm" class="editForm" novalidate>
+          <div class="row">
+              <div class="col-md-12" style="word-wrap: break-word;">
+                  <p>{{error_message}}</p>
+                  </div>
+                  </div>
+                  </form>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-primary" (click)="error.hide()">Close</button>
+        </div>
+      </app-ui-modal>
+
+
+
      <app-ui-modal #import_from_address_book [containerClick]="false" [dialogClass]="'modal-lg'">
         <div class="app-modal-header">
           <h5 class="modal-title">Import From Address Book</h5>
@@ -98,20 +119,31 @@
       <app-ui-modal #send_transaction_1 [containerClick]="false" [dialogClass]="'modal-lg'">
           <div class="app-modal-header">
             <h5 class="modal-title">Send a Transaction - Step 1</h5>
-            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="send_transaction_1.hide()"><span aria-hidden="true">&times;</span></button>
+            <button id="send_transaction_one_data" style="display: none" type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="send_transaction_1.show()"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="app-modal-body">
               <form #validationForm="ngForm" class="editForm" novalidate>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12" style="word-wrap: break-word;">
                     <h5>Confirm Transaction Details</h5>
+                    <br>
+                    <p>To: {{data.public_address}}</p>
+                    <br>
+                    <p>Amount: {{data.amount}}</p>
+                    <br>
+                    <p>Fee: {{data.fee}}</p>
+                    <br>
+                    <p *ngIf="data.payment_id != ''">Payment ID: {{data.payment_id}}</p>
+                    <br>
+                    <p *ngIf="data.public_transaction_settings === true">Transaction Privacy Settings: True</p>
+                    <p *ngIf="data.public_transaction_settings === false">Transaction Privacy Settings: False</p>
                     </div>
                     </div>
                     </form>
           </div>
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), send_transaction_1.hide()]">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="[send_transaction_1.hide(), send_transaction_2.show()]">Send the Transaction</button>
+            <button type="button" class="btn btn-primary" (click)="[send_transaction_1.hide(), send()]">Send the Transaction</button>
           </div>
         </app-ui-modal>
     
@@ -120,15 +152,17 @@
         <app-ui-modal #send_transaction_2 [containerClick]="false" [dialogClass]="'modal-lg'">
           <div class="app-modal-header">
             <h5 class="modal-title">Send a Transaction - Step 2</h5>
-            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="send_transaction_2.hide()"><span aria-hidden="true">&times;</span></button>
+            <button id="send_transaction_two_data" style="display: none" type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="send_transaction_2.show()"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="app-modal-body">
               <form #validationForm2="ngForm" class="editForm" novalidate>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="validation-required_send_transaction_1" placeholder="Password" #requiredInput_send_transaction_2 required>
-                    </div>
+                <div class="col-md-12" style="word-wrap: break-word;">
+                    <h5>Transaction Has Been Sent Successfully</h5>
+                    <br>
+                    <p>Transaction_Hash: {{data.transaction_hash}}</p>
+                    <br>
+                    <p>Transaction_Key: {{data.transaction_key}}</p>
                     </div>
                     </div>
                     </form>
