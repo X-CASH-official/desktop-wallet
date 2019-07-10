@@ -14,6 +14,7 @@ get_public_address:string = '{"jsonrpc":"2.0","id":"0","method":"get_address"}';
 get_view_key:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"view_key"}}';
 get_mnemonic_seed:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"mnemonic"}}';
 rescan_blockchain:string = '{"jsonrpc":"2.0","id":"0","method":"rescan_blockchain"}';
+get_sub_addresses:string = '{"jsonrpc":"2.0","id":"0","method":"get_address","params":{"account_index":0}';
 error:string = '{"error":{"message":"Could not authenticate"}}';
 
 xcash_public_address_prefix:string = "XCA";

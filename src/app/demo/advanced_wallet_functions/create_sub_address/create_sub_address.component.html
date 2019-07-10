@@ -6,6 +6,7 @@
     <app-card cardTitle="Full Width Table" cardClass="code-table" blockClass="pb-0">
         <app-alert type="primary" *ngIf="settings === true">Sub Address Has Been Copied To the Clipboard Successfully</app-alert>
       <div class="table-responsive">
+          <td><button type="button" class="btn btn-primary" (click)="sub_address_create_1.show()">Create</button></td>
         <table class="table table-hover">
           <thead>
             <tr>
@@ -17,20 +18,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>data1</td>
-              <td>data1</td>
-              <td><a href="javascript:" class="label theme-bg f-12 text-white">True</a></td>
-              <td><button type="button" class="btn btn-primary" (click)="[copyMessage(), timer_data()]">Copy</button></td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>data2</td>
-              <td>data2</td>
-              <td><a href="javascript:" class="label theme-bg2 f-12 text-white">False</a></td>
-              <td><button type="button" class="btn btn-primary" (click)="[copyMessage(), timer_data()]">Copy</button></td>
-            </tr>
+              <tr *ngFor="let item of sub_addresses">
+                <th scope="row">{{item.address_index+1 | number}}</th>
+                <td>{{item.label}}</td>
+                <td>{{item.address}}</td>
+                <td *ngIf="item.used === true"><a href="javascript:" class="label theme-bg f-12 text-white">True</a></td>
+                <td *ngIf="item.used === false"><a href="javascript:" class="label theme-bg2 f-12 text-white">False</a></td>
+                <td><button type="button" class="btn btn-primary" (click)="[copyMessage(item.address), timer_data()]">Copy</button></td>
+              </tr>
             </tbody>
         </table>
       </div>
@@ -57,7 +52,7 @@
     </div>
     <div class="app-modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="[reset_data(), sub_address_create_1.hide()]">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="create_sub_address(requiredInput_sub_address_create_1.value) === true ? [reset_data(), sub_address_create_1.hide()] : reset_data()">Create Sub Address</button>
+      <button type="button" class="btn btn-primary" (click)="[create_sub_address(requiredInput_sub_address_create_1.value), reset_data(), sub_address_create_1.hide()]">Create Sub Address</button>
     </div>
   </app-ui-modal>
  <!-- [ Modals ] end -->

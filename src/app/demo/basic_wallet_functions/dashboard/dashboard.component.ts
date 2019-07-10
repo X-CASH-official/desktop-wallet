@@ -68,8 +68,7 @@ export class dashboardComponent implements OnInit {
         {
           this.variables_and_functions_service.transaction_history[count].amount = this.variables_and_functions_service.xcash_amount_settings(this.variables_and_functions_service.transaction_history[count].amount,1);
           this.variables_and_functions_service.transaction_history[count].fee = this.variables_and_functions_service.xcash_amount_settings(this.variables_and_functions_service.transaction_history[count].fee,1);
-        }
-        
+        }        
       }
       else
       {
