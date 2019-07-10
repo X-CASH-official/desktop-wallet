@@ -72,22 +72,22 @@ export class sendComponent implements OnInit {
       {
         if (!this.data.public_transaction_settings)
         {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
         }
         else
         {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"tx_privacy_settings":"public", "payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
         }
       }
       else
       {
         if (!this.data.public_transaction_settings)
         {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
         }
         else
         {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"tx_privacy_settings":"public", "payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
         }
       }
 
@@ -114,28 +114,28 @@ export class sendComponent implements OnInit {
        // Variables
        let data:string;
        let data2:any;     
-      if (this.data.amount === "FULL_BALNCE")
-      {
-        if (!this.data.public_transaction_settings)
-        {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
-        }
-        else
-        {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"tx_privacy_settings":"public", "payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
-        }
-      }
-      else
-      {
-        if (!this.data.public_transaction_settings)
-        {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
-        }
-        else
-        {
-          data = this.data.payment_id == "" ? '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0) + ',"address":"' + this.data.public_address + '"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}' : '{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":' + this.variables_and_functions_service.xcash_amount_settings(this.data.amount1000000000000,0) + ',"address":"' + this.data.public_address + '"}],"tx_privacy_settings":"public", "payment_id":"' + this.data.payment_id + '"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}';
-        }
-      }
+       if (this.data.amount === "FULL_BALNCE")
+       {
+         if (!this.data.public_transaction_settings)
+         {
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+         }
+         else
+         {
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+         }
+       }
+       else
+       {
+         if (!this.data.public_transaction_settings)
+         {
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+         }
+         else
+         {
+           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+         }
+       }
 
       data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
       if (this.error.error_settings === false)
