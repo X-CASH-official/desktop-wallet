@@ -11,6 +11,8 @@ transaction_history:any;
 get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
 get_all_transactions:string = '{"jsonrpc":"2.0","id":"0","method":"get_transfers","params":{"in":true,"out":true,"pending":true,"filter_by_height":true}}';
 get_public_address:string = '{"jsonrpc":"2.0","id":"0","method":"get_address"}';
+get_view_key:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"view_key"}}';
+get_mnemonic_seed:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"mnemonic"}}';
 error:string = '{"error":{"message":"Could not authenticate"}}';
 
 xcash_public_address_prefix:string = "XCA";

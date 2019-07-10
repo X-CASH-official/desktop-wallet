@@ -53,7 +53,7 @@ export class view_public_addressComponent implements OnInit {
     }
     else
     {
-      this.error_title = "Send";
+      this.error_title = "View Public Address";
       this.error_message = data2.error.message;
       setTimeout(() => document.getElementById("error").click(), 1000);        
     } 

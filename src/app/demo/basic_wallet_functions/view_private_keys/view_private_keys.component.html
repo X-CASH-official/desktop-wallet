@@ -24,15 +24,15 @@
 <div *ngIf="password_settings === true">
       <div class="col-md-6 col-xl-12">
           <h5>Private Key</h5>
-          <app-alert type="primary" *ngIf="private_key_settings === true">{{data2}}</app-alert>
+          <app-alert type="primary" *ngIf="private_key_settings === true">The private key has been copied to the clipboard</app-alert>
           <hr>
           <div class="card">
             <div class="card-body">
                 <div class="col-md-12">
                 <div class="input-group">
-                    <input type="text" [value]="private_key" class="form-control" readonly>
+                    <input type="text" [value]="mnemonic_seed" class="form-control" readonly>
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" (click)="[copyMessage(private_key), timer_data('The private key has been copied to the clipboard')]">Copy</button>
+                        <button class="btn btn-primary" (click)="[copyMessage(mnemonic_seed), timer_data('mnemonic_seed')]">Copy</button>
                     </span>
                 </div>
                 </div>
@@ -45,15 +45,15 @@
 
           <div class="col-md-6 col-xl-12">
               <h5>View Key</h5>
-              <app-alert type="primary" *ngIf="view_key_settings === true">{{data2}}</app-alert>
+              <app-alert type="primary" *ngIf="view_key_settings === true">The view key has been copied to the clipboard</app-alert>
               <hr>
               <div class="card">
                 <div class="card-body">
                     <div class="col-md-12">
                     <div class="input-group">
-                        <input type="text" [value]="private_key" class="form-control" readonly>
+                        <input type="text" [value]="view_key" class="form-control" readonly>
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" (click)="[copyMessage(private_key), timer_data('The view key has been copied to the clipboard')]">Copy</button>
+                            <button class="btn btn-primary" (click)="[copyMessage(view_key), timer_data('view_key')]">Copy</button>
                         </span>
                     </div>
                     </div>
@@ -63,6 +63,29 @@
               </div>
             </div>
     <!-- [ card range1 ] end -->
+
+
+
+     <!-- [ Modals ] start -->
+     <app-ui-modal #error [containerClick]="false" [dialogClass]="'modal-lg'">
+            <div class="app-modal-header">
+              <h5 class="modal-title">{{error_title}}</h5>
+              <button id="error" style="display: none" type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="error.show()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="app-modal-body">
+                <form #validationForm="ngForm" class="editForm" novalidate>
+              <div class="row">
+                  <div class="col-md-12" style="word-wrap: break-word;">
+                      <p>{{error_message}}</p>
+                      </div>
+                      </div>
+                      </form>
+            </div>
+            <div class="app-modal-footer">
+              <button type="button" class="btn btn-primary" (click)="error.hide()">Close</button>
+            </div>
+          </app-ui-modal>
+           <!-- [ Modals ] end -->   
 
    
 </div>
