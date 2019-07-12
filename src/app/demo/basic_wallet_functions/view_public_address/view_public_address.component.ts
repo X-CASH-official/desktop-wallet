@@ -41,6 +41,14 @@ export class view_public_addressComponent implements OnInit {
     setTimeout(() => this.public_address_settings = false, 5000);
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "View Public Address";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async ngOnInit()
   {
     // Variables
@@ -53,9 +61,7 @@ export class view_public_addressComponent implements OnInit {
     }
     else
     {
-      this.error_title = "View Public Address";
-      this.error_message = data2.error.message;
-      setTimeout(() => document.getElementById("error").click(), 1000);        
+      this.post_request_error_message(data2.error.message);      
     } 
   }
 }
