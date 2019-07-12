@@ -22,6 +22,14 @@ export class rescan_blockchainComponent implements OnInit {
   
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Rescan Blockchain";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async rescan_blockchain()
   {
     // Variables
@@ -34,9 +42,7 @@ export class rescan_blockchainComponent implements OnInit {
     }
     else
     {
-      this.error_title = "Rescan Blockchain";
-      this.error_message = data2.error.message;
-      setTimeout(() => document.getElementById("error").click(), 1000);        
+      this.post_request_error_message(data2.error.message);      
     }       
   }
 }
