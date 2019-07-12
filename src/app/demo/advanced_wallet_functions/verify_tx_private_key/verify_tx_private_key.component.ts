@@ -38,6 +38,14 @@ export class verify_tx_private_keyComponent implements OnInit {
     };  
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Verify Transaction Private Key";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async verify_tx_private_key()
   {
     if (this.variables_and_functions_service.private_key.test(this.data.transaction_hash) && this.variables_and_functions_service.private_key.test(this.data.tx_private_key) && this.variables_and_functions_service.xcash_address.test(this.data.public_address))
@@ -56,9 +64,7 @@ export class verify_tx_private_keyComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Verify Transaction Private Key";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data2.error.message);        
       }
     }
   }
