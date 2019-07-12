@@ -51,6 +51,14 @@ export class sign_dataComponent implements OnInit {
     this.data = "";
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Sign Data";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async sign_data()
   {
     // Constants
@@ -67,9 +75,7 @@ export class sign_dataComponent implements OnInit {
     }
     else
     {
-      this.error_title = "Sign data";
-      this.error_message = data2.error.message;
-      setTimeout(() => document.getElementById("error").click(), 1000);        
+      this.post_request_error_message(data2.error.message);    
     }   
   }
 }
