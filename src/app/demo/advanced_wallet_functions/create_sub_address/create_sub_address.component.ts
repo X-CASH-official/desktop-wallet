@@ -50,6 +50,14 @@ export class create_sub_addressComponent implements OnInit {
     setTimeout(() => this.settings = false, 5000);
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Create Sub Address";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async get_sub_addressses()
   {
     // Variables
@@ -63,9 +71,7 @@ export class create_sub_addressComponent implements OnInit {
     }
     else
     {
-      this.error_title = "Get Sub Addresses";
-      this.error_message = data.error.message;
-      setTimeout(() => document.getElementById("error").click(), 1000);        
+      this.post_request_error_message(data.error.message);      
     }  
   }
 
@@ -87,9 +93,7 @@ export class create_sub_addressComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Create Sub Address";
-        this.error_message = data3.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data3.error.message);     
       }       
       return true;
     }
