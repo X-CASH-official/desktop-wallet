@@ -34,9 +34,23 @@ export class dashboardComponent implements OnInit {
 
   async ngOnInit()
   {
+    this.get_balance();
+    await this.variables_and_functions_service.sleep(100);
+    this.get_transactions();
+
+    // set the timer to get the balance and the transactions every block interval
+    setInterval(async () => {
+      this.get_balance();
+      await this.variables_and_functions_service.sleep(100);
+      this.get_transactions();
+    }, this.variables_and_functions_service.block_time * 60 * 1000);
+  }
+
+  async get_balance()
+  {
     // Variables
     let data:any;
-  
+
     // get the balance
     data = await this.variables_and_functions_service.send_post_request(this.variables_and_functions_service.get_balance, this.error);
     if (this.error.error_settings === false)
@@ -50,33 +64,34 @@ export class dashboardComponent implements OnInit {
       this.error_message = data.error.message;
       setTimeout(() => document.getElementById("error").click(), 1000);
     } 
+  }
 
-    // get the transaction history
-    await this.variables_and_functions_service.sleep(100);
-    if (this.variables_and_functions_service.transaction_history == undefined)
+  async get_transactions()
+  {
+    // Variables
+    let data:any;
+
+    // Get all of the transactions
+    data = await this.variables_and_functions_service.send_post_request(this.variables_and_functions_service.get_all_transactions, this.error);
+    if (this.error.error_settings === false)
     {
-      // Get all of the transactions
-      data = await this.variables_and_functions_service.send_post_request(this.variables_and_functions_service.get_all_transactions, this.error);
-      if (this.error.error_settings === false)
+      // combine the in, out and pending arrays and then remove any empty values and then sort the array in descending order by the timestamps
+      this.variables_and_functions_service.transaction_history = ((data.result.in.concat(data.result.out).concat(data.result.pending)).filter(data => data)).sort((a,b)=>b.timestamp-a.timestamp);  
+      
+      // adjust the numbers to display them
+      var count;
+      for (count = 0; count < this.variables_and_functions_service.transaction_history.length; count++)
       {
-        // combine the in, out and pending arrays and then remove any empty values and then sort the array in descending order by the timestamps
-        this.variables_and_functions_service.transaction_history = ((data.result.in.concat(data.result.out).concat(data.result.pending)).filter(data => data)).sort((a,b)=>b.timestamp-a.timestamp);  
-        
-        // adjust the numbers to display them
-        var count;
-        for (count = 0; count < this.variables_and_functions_service.transaction_history.length; count++)
-        {
-          this.variables_and_functions_service.transaction_history[count].amount = this.variables_and_functions_service.xcash_amount_settings(this.variables_and_functions_service.transaction_history[count].amount,1);
-          this.variables_and_functions_service.transaction_history[count].fee = this.variables_and_functions_service.xcash_amount_settings(this.variables_and_functions_service.transaction_history[count].fee,1);
-        }        
-      }
-      else
-      {
-        this.error_title = "Get Transactions";
-        this.error_message = data.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);
-      } 
+        this.variables_and_functions_service.transaction_history[count].amount = this.variables_and_functions_service.xcash_amount_settings(this.variables_and_functions_service.transaction_history[count].amount,1);
+        this.variables_and_functions_service.transaction_history[count].fee = this.variables_and_functions_service.xcash_amount_settings(this.variables_and_functions_service.transaction_history[count].fee,1);
+      }        
     }
+    else
+    {
+      this.error_title = "Get Transactions";
+      this.error_message = data.error.message;
+      setTimeout(() => document.getElementById("error").click(), 1000);
+    } 
   }
 
   get_transaction_details(count:number)

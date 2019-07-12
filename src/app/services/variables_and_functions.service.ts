@@ -6,6 +6,7 @@ export class variables_and_functions_service{
 constructor() { }
 
 // Variables
+block_time:number = 2;
 password:string = "password";
 transaction_history:any;
 get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
@@ -153,6 +154,6 @@ async send_post_request(data:string, error:any)
 
 xcash_amount_settings(count:number, settings:number)
 {
-return settings === 0 ? count * 1000000 : count / 1000000;
+  return settings === 0 ? count * 1000000 : count / 1000000;
 }
 }
