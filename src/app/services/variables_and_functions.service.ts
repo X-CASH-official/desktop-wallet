@@ -7,6 +7,7 @@ constructor() { }
 
 // Variables
 block_time:number = 2;
+ring_size:number = 21;
 password:string = "password";
 transaction_history:any;
 get_balance:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';

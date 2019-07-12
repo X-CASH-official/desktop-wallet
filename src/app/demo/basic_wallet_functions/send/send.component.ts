@@ -61,37 +61,62 @@ export class sendComponent implements OnInit {
     };  
   }
 
-  async get_transaction_fee()
+  send_error(error_message:string)
   {
+    this.error_title = "Send";
+    this.error_message = error_message;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
+  create_send_data(settings:boolean)
+  {
+    // Variables
+    let data:string;
+
     // verify that the data is correct for sending the transaction
     if (this.variables_and_functions_service.xcash_address.test(this.data.public_address) && this.variables_and_functions_service.xcash_amount.test(this.data.amount) && this.variables_and_functions_service.payment_id.test(this.data.payment_id))
-    {
-       // Variables
-       let data:string;
-       let data2:any;     
+    {           
       if (this.data.amount === "FULL_BALNCE")
       {
         if (!this.data.public_transaction_settings)
         {
-          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}}`;
         }
         else
         {
-          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}}`;
         }
       }
       else
       {
         if (!this.data.public_transaction_settings)
         {
-          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}}`;
         }
         else
         {
-          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true, "do_not_relay":true}}`;
+          data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":${this.variables_and_functions_service.ring_size},"get_tx_keys": true, "do_not_relay":${settings}}}`;
         }
       }
+    }
+    else
+    {
+      data = "";
+    }
+    return data;   
+  }
 
+  async get_transaction_fee()
+  {
+    // Variables
+    let data:string;
+    let data2:any; 
+
+    data = this.create_send_data(true); 
+    
+    if (data != "")
+    {
       data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
       if (this.error.error_settings === false)
       {
@@ -100,11 +125,13 @@ export class sendComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Send";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.send_error(data2.error.message);        
       } 
     }
+    else
+    {
+      this.send_error(data2.error.message);      
+    } 
   }
 
   async send()
@@ -119,41 +146,17 @@ export class sendComponent implements OnInit {
     data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
     if (this.error.error_settings === true)
     {
-      this.error_title = "Send";
-      this.error_message = data2.error.message;
       this.data.password = "";
-      setTimeout(() => document.getElementById("error").click(), 1000); 
+      this.send_error(data2.error.message);
       return;
     }
 
     await this.variables_and_functions_service.sleep(100);
 
-    // verify that the data is correct for sending the transaction
-    if (this.variables_and_functions_service.xcash_address.test(this.data.public_address) && this.variables_and_functions_service.xcash_amount.test(this.data.amount) && this.variables_and_functions_service.payment_id.test(this.data.payment_id))
+    data = this.create_send_data(false); 
+    
+    if (data != "")
     {
-       if (this.data.amount === "FULL_BALNCE")
-       {
-         if (!this.data.public_transaction_settings)
-         {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
-         }
-         else
-         {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
-         }
-       }
-       else
-       {
-         if (!this.data.public_transaction_settings)
-         {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
-         }
-         else
-         {
-           data = this.data.payment_id == "" ? `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"priority":0,"ring_size":21,"get_tx_keys": true}}` : `{"jsonrpc":"2.0","id":"0","method":"transfer_split","params":{"destinations":[{"amount":${this.variables_and_functions_service.xcash_amount_settings(this.data.amount,0)},"address":"${this.data.public_address}"}],"tx_privacy_settings":"public", "payment_id":"${this.data.payment_id},"priority":0,"ring_size":21,"get_tx_keys": true}}`;
-         }
-       }
-
       data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
       if (this.error.error_settings === false)
       {
@@ -163,20 +166,12 @@ export class sendComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Send";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.send_error(data2.error.message);      
       } 
     }
-  }
-
-  verify_data(item:string, data:string)
-  {    
-    if (item === "send_transaction_2")
+    else
     {
-      // verify the password for sending the transaction
-      return this.variables_and_functions_service.text_settings.test(data);
-    }
-    return false;
+      this.send_error(data2.error.message);       
+    } 
   }
 }
