@@ -52,6 +52,14 @@ export class view_private_keysComponent implements OnInit {
     }
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "View Private Keys";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async view_private_keys()
   {
     // Variables
@@ -63,11 +71,9 @@ export class view_private_keysComponent implements OnInit {
     // Verify the password
     data2 = await this.variables_and_functions_service.send_post_request(data, this.error);
     if (this.error.error_settings === true)
-    {
-      this.error_title = "Send";
-      this.error_message = data2.error.message;
+    {      
       this.data = "";
-      setTimeout(() => document.getElementById("error").click(), 1000); 
+      this.post_request_error_message(data2.error.message);
       return;
     }
  
@@ -77,7 +83,6 @@ export class view_private_keysComponent implements OnInit {
     if (this.error.error_settings === false)
     {
       this.mnemonic_seed = data2.result.key;
-      console.log(this.mnemonic_seed);
       await this.variables_and_functions_service.sleep(100);
       data2 = await this.variables_and_functions_service.send_post_request(this.variables_and_functions_service.get_view_key, this.error);
       if (this.error.error_settings === false)
@@ -87,16 +92,12 @@ export class view_private_keysComponent implements OnInit {
       }
       else
       {
-        this.error_title = "View Private Keys";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data2.error.message);
       }  
     }
     else
     {
-      this.error_title = "View Private Keys";
-      this.error_message = data2.error.message;
-      setTimeout(() => document.getElementById("error").click(), 1000);        
+      this.post_request_error_message(data2.error.message);      
     } 
   }
 

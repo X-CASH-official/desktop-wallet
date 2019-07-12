@@ -61,10 +61,10 @@ export class sendComponent implements OnInit {
     };  
   }
 
-  send_error(error_message:string)
+  post_request_error_message(data:string)
   {
     this.error_title = "Send";
-    this.error_message = error_message;
+    this.error_message = data;
     setTimeout(() => document.getElementById("error").click(), 1000); 
     return;
   }
@@ -125,12 +125,12 @@ export class sendComponent implements OnInit {
       }
       else
       {
-        this.send_error(data2.error.message);        
+        this.post_request_error_message(data2.error.message);        
       } 
     }
     else
     {
-      this.send_error(data2.error.message);      
+      this.post_request_error_message(data2.error.message);      
     } 
   }
 
@@ -147,7 +147,7 @@ export class sendComponent implements OnInit {
     if (this.error.error_settings === true)
     {
       this.data.password = "";
-      this.send_error(data2.error.message);
+      this.post_request_error_message(data2.error.message);
       return;
     }
 
@@ -166,12 +166,12 @@ export class sendComponent implements OnInit {
       }
       else
       {
-        this.send_error(data2.error.message);      
+        this.post_request_error_message(data2.error.message);      
       } 
     }
     else
     {
-      this.send_error(data2.error.message);       
+      this.post_request_error_message(data2.error.message);       
     } 
   }
 }
