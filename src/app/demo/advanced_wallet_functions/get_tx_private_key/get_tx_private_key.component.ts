@@ -47,6 +47,14 @@ export class get_tx_private_keyComponent implements OnInit {
     setTimeout(() => this.settings = "", 5000);
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Get Transaction Private Key";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async get_tx_private_key()
   {
     if (this.variables_and_functions_service.private_key.test(this.data))
@@ -64,9 +72,7 @@ export class get_tx_private_keyComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Get Transaction Private Key";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data2.error.message);       
       }
     }
   }
