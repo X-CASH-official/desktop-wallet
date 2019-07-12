@@ -51,6 +51,14 @@ export class create_integrated_addressComponent implements OnInit {
     this.data = "";
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Create Integrated Address";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async create_integrated_address()
   { 
     if (this.variables_and_functions_service.encrypted_payment_id.test(this.data) || this.data == undefined)   
@@ -69,9 +77,7 @@ export class create_integrated_addressComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Change Password";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data2.error.message);    
       }       
       return true;
     }
