@@ -38,6 +38,14 @@ export class verify_reserve_proofComponent implements OnInit {
     };  
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Verify Reserve Proof";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async verify_reserve_proof()
   {
     if (this.variables_and_functions_service.reserve_proof.test(this.data.reserve_proof) && this.variables_and_functions_service.xcash_address.test(this.data.public_address))
@@ -56,9 +64,7 @@ export class verify_reserve_proofComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Verify Reserve Proof Key";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data2.error.message);        
       }
     }
   }
