@@ -57,6 +57,14 @@ constructor(private variables_and_functions_service: variables_and_functions_ser
     };  
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Create Reserve Proof";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async create_reserve_proof()
   {    
     // Variables
@@ -80,9 +88,7 @@ constructor(private variables_and_functions_service: variables_and_functions_ser
     }
     else
     {
-      this.error_title = "Create Reserve Proof";
-      this.error_message = data2.error.message;
-      setTimeout(() => document.getElementById("error").click(), 1000);        
+      this.post_request_error_message(data2.error.message);    
     }   
   }
 }
