@@ -38,6 +38,14 @@ export class verify_dataComponent implements OnInit {
     };  
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Verify Data";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async verify_signature()
   {
     if (this.variables_and_functions_service.signature.test(this.data.signature) && this.variables_and_functions_service.xcash_address.test(this.data.public_address))
@@ -56,9 +64,7 @@ export class verify_dataComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Verify data";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data2.error.message);        
       }
     }
   }
