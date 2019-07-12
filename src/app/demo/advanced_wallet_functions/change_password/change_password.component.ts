@@ -43,6 +43,14 @@ export class change_passwordComponent implements OnInit {
     setTimeout(() => this.settings = false, 5000);
   }
 
+  post_request_error_message(data:string)
+  {
+    this.error_title = "Change Password";
+    this.error_message = data;
+    setTimeout(() => document.getElementById("error").click(), 1000); 
+    return;
+  }
+
   async change_password()
   {
     if (this.variables_and_functions_service.text_settings.test(this.data.current_password) && this.variables_and_functions_service.text_settings.test(this.data.new_password) && this.variables_and_functions_service.text_settings.test(this.data.confirm_password) && this.data.new_password === this.data.confirm_password)
@@ -60,9 +68,7 @@ export class change_passwordComponent implements OnInit {
       }
       else
       {
-        this.error_title = "Change Password";
-        this.error_message = data2.error.message;
-        setTimeout(() => document.getElementById("error").click(), 1000);        
+        this.post_request_error_message(data2.error.message);       
       }
     }
   }
