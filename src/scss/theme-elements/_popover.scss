@@ -1,0 +1,115 @@
+/**  =====================
+      tooltip css start
+==========================  **/
+.popover {
+    top: 0;
+    left: 0;
+    border: none;
+    box-shadow: 0 0 15px #dcdcdc;
+    border-radius: 15px;
+
+    .arrow {
+        &::after {
+            display: none;
+        }
+
+        &::before {
+            content: "\6d";
+            top: -1px;
+            left: 0;
+            font-family: "pct";
+            font-size: 20px;
+            line-height: 0.3;
+            color: #fff;
+            border: none;
+            text-shadow: 0 2px 3px rgba(220, 220, 220, 0.7);
+        }
+    }
+
+    .popover-header {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        background: transparent;
+        border-bottom-color: $theme-background;
+    }
+}
+
+.bs-popover-top {
+    .arrow {
+        &::before {
+            content: "\6d";
+            text-shadow: 0 2px 3px rgba(220, 220, 220, 0.7);
+        }
+    }
+}
+
+.bs-popover-right {
+    .arrow::before {
+        content: "\6a";
+        left: -4px;
+        top: 2.6px;
+        border: none;
+        text-shadow: -2px 0 3px rgba(220,220,220,0.46);
+    }
+}
+
+.bs-popover-bottom {
+    .arrow:before {
+        content: "\6c";
+        top: 3px;
+        border: none;
+        text-shadow: 0 -2px 3px rgba(220,220,220,0.46);
+    }
+
+    .popover-header::before {}
+}
+
+.bs-popover-left {
+    .arrow::before {
+        content: "\6b";
+        left: -8px;
+        top: 3.6px;
+        border: none;
+        text-shadow: 2px 0 3px rgba(220,220,220,0.46);
+    }
+}
+
+.bs-popover-auto {
+    &[x-placement^="top"] {
+        @extend .bs-popover-top;
+    }
+
+    &[x-placement^="right"] {
+        @extend .bs-popover-right;
+    }
+
+    &[x-placement^="bottom"] {
+        @extend .bs-popover-bottom;
+    }
+
+    &[x-placement^="left"] {
+        @extend .bs-popover-left;
+    }
+}
+//
+// // Offset the popover to account for the popover arrow
+// .popover-header {
+//   padding: $popover-header-padding-y $popover-header-padding-x;
+//   margin-bottom: 0; // Reset the default from Reboot
+//   font-size: $font-size-base;
+//   color: $popover-header-color;
+//   background-color: $popover-header-bg;
+//   border-bottom: $popover-border-width solid darken($popover-header-bg, 5%);
+//   $offset-border-width: calc(#{$border-radius-lg} - #{$popover-border-width});
+//   @include border-top-radius($offset-border-width);
+//
+//   &:empty {
+//     display: none;
+//   }
+// }
+//
+// .popover-body {
+//   padding: $popover-body-padding-y $popover-body-padding-x;
+//   color: $popover-body-color;
+// }
+/**====== tooltip css end ======**/

@@ -1,0 +1,595 @@
+<div class="row">
+  <div class="col-xl-3 col-lg-12">
+    <app-card cardTitle="Search Box" cardClass="task-board-left" [options]="false">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control add_task_todo" placeholder="Search here..." required="">
+        <div class="input-group-append">
+          <button class="btn btn-primary btn-icon btn-msg-send" type="button"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <div class="task-right">
+        <!-- complete status -->
+        <div class="task-right-header-status" (click)="isCompleteStatus = !isCompleteStatus" [attr.aria-expanded]="!isCompleteStatus" aria-controls="completeStatus">
+          <span class="f-w-400">Completed Status</span>
+          <i class="fas fa-caret-down float-right m-t-5"></i>
+        </div>
+        <div id="completeStatus" [ngbCollapse]="isCompleteStatus" class="taskboard-right-progress">
+          <h6 class="m-t-10">Highest Priority</h6>
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h6 class="m-t-15">High priority</h6>
+          <div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h6 class="m-t-15">Normal priority</h6>
+          <div class="progress">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h6 class="m-t-15">Low priority</h6>
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <!-- assign users -->
+        <div class="task-right-header-users" (click)="isAssignUsers = !isAssignUsers" [attr.aria-expanded]="!isAssignUsers" aria-controls="assignUsers">
+          <span class="f-w-400" data-toggle="collapse">Assign Users</span>
+          <i class="fas fa-caret-down float-right m-t-5"></i>
+        </div>
+        <div id="assignUsers" [ngbCollapse]="isAssignUsers" class="user-box assign-user taskboard-right-users">
+          <div class="media mb-2">
+            <div class="media-left media-middle mr-3">
+              <a href="javascript:">
+                <img class="media-object img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+                <div class="live-status bg-danger"></div>
+              </a>
+            </div>
+            <div class="media-body">
+              <h6>Josephin Doe</h6>
+              <p>Santa Ana,CA</p>
+            </div>
+          </div>
+          <div class="media mb-2">
+            <div class="media-left media-middle mr-3">
+              <a href="javascript:">
+                <img class="media-object img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+                <div class="live-status bg-success"></div>
+              </a>
+            </div>
+            <div class="media-body">
+              <h6>Josephin Doe</h6>
+              <p>Huntingston, NJ</p>
+            </div>
+          </div>
+          <div class="media mb-2">
+            <div class="media-left media-middle mr-3">
+              <a href="javascript:">
+                <img class="media-object img-radius" src="assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+                <div class="live-status bg-danger"></div>
+              </a>
+            </div>
+            <div class="media-body">
+              <h6>Josephin Doe</h6>
+              <p>Willingstion, WA</p>
+            </div>
+          </div>
+          <div class="media mb-2">
+            <div class="media-left media-middle mr-3">
+              <a href="javascript:">
+                <img class="media-object img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+                <div class="live-status bg-success"></div>
+              </a>
+            </div>
+            <div class="media-body">
+              <h6>Josephin Doe</h6>
+              <p>Illions, IL</p>
+            </div>
+          </div>
+        </div>
+        <!-- revision -->
+        <div class="task-right-header-revision" (click)="isRevision = !isRevision" [attr.aria-expanded]="!isRevision" aria-controls="revision">
+          <span class="f-w-400" data-toggle="collapse">Revision</span>
+          <i class="fas fa-caret-down float-right m-t-5"></i>
+        </div>
+        <div id="revision" [ngbCollapse]="isRevision" class="taskboard-right-revision user-box">
+          <div class="media">
+            <div class="media-left">
+              <a class="btn btn-outline-primary btn-icon" href="javascript:" role="button"><i class="fas fa-cogs"></i>
+              </a>
+            </div>
+            <div class="media-body">
+              <div class="chat-header f-w-400 mb-1">Drop the IE specific hacks for temporal inputs</div>
+              <p class="chat-header  text-muted">4 minutes ago</p>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-left">
+              <a class="btn btn-outline-danger btn-icon" href="javascript:" role="button"><i class="fas fa-share-alt"></i>
+              </a>
+            </div>
+            <div class="media-body">
+              <div class="chat-header f-w-400 mb-1">Have Carousel ignore keyboard events</div>
+              <p class="chat-header text-muted">12 Dec,2015</p>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-left">
+              <a class="btn btn-outline-warning btn-icon" href="javascript:" role="button"><i class="fas fa-font"></i>
+              </a>
+            </div>
+            <div class="media-body">
+              <div class="chat-header f-w-400 mb-1">Add full font overrides for popovers and tooltips</div>
+              <p class="chat-header text-muted">2 month ago</p>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-left">
+              <a class="btn btn-outline-success btn-icon" href="javascript:" role="button"><i class="fas fa-mobile-alt"></i>
+              </a>
+            </div>
+            <div class="media-body">
+              <div class="chat-header">Responsive Asssignment</div>
+              <p class="chat-header  text-muted">6 month ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-9 col-lg-12 filter-bar invoice-list">
+    <nav class="navbar m-b-30 p-10">
+      <ul class="nav">
+        <li class="nav-item active">
+          <a class="nav-link text-secondary" href="javascript:">Filter: <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link text-secondary" ngbDropdownToggle href="javascript:" id="bydate"><i class="far fa-clock"></i> By Date</a>
+          <div ngbDropdownMenu aria-labelledby="bydate">
+            <a class="dropdown-item" href="javascript:">Show all</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:">Today</a>
+            <a class="dropdown-item" href="javascript:">Yesterday</a>
+            <a class="dropdown-item" href="javascript:">This week</a>
+            <a class="dropdown-item" href="javascript:">This month</a>
+            <a class="dropdown-item" href="javascript:">This year</a>
+          </div>
+        </li>
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link text-secondary" ngbDropdownToggle href="javascript:" id="bystatus"><i class="fas fa-chart-line"></i> By Status</a>
+          <div ngbDropdownMenu aria-labelledby="bystatus">
+            <a class="dropdown-item" href="javascript:">Show all</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:">Open</a>
+            <a class="dropdown-item" href="javascript:">On hold</a>
+            <a class="dropdown-item" href="javascript:">Resolved</a>
+            <a class="dropdown-item" href="javascript:">Closed</a>
+            <a class="dropdown-item" href="javascript:">Dublicate</a>
+            <a class="dropdown-item" href="javascript:">Wontfix</a>
+          </div>
+        </li>
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link text-secondary" ngbDropdownToggle href="javascript:" id="bypriority"><i class="fas fa-list-ol"></i> By Priority</a>
+          <div ngbDropdownMenu aria-labelledby="bypriority">
+            <a class="dropdown-item" href="javascript:">Show all</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:">Highest</a>
+            <a class="dropdown-item" href="javascript:">High</a>
+            <a class="dropdown-item" href="javascript:">Normal</a>
+            <a class="dropdown-item" href="javascript:">Low</a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav-item nav-grid">
+        <span class="m-r-15">View Mode: </span>
+        <button type="button" class="btn btn-primary btn-icon" [placement]="'top'" ngbTooltip="list view">
+          <i class="fas fa-list-ul"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-icon" [placement]="'top'" ngbTooltip="grid view">
+          <i class="fas fa-th-large"></i>
+        </button>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-blue">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-primary btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">SWIFT</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-primary">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-primary"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-primary" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-green">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-success btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">Payoneer</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-success">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-success"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-success" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-red">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-danger btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">Paypal</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-danger">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-danger"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-danger" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-yellow">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-warning btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">Paypal</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-warning">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-warning"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-warning" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-green">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-success btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">Payoneer</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-success">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-success"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-success" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-blue">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-primary btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">SWIFT</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-primary">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-primary"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-primary" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-yellow">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-warning btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">Paypal</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-warning">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-warning"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-warning" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-card [hidHeader]="true" cardClass="card-border-c-red">
+          <div class="mb-3">
+            <h5 class="d-inline-block m-b-10">John Doe</h5>
+            <div class="dropdown-secondary float-right" ngbDropdown>
+              <span>Status : </span>
+              <button class="btn btn-danger btn" ngbDropdownToggle type="button">Overdue</button>
+              <div ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Pending</a>
+                <a class="dropdown-item" href="javascript:">Paid</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item active" href="javascript:">On Hold</a>
+                <a class="dropdown-item" href="javascript:">Canceled</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list list-unstyled">
+                <li>Invoice #: &nbsp;0028</li>
+                <li>Issued on: <span class="text-semibold">2015/01/25</span></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list list-unstyled text-right">
+                <li>$8,750</li>
+                <li>Method: <span class="text-semibold">Paypal</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-t-30">
+            <div class="task-list-table">
+              <p class="task-due"><strong> Due : </strong><strong class="label label-danger">23 hours</strong></p>
+            </div>
+            <div class="task-board m-0 float-right">
+              <a href="javascript:" class="btn btn-danger"><i class="fas fa-eye m-0"></i></a>
+              <div class="dropdown-secondary d-inline" ngbDropdown>
+                <button class="btn btn-danger" ngbDropdownToggle type="button"><i class="fas fa-bars"></i></button>
+                <div ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-bell"></i> Print Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-download"></i> Download invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-edit"></i> Edit Invoice</a>
+                  <a class="dropdown-item" href="javascript:"><i class="fas fa-trash"></i> Remove Invoice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+    </div>
+  </div>
+</div>

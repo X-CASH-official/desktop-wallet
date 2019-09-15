@@ -1,0 +1,215 @@
+<div class="row">
+  <div class="col-lg-12 col-xl-6">
+    <app-card cardTitle="Date" [options]="false">
+      <form action="javascript:">
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Insert Date 1</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskDateSlash}" type="text" class="form-control" placeholder="dd/mm/yyyy"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <label class="col-form-label">Insert Date 2</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskDateDash}" type="text" class="form-control" placeholder="dd-mm-yyyy"/>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+  <div class="col-lg-12 col-xl-6">
+    <app-card cardTitle="Time" [options]="false">
+      <form action="javascript:">
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Hour</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskHour}" type="text" class="form-control" placeholder="12:59:59"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <label class="col-form-label">Date & Hour</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskDateHour}" type="text" class="form-control" placeholder="dd-mm-yyyy 12:59:59"/>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+  <div class="col-lg-12 col-xl-6">
+    <app-card cardTitle="Phone No." [options]="false">
+      <form action="javascript:">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label">Mobile No.</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskMobileNo}" type="text" class="form-control" placeholder="9999-999-999"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label">Telephone</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskTeleNo}" type="text" class="form-control" placeholder="9999-9999"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label">Tel. with Code Area</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskTeleArea}" type="text" class="form-control" placeholder="(99) 9999-9999"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label">US Telephone</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskTeleUS}" type="text" class="form-control" placeholder="(999) 999-9999"/>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+  <div class="col-lg-12 col-xl-6">
+    <app-card cardTitle="Network" [options]="false">
+      <form action="javascript:">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label">IP Address</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskIP}" type="text" class="form-control" placeholder="255.255.255.255"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label">IPV4</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskIPV4}" type="text" class="form-control" placeholder="255.255.255.0000"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label">IPV6</label>
+          </div>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: maskIPV6}" type="text" class="form-control" placeholder="9999:9999:9999:9:9999:9999:999"/>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+  <div class="col-lg-12 col-xl-6">
+    <app-card cardTitle="Numbers" [options]="false">
+      <form action="javascript:">
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Default</label>
+          </div>
+          <div class="col-sm-9">
+            <input type="text" class="form-control autonumber" >
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Auto Numeric (%)</label>
+          </div>
+          <div class="col-sm-9">
+            <input type="text" class="form-control autonumber" name="autonumeric" currencyMask [options]="{ prefix: '% ', align: 'right', allowZero: false }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Amount Alignment</label>
+          <div class="col-sm-9">
+            <input currencyMask type="text" class="form-control" placeholder="Enter Amount Left" [options]="{ align: 'left' }"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Positive Amount Only</label>
+          <div class="col-sm-9">
+            <input currencyMask type="text" class="form-control" placeholder="Enter Positive Amount" [options]="{ allowNegative: false }"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Decimal Separator</label>
+          <div class="col-sm-9">
+            <input currencyMask type="text" class="form-control" placeholder="Enter Amount" [options]="{ decimal: '.' }"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Amount Format</label>
+          <div class="col-sm-9">
+            <label class="label label-primary"> 1000 = <ng-number-formatter [ngNumber]="1000"></ng-number-formatter> </label>
+            <label class="label label-danger"> 2563 = <ng-number-formatter [ngNumber]="2563"></ng-number-formatter> </label>
+            <label class="label label-info"> 9163211 = <ng-number-formatter [ngNumber]="9163211"></ng-number-formatter> </label>
+            <label class="label label-warning"> 4523651111 = <ng-number-formatter [ngNumber]="4523651111"></ng-number-formatter> </label>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+  <div class="col-lg-12 col-xl-6">
+    <app-card cardTitle="Currency Mask" [options]="false">
+      <form action="javascript:">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Default</label>
+          <div class="col-sm-9">
+            <input currencyMask type="text" class="form-control" placeholder="Enter Amount"/>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Dollar ($)</label>
+          </div>
+          <div class="col-sm-9">
+            <input type="text" class="form-control autonumber" name="dollar" placeholder="Enter Dollar" currencyMask [options]="{ prefix: '$ ', allowZero: false }" >
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Euro (€)</label>
+          </div>
+          <div class="col-sm-9">
+            <input type="text" class="form-control autonumber" name="Euro" placeholder="Enter Euro" currencyMask [options]="{ prefix: '€ ', allowZero: false }" >
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Rupee (Rs.)</label>
+          </div>
+          <div class="col-sm-9">
+            <input type="text" name="Rupee" class="form-control autonumber" placeholder="Enter Amount"  currencyMask [options]="{ prefix: 'Rs. ', allowZero: false }" >
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label class="col-form-label">Renminbi (¥)</label>
+          </div>
+          <div class="col-sm-9">
+            <input type="text" class="form-control autonumber" name="renminbi" placeholder="Enter Renminbi"  currencyMask [options]="{ prefix: '¥ ', allowZero: false }" >
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <label class="col-form-label">Pound (£)</label>
+          </div>
+          <div class="col-sm-9">
+            <input type="text" class="form-control autonumber" placeholder="Enter Pound" name="pound" currencyMask [options]="{ prefix: '£ ', allowZero: false }" >
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>

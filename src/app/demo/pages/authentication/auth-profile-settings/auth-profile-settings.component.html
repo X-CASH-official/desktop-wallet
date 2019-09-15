@@ -1,0 +1,38 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card">
+      <div class="card-body text-center">
+        <h5 class="mb-4">Profile Settings</h5>
+        <img src="assets/images/user/avatar-3.jpg" class="img-radius mb-4" alt="User-Profile-Image">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Name">
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="User Name">
+        </div>
+        <div class="mb-4 text-left">
+          <div class="form-group d-inline">
+            <div class="radio d-inline">
+              <input type="radio" name="radio-in-1" id="radio-in-1" checked>
+              <label for="radio-in-1" class="cr">Private Profile</label>
+            </div>
+          </div>
+          <div class="form-group d-inline">
+            <div class="radio d-inline">
+              <input type="radio" name="radio-in-1" id="radio-in-2">
+              <label for="radio-in-2" class="cr">Public Profile</label>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary mb-4">Register</button>
+        <p class="mb-0 text-muted">Don’t have an account? <a [routerLink]="['/auth/signup']">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+</div>

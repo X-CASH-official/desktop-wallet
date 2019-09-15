@@ -1,0 +1,238 @@
+<div class="row">
+  <div class="col-md-6 col-xl-4">
+    <app-card [hidHeader]="true" [options]="false">
+      <h5>Online Orders</h5>
+      <h6 class="text-muted d-flex align-items-center justify-content-between m-t-30">Delivery Orders<span class="float-right f-18 text-c-green">237 / 400</span></h6>
+      <div class="progress mt-3">
+        <div class="progress-bar progress-c-theme" role="progressbar" style="width:65%;height:6px;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <span class="text-muted mt-2 d-block">37% Done</span>
+    </app-card>
+  </div>
+  <div class="col-md-6 col-xl-4">
+    <app-card [hidHeader]="true" [options]="false">
+      <h5>Pending Orders</h5>
+      <h6 class="text-muted d-flex align-items-center justify-content-between m-t-30">Pending Orders<span class="float-right f-18 text-c-purple">100 / 500</span></h6>
+      <div class="progress mt-3">
+        <div class="progress-bar progress-c-theme2" role="progressbar" style="width:50%;height:6px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <span class="text-muted mt-2 d-block">20% Pending</span>
+    </app-card>
+  </div>
+  <div class="col-md-12 col-xl-4">
+    <app-card [hidHeader]="true" [options]="false">
+      <h5>Return Orders</h5>
+      <h6 class="text-muted d-flex align-items-center justify-content-between m-t-30">Return Orders<span class="float-right f-18 text-c-blue">50 / 400</span></h6>
+      <div class="progress mt-3">
+        <div class="progress-bar progress-c-blue" role="progressbar" style="width:40%;height:6px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <span class="text-muted mt-2 d-block">10% Return</span>
+    </app-card>
+  </div>
+  <div class="col-xl-8 col-md-12">
+    <app-card cardTitle="Yearly Summary">
+      <div class="row pb-3">
+        <div class="col-md-4 col-6 text-center m-b-10">
+          <h3 class="f-w-300">$2356.4</h3>
+          <span>Invoiced</span>
+        </div>
+        <div class="col-md-4 col-6 text-center m-b-10">
+          <h3 class="f-w-300">$1935.6</h3>
+          <span>Profit</span>
+        </div>
+        <div class="col-md-4 col-12 text-center m-b-10">
+          <h3 class="f-w-300">$468.9</h3>
+          <span>Expenses</span>
+        </div>
+      </div>
+      <div id="bar-chart3" class="bar-chart3" style="height:280px;"></div>
+    </app-card>
+  </div>
+  <div class="col-md-6 col-xl-4">
+    <div class="card theme-bg earning-date">
+      <div class="card-header borderless">
+        <h5 class="text-white">Earnings</h5>
+      </div>
+      <div class="card-block">
+        <div class="bd-example bd-example-tabs">
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="earnings-mon" role="tabpanel" aria-labelledby="pills-earnings-mon">
+              <h2 class="text-white mb-3 f-w-300">359,234<i class="feather icon-arrow-up"></i></h2>
+              <span class="text-white mb-4 d-block">TOTAL EARNINGS</span>
+            </div>
+          </div>
+          <ul class="nav nav-pills align-items-center justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-earnings-mon" data-toggle="pill" href="javascript:" role="tab" aria-controls="earnings-mon" aria-selected="true">Mon</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-earnings-tue" data-toggle="pill" href="javascript:" role="tab" aria-controls="earnings-tue" aria-selected="false">Tue</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-earnings-wed" data-toggle="pill" href="javascript:" role="tab" aria-controls="earnings-wed" aria-selected="false">Wed</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-earnings-thu" data-toggle="pill" href="javascript:" role="tab" aria-controls="earnings-thu" aria-selected="false">Thu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-earnings-fri" data-toggle="pill" href="javascript:" role="tab" aria-controls="earnings-fri" aria-selected="false">Fri</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-earnings-sat" data-toggle="pill" href="javascript:" role="tab" aria-controls="earnings-sat" aria-selected="false">Sat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-earnings-sun" data-toggle="pill" href="javascript:" role="tab" aria-controls="earnings-sun" aria-selected="false">Sun</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card theme-bg2">
+      <div class="card-block">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-auto">
+            <img src="assets/images/widget/shape5.png" alt="activity-user">
+          </div>
+          <div class="col">
+            <h2 class="text-white f-w-300">375</h2>
+            <h5 class="text-white">Sale Product</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-8 col-md-6">
+    <app-card cardTitle="Full Width Table" cardClass="code-table" blockClass="pb-0">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Id Number</th>
+            <th>Code</th>
+            <th>Date</th>
+            <th>Budget</th>
+            <th>Status</th>
+            <th class="text-right">Ratings</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <h6 class="mb-1">#467</h6>
+            </td>
+            <td>
+              <h6 class="mb-1">8765482</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">Nov 14, 2017</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">$ 874.23</h6>
+            </td>
+            <td><a href="javascript:" class="label theme-bg f-12 text-white">Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <h6 class="mb-1">#466</h6>
+            </td>
+            <td>
+              <h6 class="mb-1">2366482</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">Nov 13, 2017</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">$ 235.34</h6>
+            </td>
+            <td><a href="javascript:" class="label theme-bg2 f-12 text-white">Not Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <h6 class="mb-1">#465</h6>
+            </td>
+            <td>
+              <h6 class="mb-1">8832638</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">Oct 14, 2017</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">$ 233.46</h6>
+            </td>
+            <td><a href="javascript:" class="label theme-bg f-12 text-white">Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-1">#464</h6>
+            </td>
+            <td>
+              <h6 class="mb-1">9632638</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">Dec 17, 2017</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">$ 133.46</h6>
+            </td>
+            <td><a href="javascript:" class="label theme-bg2 f-12 text-white">Not Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-1">#463</h6>
+            </td>
+            <td>
+              <h6 class="mb-1">3332538</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">July 14, 2017</h6>
+            </td>
+            <td>
+              <h6 class="m-b-0">$ 244.46</h6>
+            </td>
+            <td><a href="javascript:" class="label theme-bg f-12 text-white">Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-12">
+    <app-card cardTitle="Earnings">
+      <div class="earning-price mb-4">
+        <h3 class="m-0 f-w-300">$894.39</h3>
+      </div>
+      <div id="widget-line-chart1" class="WidgetlineChart " style="height:300px;"></div>
+    </app-card>
+  </div>
+</div>

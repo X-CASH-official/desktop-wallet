@@ -1,0 +1,29 @@
+.full-data-search {
+  margin-left: 0.5em;
+  display: inline-block;
+  width: auto !important;
+}
+
+.full-data-show-entry {
+  width: 75px;
+  display: inline-block;
+}
+
+.full-data-table {
+  .glyphicon {
+    font-family: IcoFont;
+    position: absolute;
+    right: 14px;
+    font-size: 20px;
+    top: 9px;
+    &.glyphicon-triangle-bottom:before {
+      content: "\eb53";
+    }
+    &.glyphicon-triangle-top:before {
+      content: "\eb56";
+    }
+  }
+  th {
+    position: relative;
+  }
+}

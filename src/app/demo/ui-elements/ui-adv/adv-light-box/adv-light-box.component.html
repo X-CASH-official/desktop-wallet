@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Single Images">
+      <div class="row text-center border-less-image-gallery">
+        <div class="col-xl-2 col-lg-3 col-sm-4 col-xs-12" *ngFor="let img of images; let i = index">
+          <ks-modal-gallery [id]="img.id" [currentImageConfig]="{description: customFullDescriptionHidden}" [modalImages]="[img]" [dotsConfig]="{visible: false}" [previewConfig]="{visible: false}"></ks-modal-gallery>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-sm-9">
+    <app-card cardTitle="Image Gallery">
+      <div class="row text-center border-less-image-gallery">
+          <ks-modal-gallery [id]="1" [modalImages]="images" [plainGalleryConfig]="plainGalleryGrid"></ks-modal-gallery>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-sm-3">
+    <app-card cardTitle="Vertical Gallery">
+      <div class="row text-center border-less-image-gallery">
+        <ks-modal-gallery [id]="4" [modalImages]="images" [plainGalleryConfig]="plainGalleryColumn"></ks-modal-gallery>
+      </div>
+    </app-card>
+  </div>
+</div>

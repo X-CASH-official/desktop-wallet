@@ -1,0 +1,182 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Task List" [options]="false" blockClass="task-data">
+      <div class="dt-responsive" *ngIf="taskObservable | async as data else empty">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div>
+              <label class="label-control">Show
+                <select class="form-control input-sm full-data-show-entry" [(ngModel)]="rowsOnPage">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                entries
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <label>Search:
+                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped task-list-table table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+                 [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+            <thead>
+            <tr>
+              <th>
+                <mfDefaultSorter  by="id">#</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter  by="task">Task List</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="date">Last Commit</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter  by="status">Status</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="images">Assigned Users</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter>Action</mfDefaultSorter>
+              </th>
+            </tr>
+            <tr>
+            </tr>
+            </thead>
+            <tbody class="task-page">
+            <tr *ngFor="let item of mf.data">
+              <td>#{{item.id}}</td>
+              <td>{{item.task}}</td>
+              <td>
+                <div class="form-group form-primary mb-0">
+                  <input type="date" class="form-control" value="{{item.date}}" />
+                  <span class="form-bar"></span>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-primary mb-0">
+                  <select name="select" class="form-control form-control-sm">
+                    <option value="opt1" [selected]="item.status === 'opt1'">Open</option>
+                    <option value="opt2" [selected]="item.status === 'opt2'">Resolved</option>
+                    <option value="opt3" [selected]="item.status === 'opt3'">Invalid</option>
+                    <option value="opt4" [selected]="item.status === 'opt4'">On hold</option>
+                    <option value="opt5" [selected]="item.status === 'opt5'">Close</option>
+                  </select>
+                  <span class="form-bar"></span>
+                </div>
+              </td>
+              <td>
+                <a href="javascript:;" *ngFor="let image of item.images">
+                  <img class="img-fluid img-radius m-r-5" src="{{image}}" alt="{{item.id}}">
+                </a>
+                <a href="javascript:;"><i class="fas fa-plus f-w-600 m-l-5"></i></a>
+              </td>
+              <td class="text-center">
+                <a href="javascript:" class="btn btn-icon btn-rounded btn-outline-primary"><span class="fas fa-book"></span></a>
+                <a href="javascript:" class="btn btn-icon btn-rounded btn-outline-warning"><span class="fas fa-edit"></span></a>
+                <a href="javascript:" class="btn btn-icon btn-rounded btn-outline-danger"><span class="fas fa-trash"></span></a>
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Task List</th>
+              <th>Last Commit</th>
+              <th>Status</th>
+              <th>Assigned User</th>
+              <th>Action</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <ng-template #empty> No Customers Yet </ng-template>
+    </app-card>
+  </div>
+  <div class="col-sm-12">
+    <app-card cardTitle="To Do List" [options]="false">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control add_task_todo" placeholder="Create your task list">
+        <div class="input-group-append">
+          <button class="btn btn-icon btn-msg-send" [ngClass]="{'btn-danger': todo_list_message_error, 'btn-primary': !todo_list_message_error}" (click)="addTodoList()" type="button">
+            <i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="new-task">
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck1" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck2" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Industry's standard dummy text ever since the 1500s</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck3" (change)="completeTodoList($event)">
+              <span class="custom-control-label">The point of using Lorem Ipsum is that it has a more-or-less </span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck4" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Contrary to popular belief</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck5" (change)="completeTodoList($event)">
+              <span class="custom-control-label">There are many variations of passages of Lorem Ipsum</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck6" (change)="completeTodoList($event)">
+              <span class="custom-control-label">Sed ut perspiciatis unde omnis iste natus</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="to-do-list mb-3">
+          <div class="d-inline-block">
+            <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" id="customCheck7" (change)="completeTodoList($event)">
+              <span class="custom-control-label"> must explain to you how all this mistaken idea</span>
+            </label>
+          </div>
+          <div class="float-right"><a href="javascript:" class="delete_todolist" appTodoListRemove><i class="far fa-trash-alt"></i></a></div>
+        </div>
+        <span [innerHTML]="newTodoList"></span>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<app-card cardTitle="Large Nav Filled With Symbol Icon" [options]="false">
+  <wizard #wizard class="arc-wizard" navBarLayout="large-filled-symbols">
+    <wizard-step stepTitle="Profile" navigationSymbol="&#xf0b1;" navigationSymbolFontFamily="Font Awesome\ 5 Free" [style.font-weight]="900">
+      <div class="row">
+        <div class="col-sm-12">
+          <h5>Profile Title</h5>
+          <hr>
+          <h6>Sub title 1</h6>
+          <p><strong>@Title content 1!.. </strong> Lorem Ipsum is simply dummy text of the printing <strong>@Content content 1 </strong> and typesetting industry. Lorem Ipsum has been the industry's
+            standard dummy text.</p>
+          <h6 class="mt-3">Sub title 2</h6>
+          <p><strong>@Title content 2!.. </strong> Lorem Ipsum is simply dummy text and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+        </div>
+        <div class="col-sm-12 centered-content">
+          <div class="btn-group mt-10">
+            <button type="button" class="btn btn-primary btn-sm" nextStep>Continue</button>
+          </div>
+        </div>
+      </div>
+    </wizard-step>
+    <wizard-step stepTitle="Address" navigationSymbol="&#xf085;" navigationSymbolFontFamily="Font Awesome\ 5 Free" [style.font-weight]="900">
+      <div class="row">
+        <div class="col-sm-12">
+          <h5>Address Title</h5>
+          <hr>
+          <h6>Sub title 1</h6>
+          <p><strong>@Title content 1!.. </strong> Lorem Ipsum is simply dummy text of the printing <strong>@Content content 1 </strong> and typesetting industry. Lorem Ipsum has been the industry's
+            standard dummy text.</p>
+          <h6 class="mt-3">Sub title 2</h6>
+          <p><strong>@Title content 2!.. </strong> Lorem Ipsum is simply dummy text and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+        </div>
+        <div class="col-sm-12 centered-content">
+          <div class="btn-group mt-10">
+            <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+            <button type="button" class="btn btn-primary btn-sm" nextStep>Continue</button>
+          </div>
+        </div>
+      </div>
+    </wizard-step>
+    <wizard-step stepTitle="Completed" navigationSymbol="&#xf00c;" navigationSymbolFontFamily="Font Awesome\ 5 Free">
+      <div class="row">
+        <div class="col-sm-12">
+          <h5>Finished Title</h5>
+          <hr>
+          <h6>Sub title 1</h6>
+          <p><strong>@Title content 1!.. </strong> Lorem Ipsum is simply dummy text of the printing <strong>@Content content 1 </strong> and typesetting industry. Lorem Ipsum has been the industry's
+            standard dummy text.</p>
+          <h6 class="mt-3">Sub title 2</h6>
+          <p><strong>@Title content 2!.. </strong> Lorem Ipsum is simply dummy text and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+        </div>
+        <div class="col-sm-12 centered-content">
+          <div class="btn-group mt-10">
+            <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+            <button type="button" class="btn btn-success btn-sm" resetWizard>Finished</button>
+          </div>
+        </div>
+      </div>
+    </wizard-step>
+  </wizard>
+</app-card>

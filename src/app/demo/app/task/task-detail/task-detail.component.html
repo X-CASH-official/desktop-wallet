@@ -1,0 +1,543 @@
+<div class="row">
+  <div class="col-xl-4 col-lg-12 task-detail-right">
+    <app-card cardTitle="Task Timer" [options]="false" blockClass="bg-c-blue" [hidHeader]="true">
+      <div class="counter text-center">
+        <h4 id="timer">
+          <b>{{(dYears !== 0 && dYears !== undefined) ? dYears : ''}}</b>{{(dYears !== 0 && dYears !== undefined) ? 'y : ' : ''}}
+          <b>{{dDays}}</b>d :
+          <b>{{dHours}}</b>h :
+          <b>{{dMinutes}}</b>m :
+          <b>{{dSeconds}}</b>s
+        </h4>
+      </div>
+    </app-card>
+    <app-card cardTitle="Task Details" blockClass="task-details" [options]="false">
+      <table class="table">
+        <tbody>
+        <tr>
+          <td><i class="fas fa-adjust m-r-5"></i> Project:</td>
+          <td class="text-right"><span class="float-right"><a class="text-secondary" href="javascript:"> Singular app</a></span></td>
+        </tr>
+        <tr>
+          <td><i class="far fa-calendar-alt m-r-5"></i> Updated:</td>
+          <td class="text-right">12 May, 2015</td>
+        </tr>
+        <tr>
+          <td><i class="far fa-credit-card m-r-5"></i> Created:</td>
+          <td class="text-right">25 Feb, 2015</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-chart-line m-r-5"></i> Priority:</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <a href="javascript:" class="text-secondary"><i class="fas fa-upload m-r-5"></i> Highest</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-sync-alt m-r-5"></i> Revisions:</td>
+          <td class="text-right">29</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-plus m-r-5"></i> Added by:</td>
+          <td class="text-right"><a class="text-secondary" href="javascript:">Winnie</a></td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-thermometer-half m-r-5"></i> Status:</td>
+          <td class="text-right">Published</td>
+        </tr>
+        </tbody>
+      </table>
+      <div>
+        <span>
+          <a href="javascript:" class="text-muted f-16 m-r-10"><i class="fas fa-random"></i> </a>
+        </span>
+        <span class="m-r-10">
+          <a href="javascript:" class="text-muted f-16"><i class="fas fa-ellipsis-v"></i></a>
+        </span>
+        <div class="btn-group d-inline-block" ngbDropdown [placement]="'bottom-left'">
+          <button class="btn drp-icon btn-primary" ngbDropdownToggle type="button"><i class="feather icon-thumbs-up"></i></button>
+          <div ngbDropdownMenu>
+            <a class="dropdown-item" href="javascript:">Check in</a>
+            <a class="dropdown-item" href="javascript:">Attach screenshot</a>
+            <a class="dropdown-item active" href="javascript:">Reassign</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:">Edit task</a>
+            <a class="dropdown-item" href="javascript:">Remove</a>
+          </div>
+        </div>
+      </div>
+    </app-card>
+    <app-card cardTitle="Task settings" blockClass="task-setting" [options]="false">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group  mb-0">
+              <div class="switch d-inline m-r-10">
+                <input type="checkbox" id="switch-1" checked>
+                <label for="switch-1" class="cr"></label>
+              </div>
+              <label>Publish after save</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group mb-0">
+              <div class="switch d-inline m-r-10">
+                <input type="checkbox" id="switch-2" checked>
+                <label for="switch-2" class="cr"></label>
+              </div>
+              <label>Allow comments</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group  mb-0">
+              <div class="switch d-inline m-r-10">
+                <input type="checkbox" id="switch-3" checked>
+                <label for="switch-3" class="cr"></label>
+              </div>
+              <label>Allow users to edit the task</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group  mb-0">
+              <div class="switch d-inline m-r-10">
+                <input type="checkbox" id="switch-4">
+                <label for="switch-4" class="cr"></label>
+              </div>
+              <label>Use task timer</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group  mb-0">
+              <div class="switch d-inline m-r-10">
+                <input type="checkbox" id="switch-5">
+                <label for="switch-5" class="cr"></label>
+              </div>
+              <label>Auto saving</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group  mb-0">
+              <div class="switch d-inline m-r-10">
+                <input type="checkbox" id="switch-6">
+                <label for="switch-6" class="cr"></label>
+              </div>
+              <label>Auto saving</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group  mb-0">
+              <div class="switch d-inline m-r-10">
+                <input type="checkbox" id="switch-7">
+                <label for="switch-7" class="cr"></label>
+              </div>
+              <label>Allow attachments</label>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center mt-2">
+          <div class="col-sm-12">
+            <button type="button" class="btn btn-secondary ">Reset
+            </button>
+            <button type="button" class="btn btn-primary  ">Save</button>
+          </div>
+        </div>
+      </div>
+    </app-card>
+    <app-card cardTitle="Revisions" [options]="false">
+      <div class="taskboard-right-revision user-box">
+        <div class="media">
+          <div class="media-left">
+            <a class="btn btn-outline-primary btn-icon" href="javascript:" role="button"><i class="fas fa-user-secret"></i>
+            </a>
+          </div>
+          <div class="media-body">
+            <div class="chat-header f-w-400 mb-1">Drop the IE specific hacks for temporal inputs</div>
+            <p class="chat-header  text-muted">4 minutes ago</p>
+          </div>
+        </div>
+        <div class="media">
+          <div class="media-left">
+            <a class="btn btn-outline-danger btn-icon" href="javascript:" role="button"><i class="fas fa-anchor"></i>
+            </a>
+          </div>
+          <div class="media-body">
+            <div class="chat-header f-w-400 mb-1">Add full font overrides for popovers and tooltips</div>
+            <p class="chat-header text-muted">36 minutes ago</p>
+          </div>
+        </div>
+        <div class="media">
+          <div class="media-left">
+            <a class="btn btn-outline-warning btn-icon" href="javascript:" role="button"><i class="fas fa-desktop"></i>
+            </a>
+          </div>
+          <div class="media-body">
+            <div class="chat-header f-w-400 mb-1">created a new Design branch</div>
+            <p class="chat-header text-muted">2 month ago</p>
+          </div>
+        </div>
+        <div class="media">
+          <div class="media-left">
+            <a class="btn btn-outline-success btn-icon" href="javascript:" role="button"><i class="fas fa-briefcase"></i>
+            </a>
+          </div>
+          <div class="media-body">
+            <div class="chat-header">merged Master and Dev branches</div>
+            <p class="chat-header  text-muted">6 month ago</p>
+          </div>
+        </div>
+      </div>
+    </app-card>
+    <app-card cardTitle="Attached Files" blockClass="task-attachment" [options]="false">
+      <ul class="media-list p-0">
+        <li class="media d-flex m-b-15">
+          <div class="m-r-20 file-attach">
+            <i class="far fa-file-word f-28 text-muted"></i>
+          </div>
+          <div class="media-body">
+            <a href="javascript:" class="m-b-5 d-block text-secondary">Overdrew_scowled.doc</a>
+            <div class="text-muted">
+              <span>Size: 1.2Mb</span>
+              <span> Added by <a href="javascript:" class="text-secondary">Winnie</a></span>
+            </div>
+          </div>
+          <div class="float-right text-muted">
+            <i class="fas fa-download f-18"></i>
+          </div>
+        </li>
+        <li class="media d-flex m-b-15">
+          <div class="m-r-20 file-attach">
+            <i class="far fa-file-powerpoint f-28 text-muted"></i>
+          </div>
+          <div class="media-body">
+            <a href="javascript:" class="m-b-5 d-block text-secondary">And_less_maternally.pdf</a>
+            <div class="text-muted">
+              <span>Size: 0.11Mb</span>
+              <span> Added by <a href="javascript:" class="text-secondary">Eugene</a></span>
+            </div>
+          </div>
+          <div class="float-right text-muted">
+            <i class="fas fa-download f-18"></i>
+          </div>
+        </li>
+        <li class="media d-flex m-b-15">
+          <div class="m-r-20 file-attach">
+            <i class="far fa-file-pdf f-28 text-muted"></i>
+          </div>
+          <div class="media-body">
+            <a href="javascript:" class="m-b-5 d-block text-secondary">The_less_overslept.pdf</a>
+            <div class="text-muted">
+              <span>Size:5.9Mb</span>
+              <span> Added by <a href="javascript:" class="text-secondary">Natalie</a></span>
+            </div>
+          </div>
+          <div class="float-right text-muted">
+            <i class="fas fa-download f-18"></i>
+          </div>
+        </li>
+        <li class="media d-flex m-b-15">
+          <div class="m-r-20 file-attach">
+            <i class="far fa-file-excel f-28 text-muted"></i>
+          </div>
+          <div class="media-body">
+            <a href="javascript:" class="m-b-5 d-block text-secondary">Well_equitably.mov</a>
+            <div class="text-muted">
+              <span>Size:20.9Mb</span>
+              <span> Added by <a href="javascript:" class="text-secondary">Jenny</a></span>
+            </div>
+          </div>
+          <div class="float-right text-muted">
+            <i class="fas fa-download f-18"></i>
+          </div>
+        </li>
+      </ul>
+    </app-card>
+    <app-card cardTitle="Assigned Users" blockClass="user-box assign-user" [options]="false">
+      <div class="media">
+        <div class="media-left media-middle mr-3">
+          <a href="javascript:">
+            <img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="chat-user">
+          </a>
+        </div>
+        <div class="media-body">
+          <h6>Sortino media</h6>
+          <p>Software Engineer</p>
+        </div>
+        <div>
+          <a href="javascript:" class="text-muted"> <i class="icon-options-vertical"></i></a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="media-left media-middle mr-3">
+          <a href="javascript:">
+            <img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="chat-user">
+          </a>
+        </div>
+        <div class="media-body">
+          <h6>Larry heading </h6>
+          <p>Web Designer</p>
+        </div>
+        <div>
+          <a href="javascript:" class="text-muted"> <i class="icon-options-vertical"></i></a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="media-left media-middle mr-3">
+          <a href="javascript:">
+            <img class="img-radius" src="assets/images/user/avatar-3.jpg" alt="chat-user">
+          </a>
+        </div>
+        <div class="media-body">
+          <h6>Mark</h6>
+          <p>Chief Financial Officer (CFO)</p>
+        </div>
+        <div>
+          <a href="javascript:" class="text-muted"> <i class="icon-options-vertical"></i></a>
+        </div>
+      </div>
+      <div class="media p-0 d-flex">
+        <div class="media-left media-middle mr-3">
+          <a href="javascript:">
+            <img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="chat-user">
+          </a>
+        </div>
+        <div class="media-body">
+          <h6>John Doe</h6>
+          <p>Senior Marketing Designer</p>
+        </div>
+        <div>
+          <a href="javascript:" class="text-muted"> <i class="icon-options-vertical"></i></a>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-8 col-lg-12">
+    <app-card [customHeader]="true" [options]="false">
+      <div class="app-card-header">
+        <h5 class="mb-3"><i class="fas fa-ticket-alt m-r-5"></i> Ticket List Doesn't Support Commas</h5>
+        <button class="btn btn-primary float-right f-14"><i class="far fa-bell m-r-5"></i>Check in</button>
+      </div>
+      <div class="m-b-20">
+        <h6>Overview</h6>
+        <hr>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      </div>
+      <div class="m-b-20">
+        <h6>What we need</h6>
+        <hr>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+      </div>
+      <div class="m-b-20 col-sm-12">
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <div class="text-primary f-14 m-b-10">
+              1. The standard Lorem Ipsum passage
+            </div>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+          </div>
+          <div class="col-md-12 col-lg-6">
+            <div class="text-primary f-14 m-b-10">
+              2. The standard Lorem Ipsum passage
+            </div>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-20">
+        <h6>Requirements</h6>
+        <hr>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+        <div class="table-responsive m-t-20">
+          <table class="table m-b-0 f-14 b-solid requid-table">
+            <thead>
+            <tr class="text-uppercase">
+              <th class="text-center">#</th>
+              <th class="text-center">Task</th>
+              <th class="text-center">Due Date</th>
+              <th class="text-center">Description</th>
+            </tr>
+            </thead>
+            <tbody class="text-center text-muted">
+            <tr>
+              <td>1</td>
+              <td>Design mockup</td>
+              <td> <i class="far fa-calendar-alt"></i>&nbsp; 22 December, 16</td>
+              <td>The standard Lorem Ipsum passage</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Software Engineer</td>
+              <td> <i class="far fa-calendar-alt"></i>&nbsp; 01 December, 16</td>
+              <td>The standard Lorem Ipsum passage</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Photoshop And Illustrator</td>
+              <td> <i class="far fa-calendar-alt"></i>&nbsp; 15 December, 16</td>
+              <td>The standard Lorem Ipsum passage</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Allocated Resource</td>
+              <td> <i class="far fa-calendar-alt"></i>&nbsp; 28 December, 16</td>
+              <td>The standard Lorem Ipsum passage</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Financial Controlle</td>
+              <td> <i class="far fa-calendar-alt"></i>&nbsp; 20 December, 16</td>
+              <td>The standard Lorem Ipsum passage</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="float-left mt-4"><span class="txt-primary m-r-5"> <i class="fas fa-chart-line"></i>Status:</span>
+        <div class="dropdown-secondary d-inline-block" ngbDropdown [placement]="'top-left'">
+          <button class="btn btn btn-primary" ngbDropdownToggle type="button">Open</button>
+          <div ngbDropdownMenu>
+            <a class="dropdown-item active" href="javascript:">Open</a>
+            <a class="dropdown-item" href="javascript:">On hold</a>
+            <a class="dropdown-item" href="javascript:">Resolved</a>
+            <a class="dropdown-item" href="javascript:">Closed</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:">Dublicate</a>
+            <a class="dropdown-item" href="javascript:">Invalid</a>
+            <a class="dropdown-item" href="javascript:">Wontfix</a>
+          </div>
+        </div>
+      </div>
+      <div class="float-right d-flex mt-4">
+        <span><a href="javascript:" class="text-muted m-r-10 f-16"><i class="fas fa-edit"></i> </a></span>
+        <span class="m-r-10"><a href="javascript:" class="text-muted f-16"><i class="fas fa-trash"></i></a></span>
+      </div>
+    </app-card>
+    <app-card [customHeader]="true" blockClass="task-comment" [options]="false">
+      <div class="app-card-header">
+        <h5 class="card-header-text"><i class="fas fa-plus m-r-5"></i> Comments</h5>
+        <button type="button" class="btn btn-icon btn-primary float-right m-0"><i class="fas fa-plus"></i></button>
+      </div>
+      <ul class="media-list p-0">
+        <li class="media">
+          <div class="media-left mr-3">
+            <a href="javascript:">
+              <img class="media-object img-radius comment-img" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+            </a>
+          </div>
+          <div class="media-body">
+            <h6 class="media-heading txt-primary">Lorem Ipsum <span class="f-12 text-muted m-l-5">Just now</span></h6>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+            <div class="m-t-10 m-b-25">
+              <span><a href="javascript:" class="m-r-10 text-secondary">Reply</a></span><span><a href="javascript:" class="m-r-10 text-secondary">Edit</a> </span>
+            </div>
+            <hr>
+            <div class="media mt-2">
+              <a class="media-left mr-3" href="javascript:">
+                <img class="media-object img-radius comment-img" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+              </a>
+              <div class="media-body">
+                <h6 class="media-heading txt-primary">Lorem Ipsum <span class="f-12 text-muted m-l-5">Just now</span></h6>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                <div class="m-t-10 m-b-25">
+                  <span><a href="javascript:" class="m-r-10 text-secondary">Reply</a></span><span><a href="javascript:" class="m-r-10 text-secondary">Edit</a> </span>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="media mt-2">
+          <div class="media-left mr-3">
+            <a href="javascript:">
+              <img class="media-object img-radius comment-img" src="assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+            </a>
+          </div>
+          <div class="media-body">
+            <h6 class="media-heading txt-primary">Lorem ipsum<span class="f-12 text-muted m-l-5">Just now</span></h6>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+            <div class="m-t-10 m-b-25">
+              <span><a href="javascript:" class="m-r-10 text-secondary">Reply</a></span><span><a href="javascript:" class="m-r-10 text-secondary">Edit</a> </span>
+            </div>
+            <hr>
+          </div>
+        </li>
+        <li class="media">
+          <div class="media-left mr-3">
+            <a href="javascript:">
+              <img class="media-object img-radius comment-img" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+            </a>
+          </div>
+          <div class="media-body">
+            <h6 class="media-heading txt-primary">Lorem Ipsum <span class="f-12 text-muted m-l-5">Just now</span></h6>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+            <div class="m-t-10 m-b-25">
+              <span><a href="javascript:" class="m-r-10 text-secondary">Reply</a></span><span><a href="javascript:" class="m-r-10 text-secondary">Edit</a> </span>
+            </div>
+            <hr>
+            <div class="media mt-2">
+              <a class="media-left mr-3" href="javascript:">
+                <img class="media-object img-radius comment-img" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+              </a>
+              <div class="media-body">
+                <h6 class="media-heading txt-primary">Lorem Ipsum <span class="f-12 text-muted m-l-5">Just now</span></h6>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                <div class="m-t-10 m-b-25">
+                  <span><a href="javascript:" class="m-r-10 text-secondary">Reply</a></span><span><a href="javascript:" class="m-r-10 text-secondary">Edit</a> </span>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="media mt-2">
+          <div class="media-left mr-3">
+            <a href="javascript:">
+              <img class="media-object img-radius comment-img" src="assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+            </a>
+          </div>
+          <div class="media-body">
+            <h6 class="media-heading txt-primary">Lorem ipsum<span class="f-12 text-muted m-l-5">Just now</span></h6>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+            <div class="m-t-10 m-b-25">
+              <span><a href="javascript:" class="m-r-10 text-secondary">Reply</a></span><span><a href="javascript:" class="m-r-10 text-secondary">Edit</a> </span>
+            </div>
+            <hr>
+          </div>
+        </li>
+        <li class="media mt-2">
+          <div class="media-left mr-3">
+            <a href="javascript:">
+              <img class="media-object img-radius comment-img" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+            </a>
+          </div>
+          <div class="media-body">
+            <h6 class="media-heading txt-primary">Lorem ipsum<span class="f-12 text-muted m-l-5">Just now</span></h6>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+            <div class="m-t-10 m-b-25">
+              <span><a href="javascript:" class="m-r-10 text-secondary">Reply</a></span><span><a href="javascript:" class="m-r-10 text-secondary">Edit</a> </span>
+            </div>
+            <hr>
+          </div>
+        </li>
+      </ul>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Add Task...">
+        <div class="input-group-append">
+          <button class="btn btn-primary btn-icon" type="button"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

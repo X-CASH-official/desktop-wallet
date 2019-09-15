@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Notification Default">
+      <p>Notification All Options : <code> (click) with option, title, msg, showClose, timeout, position, theme, type</code></p>
+      <button class="btn btn-inverse ripple light" (click)="addToast({title:'Inverse Toasty', msg:'Turning standard Inverse alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'default'})">Default</button>
+      <button class="btn btn-info ripple light" (click)="addToast({title:'Info Toasty', msg:'Turning standard Info alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'info'})">Info</button>
+      <button class="btn btn-success ripple light" (click)="addToast({title:'Success Toasty', msg:'Turning standard Success alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'success'})">Success</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Primary Toasty', msg:'Turning standard Primary alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'wait'})">Primary/Wait</button>
+      <button class="btn btn-warning ripple" (click)="addToast({title:'Warning Toasty', msg:'Turning standard Warning alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'warning'})">Warning</button>
+      <button class="btn btn-danger ripple light" (click)="addToast({title:'Danger Toasty', msg:'Turning standard Danger alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'error'})">Danger/Error</button>
+    </app-card>
+  </div>
+  <div class="col-sm-12">
+    <app-card cardTitle="Notification Position">
+      <p>This plugin has layout options where you can display it in any corner of the screen, simply click one layout corners and press the buttons on the other section to see the magic</p>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', showClose: true, timeout: 5000, theme:'bootstrap', type:'wait', position:'top-left', closeOther:true})">Top Left</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', showClose: true, timeout: 5000, theme:'bootstrap', type:'wait', position:'top-right', closeOther:true})">Top Right</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', showClose: true, timeout: 5000, theme:'bootstrap', type:'wait', position:'top-center', closeOther:true})">Top Center</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', showClose: true, timeout: 5000, theme:'bootstrap', type:'wait', position:'bottom-left', closeOther:true})">Bottom Left</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', showClose: true, timeout: 5000, theme:'bootstrap', type:'wait', position:'bottom-right', closeOther:true})">Bottom Right</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', showClose: true, timeout: 5000, theme:'bootstrap', type:'wait', position:'bottom-center', closeOther:true})">Bottom Center</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', showClose: true, timeout: 5000, theme:'bootstrap', type:'wait', position:'center-center', closeOther:true})">Center Center</button>
+    </app-card>
+  </div>
+  <div class="col-sm-12">
+    <app-card cardTitle="Notification Bootstrap">
+      <p>Change data-type : <code> theme="bootstrap"</code> to change notification color</p>
+      <button class="btn btn-inverse ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'bootstrap', position:'bottom-right', type:'default'})">Default</button>
+      <button class="btn btn-info ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'bootstrap', position:'bottom-right', type:'info'})">Info</button>
+      <button class="btn btn-success ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'bootstrap', position:'bottom-right', type:'success'})">Success</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'bootstrap', position:'bottom-right', type:'wait'})">Primary/Wait</button>
+      <button class="btn btn-warning ripple" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'bootstrap', position:'bottom-right', type:'warning'})">Warning</button>
+      <button class="btn btn-danger ripple light" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'bootstrap', position:'bottom-right', type:'error'})">Danger/Error</button>
+    </app-card>
+  </div>
+  <div class="col-sm-12">
+    <app-card cardTitle="Notification Material">
+      <p>Change data-type : <code> theme="material"</code> to change notification color</p>
+      <button class="btn btn-inverse ripple light" (click)="addToast({title:'Material Toasty', msg:'Turning standard Material alerts into awesome notifications', timeout: 5000, theme:'material', position:'bottom-right', type:'default'})">Default</button>
+      <button class="btn btn-info ripple light" (click)="addToast({title:'Material Toasty', msg:'Turning standard Material alerts into awesome notifications', timeout: 5000, theme:'material', position:'bottom-right', type:'info'})">Info</button>
+      <button class="btn btn-success ripple light" (click)="addToast({title:'Material Toasty', msg:'Turning standard Material alerts into awesome notifications', timeout: 5000, theme:'material', position:'bottom-right', type:'success'})">Success</button>
+      <button class="btn btn-primary ripple light" (click)="addToast({title:'Material Toasty', msg:'Turning standard Material alerts into awesome notifications', timeout: 5000, theme:'material', position:'bottom-right', type:'wait'})">Primary/Wait</button>
+      <button class="btn btn-warning ripple" (click)="addToast({title:'Material Toasty', msg:'Turning standard Material alerts into awesome notifications', timeout: 5000, theme:'material', position:'bottom-right', type:'warning'})">Warning</button>
+      <button class="btn btn-danger ripple light" (click)="addToast({title:'Material Toasty', msg:'Turning standard Material alerts into awesome notifications', timeout: 5000, theme:'material', position:'bottom-right', type:'error'})">Danger/Error</button>
+    </app-card>
+  </div>
+</div>
+<ng2-toasty [position]="position"></ng2-toasty>

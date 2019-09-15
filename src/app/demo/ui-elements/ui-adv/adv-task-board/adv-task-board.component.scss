@@ -1,0 +1,20 @@
+:host {
+  padding: 0!important;
+  height: 100%;
+}
+.gu-mirror {
+  background-color: white;
+  border-radius: 0.125rem;
+  padding: 0.5rem;
+  opacity: 1;
+}
+
+.gu-unselectable {
+  user-select: none !important;
+}
+
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+

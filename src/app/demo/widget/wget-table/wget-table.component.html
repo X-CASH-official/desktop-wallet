@@ -1,0 +1,732 @@
+<div class="row">
+  <div class="col-xl-8 col-md-12">
+    <app-card cardTitle="User Activity" cardClass="User-Activity" blockClass="pb-0" >
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>User</th>
+            <th>Activity</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th class="text-right"></th>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;"  src="assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6></td>
+            <td>
+              <h6 class="m-0">The quick brown fox</h6></td>
+            <td>
+              <h6 class="m-0">3:28 PM</h6></td>
+            <td class="text-c-green">
+              <h6 class="m-0">Done</h6></td>
+            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+          </tr>
+
+          <tr>
+            <td>
+              <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;"  src="assets/images/user/avatar-2.jpg" alt="activity-user">Albert Andersen</h6></td>
+            <td>
+              <h6 class="m-0">Jumps over the lazy</h6></td>
+            <td>
+              <h6 class="m-0">2:37 PM</h6></td>
+            <td class="text-c-red">
+              <h6 class="m-0">Missed</h6></td>
+            <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
+          </tr>
+
+          <tr>
+            <td>
+              <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;"  src="assets/images/user/avatar-3.jpg" alt="activity-user">Silje Larsen</h6></td>
+            <td>
+              <h6 class="m-0">Dog the quick brown</h6></td>
+            <td>
+              <h6 class="m-0">10:23 AM</h6></td>
+            <td class="text-c-purple">
+              <h6 class="m-0">Delayed</h6></td>
+            <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;"  src="assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6></td>
+            <td>
+              <h6 class="m-0">The quick brown fox</h6></td>
+            <td>
+              <h6 class="m-0">4:28 PM</h6></td>
+            <td class="text-c-green">
+              <h6 class="m-0">Done</h6></td>
+            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-12 m-b-30">
+    <ngb-tabset>
+      <ngb-tab title="Today">
+        <ng-template ngbTabContent>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>3784</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Julie Vad</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>3544</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Storm Hanse</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>2739</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Frida Thomse</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>1032</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>8750</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>8750</span>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="This Week">
+        <ng-template ngbTabContent>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>3784</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Julie Vad</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>3544</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Storm Hanse</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>2739</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Frida Thomse</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>1032</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>8750</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>8750</span>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="All">
+        <ng-template ngbTabContent>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>3784</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Julie Vad</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>3544</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Storm Hanse</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>2739</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Frida Thomse</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>1032</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center m-b-20">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-up f-22 m-r-10 text-c-green"></i>8750</span>
+            </div>
+          </div>
+          <div class="media friendlist-box align-items-center justify-content-center">
+            <div class="m-r-10 photo-table">
+              <a href="javascript:"><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></a>
+            </div>
+            <div class="media-body">
+              <h6 class="m-0 d-inline">Silje Larsen</h6>
+              <span class="float-right d-flex  align-items-center"><i class="fas fa-caret-down f-22 m-r-10 text-c-red"></i>8750</span>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <div class="col-xl-12 col-md-12">
+    <app-card cardTitle="Application list" cardClass="Application-list" blockClass="pb-0">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Image</th>
+            <th>Application</th>
+            <th>Installs</th>
+            <th>Created</th>
+            <th>Budget</th>
+            <th>Status</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td><img class="rounded-circle" style="width:50px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Facebook</h6>
+              <p class="m-0">Apple</p>
+            </td>
+            <td>
+              <h6 class="mb-1">523.423</h6>
+              <p class="text-c-green m-0">+ 84 Daily</p>
+            </td>
+            <td>
+              <h6 class="m-b-0">Feb 11 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 16,244</h6></td>
+            <td><a class="text-white label theme-bg f-12" href="javascript:">Active</a></td>
+          </tr>
+
+          <tr>
+            <td><img class="rounded-circle" style="width:50px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Twitter</h6>
+              <p class="m-0">CS Form</p>
+            </td>
+            <td>
+              <h6 class="mb-1">7.239</h6>
+              <p class="text-muted m-0">+ 5 Daily</p>
+            </td>
+            <td>
+              <h6 class="m-b-0">Jan 19 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 3,937</h6></td>
+            <td><a class="label theme-bg2 f-12 text-white" href="javascript:">Not Active</a></td>
+          </tr>
+
+          <tr>
+            <td><img class="rounded-circle" style="width:50px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Instagram</h6>
+              <p class="m-0">Microsoft</p>
+            </td>
+            <td>
+              <h6 class="mb-1">5.877</h6>
+              <p class="text-c-green m-0">+ 12 Daily</p>
+            </td>
+            <td>
+              <h6 class="m-b-0">Aug 04 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 28,039</h6></td>
+            <td><a class="label bg-c-blue f-12 text-white" href="javascript:">Paused</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-8 col-md-12">
+    <app-card cardTitle="User Project List" cardClass="user-list" blockClass="pb-0">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>User</th>
+            <th>project</th>
+            <th>Completed</th>
+            <th>Status</th>
+            <th>Date</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Social Media App</h6>
+              <p class="m-0">Assigned to<span class="text-c-green"> Tristan Madsen</span></p>
+            </td>
+            <td><span class="pie_1">326,134</span></td>
+            <td>
+              <h6 class="m-0">68%</h6></td>
+            <td>
+              <h6 class="m-0">October 26, 2017</h6></td>
+          </tr>
+
+          <tr>
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Newspaper Wordpress Web</h6>
+              <p class="m-0">Assigned to<span class="text-c-green">  Marcus Poulsen</span></p>
+            </td>
+            <td><span class="pie_2">110,134</span></td>
+            <td>
+              <h6 class="m-0">46%</h6></td>
+            <td>
+              <h6 class="m-0">September 4, 2017</h6></td>
+          </tr>
+
+          <tr>
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Dashboard UI Kit Design</h6>
+              <p class="m-0">Assigned to<span class="text-c-green">  Felix Johansen</span></p>
+            </td>
+            <td><span class="pie_3">226,134</span></td>
+            <td>
+              <h6 class="m-0">31%</h6></td>
+            <td>
+              <h6 class="m-0">November 14, 2017</h6></td>
+          </tr>
+          <tr>
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Social Media App</h6>
+              <p class="m-0">Assigned to<span class="text-c-green">  Tristan Madsen</span></p>
+            </td>
+            <td><span class="pie_4">500,134</span></td>
+            <td>
+              <h6 class="m-0">85%</h6></td>
+            <td>
+              <h6 class="m-0">December 14, 2017</h6></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-12 m-b-30">
+    <ngb-tabset>
+      <ngb-tab title="Developer">
+        <ng-template ngbTabContent>
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Silje Larsen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 15</h6></td>
+                <td>
+                  <h6 class="m-0">5 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+              </tr>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Clara Madsen</h6></td>
+                <td><a href="javascript:" class="label theme-bg2 text-white f-12">Message</a></td>
+                <td><a href="javascript:" class="label theme-bg text-white f-12">Invite</a></td>
+                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+              </tr>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Lucas Olsen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 30</h6></td>
+                <td>
+                  <h6 class="m-0">5 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-purple f-10"></i></td>
+              </tr>
+
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Jakob Rasmussen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 50</h6></td>
+                <td>
+                  <h6 class="m-0">1 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-blue f-10"></i></td>
+              </tr>
+
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Julie Vad</h6></td>
+                <td>
+                  <h6 class="m-0">$ 100</h6></td>
+                <td>
+                  <h6 class="m-0">10 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-purple f-10"></i></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Designer">
+        <ng-template ngbTabContent>
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Silje Larsen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 15</h6></td>
+                <td>
+                  <h6 class="m-0">5 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+              </tr>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Clara Madsen</h6></td>
+                <td><a href="javascript:" class="label theme-bg2 text-white f-12">Message</a></td>
+                <td><a href="javascript:" class="label theme-bg text-white f-12">Invite</a></td>
+                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+              </tr>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Lucas Olsen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 30</h6></td>
+                <td>
+                  <h6 class="m-0">5 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-purple f-10"></i></td>
+              </tr>
+
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Jakob Rasmussen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 50</h6></td>
+                <td>
+                  <h6 class="m-0">1 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-blue f-10"></i></td>
+              </tr>
+
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Julie Vad</h6></td>
+                <td>
+                  <h6 class="m-0">$ 100</h6></td>
+                <td>
+                  <h6 class="m-0">10 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-purple f-10"></i></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="All">
+        <ng-template ngbTabContent>
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Silje Larsen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 15</h6></td>
+                <td>
+                  <h6 class="m-0">5 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+              </tr>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Clara Madsen</h6></td>
+                <td><a href="javascript:" class="label theme-bg2 text-white f-12">Message</a></td>
+                <td><a href="javascript:" class="label theme-bg text-white f-12">Invite</a></td>
+                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+              </tr>
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Lucas Olsen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 30</h6></td>
+                <td>
+                  <h6 class="m-0">5 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-purple f-10"></i></td>
+              </tr>
+
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Jakob Rasmussen</h6></td>
+                <td>
+                  <h6 class="m-0">$ 50</h6></td>
+                <td>
+                  <h6 class="m-0">1 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-blue f-10"></i></td>
+              </tr>
+
+              <tr class="unread">
+                <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+                <td>
+                  <h6 class="m-0">Julie Vad</h6></td>
+                <td>
+                  <h6 class="m-0">$ 100</h6></td>
+                <td>
+                  <h6 class="m-0">10 Projects</h6></td>
+                <td><i class="fas fa-circle text-c-purple f-10"></i></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <div class="col-xl-12 col-md-12">
+    <app-card cardTitle="Full Width Table" cardClass="code-table" blockClass="pb-0">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Id Number</th>
+            <th>Code</th>
+            <th>Date</th>
+            <th>Budget</th>
+            <th>Status</th>
+            <th class="text-right">Ratings</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <h6 class="mb-1">#467</h6></td>
+            <td>
+              <h6 class="mb-1">8765482</h6></td>
+            <td>
+              <h6 class="m-b-0">November 14, 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 874.23</h6></td>
+            <td><a href="javascript:" class="label theme-bg f-12 text-white">Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <h6 class="mb-1">#466</h6></td>
+            <td>
+              <h6 class="mb-1">2366482</h6></td>
+            <td>
+              <h6 class="m-b-0">November 13, 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 235.34</h6></td>
+            <td><a href="javascript:" class="label theme-bg2 f-12 text-white">Not Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <h6 class="mb-1">#465</h6></td>
+            <td>
+              <h6 class="mb-1">8832638</h6></td>
+            <td>
+              <h6 class="m-b-0">October 14, 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 233.46</h6></td>
+            <td><a href="javascript:" class="label theme-bg f-12 text-white">Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-1">#464</h6></td>
+            <td>
+              <h6 class="mb-1">9632638</h6></td>
+            <td>
+              <h6 class="m-b-0">December 17, 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 133.46</h6></td>
+            <td><a href="javascript:" class="label theme-bg2 f-12 text-white">Not Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-1">#463</h6></td>
+            <td>
+              <h6 class="mb-1">3332538</h6></td>
+            <td>
+              <h6 class="m-b-0">July 14, 2017</h6></td>
+            <td>
+              <h6 class="m-b-0">$ 244.46</h6></td>
+            <td><a href="javascript:" class="label theme-bg f-12 text-white">Active</a></td>
+            <td class="text-right"><a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-c-yellow"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+              <a href="javascript:"><i class="fa fa-star f-18 text-black-50"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-md-12">
+    <app-card cardTitle="Recent Users" cardClass="Recent-Users">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+          <tr class="unread">
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Isabella Christensen</h6>
+              <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
+            </td>
+            <td>
+              <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6></td>
+            <td><a href="javascript:" class="label theme-bg2 text-white f-12">Reject</a><a href="javascript:" class="label theme-bg text-white f-12">Approve</a></td>
+          </tr>
+          <tr class="unread">
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Mathilde Andersen</h6>
+              <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
+            </td>
+            <td>
+              <h6 class="text-muted"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>11 MAY 10:35</h6></td>
+            <td><a href="javascript:" class="label theme-bg2 text-white f-12">Reject</a><a href="javascript:" class="label theme-bg text-white f-12">Approve</a></td>
+          </tr>
+          <tr class="unread">
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-3.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Karla Sorensen</h6>
+              <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
+            </td>
+            <td>
+              <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>9 MAY 17:38</h6></td>
+            <td><a href="javascript:" class="label theme-bg2 text-white f-12">Reject</a><a href="javascript:" class="label theme-bg text-white f-12">Approve</a></td>
+          </tr>
+          <tr class="unread">
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Ida Jorgensen</h6>
+              <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
+            </td>
+            <td>
+              <h6 class="text-muted f-w-300"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>19 MAY 12:56</h6></td>
+            <td><a href="javascript:" class="label theme-bg2 text-white f-12">Reject</a><a href="javascript:" class="label theme-bg text-white f-12">Approve</a></td>
+          </tr>
+          <tr class="unread">
+            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
+            <td>
+              <h6 class="mb-1">Albert Andersen</h6>
+              <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
+            </td>
+            <td>
+              <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>21 July 12:56</h6></td>
+            <td><a href="javascript:" class="label theme-bg2 text-white f-12">Reject</a><a href="javascript:" class="label theme-bg text-white f-12">Approve</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <!-- [ Recent Users ] end -->
+</div>

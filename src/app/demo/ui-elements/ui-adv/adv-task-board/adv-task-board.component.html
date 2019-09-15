@@ -1,0 +1,169 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="User Task Board">
+      <div class="scrollmenu">
+        <div class="taskboard page-height">
+          <div class="taskboard-wrapper">
+            <div class="taskboard-list">
+              <h6 class="taskboard-header">Backlog</h6>
+              <div class="taskboard-cards" [dragula]='"task-group"'>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Responsive bug</div>
+                  <small class="card-text text-white">Etiam porta sem malesuada magna mollis euismod.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Travel checklist</div>
+                  <small class="card-text text-white">Curabitur blandit tempus porttitor.</small>
+                </div>
+                <div class="taskboard-task task-status-success">
+                  <div class="taskboard-task-title">Budget review</div>
+                  <small class="card-text text-white">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</small>
+                </div>
+                <div class="taskboard-task task-status-danger">
+                  <div class="taskboard-task-title">Layout design</div>
+                  <small class="card-text text-white">Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="taskboard-wrapper">
+            <div class="taskboard-list">
+              <h6 class="taskboard-header">To Do</h6>
+              <div class="taskboard-cards" [dragula]='"task-group"'>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">QA Testing</div>
+                  <small class="card-text text-white">Etiam porta sem malesuada magna mollis euismod.</small>
+                </div>
+                <div class="taskboard-task task-status-info">
+                  <div class="taskboard-task-title">Fix navigation menu</div>
+                  <small class="card-text text-white">Donec sed odio dui.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Update bootstrap 4</div>
+                  <small class="card-text text-white">Aenean lacinia bibendum nulla sed consectetur.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Run build tools</div>
+                  <small class="card-text text-white">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</small>
+                </div>
+                <div class="taskboard-task task-status-success">
+                  <div class="taskboard-task-title">List article ideas</div>
+                  <small class="card-text text-white">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Reactjs fixes</div>
+                  <small class="card-text text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
+                </div>
+                <div class="taskboard-task task-status-warning">
+                  <div class="taskboard-task-title">Implement SSL</div>
+                  <small class="card-text text-white">Etiam porta sem malesuada magna mollis euismod.</small>
+                </div>
+                <div class="taskboard-task task-status-danger">
+                  <div class="taskboard-task-title">Cleanup code</div>
+                  <small class="card-text text-white">Sollicitudin</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="taskboard-wrapper">
+            <div class="taskboard-list">
+              <h6 class="taskboard-header">In Process</h6>
+              <div class="taskboard-cards" [dragula]='"task-group"'>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">QOS Assessment</div>
+                  <small class="card-text text-white">Maecenas sed diam eget risus varius blandit sit amet non magna.</small>
+                </div>
+                <div class="taskboard-task task-status-warning">
+                  <div class="taskboard-task-title">Schedule new tasks</div>
+                  <small class="card-text text-white">Sed posuere consectetur est at lobortis.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Add dashboard variants</div>
+                  <small class="card-text text-white">Nulla vitae elit libero, a pharetra augue.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Extended color scheme support</div>
+                  <small class="card-text text-white">Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</small>
+                </div>
+                <div class="taskboard-task task-status-info">
+                  <div class="taskboard-task-title">Merge unit tests</div>
+                  <small class="card-text text-white">Maecenas sed diam eget risus varius blandit sit amet non magna.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Test final version</div>
+                  <small class="card-text text-white">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="taskboard-wrapper">
+            <div class="taskboard-list">
+              <h6 class="taskboard-header">In Review</h6>
+              <div class="taskboard-cards" [dragula]='"task-group"'>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Integrate Angular 4</div>
+                  <small class="card-text text-white">Nulla vitae elit libero, a pharetra augue.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Additional fields</div>
+                  <small class="card-text text-white">Donec id elit non mi porta gravida at eget metus.</small>
+                </div>
+                <div class="taskboard-task task-status-danger">
+                  <div class="taskboard-task-title">Draggable task board</div>
+                  <small class="card-text text-white">Sed posuere consectetur est at lobortis.</small>
+                </div>
+                <div class="taskboard-task task-status-danger">
+                  <div class="taskboard-task-title">Setup CI server</div>
+                  <small class="card-text text-white">Maecenas faucibus mollis interdum.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Assign new tasks</div>
+                  <small class="card-text text-white">Nullam quis risus eget urna mollis ornare vel eu leo.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Contact administrator</div>
+                  <small class="card-text text-white">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Commit changes</div>
+                  <small class="card-text text-white">Aenean lacinia bibendum nulla sed consectetur.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="taskboard-wrapper">
+            <div class="taskboard-list">
+              <h6 class="taskboard-header">Done</h6>
+              <div class="taskboard-cards" [dragula]='"task-group"'>
+                <div class="taskboard-task task-status-info">
+                  <div class="taskboard-task-title">Store new files</div>
+                  <small class="card-text text-white">Sed posuere consectetur est at lobortis.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Build landing page</div>
+                  <small class="card-text text-white">Maecenas sed diam eget risus varius blandit sit amet non magna.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Setup basic layout</div>
+                  <small class="card-text text-white">Vestibulum id ligula porta felis euismod semper.</small>
+                </div>
+                <div class="taskboard-task">
+                  <div class="taskboard-task-title">Graphical fixes</div>
+                  <small class="card-text text-white">Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</small>
+                </div>
+                <div class="taskboard-task task-status-warning">
+                  <div class="taskboard-task-title">Email alerts</div>
+                  <small class="card-text text-white">Donec sed odio dui.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

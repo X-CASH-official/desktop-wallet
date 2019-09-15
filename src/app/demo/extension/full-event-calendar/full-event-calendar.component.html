@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Full Calendar" [options]="false">
+      <div *ngIf="calendarOptions">
+        <ng-fullcalendar class="datta-calendar table-responsive" #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)" (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+      </div>
+    </app-card>
+  </div>
+</div>

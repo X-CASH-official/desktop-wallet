@@ -1,0 +1,275 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Animeted Model">
+      <div class="main clearfix">
+        <div class="column">
+          <button class="btn btn-primary md-trigger" data-modal="modal-1" (click)="openMyModal('modal-1')">Fade in &amp; Scale</button>
+          <app-animation-modal [modalID]="'modal-1'" [modalClass]="'md-effect-1'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-2" (click)="openMyModal('modal-2')">Slide in (right)</button>
+          <app-animation-modal [modalID]="'modal-2'" [modalClass]="'md-effect-2'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-3" (click)="openMyModal('modal-3')">Slide in (bottom)</button>
+          <app-animation-modal [modalID]="'modal-3'" [modalClass]="'md-effect-3'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-4" (click)="openMyModal('modal-4')">Newspaper</button>
+          <app-animation-modal [modalID]="'modal-4'" [modalClass]="'md-effect-4'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-5" (click)="openMyModal('modal-5')">Fall</button>
+          <app-animation-modal [modalID]="'modal-5'" [modalClass]="'md-effect-5'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-6" (click)="openMyModal('modal-6')">Side Fall</button>
+          <app-animation-modal [modalID]="'modal-6'" [modalClass]="'md-effect-6'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-7" (click)="openMyModal('modal-7')">Sticky Up</button>
+          <app-animation-modal [modalID]="'modal-7'" [modalClass]="'md-effect-7'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-8" (click)="openMyModal('modal-8')">3D Flip (horizontal)</button>
+          <app-animation-modal [modalID]="'modal-8'" [modalClass]="'md-effect-8'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-9" (click)="openMyModal('modal-9')">3D Flip (vertical)</button>
+          <app-animation-modal [modalID]="'modal-9'" [modalClass]="'md-effect-9'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-10" (click)="openMyModal('modal-10')">3D Sign</button>
+          <app-animation-modal [modalID]="'modal-10'" [modalClass]="'md-effect-10'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-11" (click)="openMyModal('modal-11')">Super Scaled</button>
+          <app-animation-modal [modalID]="'modal-11'" [modalClass]="'md-effect-11'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-12" (click)="openMyModal('modal-12')">Just Me</button>
+          <app-animation-modal [modalID]="'modal-12'" [modalClass]="'md-effect-12'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-13" (click)="openMyModal('modal-13')">3D Slit</button>
+          <app-animation-modal [modalID]="'modal-13'" [modalClass]="'md-effect-13'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-14" (click)="openMyModal('modal-14')">3D Rotate Bottom</button>
+          <app-animation-modal [modalID]="'modal-14'" [modalClass]="'md-effect-14'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-15" (click)="openMyModal('modal-15')">3D Rotate In Left</button>
+          <app-animation-modal [modalID]="'modal-15'" [modalClass]="'md-effect-15'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-16" (click)="openMyModal('modal-16')">Blur</button>
+          <app-animation-modal [modalID]="'modal-16'" [modalClass]="'md-effect-16'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-17" (click)="openMyModal('modal-17')">Let me in</button>
+          <app-animation-modal [modalID]="'modal-17'" [modalClass]="'md-effect-17'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-18" (click)="openMyModal('modal-18')">Make way!</button>
+          <app-animation-modal [modalID]="'modal-18'" [modalClass]="'md-effect-18'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+
+          <button class="btn btn-primary md-trigger" data-modal="modal-19" (click)="openMyModal('modal-19')">Slip from top</button>
+          <app-animation-modal [modalID]="'modal-19'" [modalClass]="'md-effect-19'">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+              <p>This is a modal window. You can do the following things with it:</p>
+              <ul>
+                <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                <li><strong>Close:</strong> click on the button below to close the modal.</li>
+              </ul>
+              <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+            </div>
+          </app-animation-modal>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+.datta-calendar {
+  .fc-event {
+    padding: 5px 18px;
+    margin-top: 2px;
+    background: #04a9f5;
+    border-color: #04a9f5;
+    color: #fff !important;
+  }
+
+  .fc-button {
+    background-color: $primary-color;
+    border-color: #fff;
+    color: #fff;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+    height: 37px;
+    padding: 0 15px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+  @media screen and (max-width:768px) {
+    .fc .fc-toolbar>*>*{
+      float:none;
+    }
+    .fc-toolbar .fc-left,.fc-toolbar .fc-right,.fc-toolbar .fc-center{
+      float:none;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      width:100%;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom:10px;
+    }
+  }
+
+  table {
+    min-width: 700px;
+  }
+}
