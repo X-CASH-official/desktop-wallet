@@ -1,0 +1,20 @@
+<div>
+    <app-card cardTitle="Wallet Name" cardClass="Monthly-daily" [options]="true">
+      <div class="row">
+        <div class="col-sm-10">
+          <span>Address: XCA1.........BKV</span>
+          <span class="d-block  text-muted text-uppercase">Total Revenue</span>
+        </div>
+        <!-- Write a separated component -->
+        <div class="col-sm-2">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link" routerLinkActive="active" id="wallet-history-tab" [routerLink]="['./history']" role="tab">History</a>
+              <a class="nav-link" routerLinkActive="active" id="wallet-settings-tab" [routerLink]="['./settings']" role="tab">Settings</a>
+              <a class="nav-link" routerLinkActive="active" id="wallet-advanced-tab" [routerLink]="['./advanced']" role="tab">Advanced</a>
+            </div>
+        </div>
+      </div>
+      
+    </app-card>
+</div>
+<router-outlet></router-outlet>

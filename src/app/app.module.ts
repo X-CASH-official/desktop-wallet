@@ -26,6 +26,8 @@ import { FriendComponent } from './theme/layout/admin/nav-bar/nav-right/chat-use
 import {ChatMsgComponent} from './theme/layout/admin/nav-bar/nav-right/chat-msg/chat-msg.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import {variables_and_functions_service} from './services/variables_and_functions.service';
+import { advanced_wallet_functionsModule } from './unused_old_components_and_modules/advanced_wallet_functions/advanced_wallet_functions.module';
+import { WalletHomepageModule } from './modules/wallet-homepage/wallet-homepage.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,7 @@ import {variables_and_functions_service} from './services/variables_and_function
     ChatUserListComponent,
     FriendComponent,
     ChatMsgComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -56,7 +58,9 @@ import {variables_and_functions_service} from './services/variables_and_function
     NgbDropdownModule,
     NgbTooltipModule,
     NgbButtonsModule,
-    NgbTabsetModule
+    NgbTabsetModule,
+    advanced_wallet_functionsModule,
+    WalletHomepageModule,
   ],
   providers: [
     NavigationItem,

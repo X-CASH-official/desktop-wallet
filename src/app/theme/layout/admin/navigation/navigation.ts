@@ -25,7 +25,7 @@ export interface Navigation extends NavigationItem {
   children?: NavigationItem[];
 }
 
-const NAVIGATION_ITEMS = [
+const NAVIGATION_ITEMS_OLD = [
   {
     id: 'wallet_functions',
     title: 'Wallet Functions',
@@ -148,6 +148,33 @@ const NAVIGATION_ITEMS = [
   },
 ];
 
+const NAVIGATION_ITEMS = [
+  {
+    id: 'wallet',
+    title: 'Overview',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'wallet_home',
+        title: 'Wallet',
+        type: 'item',
+        url: '/wallet-homepage',
+        classes: 'nav-item',
+        icon: 'feather icon-package',
+      },
+      {
+        id: 'contacts',
+        title: 'Contacts',
+        type: 'item',
+        url: '/contacts',
+        classes: 'nav-item',
+        icon: 'feather icon-settings'
+      }
+    ]
+  }
+];
+
 const MAIN_MENU_NAVIGATION_ITEMS = [
   {
     id: 'wallet_settings',
@@ -182,6 +209,7 @@ export class NavigationItem {
     const MAIN_MENU_ROUTE:string = "/wallet_menu/main_menu";
     const WALLET_CONNECTION_SETTINGS_ROUTE:string = "/wallet_menu/wallet_connection_settings";
 
-    return data === MAIN_MENU_ROUTE || data === WALLET_CONNECTION_SETTINGS_ROUTE ? MAIN_MENU_NAVIGATION_ITEMS : NAVIGATION_ITEMS;
+    return NAVIGATION_ITEMS;
+    //return data === MAIN_MENU_ROUTE || data === WALLET_CONNECTION_SETTINGS_ROUTE ? MAIN_MENU_NAVIGATION_ITEMS : NAVIGATION_ITEMS_OLD;
   }
 }

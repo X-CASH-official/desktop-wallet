@@ -7,12 +7,13 @@ import {NavigationEnd, Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'datta-able';
+  title = 'X-Cash Wallet';
 
   constructor(private router: Router)
   {
     // override the route reuse strategy
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;  
+    // TODO cause problem with theming: 
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;  
   }
 
   ngOnInit() {
