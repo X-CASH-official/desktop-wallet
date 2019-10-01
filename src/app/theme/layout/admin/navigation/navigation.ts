@@ -150,7 +150,7 @@ const NAVIGATION_ITEMS_OLD = [
 
 const NAVIGATION_ITEMS = [
   {
-    id: 'wallet',
+    id: 'overview',
     title: 'Overview',
     type: 'group',
     icon: 'icon-navigation',

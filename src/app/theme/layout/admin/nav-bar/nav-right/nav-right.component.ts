@@ -31,15 +31,10 @@ import {ConfigurationComponent} from '../../configuration/configuration.componen
   ]
 })
 export class NavRightComponent implements OnInit, DoCheck {
-  public visibleUserList: boolean;
-  public chatMessage: boolean;
-  public friendId: boolean;
   public dattaConfig: any;
 
   constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent) {
     config.placement = 'bottom-right';
-    this.visibleUserList = false;
-    this.chatMessage = false;
     this.dattaConfig = DattaConfig.config;
   }
 
@@ -49,11 +44,6 @@ export class NavRightComponent implements OnInit, DoCheck {
   change_theme(data:string)
   {
     this.Configuration_Component.setLayout(data);
-  }
-
-  onChatToggle(friend_id) {
-    this.friendId = friend_id;
-    this.chatMessage = !this.chatMessage;
   }
 
   ngDoCheck() {
