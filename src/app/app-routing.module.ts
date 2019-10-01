@@ -22,6 +22,14 @@ const routes: Routes = [
         loadChildren: './modules/contacts/contacts.module#ContactsModule'
       },
       {
+        path: 'settings',
+        loadChildren: './modules/settings/settings.module#SettingsModule'
+      },
+      {
+        path: 'connection',
+        loadChildren: './modules/connection/connection.module#ConnectionModule'
+      },
+      {
         path: '**',
         redirectTo: 'wallet-homepage',
         pathMatch: 'full'

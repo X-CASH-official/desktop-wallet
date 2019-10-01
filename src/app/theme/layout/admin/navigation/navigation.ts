@@ -161,7 +161,7 @@ const NAVIGATION_ITEMS = [
         type: 'item',
         url: '/wallet-homepage',
         classes: 'nav-item',
-        icon: 'feather icon-package',
+        icon: 'feather icon-briefcase',
       },
       {
         id: 'contacts',
@@ -169,7 +169,23 @@ const NAVIGATION_ITEMS = [
         type: 'item',
         url: '/contacts',
         classes: 'nav-item',
+        icon: 'feather icon-users'
+      },
+      {
+        id: 'settings',
+        title: 'Settings',
+        type: 'item',
+        url: '/settings',
+        classes: 'nav-item',
         icon: 'feather icon-settings'
+      },
+      {
+        id: 'connection',
+        title: 'Connection',
+        type: 'item',
+        url: '/connection',
+        classes: 'nav-item',
+        icon: 'feather icon-sliders'
       }
     ]
   }
