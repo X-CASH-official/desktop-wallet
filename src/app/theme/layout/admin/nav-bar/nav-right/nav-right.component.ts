@@ -32,6 +32,7 @@ import {ConfigurationComponent} from '../../configuration/configuration.componen
 })
 export class NavRightComponent implements OnInit, DoCheck {
   public dattaConfig: any;
+  public darkTheme: boolean = true;
 
   constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent) {
     config.placement = 'bottom-right';
@@ -39,6 +40,14 @@ export class NavRightComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+  }
+
+  toggleTheme(darkTheme: boolean) {
+    if (darkTheme) {
+      this.Configuration_Component.setLayout('dark');
+    } else {
+      this.Configuration_Component.setLayout('light');
+    }
   }
 
   change_theme(data:string)

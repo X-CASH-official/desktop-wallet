@@ -1,5 +1,10 @@
 <ul class="navbar-nav">
   <li>
+    <a href="javascript:" (click)="darkTheme=!darkTheme; toggleTheme(darkTheme)">
+      <i id="themeToggle" [ngClass]="darkTheme ? 'icon feather icon-sun' : 'icon feather icon-moon'"></i>
+    </a>
+  </li>
+  <li>
     <div class="dropdown" ngbDropdown [placement]="['bottom-left', 'bottom-right']">
       <a ngbDropdownToggle href="javascript:" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right notification">
@@ -65,7 +70,7 @@
           </a>
         </div>
         <ul class="pro-body">
-            <li><a href="javascript:void(0);" (click)="change_theme('light')" class="dropdown-item"><i class="feather icon-user"></i> Light Theme</a></li>
+          <li><a href="javascript:void(0);" (click)="change_theme('light')" class="dropdown-item"><i class="feather icon-user"></i> Light Theme</a></li>
           <li><a href="javascript:void(0);" (click)="change_theme('dark')" class="dropdown-item"><i class="feather icon-user"></i> Dark Theme</a></li>
           <li><a [routerLink]="['/wallet_menu_main_menu']" class="dropdown-item"><i class="feather icon-lock"></i> Log Out Of Current Wallet</a></li>
         </ul>
