@@ -161,7 +161,7 @@ const NAVIGATION_ITEMS = [
         type: 'item',
         url: '/wallet-homepage',
         classes: 'nav-item',
-        icon: 'feather icon-briefcase',
+        icon: 'fas fa-wallet',
       },
       {
         id: 'contacts',

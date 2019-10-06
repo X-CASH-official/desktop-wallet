@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit {
+  maxAmountSwitch: boolean = false;
+  placement: any;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  resetModelData() {
+    this.maxAmountSwitch = false;
   }
 
 }

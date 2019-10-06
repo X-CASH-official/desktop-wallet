@@ -1,20 +1,128 @@
-<div>
-    <app-card cardTitle="Wallet Name" cardClass="Monthly-daily" [options]="true">
-      <div class="row">
-        <div class="col-sm-10">
-          <span>Address: XCA1.........BKV</span>
-          <span class="d-block  text-muted text-uppercase">Total Revenue</span>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-10">
+        <!-- Wallet Name -->
+        <h3>My Wallet Name</h3>
+        
+        <!-- Public address -->
+        <div class="input-group my-3">
+          <input type="text" class="form-control" value="XCA1r7VKaXa0G1dibca68D09MeqK7e4FyVIypXJ7CafJt8IbGNtFYkhcS1dWAzqo8ecQJndKtoinC5Rmj3r32HYHFtJn9M6dTQ" aria-label="Wallet's public key" aria-describedby="public-key" readonly>
+          <div class="input-group-append">
+            <button class="btn btn-icon btn-secondary" type="button"><i class="feather icon-copy"></i></button>
+            <button class="btn btn-icon btn-primary" type="button"><i class="fas fa-qrcode"></i></button>
+          </div>
         </div>
-        <!-- Write a separated component -->
-        <div class="col-sm-2">
-          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a class="nav-link" routerLinkActive="active" id="wallet-history-tab" [routerLink]="['./history']" role="tab">History</a>
-              <a class="nav-link" routerLinkActive="active" id="wallet-settings-tab" [routerLink]="['./settings']" role="tab">Settings</a>
-              <a class="nav-link" routerLinkActive="active" id="wallet-advanced-tab" [routerLink]="['./advanced']" role="tab">Advanced</a>
-            </div>
+        
+        <!-- Balance in XCASH, USD and SEND button-->
+        <div class="row">
+          <div class="col-3 my-auto">
+            <h5>XCASH 128,283,370</h5>
+          </div>
+          
+          <div class="col-2 my-auto">
+            <h5>USD 36,23</h5>
+          </div>
+          
+          <div class="col-7 m-0 text-right">
+            <button class="btn btn-success m-0 px-5" type="button" (click)="sendModal.show()" data-toggle="modal">Send</button>
+          </div>
         </div>
       </div>
       
-    </app-card>
+      <!-- Wallet Navbar -->
+      <div class="col-2">
+        <div class="nav flex-column nav-pills justify-content-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link" routerLinkActive="active" id="wallet-history-tab" [routerLink]="['./history']" role="tab">History</a>
+          <a class="nav-link" routerLinkActive="active" id="wallet-settings-tab" [routerLink]="['./settings']" role="tab">Settings</a>
+          <a class="nav-link" routerLinkActive="active" id="wallet-advanced-tab" [routerLink]="['./advanced']" role="tab">Advanced</a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 </div>
+
 <router-outlet></router-outlet>
+
+
+<!-- Send Modal -->
+<app-ui-modal #sendModal dialogClass="modal-dialog-centered">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Send</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form>
+      <div class="form-group">
+        <label for="Sender">Sender</label>
+        <input type="text" class="form-control" id="Sender" value="Wallet name already in place">
+        <!--
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        -->
+      </div>
+      <div class="form-group">
+        <label for="recipient">Recipient</label>
+        <input type="text" class="form-control" id="recipient" placeholder="Enter recipient address">
+      </div>
+      
+      <div class="form-group">
+        <label for="payment-id">Payment ID (optional)</label>
+        <input type="text" class="form-control" id="payment-id" placeholder="Enter payment ID (optional)">
+      </div>
+      
+      <div class="form-group">
+        <div class="d-flex">
+          <label class="pr-2" for="amount">Amount |</label>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="max-amount-switch" name="max-amount-switch" [(ngModel)]="maxAmountSwitch">
+            <label class="custom-control-label" for="max-amount-switch">Max</label>
+          </div>
+        </div>
+        <div class="input-group">
+          <input type="text" class="form-control autonumber" id="amount" placeholder="0" [disabled]="maxAmountSwitch">
+          <div class="input-group-append">
+            <span class="input-group-text">XCASH</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="pr-4" for="priority">Priority</label>
+        <div class="radio radio-fill d-inline pr-3">
+          <input type="radio" name="radio-priority" id="radio-priority-high" checked>
+          <label for="radio-priority-high" class="cr">High</label>
+        </div>
+        <div class="radio radio-fill d-inline pr-3">
+          <input type="radio" name="radio-priority" id="radio-priority-medium">
+          <label for="radio-priority-medium" class="cr">Medium</label>
+        </div>
+        <div class="radio radio-fill d-inline">
+          <input type="radio" name="radio-priority" id="radio-priority-low">
+          <label for="radio-priority-low" class="cr">Low</label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="pr-4" for="privacy">Privacy</label>
+        <div class="radio radio-fill d-inline pr-3">
+          <input type="radio" name="radio-privacy" id="radio-privacy-public" checked>
+          <label for="radio-privacy-public" class="cr">Public</label>
+        </div>
+        <div class="radio radio-fill d-inline">
+          <input type="radio" name="radio-privacy" id="radio-privacy-private">
+          <label for="radio-privacy-private" class="cr">Private</label>
+        </div>
+      </div>
+
+    </form>    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button type="submit" class="btn btn-primary text-center">Continue</button>
+  </div>
+  
+</app-ui-modal>
