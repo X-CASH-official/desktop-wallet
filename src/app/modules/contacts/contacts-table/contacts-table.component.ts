@@ -25,7 +25,8 @@ export class ContactsTableComponent implements OnInit {
         data: 'address'
       }, {
         data: null,
-        defaultContent: "<button>Copy</button>"
+        defaultContent: "<button>Copy</button>",
+        responsive: true
       }]
     };
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-wallet-details',
@@ -7,15 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletComponent implements OnInit {
   maxAmountSwitch: boolean = false;
-  placement: any;
+
+  @ViewChild('sendConfirmationModal') sendConfirmationModal: any;
+  sendConfirmationLoading: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
   resetModelData() {
     this.maxAmountSwitch = false;
   }
+
+  simulateLoadingThenHide() {
+    this.sendConfirmationLoading = true;
+    setTimeout(() => {
+      this.sendConfirmationModal.hide();
+      setTimeout(() => {
+        this.sendConfirmationLoading = false;
+      }, 300); // The time of the modal hiding animation
+    }, 1500); // Arbitrary waiting time
+  }
+
+
 
 }

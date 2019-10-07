@@ -127,11 +127,13 @@
 
 
 <!-- Send Confirmation Modal -->
-<app-ui-modal #sendConfirmationModal dialogClass="modal-dialog-centered">
+<app-ui-modal id="sendConfirmationModal" #sendConfirmationModal containerClick="false" dialogClass="modal-dialog-centered">
   <div class="app-modal-header">
     
     <h5 class="modal-title">Transaction confirmation</h5>
+    <!--
     <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendConfirmationModal.hide()"><span aria-hidden="true">&times;</span></button>
+    -->
     
   </div>
   <div class="app-modal-body">
@@ -149,13 +151,13 @@
         <input type="text" readonly class="form-control-plaintext" id="sending-recipient" value="User Recipient">
       </div>
     </div>
-
+    
     <div class="form-group row">
-        <label for="sending-type" class="col-sm-3 col-form-label">Type</label>
-        <div class="col-sm-9">
-          <input type="text" readonly class="form-control-plaintext" id="sending-type" value="Private with low priority">
-        </div>
+      <label for="sending-type" class="col-sm-3 col-form-label">Type</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-type" value="Private with low priority">
       </div>
+    </div>
     
     <div class="form-group row">
       <label for="sending-fees" class="col-sm-3 col-form-label">Fees</label>
@@ -173,12 +175,20 @@
     </div>
     <small id="total-sent-help" class="form-text text-muted">The recipient will receive the amount sent and you will be charged the total.</small>
     
-    
   </div>
   
   <div class="app-modal-footer" >
-    <button class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
-    <button type="submit" class="btn btn-success text-center" (click)="sendConfirmationModal.hide()">Confirm & Send</button>
+    <button *ngIf="!sendConfirmationLoading" class="btn btn-danger text-center" (click)="sendConfirmationModal.hide();">Cancel</button>
+    <button *ngIf="!sendConfirmationLoading" class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
+    <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide()">
+      <div *ngIf="!sendConfirmationLoading">
+        Confirm & Send
+      </div>
+      <div *ngIf="sendConfirmationLoading">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Sending...
+      </div>
+    </button>
   </div>
   
 </app-ui-modal>

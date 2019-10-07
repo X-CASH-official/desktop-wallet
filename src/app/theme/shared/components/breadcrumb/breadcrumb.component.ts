@@ -38,7 +38,7 @@ export class BreadcrumbComponent implements OnInit {
 
   filterNavigation(activeLink) {
     let result: any;
-    let title = 'Welcome';
+    let title = 'Wallet';
     this.navigation.forEach(function (a) {
       if (a.type === 'item' && 'url' in a && a.url === activeLink) {
         result = [{
@@ -101,7 +101,7 @@ export class BreadcrumbComponent implements OnInit {
       }
     });
     this.navigationList = result;
-    this.titleService.setTitle(title + ' | Datta Able Angular Template');
+    this.titleService.setTitle(title + ' | X-CASH');
   }
 
 }
