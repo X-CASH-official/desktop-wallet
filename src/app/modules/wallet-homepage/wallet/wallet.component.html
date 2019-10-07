@@ -60,10 +60,8 @@
       <div class="form-group">
         <label for="Sender">Sender</label>
         <input type="text" class="form-control" id="Sender" value="Wallet name already in place">
-        <!--
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        -->
       </div>
+      
       <div class="form-group">
         <label for="recipient">Recipient</label>
         <input type="text" class="form-control" id="recipient" placeholder="Enter recipient address">
@@ -92,15 +90,15 @@
       
       <div class="form-group">
         <label class="pr-4" for="priority">Priority</label>
-        <div class="radio radio-fill d-inline pr-3">
+        <div class="radio radio-primary d-inline pr-3">
           <input type="radio" name="radio-priority" id="radio-priority-high" checked>
           <label for="radio-priority-high" class="cr">High</label>
         </div>
-        <div class="radio radio-fill d-inline pr-3">
+        <div class="radio radio-primary d-inline pr-3">
           <input type="radio" name="radio-priority" id="radio-priority-medium">
           <label for="radio-priority-medium" class="cr">Medium</label>
         </div>
-        <div class="radio radio-fill d-inline">
+        <div class="radio radio-primary d-inline">
           <input type="radio" name="radio-priority" id="radio-priority-low">
           <label for="radio-priority-low" class="cr">Low</label>
         </div>
@@ -108,21 +106,79 @@
       
       <div class="form-group">
         <label class="pr-4" for="privacy">Privacy</label>
-        <div class="radio radio-fill d-inline pr-3">
+        <div class="radio d-inline pr-3">
           <input type="radio" name="radio-privacy" id="radio-privacy-public" checked>
           <label for="radio-privacy-public" class="cr">Public</label>
         </div>
-        <div class="radio radio-fill d-inline">
+        <div class="radio d-inline">
           <input type="radio" name="radio-privacy" id="radio-privacy-private">
           <label for="radio-privacy-private" class="cr">Private</label>
         </div>
       </div>
-
+      
     </form>    
   </div>
   
   <div class="app-modal-footer">
-    <button type="submit" class="btn btn-primary text-center">Continue</button>
+    <button type="submit" class="btn btn-primary text-center" (click)="sendModal.hide();sendConfirmationModal.show()">Continue</button>
+  </div>
+  
+</app-ui-modal>
+
+
+<!-- Send Confirmation Modal -->
+<app-ui-modal #sendConfirmationModal dialogClass="modal-dialog-centered">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Transaction confirmation</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendConfirmationModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <div class="form-group row">
+      <label for="sending-amount" class="col-sm-3 col-form-label">Amount sent</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-amount" value="124,533,260 XCASH">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="sending-recipient" class="col-sm-3 col-form-label">To</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-recipient" value="User Recipient">
+      </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="sending-type" class="col-sm-3 col-form-label">Type</label>
+        <div class="col-sm-9">
+          <input type="text" readonly class="form-control-plaintext" id="sending-type" value="Private with low priority">
+        </div>
+      </div>
+    
+    <div class="form-group row">
+      <label for="sending-fees" class="col-sm-3 col-form-label">Fees</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-fees" value="533,260 XCASH">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="sending-total" class="col-sm-3 col-form-label">Total</label>
+      
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-total" value="125,066,520 XCASH">
+      </div>
+    </div>
+    <small id="total-sent-help" class="form-text text-muted">The recipient will receive the amount sent and you will be charged the total.</small>
+    
+    
+  </div>
+  
+  <div class="app-modal-footer" >
+    <button class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
+    <button type="submit" class="btn btn-success text-center" (click)="sendConfirmationModal.hide()">Confirm & Send</button>
   </div>
   
 </app-ui-modal>
