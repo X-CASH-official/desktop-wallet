@@ -19,7 +19,6 @@ import { NavBarComponent } from './theme/layout/admin/nav-bar/nav-bar.component'
 import {ToggleFullScreenDirective} from './theme/shared/full-screen/toggle-full-screen';
 import {NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavLeftComponent } from './theme/layout/admin/nav-bar/nav-left/nav-left.component';
-import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-search/nav-search.component';
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { variables_and_functions_service } from './services/variables_and_functions.service';
@@ -39,7 +38,6 @@ import { WalletHomepageModule } from './modules/wallet-homepage/wallet-homepage.
     NavBarComponent,
     ToggleFullScreenDirective,
     NavLeftComponent,
-    NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
   ],
