@@ -1,28 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { variables_and_functions_service } from 'src/app/services/variables_and_functions.service';
 
 declare const AmCharts: any;
 declare const $: any;
 
-import '../../../assets/charts/amchart/amcharts.js';
-import '../../../assets/charts/amchart/gauge.js';
-import '../../../assets/charts/amchart/serial.js';
-import '../../../assets/charts/amchart/light.js';
-import '../../../assets/charts/amchart/pie.min.js';
-import '../../../assets/charts/amchart/ammap.min.js';
-import '../../../assets/charts/amchart/usaLow.js';
-import '../../../assets/charts/amchart/radar.js';
-import '../../../assets/charts/amchart/worldLow.js';
-
-import '../../../assets/charts/flot/jquery.flot.js';
-import '../../../assets/charts/flot/jquery.flot.categories.js';
-import '../../../assets/charts/flot/curvedLines.js';
-import '../../../assets/charts/flot/jquery.flot.tooltip.min.js';
+import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-wallet-main-menu',
   templateUrl: './wallet-homepage.component.html',
-  styleUrls: ['./wallet-homepage.component.scss']
+  styleUrls: ['./wallet-homepage.component.scss'],
 })
 export class WalletHomepageComponent implements OnInit {
   
@@ -31,112 +18,89 @@ export class WalletHomepageComponent implements OnInit {
   password: string;
   data: string; $
   isWalletHere = false;
+
+  wordsToConfirm: object;
+  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 12;
+  @ViewChild('createWalletModal5') walletCreationConfirmationModal: any;
+  walletCreationConfirmationLoading: boolean = false;
   
-  constructor(private variables_and_functions_service: variables_and_functions_service) { }
+  constructor(private variables_and_functions_service: variables_and_functions_service, config: NgbDropdownConfig) {
+    config.placement = 'bottom-right';
+   }
   
+  walletsList: Array<object> = [
+    {
+      name: "Wallet name",
+      address: "XCA...3dR",
+      balance: 123423245
+    },
+    {
+      name: "Salary",
+      address: "XCA...v2D",
+      balance: 18240890
+    },
+    {
+      name: "Fundings",
+      address: "XCA...b3s",
+      balance: 20640789
+    },
+    {
+      name: "Charities",
+      address: "XCA...z4n",
+      balance: 1960740
+    }
+  ];
+
+  exampleSeed: string[] = ["cover", "palace", "renew", "address", "orchard", "derive", "promote", "similar", "artist", "cage", "dial", "forget", "print", "extend", "scissors", "festival", "donor", "peasant", "spawn", "donate", "fever", "olive", "section", "device"];
+
+
   ngOnInit() {
     this.reset_data();
-    
-    setTimeout(() => {
-      
-      AmCharts.makeChart('line-area2', {
-        'type': 'serial',
-        'theme': 'light',
-        'marginTop': 10,
-        'marginRight': 0,
-        'dataProvider': [{
-          'year': 'Jan',
-          'value': 5,
-          'value2': 80,
-        }, {
-          'year': 'Feb',
-          'value': 30,
-          'value2': 95,
-        }, {
-          'year': 'Mar',
-          'value': 25,
-          'value2': 87,
-        }, {
-          'year': 'Apr',
-          'value': 55,
-          'value2': 155,
-        }, {
-          'year': 'May',
-          'value': 45,
-          'value2': 140,
-        }, {
-          'year': 'Jun',
-          'value': 65,
-          'value2': 147,
-        }, {
-          'year': 'Jul',
-          'value': 60,
-          'value2': 130,
-        }, {
-          'year': 'Aug',
-          'value': 105,
-          'value2': 180,
-        }, {
-          'year': 'Sep',
-          'value': 80,
-          'value2': 160,
-        }, {
-          'year': 'Oct',
-          'value': 110,
-          'value2': 175,
-        }, {
-          'year': 'Nov',
-          'value': 120,
-          'value2': 165,
-        }, {
-          'year': 'Dec',
-          'value': 150,
-          'value2': 200,
-        }],
-        'valueAxes': [{
-          'axisAlpha': 0,
-          'position': 'left'
-        }],
-        'graphs': [{
-          'id': 'g1',
-          'balloonText': '[[category]]<br><b><span style="font-size:14px;">[[value]]</span></b>',
-          'bullet': 'round',
-          'lineColor': '#1de9b6',
-          'lineThickness': 3,
-          'negativeLineColor': '#1de9b6',
-          'valueField': 'value'
-        }, {
-          'id': 'g2',
-          'balloonText': '[[category]]<br><b><span style="font-size:14px;">[[value]]</span></b>',
-          'bullet': 'round',
-          'lineColor': '#10adf5',
-          'lineThickness': 3,
-          'negativeLineColor': '#10adf5',
-          'valueField': 'value2'
-        }],
-        'chartCursor': {
-          'cursorAlpha': 0,
-          'valueLineEnabled': true,
-          'valueLineBalloonEnabled': true,
-          'valueLineAlpha': 0.3,
-          'fullWidth': true
-        },
-        'categoryField': 'year',
-        'categoryAxis': {
-          'minorGridAlpha': 0,
-          'minorGridEnabled': true,
-          'gridAlpha': 0,
-          'axisAlpha': 0,
-          'lineAlpha': 0
-        },
-        'legend': {
-          'useGraphSettings': true,
-          'position': 'top'
-        },
-      });
-      
-    }, 500);
   }
+
+  simulateLoadingThenHide() {
+    this.walletCreationConfirmationLoading = true;
+    setTimeout(() => {
+      this.walletCreationConfirmationModal.hide();
+      setTimeout(() => {
+        this.walletCreationConfirmationLoading = false;
+      }, 300); // The time of the modal hiding animation
+    }, 1000); // Arbitrary waiting time
+  }
+
+  /**
+   * This function alter this.wordsToConfirm
+   * @param seed 
+   * @param amountToConfirm 
+   */
+  public confirmSeedRandomWords(seed: string[], amountToConfirm: number) {
+    let numbersToConfirm: number[] = [];
+    for(let i = 0; i < amountToConfirm; i++) {
+      let randomPick: number = this.getRandomInt(0, seed.length);
+      while (numbersToConfirm.includes(randomPick)) {
+        randomPick = this.getRandomInt(0, seed.length);
+      }
+      numbersToConfirm.push(this.getRandomInt(0, seed.length));
+    }
+
+    let wordsToConfirm: boolean[] = [];
+    for(let i = 0; i < seed.length; i++) {
+      if (numbersToConfirm.includes(i)) {
+        wordsToConfirm[i] = true;
+      } else {
+        wordsToConfirm[i] = false;
+      }
+    }
+
+    this.wordsToConfirm = wordsToConfirm;
+  }
+
+  private getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   
   reset_data() {
     this.data = "";

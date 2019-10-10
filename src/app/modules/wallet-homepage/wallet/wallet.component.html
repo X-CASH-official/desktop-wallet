@@ -132,7 +132,7 @@
     
     <h5 class="modal-title">Transaction confirmation</h5>
     <!--
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendConfirmationModal.hide()"><span aria-hidden="true">&times;</span></button>
+      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendConfirmationModal.hide()"><span aria-hidden="true">&times;</span></button>
     -->
     
   </div>
@@ -178,17 +178,19 @@
   </div>
   
   <div class="app-modal-footer" >
-    <button *ngIf="!sendConfirmationLoading" class="btn btn-danger text-center" (click)="sendConfirmationModal.hide();">Cancel</button>
-    <button *ngIf="!sendConfirmationLoading" class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
-    <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide()">
-      <div *ngIf="!sendConfirmationLoading">
-        Confirm & Send
-      </div>
-      <div *ngIf="sendConfirmationLoading">
+    <div *ngIf="!sendConfirmationLoading">
+      <button class="btn btn-danger text-center" (click)="sendConfirmationModal.hide();">Cancel</button>
+      <button class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
+      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide()">
+          Confirm & Send
+      </button>
+    </div>
+    <div *ngIf="sendConfirmationLoading">
+      <button type="submit" class="btn btn-success text-center">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         Sending...
-      </div>
-    </button>
-  </div>
-  
+      </button>
+    </div>
+</div>
+
 </app-ui-modal>
