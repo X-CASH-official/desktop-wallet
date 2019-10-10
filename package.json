@@ -23,7 +23,7 @@
     "@angular/router": "~7.0.0",
     "@iplab/ngx-file-upload": "^1.1.1",
     "@ks89/angular-modal-gallery": "^6.3.0",
-    "@ng-bootstrap/ng-bootstrap": "^3.2.2",
+    "@ng-bootstrap/ng-bootstrap": "^4.2.2",
     "@nicky-lenaers/ngx-scroll-to": "^1.1.1",
     "amazing-time-picker": "^1.5.3",
     "angular-6-datatable": "^0.8.0",
