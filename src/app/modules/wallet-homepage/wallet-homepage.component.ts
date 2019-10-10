@@ -19,10 +19,18 @@ export class WalletHomepageComponent implements OnInit {
   data: string; $
   isWalletHere = false;
 
-  wordsToConfirm: object;
+  /* Contains which words of the seed should be confirmed */
+  wordsToConfirm: boolean[];
+
+  /* The number of words to confirm */
   readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 12;
+
+  /* Used to display a "Copied!" badge to copy to clipboard button */
+  seedCopiedToClipboard: boolean = false;
+
   @ViewChild('createWalletModal5') walletCreationConfirmationModal: any;
   walletCreationConfirmationLoading: boolean = false;
+  
   
   constructor(private variables_and_functions_service: variables_and_functions_service, config: NgbDropdownConfig) {
     config.placement = 'bottom-right';
@@ -56,6 +64,13 @@ export class WalletHomepageComponent implements OnInit {
 
   ngOnInit() {
     this.reset_data();
+  }
+
+  copySeedToClipboard() {
+    this.seedCopiedToClipboard = true
+    setTimeout(() => {
+      this.seedCopiedToClipboard = false;
+    }, 3000);
   }
 
   simulateLoadingThenHide() {
