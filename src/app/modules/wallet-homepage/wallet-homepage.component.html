@@ -10,7 +10,7 @@
           
           <div class="col-4 text-right">
             <button type="button" class="btn btn-primary btn-lg" (click)="createWalletModal1.show();"><i class="feather icon-plus-circle"></i>Create Wallet</button>
-            <button type="button" class="btn btn-primary btn-lg"><i class="feather icon-download"></i>Import Wallet</button>
+            <button type="button" class="btn btn-primary btn-lg" (click)="importWalletModal1.show();"><i class="feather icon-download"></i>Import Wallet</button>
           </div>
         </div> 
       </div>
@@ -48,6 +48,14 @@
 
 
 <!-- Create new wallet serie of modals -->
+<!-- These button are only for debugging purposes, please respect the modal sequence -->
+<h4>Create wallet debug buttons</h4>
+<button class="btn btn-primary" (click)="createWalletModal1.show()">create 1</button>
+<button class="btn btn-primary" (click)="createWalletModal2.show()">create 2</button>
+<button class="btn btn-primary" (click)="createWalletModal3.show()">create 3</button>
+<button class="btn btn-primary" (click)="createWalletModal4.show()">create 4</button>
+<button class="btn btn-primary" (click)="createWalletModal5.show()">create 5</button>
+
 <!-- Create new wallet modal 1/5 - Name and password -->
 <app-ui-modal #createWalletModal1 dialogClass="modal-dialog-centered" containerClick="false">
   <div class="app-modal-header">
@@ -117,8 +125,8 @@
     <form>
       <div class="form-group">
         <div class="row">
-            <label class="col-6 text-left" for="mnemonic-seed">Mnemonic seed</label>
-            <div class="col-6 text-right">
+          <label class="col-6 text-left" for="mnemonic-seed">Mnemonic seed</label>
+          <div class="col-6 text-right">
             <button class="btn btn-icon btn-secondary" type="button" (click)="copySeedToClipboard()"><i class="feather icon-copy"></i><span [hidden]="!seedCopiedToClipboard" class="badge badge-success">Copied!</span></button>
             
           </div>
@@ -158,6 +166,7 @@
       <div class="form-group">
         <label for="mnemonic-seed">Mnemonic seed confirmation</label>
         <div class="font-weight-bold text-center mb-2">Please enter the missing words.</div>
+        <div *ngIf="wordsToConfirm === undefined" class="font-weight-bold text-center mb-2 text-danger">Please click on back and generate the random confirmation array</div>
         <div class="px-3">
           <div class="row">
             <div *ngFor="let word of exampleSeed; let i=index" class="form-group col-3 px-2 mb-0">
@@ -208,7 +217,7 @@
   <div class="app-modal-footer">
     <div *ngIf="!walletCreationConfirmationLoading">
       <button class="btn btn-secondary text-center" (click)="createWalletModal5.hide(); createWalletModal4.show()">Back</button>
-      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide()">Confirm & Create wallet</button>
+      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHideWalletCreation()">Confirm & Create wallet</button>
     </div>
     
     <div *ngIf="walletCreationConfirmationLoading">
@@ -217,5 +226,117 @@
         Creating wallet...
       </button>
     </div>
+  </div>
+</app-ui-modal>
+
+
+<!-- import wallet serie of modals -->
+<!-- These button are only for debugging purposes, please respect the modal sequence -->
+<h4>Import wallet debug buttons</h4>
+<button class="btn btn-primary" (click)="importWalletModal1.show()">import 1</button>
+<button class="btn btn-primary" (click)="importWalletModal2.show()">import 2</button>
+<button class="btn btn-primary" (click)="importWalletModal3.show()">import 3</button>
+
+<!-- import wallet modal 1/3 - Choose way of import  -->
+<app-ui-modal #importWalletModal1 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Import wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="importWalletModal1.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <div class="pb-3">
+      <ngb-tabset type='pills' justify='center'>
+        
+        <ngb-tab title="Mnemonic seed">
+          <ng-template ngbTabContent>
+            <div class="form-group">
+              <label for="import-mnemonic-seed">Mnemonic seed</label>
+              <textarea style="resize: none;" class="form-control text-monospace" id="import-mnemonic-seed" rows="4" placeholder="Enter your mnemonic seed"></textarea>
+              <small id="import-mnemonic-seed-help" class="form-text text-muted">Enter the 27 words of your mnemonic seed separated by space.</small>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Private key">
+          <ng-template ngbTabContent >
+            <div class="form-group">
+              <label for="import-private-key">Private key restore</label>
+              <textarea style="resize: none;" class="form-control text-monospace" id="import-private-key" rows="3" placeholder="Enter your private send key"></textarea>
+              <small id="import-private-key-help" class="form-text text-muted">Help about this step.</small>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Key file">
+          <ng-template ngbTabContent>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" i d="validatedCustomFile" required>
+              <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+              <small id="import-private-key-help" class="form-text text-muted">Help about this step.</small>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        
+      </ngb-tabset> 
+    </div>
+  </div>
+  
+  <div class="app-modal-footer">
+    <button type="submit" class="btn btn-primary text-center" (click)="importWalletModal1.hide(); importWalletModal2.show()">Continue</button>
+  </div>
+</app-ui-modal>
+
+<!-- import wallet modal 2/3 - name and password -->
+<app-ui-modal #importWalletModal2 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Import wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="importWalletModal2.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form>
+      <div class="form-group">
+        <label for="import-wallet-name">Name</label>
+        <input type="text" class="form-control" id="import-wallet-name" placeholder="Enter wallet name">
+        <small id="import-wallet-name-help" class="form-text text-muted">This name can be changed later.</small>
+      </div>
+      
+      <div class="form-group">
+        <label for="import-wallet-password">Password</label>
+        <input type="password" class="form-control" id="import-wallet-password" placeholder="Enter a password">
+        <small id="import-wallet-password-help" class="form-text text-muted">This password is used to encrypt the private key and can be changed later.</small>
+      </div>
+    </form>    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button type="submit" class="btn btn-primary text-center" (click)="importWalletModal2.hide(); importWalletModal3.show()">Continue</button>
+  </div>
+</app-ui-modal>
+
+<!-- import wallet modal 3/3 - password confirmation -->
+<app-ui-modal #importWalletModal3 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Import wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="importWalletModal3.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form>
+      <div class="form-group">
+        <label for="import-wallet-password-confirmation">Confirm password</label>
+        <input type="password" class="form-control" id="import-wallet-password-confirmation" placeholder="Please confirm the password">
+      </div>
+    </form>    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-secondary text-center" (click)="importWalletModal3.hide(); importWalletModal2.show()">Back</button>
+    <button type="submit" class="btn btn-success text-center" (click)="importWalletModal3.hide()">Confirm & import</button>
   </div>
 </app-ui-modal>

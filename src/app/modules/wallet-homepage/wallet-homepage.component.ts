@@ -73,7 +73,7 @@ export class WalletHomepageComponent implements OnInit {
     }, 3000);
   }
 
-  simulateLoadingThenHide() {
+  simulateLoadingThenHideWalletCreation() {
     this.walletCreationConfirmationLoading = true;
     setTimeout(() => {
       this.walletCreationConfirmationModal.hide();
