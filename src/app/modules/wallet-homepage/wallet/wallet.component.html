@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
-    <div class="row">
-      <div class="col-10">
+    <div class="row justify-content-between">
+      <div class="col-8">
         <!-- Wallet Name -->
         <h3>My Wallet Name</h3>
         
@@ -15,33 +15,67 @@
         </div>
         
         <!-- Balance in XCASH, USD and SEND button-->
-        <div class="row">
-          <div class="col-3 my-auto">
-            <h5>XCASH 128,283,370</h5>
-          </div>
-          
-          <div class="col-2 my-auto">
-            <h5>USD 36,23</h5>
-          </div>
-          
-          <div class="col-7 m-0 text-right">
-            <button class="btn btn-success m-0 px-5" type="button" (click)="sendModal.show()" data-toggle="modal">Send</button>
-          </div>
+        
+        <div class="d-flex align-items-end">
+          <h4 class="mb-0 mr-2">128,283,370 XCASH</h4>
+          <span>USD 36,23</span>
         </div>
+      
+      </div>
+
+      <!-- Wallet basic functionnalities navbar -->
+      <div class="col-2">
+        <button class="btn btn-success m-0 px-4" type="button" (click)="sendModal.show()" data-toggle="modal"><i style="transform: scaleX(-1);" class="fas fa-reply"></i>Send</button>
       </div>
       
-      <!-- Wallet Navbar -->
-      <div class="col-2">
-        <div class="nav flex-column nav-pills justify-content-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link" routerLinkActive="active" id="wallet-history-tab" [routerLink]="['./history']" role="tab">History</a>
-          <a class="nav-link" routerLinkActive="active" id="wallet-settings-tab" [routerLink]="['./settings']" role="tab">Settings</a>
-          <a class="nav-link" routerLinkActive="active" id="wallet-advanced-tab" [routerLink]="['./advanced']" role="tab">Advanced</a>
-        </div>
-      </div>
+      
     </div>
     
   </div>
 </div>
+
+<ngb-tabset>
+  <ngb-tab>
+    <ng-template ngbTabTitle><h5 class="mb-0">Transactions</h5></ng-template>
+    <ng-template ngbTabContent>
+      <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+        master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
+        dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+        iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+      </p>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle><h5 class="mb-0">Addresses</h5></ng-template>
+    <ng-template ngbTabContent>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ex, numquam praesentium ad impedit accusamus nostrum vero unde sed porro odit eos expedita, dignissimos sequi dolores excepturi voluptas dolore illo animi blanditiis exercitationem quas nisi quis fugiat. Blanditiis architecto natus dolores saepe, cupiditate provident obcaecati quam amet expedita enim voluptatibus voluptas ex, vitae maxime mollitia quasi reprehenderit culpa nulla veritatis officia impedit consequuntur dolore. Eos, reiciendis consequuntur nesciunt atque ratione saepe inventore numquam possimus facere earum? Iure culpa veritatis, debitis rerum repellendus distinctio impedit minima dicta, voluptatem numquam ratione excepturi cumque ad fuga nisi, molestias earum aliquid. Cupiditate, modi nemo?
+      </p>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle><h5 class="mb-0">Sign Data</h5></ng-template>
+    <ng-template ngbTabContent>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit culpa a eum necessitatibus tempore consequuntur laudantium molestiae, distinctio voluptate, quam ab, odit natus! Provident voluptatum eius, harum molestias in doloremque!
+      </p>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle><h5 class="mb-0">Reserve Proof</h5></ng-template>
+    <ng-template ngbTabContent>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos in error doloremque, soluta nulla omnis. Totam, sunt est corrupti assumenda voluptatibus voluptate libero, illum omnis amet asperiores sit, culpa fuga.
+      </p>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+
+<!-- Wallet Navbar -->
+<div class="col-2">
+    <div class="nav flex-column nav-pills justify-content-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link" routerLinkActive="active" id="wallet-history-tab" [routerLink]="['./history']" role="tab">History</a>
+      <a class="nav-link" routerLinkActive="active" id="wallet-settings-tab" [routerLink]="['./settings']" role="tab">Settings</a>
+      <a class="nav-link" routerLinkActive="active" id="wallet-advanced-tab" [routerLink]="['./advanced']" role="tab">Advanced</a>
+    </div>
+  </div>
 
 <router-outlet></router-outlet>
 
@@ -182,7 +216,7 @@
       <button class="btn btn-danger text-center" (click)="sendConfirmationModal.hide();">Cancel</button>
       <button class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
       <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide()">
-          Confirm & Send
+        Confirm & Send
       </button>
     </div>
     <div *ngIf="sendConfirmationLoading">
@@ -191,6 +225,6 @@
         Sending...
       </button>
     </div>
-</div>
-
+  </div>
+  
 </app-ui-modal>
