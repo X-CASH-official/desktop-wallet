@@ -5,6 +5,7 @@ declare const AmCharts: any;
 declare const $: any;
 
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 
 @Component({
   selector: 'app-wallet-main-menu',
@@ -73,14 +74,15 @@ export class WalletHomepageComponent implements OnInit {
     }, 3000);
   }
 
-  simulateLoadingThenHideWalletCreation() {
-    this.walletCreationConfirmationLoading = true;
+  simulateLoadingThenHide(modalElement: UiModalComponent, loadingTime: number, hidingBooleanName: string) {
+    // I'm sure there's a way to avoid this
+    this[hidingBooleanName] = true;
     setTimeout(() => {
-      this.walletCreationConfirmationModal.hide();
+      modalElement.hide();
       setTimeout(() => {
-        this.walletCreationConfirmationLoading = false;
+        this[hidingBooleanName] = false;
       }, 300); // The time of the modal hiding animation
-    }, 1000); // Arbitrary waiting time
+    }, loadingTime);
   }
 
   /**

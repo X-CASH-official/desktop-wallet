@@ -197,7 +197,7 @@
   <div class="app-modal-footer">
     <div *ngIf="!walletCreationConfirmationLoading">
       <button class="btn btn-secondary text-center" (click)="createWalletModal4.hide(); createWalletModal3.show()">Back</button>
-      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHideWalletCreation()">Confirm & Create wallet</button>
+      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide(createWalletModal4, 1000, 'walletCreationConfirmationLoading')">Confirm & Create wallet</button>
     </div>
     
     <div *ngIf="walletCreationConfirmationLoading">

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 
 @Component({
   selector: 'app-wallet-details',
@@ -8,7 +9,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class WalletComponent implements OnInit {
   maxAmountSwitch: boolean = false;
 
-  @ViewChild('sendConfirmationModal') sendConfirmationModal: any;
   sendConfirmationLoading: boolean = false;
 
   constructor() { }
@@ -21,14 +21,15 @@ export class WalletComponent implements OnInit {
     this.maxAmountSwitch = false;
   }
 
-  simulateLoadingThenHide() {
-    this.sendConfirmationLoading = true;
+  simulateLoadingThenHide(modalElement: UiModalComponent, loadingTime: number, hidingBooleanName: string) {
+    // I'm sure there's a way to avoid this
+    this[hidingBooleanName] = true;
     setTimeout(() => {
-      this.sendConfirmationModal.hide();
+      modalElement.hide();
       setTimeout(() => {
-        this.sendConfirmationLoading = false;
+        this[hidingBooleanName] = false;
       }, 300); // The time of the modal hiding animation
-    }, 1500); // Arbitrary waiting time
+    }, loadingTime);
   }
 
 

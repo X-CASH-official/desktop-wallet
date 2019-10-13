@@ -215,7 +215,7 @@
     <div *ngIf="!sendConfirmationLoading">
       <button class="btn btn-danger text-center" (click)="sendConfirmationModal.hide();">Cancel</button>
       <button class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
-      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide()">
+      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide(sendConfirmationModal, 1500, 'sendConfirmationLoading')">
         Confirm & Send
       </button>
     </div>
