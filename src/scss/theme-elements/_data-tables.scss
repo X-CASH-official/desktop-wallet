@@ -2,7 +2,7 @@
       Data Tables css start
 ==========================  **/
 
-.table {
+.custom-table {
     td,
     th {
         border-top: 1px solid $theme-border;
@@ -21,7 +21,7 @@
 }
 // Border versions
 
-.table-bordered {
+.custom-table-bordered {
     border: 1px solid $theme-border;
 
     td,
@@ -31,14 +31,14 @@
 }
 // Zebra-striping
 
-.table-striped {
+.custom-table-striped {
     tbody tr:nth-of-type(2n+1) {
         background-color: transparentize($primary-color,0.95);
     }
 }
 // Hover effect
 
-.table-hover {
+.custom-table-hover {
     tbody tr {
         &:hover {
             background-color: transparentize($primary-color,0.95);
@@ -47,7 +47,7 @@
 }
 // Table backgrounds
 
-.table {
+.custom-table {
     .thead-dark {
         th {
             color: #fff;
@@ -57,7 +57,7 @@
     }
 }
 
-.table-dark {
+.custom-table-dark {
     color: #fff;
     background-color: $dark-color;
 
@@ -67,13 +67,13 @@
         border-color: darken($dark-color,10%);
     }
 
-    &.table-striped {
+    &.custom-table-striped {
         tbody tr:nth-of-type(odd) {
             background-color: darken($dark-color,2%);
         }
     }
 
-    &.table-hover {
+    &.custom-table-hover {
         tbody tr {
             &:hover {
                 background-color: darken($dark-color,5%);
@@ -111,8 +111,8 @@ table.dataTable.fixedHeader-floating {
     }
 }
 
-.footable-details.table,
-.footable.table {
+.footable-details.custom-table,
+.footable.custom-table {
     margin-bottom: 0;
 }
 
@@ -125,7 +125,7 @@ table {
         padding-bottom: 0;
     }
 }
-.table-columned >{
+.custom-table-columned >{
     tbody >{
         tr >{
             td{

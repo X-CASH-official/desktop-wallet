@@ -22,11 +22,12 @@ export class ContactsTableComponent implements OnInit {
         data: 'name'
       }, {
         title: 'Address',
-        data: 'address'
+        data: 'address',
+        responsive: true
       }, {
         data: null,
         defaultContent: "<button>Copy</button>",
-        responsive: true
+        
       }]
     };
   }

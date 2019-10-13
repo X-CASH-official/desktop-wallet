@@ -92,7 +92,7 @@ body.datta-dark {
   }
 
   .dropdown-divider,
-  .table-bordered {
+  .custom-table-bordered {
     border: 1px solid lighten($dark-layout, 3%);
   }
   // ==========  card css start  ===========
@@ -455,7 +455,7 @@ body.datta-dark {
     }
   }
 
-  .table {
+  .custom-table {
     td {
       border-top: 1px solid lighten($dark-layout, 5%);
     }
@@ -518,14 +518,14 @@ body.datta-dark {
     color: darken($dark-layout-font, 10%);
   }
 
-  .table th,
-  .table thead th,
-  .table-bordered td,
-  .table-bordered th {
+  .custom-table th,
+  .custom-table thead th,
+  .custom-table-bordered td,
+  .custom-table-bordered th {
     border-color: lighten($dark-layout, 5%);
   }
 
-  .table-striped {
+  .custom-table-striped {
     tbody tr:nth-of-type(2n+1) {
       background-color: $dark-layout;
     }
@@ -534,23 +534,23 @@ body.datta-dark {
   .footable .label-default,
   .footable .pagination > .disabled > a,
   .footable .pagination > li > a,
-  .footable.table-striped > tbody > tr:nth-child(odd) {
+  .footable.custom-table-striped > tbody > tr:nth-child(odd) {
     background-color: transparentize(darken($dark-layout, 10%), 0.75);
     border: 1px solid lighten($dark-layout, 5%);
     color: darken($dark-layout-font, 10%);
   }
 
-  .footable.table > tbody > tr > td,
-  .footable.table > tfoot > tr > td {
+  .footable.custom-table > tbody > tr > td,
+  .footable.custom-table > tfoot > tr > td {
     border-top: 1px solid lighten($dark-layout, 5%);
   }
 
-  .footable.table > thead > tr > th {
+  .footable.custom-table > thead > tr > th {
     border-bottom: 2px solid lighten($dark-layout, 3%);
   }
 
-  .footable-details.table-hover > tbody > tr:hover,
-  .footable.table-hover > tbody > tr:hover {
+  .footable-details.custom-table-hover > tbody > tr:hover,
+  .footable.custom-table-hover > tbody > tr:hover {
     background: $dark-layout;
   }
 
@@ -558,7 +558,7 @@ body.datta-dark {
     border-color: $dark-layout;
   }
 
-  table.dataTable.table-striped.DTFC_Cloned tbody {
+  table.dataTable.custom-table-striped.DTFC_Cloned tbody {
     background-color: darken($dark-layout, 3%);
   }
 
@@ -822,9 +822,9 @@ body.datta-dark {
     border: 1px solid darken($dark-layout, 7%);
   }
 
-  .ck-content .table table,
-  .ck-content .table table td,
-  .ck-content .table table th {
+  .ck-content .custom-table table,
+  .ck-content .custom-table table td,
+  .ck-content .custom-table table th {
     border-color: darken($dark-layout, 7%);
     background: lighten($dark-layout, 0%);
   }
@@ -901,7 +901,7 @@ body.datta-dark {
     }
   }
 
-  .invoice-total.table {
+  .invoice-total.custom-table {
     background: lighten($dark-layout, 3%);
   }
 
@@ -982,7 +982,7 @@ body.datta-dark {
     }
   }
 
-  .table-columned > tbody {
+  .custom-table-columned > tbody {
     > tr {
       > td {
         border-left: 1px solid lighten($dark-layout, 4%);
