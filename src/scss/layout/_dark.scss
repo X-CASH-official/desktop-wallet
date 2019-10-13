@@ -493,7 +493,8 @@ body.datta-dark {
   .page-link {
     color: #007bff;
     background-color: $dark-layout;
-    border: 1px solid darken($dark-layout, 10%);
+    /* Added !important because in dark theme, on the datatables pagination, the '...' box add the disabled class that prevented the border from apearing */
+    border: 1px solid darken($dark-layout, 10%) !important;
 
     &:hover {
       background-color: darken($dark-layout, 10%);
