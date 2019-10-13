@@ -54,9 +54,8 @@
 <button class="btn btn-primary" (click)="createWalletModal2.show()">create 2</button>
 <button class="btn btn-primary" (click)="createWalletModal3.show()">create 3</button>
 <button class="btn btn-primary" (click)="createWalletModal4.show()">create 4</button>
-<button class="btn btn-primary" (click)="createWalletModal5.show()">create 5</button>
 
-<!-- Create new wallet modal 1/5 - Name and password -->
+<!-- Create new wallet modal 1/4 - Name and password -->
 <app-ui-modal #createWalletModal1 dialogClass="modal-dialog-centered" containerClick="false">
   <div class="app-modal-header">
     
@@ -76,8 +75,13 @@
       <div class="form-group">
         <label for="wallet-password">Password</label>
         <input type="password" class="form-control" id="wallet-password" placeholder="Enter a password">
+      </div>
+      <div class="form-group">
+        <label for="wallet-password-confirmation">Confirm password</label>
+        <input type="password" class="form-control" id="wallet-password-confirmation" placeholder="Please confirm the password">
         <small id="wallet-password-help" class="form-text text-muted">This password is used to encrypt the private key and can be changed later.</small>
       </div>
+      
     </form>
     
   </div>
@@ -88,37 +92,12 @@
 </app-ui-modal>
 
 
-<!-- Create new wallet modal 2/5 - password confirmation -->
+<!-- Create new wallet modal 2/4 - mnemonic seed -->
 <app-ui-modal #createWalletModal2 dialogClass="modal-dialog-centered" containerClick="false">
   <div class="app-modal-header">
     
     <h5 class="modal-title">Create new wallet</h5>
     <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal2.hide()"><span aria-hidden="true">&times;</span></button>
-    
-  </div>
-  <div class="app-modal-body">
-    
-    <form>
-      <div class="form-group">
-        <label for="wallet-password-confirmation">Confirm password</label>
-        <input type="password" class="form-control" id="wallet-password-confirmation" placeholder="Please confirm the password">
-      </div>
-    </form>    
-  </div>
-  
-  <div class="app-modal-footer">
-    <button class="btn btn-secondary text-center" (click)="createWalletModal2.hide(); createWalletModal1.show()">Back</button>
-    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal2.hide(); createWalletModal3.show()">Confirm & continue</button>
-  </div>
-</app-ui-modal>
-
-
-<!-- Create new wallet modal 3/5 - mnemonic seed -->
-<app-ui-modal #createWalletModal3 dialogClass="modal-dialog-centered" containerClick="false">
-  <div class="app-modal-header">
-    
-    <h5 class="modal-title">Create new wallet</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal3.hide()"><span aria-hidden="true">&times;</span></button>
     
   </div>
   <div class="app-modal-body">
@@ -147,18 +126,18 @@
   </div>
   
   <div class="app-modal-footer">
-    <button class="btn btn-secondary text-center" (click)="createWalletModal3.hide(); createWalletModal2.show()">Back</button>
-    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal3.hide(); confirmSeedRandomWords(exampleSeed, this.NUMBER_SEED_WORDS_TO_CONFIRM);createWalletModal4.show()">Continue</button>
+    <button class="btn btn-secondary text-center" (click)="createWalletModal2.hide(); createWalletModal1.show()">Back</button>
+    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal2.hide(); confirmSeedRandomWords(exampleSeed, this.NUMBER_SEED_WORDS_TO_CONFIRM);createWalletModal3.show()">Continue</button>
   </div>
 </app-ui-modal>
 
 
-<!-- Create new wallet modal 4/5 - mnemonic seed confirmation -->
-<app-ui-modal #createWalletModal4 dialogClass="modal-dialog-centered" containerClick="false">
+<!-- Create new wallet modal 3/4 - mnemonic seed confirmation -->
+<app-ui-modal #createWalletModal3 dialogClass="modal-dialog-centered" containerClick="false">
   <div class="app-modal-header">
     
     <h5 class="modal-title">Create new wallet</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal4.hide()"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal3.hide()"><span aria-hidden="true">&times;</span></button>
     
   </div>
   <div class="app-modal-body">
@@ -183,18 +162,18 @@
   </div>
   
   <div class="app-modal-footer">
-    <button class="btn btn-secondary text-center" (click)="createWalletModal4.hide(); createWalletModal3.show()">Back</button>
-    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal4.hide(); createWalletModal5.show()">Confirm & continue</button>
+    <button class="btn btn-secondary text-center" (click)="createWalletModal3.hide(); createWalletModal2.show()">Back</button>
+    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal3.hide(); createWalletModal4.show()">Confirm & continue</button>
   </div>
 </app-ui-modal>
 
 
-<!-- Create new wallet modal 5/5 - recap and confirmation -->
-<app-ui-modal #createWalletModal5 dialogClass="modal-dialog-centered" containerClick="false">
+<!-- Create new wallet modal 4/4 - recap and confirmation -->
+<app-ui-modal #createWalletModal4 dialogClass="modal-dialog-centered" containerClick="false">
   <div class="app-modal-header">
     
     <h5 class="modal-title">Create new wallet</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal5.hide()"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal4.hide()"><span aria-hidden="true">&times;</span></button>
     
   </div>
   <div class="app-modal-body">
@@ -217,7 +196,7 @@
   
   <div class="app-modal-footer">
     <div *ngIf="!walletCreationConfirmationLoading">
-      <button class="btn btn-secondary text-center" (click)="createWalletModal5.hide(); createWalletModal4.show()">Back</button>
+      <button class="btn btn-secondary text-center" (click)="createWalletModal4.hide(); createWalletModal3.show()">Back</button>
       <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHideWalletCreation()">Confirm & Create wallet</button>
     </div>
     
@@ -236,9 +215,8 @@
 <h4>Import wallet debug buttons</h4>
 <button class="btn btn-primary" (click)="importWalletModal1.show()">import 1</button>
 <button class="btn btn-primary" (click)="importWalletModal2.show()">import 2</button>
-<button class="btn btn-primary" (click)="importWalletModal3.show()">import 3</button>
 
-<!-- import wallet modal 1/3 - Choose way of import  -->
+<!-- import wallet modal 1/2 - Choose way of import  -->
 <app-ui-modal #importWalletModal1 dialogClass="modal-dialog-centered" containerClick="false">
   <div class="app-modal-header">
     
@@ -288,7 +266,7 @@
   </div>
 </app-ui-modal>
 
-<!-- import wallet modal 2/3 - name and password -->
+<!-- import wallet modal 2/2 - name and password -->
 <app-ui-modal #importWalletModal2 dialogClass="modal-dialog-centered" containerClick="false">
   <div class="app-modal-header">
     
@@ -308,38 +286,21 @@
       <div class="form-group">
         <label for="import-wallet-password">Password</label>
         <input type="password" class="form-control" id="import-wallet-password" placeholder="Enter a password">
+        
+      </div>
+      
+      <div class="form-group">
+        <label for="import-wallet-password-confirmation">Confirm password</label>
+        <input type="password" class="form-control" id="import-wallet-password-confirmation" placeholder="Please confirm the password">
         <small id="import-wallet-password-help" class="form-text text-muted">This password is used to encrypt the private key and can be changed later.</small>
       </div>
+      
     </form>    
   </div>
   
   <div class="app-modal-footer">
     <button class="btn btn-secondary text-center" (click)="importWalletModal2.hide(); importWalletModal1.show()">Back</button>
-    <button type="submit" class="btn btn-primary text-center" (click)="importWalletModal2.hide(); importWalletModal3.show()">Continue</button>
-  </div>
-</app-ui-modal>
-
-<!-- import wallet modal 3/3 - password confirmation -->
-<app-ui-modal #importWalletModal3 dialogClass="modal-dialog-centered" containerClick="false">
-  <div class="app-modal-header">
-    
-    <h5 class="modal-title">Import wallet</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="importWalletModal3.hide()"><span aria-hidden="true">&times;</span></button>
-    
-  </div>
-  <div class="app-modal-body">
-    
-    <form>
-      <div class="form-group">
-        <label for="import-wallet-password-confirmation">Confirm password</label>
-        <input type="password" class="form-control" id="import-wallet-password-confirmation" placeholder="Please confirm the password">
-      </div>
-    </form>    
-  </div>
-  
-  <div class="app-modal-footer">
-    <button class="btn btn-secondary text-center" (click)="importWalletModal3.hide(); importWalletModal2.show()">Back</button>
-    <button type="submit" class="btn btn-success text-center" (click)="importWalletModal3.hide()">Confirm & import</button>
+    <button type="submit" class="btn btn-success text-center" (click)="importWalletModal2.hide()">Confirm & import</button>
   </div>
 </app-ui-modal>
 
@@ -411,21 +372,21 @@
 
 <!-- Delete new wallet modal 2b/2 - Delete completely the wallet and file -->
 <app-ui-modal #deleteWalletModal2b containerClick="false">
-    <div class="app-modal-header">
-      
-      <h5 class="modal-title">Delete wallet</h5>
-      
-    </div>
-    <div class="app-modal-body">
-      <h4 class="text-danger text-center mb-3">Are you really sure you want to delete this wallet file?</h4>
-      
-      <div class="text-muted">
-        The ONLY way to restore this wallet will be with the mnemonic seed or the private key (send key).
-      </div>
-    </div>
+  <div class="app-modal-header">
     
-    <div class="app-modal-footer">
-      <button type="submit" class="btn btn-secondary text-center" (click)="deleteWalletModal2b.hide()">Cancel</button>
-      <button type="submit" class="btn btn-danger btn-glow-danger text-center" (click)="deleteWalletModal2b.hide()">Delete wallet</button>
+    <h5 class="modal-title">Delete wallet</h5>
+    
+  </div>
+  <div class="app-modal-body">
+    <h4 class="text-danger text-center mb-3">Are you really sure you want to delete this wallet file?</h4>
+    
+    <div class="text-muted">
+      The ONLY way to restore this wallet will be with the mnemonic seed or the private key (send key).
     </div>
-  </app-ui-modal>
+  </div>
+  
+  <div class="app-modal-footer">
+    <button type="submit" class="btn btn-secondary text-center" (click)="deleteWalletModal2b.hide()">Cancel</button>
+    <button type="submit" class="btn btn-danger btn-glow-danger text-center" (click)="deleteWalletModal2b.hide()">Delete wallet</button>
+  </div>
+</app-ui-modal>

@@ -28,7 +28,7 @@ export class WalletHomepageComponent implements OnInit {
   /* Used to display a "Copied!" badge to copy to clipboard button */
   seedCopiedToClipboard: boolean = false;
 
-  @ViewChild('createWalletModal5') walletCreationConfirmationModal: any;
+  @ViewChild('createWalletModal4') walletCreationConfirmationModal: any;
   walletCreationConfirmationLoading: boolean = false;
   
   
