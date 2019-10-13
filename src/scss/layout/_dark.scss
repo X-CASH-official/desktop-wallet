@@ -73,7 +73,8 @@ body.datta-dark {
   }
 
   a {
-    color: $dark-layout-font;
+    // Template modification: links stay blue even in dark mode
+    //color: $dark-layout-font;
   }
   a.text-secondary {
     color: $dark-layout-font !important;
@@ -493,7 +494,7 @@ body.datta-dark {
   .page-link {
     color: #007bff;
     background-color: $dark-layout;
-    /* Added !important because in dark theme, on the datatables pagination, the '...' box add the disabled class that prevented the border from apearing */
+    /* Template modification: added !important because in dark theme, on the datatables pagination, the '...' box add the disabled class that prevented the border from apearing */
     border: 1px solid darken($dark-layout, 10%) !important;
 
     &:hover {
