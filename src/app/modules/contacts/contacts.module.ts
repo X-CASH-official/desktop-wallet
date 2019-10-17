@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ContactsRoutingModule } from './contacts-routing.module';
 import { SharedModule} from '../../theme/shared/shared.module';
-import { NgbTabsetModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabsetModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ContactsTableComponent } from './contacts-table/contacts-table.component';
@@ -20,6 +20,8 @@ import {FormsModule} from '@angular/forms';
     NgbTabsetModule,
     DataTablesModule,
     FormsModule,
+    NgbTooltipModule,
+    
   ]
 })
 export class ContactsModule { }
