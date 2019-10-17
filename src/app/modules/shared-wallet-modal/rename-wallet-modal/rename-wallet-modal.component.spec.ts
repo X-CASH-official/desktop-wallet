@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConnectionComponent } from './connection.component';
+import { RenameWalletModalComponent } from './rename-wallet-modal.component';
 
-describe('ConnectionComponent', () => {
-  let component: ConnectionComponent;
-  let fixture: ComponentFixture<ConnectionComponent>;
+describe('RenameWalletModalComponent', () => {
+  let component: RenameWalletModalComponent;
+  let fixture: ComponentFixture<RenameWalletModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConnectionComponent ]
+      declarations: [ RenameWalletModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConnectionComponent);
+    fixture = TestBed.createComponent(RenameWalletModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -28,7 +28,7 @@
               <i class="feather icon-more-horizontal"></i>
             </button>
             <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-              <li class="dropdown-item reload-card" (click)="cardRefresh($event)"><a href="javascript:"><i class="feather icon-edit"></i> Rename</a></li>
+              <li class="dropdown-item reload-card" (click)="renameWalletModal.show()"><a href="javascript:"><i class="feather icon-edit"></i> Rename</a></li>
               <li class="dropdown-item close-card" (click)="deleteWalletModal.show()"><a href="javascript:"><i class="feather icon-trash"></i> Delete</a></li>
             </ul>
           </div>
@@ -308,8 +308,12 @@
 <!-- delete wallet serie of modals -->
 <!-- These button are only for debugging purposes, please respect the modal sequence -->
 <h4>Delete wallet debug button</h4>
-<button class="btn btn-primary" (click)="deleteWalletModal1.show()">delete</button>
+<button class="btn btn-primary" (click)="deleteWalletModal.show()">delete</button>
 
-<!-- Delete wallet modals -->
-<!-- This is a shared component -->
+
+<!-- Delete wallet modal -->
 <app-delete-wallet-modal #deleteWalletModal></app-delete-wallet-modal>
+
+
+<!-- Rename wallet modal -->
+<app-rename-wallet-modal #renameWalletModal></app-rename-wallet-modal>

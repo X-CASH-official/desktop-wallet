@@ -26,10 +26,6 @@ const routes: Routes = [
         loadChildren: './modules/settings/settings.module#SettingsModule'
       },
       {
-        path: 'connection',
-        loadChildren: './modules/connection/connection.module#ConnectionModule'
-      },
-      {
         path: '**',
         redirectTo: 'wallet-dashboard',
         pathMatch: 'full'

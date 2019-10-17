@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Remote node</h6>
+    <p class="text-muted mb-0">Choose the right connection node.</p>
+  </div>
+  <div>
+    <div class="input-group">
+      <select class="custom-select" id="inputGroupSelect04">
+        <ng-container *ngFor="let remoteNode of remoteNodes">
+          <option>{{ remoteNode.name }}:{{ remoteNode.port }}</option>
+        </ng-container>
+        <option selected>Choose the right connection node...</option>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-success" type="button">Choose best</button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Custom node</h6>
+    <p class="text-muted mb-0">Choose a custom node to connect to (not recommended).</p>
+  </div>
+  <div>
+    <input type="text" class="form-control" placeholder="Enter custom node">
+  </div>
+</div>
+<hr>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Status info</h6>
+    <p class="text-muted mb-0">Block height: {{ blockHeight }}</p>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary m-0"><i class="feather icon-refresh-ccw"></i>Refresh</button>
+  </div>
+</div>

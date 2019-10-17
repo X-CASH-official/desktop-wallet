@@ -55,14 +55,6 @@ const NAVIGATION_ITEMS = [
         url: '/settings',
         classes: 'nav-item',
         icon: 'feather icon-settings'
-      },
-      {
-        id: 'connection',
-        title: 'Connection',
-        type: 'item',
-        url: '/connection',
-        classes: 'nav-item',
-        icon: 'feather icon-sliders'
       }
     ]
   }
