@@ -27,7 +27,7 @@
       <div class="col-2 text-center">
         <button class="btn btn-success mr-0 px-4" type="button" (click)="sendModal.show()"><i style="transform: scaleX(-1);" class="fas fa-reply"></i> Send</button>
         <button class="btn btn-primary mr-0" type="button"><i class="feather icon-edit"></i> Rename</button>
-        <button class="btn btn-danger mr-0" type="button"><i class="feather icon-trash-2"></i> Delete</button>
+        <button class="btn btn-danger mr-0" type="button" (click) ="deleteWalletModal.show()"><i class="feather icon-trash-2"></i> Delete</button>
       </div>
       
       
@@ -217,3 +217,8 @@
   </div>
   
 </app-ui-modal>
+
+
+<!-- Delete wallet modals -->
+<!-- This is a shared component -->
+<app-delete-wallet-modal #deleteWalletModal></app-delete-wallet-modal>

@@ -7,6 +7,7 @@ import {NgbProgressbarModule, NgbDropdownModule, NgbTabsetModule} from '@ng-boot
 import { WalletHomepageComponent } from './wallet-homepage.component';
 
 import { WalletHomeRoutingModule } from './wallet-homepage-routing.module';
+import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
 
 @NgModule({
   declarations: [WalletHomepageComponent],
@@ -17,6 +18,7 @@ import { WalletHomeRoutingModule } from './wallet-homepage-routing.module';
     NgbProgressbarModule,
     NgbDropdownModule,
     NgbTabsetModule,
+    SharedWalletModalModule
   ]
 })
 export class WalletHomepageModule { }

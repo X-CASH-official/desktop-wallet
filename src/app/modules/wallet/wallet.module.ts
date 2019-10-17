@@ -11,6 +11,7 @@ import { WalletTransactionsComponent } from './wallet-transactions/wallet-transa
 import { WalletAddressesComponent } from './wallet-addresses/wallet-addresses.component';
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
+import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
 
 @NgModule({
   declarations: [WalletComponent, WalletHistoryComponent, WalletSettingsComponent, WalletTransactionsComponent, WalletAddressesComponent, WalletSignDataComponent, WalletReserveProofComponent],
@@ -19,6 +20,7 @@ import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reser
     WalletRoutingModule,
     SharedModule,
     NgbTabsetModule,
+    SharedWalletModalModule,
   ]
 })
 export class WalletModule { }

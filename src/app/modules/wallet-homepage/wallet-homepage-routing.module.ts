@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'wallet',
-    loadChildren: './wallet/wallet.module#WalletModule'
+    loadChildren: '../wallet/wallet.module#WalletModule'
   }
   
 ];

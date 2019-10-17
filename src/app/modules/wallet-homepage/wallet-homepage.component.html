@@ -29,7 +29,7 @@
             </button>
             <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right" ngbDropdownMenu>
               <li class="dropdown-item reload-card" (click)="cardRefresh($event)"><a href="javascript:"><i class="feather icon-edit"></i> Rename</a></li>
-              <li class="dropdown-item close-card" (click)="deleteWalletModal1.show()"><a href="javascript:"><i class="feather icon-trash"></i> Delete</a></li>
+              <li class="dropdown-item close-card" (click)="deleteWalletModal.show()"><a href="javascript:"><i class="feather icon-trash"></i> Delete</a></li>
             </ul>
           </div>
         </div>
@@ -305,88 +305,11 @@
 </app-ui-modal>
 
 
-
-
 <!-- delete wallet serie of modals -->
 <!-- These button are only for debugging purposes, please respect the modal sequence -->
-<h4>Delete wallet debug buttons</h4>
-<button class="btn btn-primary" (click)="deleteWalletModal1.show()">delete 1</button>
-<button class="btn btn-primary" (click)="deleteWalletModal2a.show()">delete 2a</button>
-<button class="btn btn-primary" (click)="deleteWalletModal2b.show()">delete 2b</button>
+<h4>Delete wallet debug button</h4>
+<button class="btn btn-primary" (click)="deleteWalletModal1.show()">delete</button>
 
-<!-- Delete wallet modal 1/2 - delete or remove -->
-<app-ui-modal #deleteWalletModal1 hideFooter="true">
-  <div class="app-modal-header">
-    
-    <h5 class="modal-title">Delete wallet</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="deleteWalletModal1.hide()"><span aria-hidden="true">&times;</span></button>
-    
-  </div>
-  <div class="app-modal-body">
-    <div class="row">
-      <div class="col-6">
-        <div class="card mb-0">
-          <div class="card-body text-center">
-            <span><span class="text-danger">Remove</span> this wallet from the X-CASH wallet and <span class="text-success">keep</span> the file.</span>
-            <hr>
-            <button type="button" class="btn btn-danger btn-lg" (click)="deleteWalletModal1.hide(); deleteWalletModal2a.show()">Remove</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="card mb-0">
-          <div class="card-body text-center">
-            <span><span class="text-danger">Delete</span> this wallet from the X-CASH wallet and <span class="text-danger">delete</span> the file.</span>
-            <hr>
-            <button type="button" class="btn btn-danger btn-lg btn-glow-danger" (click)="deleteWalletModal1.hide(); deleteWalletModal2b.show()">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  </div>
-</app-ui-modal>
-
-
-<!-- Delete new wallet modal 2a/2 - Remove from GUI wallet and not delete the file -->
-<app-ui-modal #deleteWalletModal2a containerClick="false">
-  <div class="app-modal-header">
-    
-    <h5 class="modal-title">Remove wallet</h5>
-    
-  </div>
-  <div class="app-modal-body">
-    <h5 class="text-danger text-center mb-3">Are you sure you want to remove this wallet from the X-CASH wallet? </h5>
-    
-    <div class="text-muted">
-      The wallet file will not be deleted and you will be able to import this wallet with it or restore with mnemonic seed or private key.
-    </div>
-  </div>
-  
-  <div class="app-modal-footer">
-    <button type="submit" class="btn btn-secondary text-center" (click)="deleteWalletModal2a.hide()">Cancel</button>
-    <button type="submit" class="btn btn-danger text-center" (click)="deleteWalletModal2a.hide()">Remove wallet</button>
-  </div>
-</app-ui-modal>
-
-
-<!-- Delete new wallet modal 2b/2 - Delete completely the wallet and file -->
-<app-ui-modal #deleteWalletModal2b containerClick="false">
-  <div class="app-modal-header">
-    
-    <h5 class="modal-title">Delete wallet</h5>
-    
-  </div>
-  <div class="app-modal-body">
-    <h4 class="text-danger text-center mb-3">Are you really sure you want to delete this wallet file?</h4>
-    
-    <div class="text-muted">
-      The ONLY way to restore this wallet will be with the mnemonic seed or the private key (send key).
-    </div>
-  </div>
-  
-  <div class="app-modal-footer">
-    <button type="submit" class="btn btn-secondary text-center" (click)="deleteWalletModal2b.hide()">Cancel</button>
-    <button type="submit" class="btn btn-danger btn-glow-danger text-center" (click)="deleteWalletModal2b.hide()">Delete wallet</button>
-  </div>
-</app-ui-modal>
+<!-- Delete wallet modals -->
+<!-- This is a shared component -->
+<app-delete-wallet-modal #deleteWalletModal></app-delete-wallet-modal>

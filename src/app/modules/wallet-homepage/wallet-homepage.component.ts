@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { variables_and_functions_service } from 'src/app/services/variables_and_functions.service';
 
 declare const AmCharts: any;
@@ -29,7 +29,6 @@ export class WalletHomepageComponent implements OnInit {
   /* Used to display a "Copied!" badge to copy to clipboard button */
   seedCopiedToClipboard: boolean = false;
 
-  @ViewChild('createWalletModal4') walletCreationConfirmationModal: any;
   walletCreationConfirmationLoading: boolean = false;
   
   
@@ -65,6 +64,7 @@ export class WalletHomepageComponent implements OnInit {
 
   ngOnInit() {
     this.reset_data();
+  
   }
 
   copySeedToClipboard() {
