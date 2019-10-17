@@ -10,12 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'wallet-homepage',
+        redirectTo: 'wallet-dashboard',
         pathMatch: 'full'
       },
       {
-        path: 'wallet-homepage',
-        loadChildren: './modules/wallet-homepage/wallet-homepage.module#WalletHomepageModule'
+        path: 'wallet-dashboard',
+        loadChildren: './modules/wallet-dashboard/wallet-dashboard.module#WalletDashboardModule'
       },
       {
         path: 'contacts',
@@ -31,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'wallet-homepage',
+        redirectTo: 'wallet-dashboard',
         pathMatch: 'full'
       }
     ]

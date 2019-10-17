@@ -8,11 +8,11 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 
 @Component({
-  selector: 'app-wallet-main-menu',
-  templateUrl: './wallet-homepage.component.html',
-  styleUrls: ['./wallet-homepage.component.scss'],
+  selector: 'app-wallet-dashboard',
+  templateUrl: './wallet-dashboard.component.html',
+  styleUrls: ['./wallet-dashboard.component.scss'],
 })
-export class WalletHomepageComponent implements OnInit {
+export class WalletDashboardComponent implements OnInit {
   
   // Variables
   total_wallets: number = 0;

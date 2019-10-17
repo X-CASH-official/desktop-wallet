@@ -22,7 +22,7 @@ import { NavLeftComponent } from './theme/layout/admin/nav-bar/nav-left/nav-left
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { variables_and_functions_service } from './services/variables_and_functions.service';
-import { WalletHomepageModule } from './modules/wallet-homepage/wallet-homepage.module';
+import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { WalletHomepageModule } from './modules/wallet-homepage/wallet-homepage.
     NgbTooltipModule,
     NgbButtonsModule,
     NgbTabsetModule,
-    WalletHomepageModule,
+    WalletDashboardModule,
   ],
   providers: [
     NavigationItem,

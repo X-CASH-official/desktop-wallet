@@ -13,7 +13,7 @@ export class NavLeftComponent implements OnInit {
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
         // Hard coded value in HTML too
-        this.showBackToHome = RegExp('/wallet-homepage/wallet/*').test(router.url);
+        this.showBackToHome = RegExp('/wallet-dashboard/wallet/*').test(router.url);
       }
    });
   }

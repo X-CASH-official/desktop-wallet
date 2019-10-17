@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import {SharedModule} from '../../theme/shared/shared.module';
 import {NgbProgressbarModule, NgbDropdownModule, NgbTabsetModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { WalletHomepageComponent } from './wallet-homepage.component';
+import { WalletDashboardComponent } from './wallet-dashboard.component';
 
-import { WalletHomeRoutingModule } from './wallet-homepage-routing.module';
+import { WalletHomeRoutingModule } from './wallet-dashboard-routing.module';
 import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
 
 @NgModule({
-  declarations: [WalletHomepageComponent],
+  declarations: [WalletDashboardComponent],
   imports: [
     CommonModule,
     WalletHomeRoutingModule,
@@ -21,4 +21,4 @@ import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-mo
     SharedWalletModalModule
   ]
 })
-export class WalletHomepageModule { }
+export class WalletDashboardModule { }

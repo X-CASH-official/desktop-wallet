@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { WalletHomepageComponent } from './wallet-homepage.component';
+import { WalletDashboardComponent } from './wallet-dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: WalletHomepageComponent
+    component: WalletDashboardComponent
   },
   {
     path: 'wallet',

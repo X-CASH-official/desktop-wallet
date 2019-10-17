@@ -36,7 +36,7 @@ const NAVIGATION_ITEMS = [
         id: 'wallet_home',
         title: 'Wallet',
         type: 'item',
-        url: '/wallet-homepage',
+        url: '/wallet-dashboard',
         classes: 'nav-item',
         icon: 'fas fa-wallet',
       },
