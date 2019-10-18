@@ -5,14 +5,15 @@ import { ContactsRoutingModule } from './contacts-routing.module';
 import { SharedModule} from '../../theme/shared/shared.module';
 import { NgbTabsetModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ContactsTableComponent } from './contacts-table/contacts-table.component';
 
 import {DataTablesModule} from 'angular-datatables';
 import {FormsModule} from '@angular/forms';
+import { ContactsComponent } from './contacts.component';
+import { ContactsHeaderComponent } from './contacts-header/contacts-header.component';
 
 @NgModule({
-  declarations: [ContactsListComponent, ContactsTableComponent],
+  declarations: [ContactsTableComponent, ContactsComponent, ContactsHeaderComponent],
   imports: [
     CommonModule,
     ContactsRoutingModule,

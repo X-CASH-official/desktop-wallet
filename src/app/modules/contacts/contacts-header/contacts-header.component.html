@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between">
+  <h3>Contacts</h3>
+  <button type="button" class="btn btn-primary m-0" (click)="addContactModal.show()"><i class="feather icon-plus-circle"></i>Add contact</button>
+</div>
+
+
+<!-- Add a contact modal -->
+<app-ui-modal #addContactModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Add a new contact</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="addContactModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="addNewContactForm" (ngSubmit)="onSubmit()" id="addNewContactForm">
+      <div class="form-group">
+        <label for="contact-name">Contact name</label>
+        <input type="text" class="form-control" id="contact-name" placeholder="Enter contact name" formControlName="contactName" [ngClass]="{'is-invalid': (contactName.dirty || contactName.touched) && contactName.invalid, 'is-valid': (contactName.dirty || contactName.touched) && !contactName.invalid}">
+        <div *ngIf="(contactName.dirty || contactName.touched) && contactName.invalid">
+            <small class="form-text text-danger" *ngIf="contactName.errors.required">Contact name is required.</small>
+            <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name containing illegal characters.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="contact-public-address">Contact public address</label>
+        <input type="text" class="form-control" id="contact-public-address" placeholder="Enter contact public address" formControlName="contactPublicAddress" rows="2" [ngClass]="{'is-invalid': (contactPublicAddress.dirty || contactPublicAddress.touched) && contactPublicAddress.invalid, 'is-valid': (contactPublicAddress.dirty || contactPublicAddress.touched) && !contactPublicAddress.invalid}">
+        <div *ngIf="(contactPublicAddress.dirty || contactPublicAddress.touched) && contactPublicAddress.invalid">
+            <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.required">Contact public address is required.</small>
+            <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.pattern">Invalid public address format.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" form="addNewContactForm">Add contact</button>
+  </div>
+</app-ui-modal>

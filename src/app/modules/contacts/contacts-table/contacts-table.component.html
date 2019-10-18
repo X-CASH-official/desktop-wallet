@@ -1,28 +1,25 @@
-<div>
-  <app-card cardTitle="Contacts Table" [options]="false">
-    <div  class="table-responsive">
-      <table datatable [hidden]='hide' [dtOptions]="contactsTableOptions" [dtTrigger]='dtTrigger' class="custom-table custom-table-striped custom-table-hover" style="width:100%;">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let contact of fakeContacts">
-            <td>{{ contact.id }}</td>
-            <td>{{ contact.name }}</td>
-            <td container="body" placement="left" ngbTooltip="{{contact.address}}">
-              {{ contact.address }}
-            </td>
-            <td>
-              <i style="transform: scaleX(-1);" class="fas fa-reply"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </app-card>
+
+<div class="table-responsive">
+  <table datatable [hidden]='hide' [dtOptions]="contactsTableOptions" [dtTrigger]='dtTrigger' class="custom-table custom-table-striped custom-table-hover" style="width:100%;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of fakeContacts">
+        <td>{{ contact.id }}</td>
+        <td>{{ contact.name }}</td>
+        <td container="body" placement="left" ngbTooltip="{{contact.address}}">
+          {{ contact.address }}
+        </td>
+        <td>
+          <i style="transform: scaleX(-1);" class="fas fa-reply"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
