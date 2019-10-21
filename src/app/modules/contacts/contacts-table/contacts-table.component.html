@@ -17,7 +17,15 @@
           {{ contact.address }}
         </td>
         <td>
-          <i style="transform: scaleX(-1);" class="fas fa-reply"></i>
+          <button type="button" class="btn btn-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
+          triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleAddrCopyTooltip(addrCopyTooltip)" [autoClose]=false placement="top" ngxClipboard [cbContent]="contact.address"><i class="feather icon-copy"></i></button>
+
+          <button type="button" class="btn btn-icon btn-outline-primary mb-0"><i class="feather icon-edit-1"></i></button>
+
+          <button type="button" class="btn btn-icon btn-outline-success m-0"><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
+          <!--
+          <a href="" ></a>
+          -->
         </td>
       </tr>
     </tbody>

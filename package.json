@@ -74,6 +74,7 @@
     "ng2-validation": "^4.2.0",
     "ngx-bar-rating": "^1.1.0",
     "ngx-chips": "^1.9.8",
+    "ngx-clipboard": "^12.2.1",
     "ngx-color-picker": "^7.0.0",
     "ngx-echarts": "^4.0.0",
     "ngx-perfect-scrollbar": "^6.3.1",

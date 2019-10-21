@@ -45,10 +45,11 @@ export class ContactsTableComponent implements OnInit {
           return data;
           }.bind(this)
         },
-        {
+        { // Action/Buttons column
           orderable: false,
-        }
-      ]
+          width: "150px", // Dirty fix: too small to force it to fit
+        }],
+      
       
       /*
       data: FAKE_CONTACTS,
@@ -96,6 +97,17 @@ export class ContactsTableComponent implements OnInit {
       }]
       */
     };
+    
+  }
+
+  toggleAddrCopyTooltip(tooltip) {
+    if (!tooltip.isOpen()) {
+      tooltip.open();
+      setTimeout(() => {
+        tooltip.close();
+      }, 2000);
+    }
+
     
   }
   

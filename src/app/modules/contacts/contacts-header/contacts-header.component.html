@@ -20,7 +20,7 @@
         <input type="text" class="form-control" id="contact-name" placeholder="Enter contact name" formControlName="contactName" [ngClass]="{'is-invalid': (contactName.dirty || contactName.touched) && contactName.invalid, 'is-valid': (contactName.dirty || contactName.touched) && !contactName.invalid}">
         <div *ngIf="(contactName.dirty || contactName.touched) && contactName.invalid">
             <small class="form-text text-danger" *ngIf="contactName.errors.required">Contact name is required.</small>
-            <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name containing illegal characters.</small>
+            <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name contains illegal characters.</small>
         </div>
       </div>
       

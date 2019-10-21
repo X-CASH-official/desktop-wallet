@@ -11,6 +11,7 @@ import {DataTablesModule} from 'angular-datatables';
 import {FormsModule} from '@angular/forms';
 import { ContactsComponent } from './contacts.component';
 import { ContactsHeaderComponent } from './contacts-header/contacts-header.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [ContactsTableComponent, ContactsComponent, ContactsHeaderComponent],
@@ -22,6 +23,7 @@ import { ContactsHeaderComponent } from './contacts-header/contacts-header.compo
     DataTablesModule,
     FormsModule,
     NgbTooltipModule,
+    ClipboardModule,
     
   ]
 })
