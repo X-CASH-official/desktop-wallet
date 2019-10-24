@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-contacts',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactsComponent implements OnInit {
 
+  @ViewChild('contactsTable') contactsTableChildComponent;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onNewContact(newContact: Event) {
+    this.contactsTableChildComponent.onNewContact(newContact);
   }
 
 }

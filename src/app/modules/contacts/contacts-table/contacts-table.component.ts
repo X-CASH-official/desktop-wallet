@@ -130,6 +130,11 @@ export class ContactsTableComponent implements OnInit {
         }, 300); // The time (animation) for the modal to disapear
       }
     }
+
+    onNewContact(newContact: object) {
+      this.fakeContacts.add(newContact['contactName'], newContact['contactPublicAddress']);
+      this.rerender();
+    }
     
   }
   

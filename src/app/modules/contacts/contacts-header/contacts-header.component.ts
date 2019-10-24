@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 
@@ -8,6 +8,8 @@ import { ValidatorsRegexService } from 'src/app/services/validators-regex.servic
   styleUrls: ['./contacts-header.component.scss']
 })
 export class ContactsHeaderComponent implements OnInit {
+
+  @Output() newContactEvent = new EventEmitter();
 
   @ViewChild('addContactModal') addContactModal: any;
 
@@ -33,7 +35,7 @@ export class ContactsHeaderComponent implements OnInit {
     console.log(this.addNewContactForm); // Debug purposes
     if (!this.addNewContactForm.invalid) {
       this.addContactModal.hide();
-      console.log(this.addNewContactForm.value); // This is where the action should take place
+      this.newContactEvent.emit(this.addNewContactForm.value);
       this.addNewContactForm.reset();
     }
   }
