@@ -2,6 +2,9 @@
 
 @import "scss/variables";
 
+/* Angular material theme */
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+
 /* fonts-icon */
 @import "scss/fonts/fontawesome/scss/fontawesome";
 @import "scss/fonts/feather/iconfont";
@@ -26,3 +29,6 @@
 
 @import "scss/layout/layout";
 @import "scss/custom";
+
+// Angular automatically add this
+//html, body { height: 100%; }

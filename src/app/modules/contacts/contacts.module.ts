@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import { ContactsComponent } from './contacts.component';
 import { ContactsHeaderComponent } from './contacts-header/contacts-header.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatPaginatorModule } from '@angular/material';
 
 @NgModule({
   declarations: [ContactsTableComponent, ContactsComponent, ContactsHeaderComponent],
@@ -24,6 +25,11 @@ import { ClipboardModule } from 'ngx-clipboard';
     FormsModule,
     NgbTooltipModule,
     ClipboardModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule
     
   ]
 })

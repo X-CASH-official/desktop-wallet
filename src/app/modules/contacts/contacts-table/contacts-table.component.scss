@@ -1,3 +1,13 @@
 table.dataTable td {
     padding: 0.5rem .75rem;
 }
+
+table {
+    width: 100%;
+}
+
+.btn.btn-icon, .btn.drp-icon {
+    height: 32px;
+    width: 32px;
+    padding: 0;
+}

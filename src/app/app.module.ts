@@ -23,12 +23,14 @@ import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-ri
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { variables_and_functions_service } from './services/variables_and_functions.service';
 import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
+import { MaterialModule } from './material.module';
 
 // Prevent Lazy Loading and preload modules
 import { WalletModule } from './modules/wallet/wallet.module';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { SharedWalletModalModule } from './modules/shared-wallet-modal/shared-wallet-modal.module';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { SharedWalletModalModule } from './modules/shared-wallet-modal/shared-wa
     NgbTooltipModule,
     NgbButtonsModule,
     NgbTabsetModule,
+    MaterialModule,
     WalletDashboardModule,
     // Prevent Lazy Loading and preload modules
     WalletModule,

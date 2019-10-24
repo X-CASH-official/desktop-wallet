@@ -12,6 +12,7 @@ import { WalletAddressesComponent } from './wallet-addresses/wallet-addresses.co
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
 import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
+import { MatTableModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [WalletComponent, WalletHistoryComponent, WalletSettingsComponent, WalletTransactionsComponent, WalletAddressesComponent, WalletSignDataComponent, WalletReserveProofComponent],
@@ -21,6 +22,8 @@ import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-mo
     SharedModule,
     NgbTabsetModule,
     SharedWalletModalModule,
+    MatTableModule,
+    MatSortModule,
   ]
 })
 export class WalletModule { }
