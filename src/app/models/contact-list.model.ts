@@ -28,6 +28,20 @@ export class ContactList {
         }  
     }
 
+    public deleteContact(id: number) {
+        if (id > this.numberOfContact) {
+            throw new Error("ID exceed contact list size");
+        } else {
+            // Delete the Contact from the list
+            this.contactList.splice(id - 1, 1);
+            this.numberOfContact--;
+            // Update all the next contacts for id/size correspondence
+            for (let i = id - 1; i < this.numberOfContact; i++) {
+                this.contactList[i].id--;
+            }
+        }
+    }
+
 
     
 }

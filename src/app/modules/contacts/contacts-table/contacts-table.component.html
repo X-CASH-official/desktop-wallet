@@ -2,7 +2,7 @@
 <div class="card" [hidden]='hideCard'>
   <div class="card-body">
     <div class="table-responsive">
-      <table datatable #datatable *ngIf="!hide" [dtOptions]="contactsTableOptions" [dtTrigger]='dtTrigger' class="custom-table custom-table-striped custom-table-hover" style="width:100%;">
+      <table datatable *ngIf="!hide" [dtOptions]="contactsTableOptions" [dtTrigger]='dtTrigger' class="custom-table custom-table-striped custom-table-hover" style="width:100%;">
         <thead>
           <tr>
             <th>ID</th>
@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let contact of fakeContacts.contactList">
+          <tr *ngFor="let contact of contacts.contactList">
             <td>{{ contact.id }}</td>
             <td>{{ contact.name }}</td>
             <td container="body" placement="left" ngbTooltip="{{contact.address}}">
@@ -23,9 +23,11 @@
               triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleAddrCopyTooltip(addrCopyTooltip)" [autoClose]=false placement="top" ngxClipboard [cbContent]="contact.address"><i class="feather icon-copy"></i></button>
               
               <button type="button" class="btn btn-icon btn-outline-primary mb-0" (click)="onModifyContactToggle(contact)"><i class="feather icon-edit-1"></i></button>
-              
-              <button type="button" class="btn btn-icon btn-outline-success m-0"><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
-              
+
+              <button type="button" class="btn btn-icon btn-outline-danger m-0" (click)="onDeleteContact(contact.id)"><i class="feather icon-trash"></i></button>
+              <!-- Send is not ready yet
+              <button type="button" class="btn btn-icon btn-outline-success m-0" "><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
+              -->
             </td>
           </tr>
         </tbody>

@@ -20,7 +20,7 @@ export class ContactsTableComponent implements OnInit {
 
   contactsTableOptions: any = {};
   
-  fakeContacts: ContactList;
+  contacts: ContactList;
   
   dtTrigger: Subject<any> = new Subject();
   hideCard: boolean = true;
@@ -50,6 +50,7 @@ export class ContactsTableComponent implements OnInit {
 
   rerender(): void {
     this.hideCard = true;
+    
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
       dtInstance.destroy();
@@ -70,7 +71,7 @@ export class ContactsTableComponent implements OnInit {
   
   ngOnInit() {
     
-    this.fakeContacts = new ContactList(FAKE_CONTACTS);
+    this.contacts = new ContactList(FAKE_CONTACTS);
     this.dataLoaded = true;
     // This has been moved in ngAfterViewInit()
     /*
@@ -122,7 +123,7 @@ export class ContactsTableComponent implements OnInit {
     onSubmitModification() {
       if (!this.modifyContactForm.invalid) {
         this.modifyContactModal.hide();
-        this.fakeContacts.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
+        this.contacts.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
         this.rerender();
 
         setTimeout(() => {
@@ -132,7 +133,12 @@ export class ContactsTableComponent implements OnInit {
     }
 
     onNewContact(newContact: object) {
-      this.fakeContacts.add(newContact['contactName'], newContact['contactPublicAddress']);
+      this.contacts.add(newContact['contactName'], newContact['contactPublicAddress']);
+      this.rerender();
+    }
+
+    onDeleteContact(contactID: number) {
+      this.contacts.deleteContact(contactID);
       this.rerender();
     }
     
