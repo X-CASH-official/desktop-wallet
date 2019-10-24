@@ -1,33 +1,74 @@
 
-<div class="table-responsive">
-  <table datatable [hidden]='hide' [dtOptions]="contactsTableOptions" [dtTrigger]='dtTrigger' class="custom-table custom-table-striped custom-table-hover" style="width:100%;">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let contact of fakeContacts">
-        <td>{{ contact.id }}</td>
-        <td>{{ contact.name }}</td>
-        <td container="body" placement="left" ngbTooltip="{{contact.address}}">
-          {{ contact.address }}
-        </td>
-        <td>
-          <button type="button" class="btn btn-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
-          triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleAddrCopyTooltip(addrCopyTooltip)" [autoClose]=false placement="top" ngxClipboard [cbContent]="contact.address"><i class="feather icon-copy"></i></button>
-
-          <button type="button" class="btn btn-icon btn-outline-primary mb-0"><i class="feather icon-edit-1"></i></button>
-
-          <button type="button" class="btn btn-icon btn-outline-success m-0"><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
-          <!--
-          <a href="" ></a>
-          -->
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="card" [hidden]='hideCard'>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table datatable #datatable *ngIf="!hide" [dtOptions]="contactsTableOptions" [dtTrigger]='dtTrigger' class="custom-table custom-table-striped custom-table-hover" style="width:100%;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contact of fakeContacts.contactList">
+            <td>{{ contact.id }}</td>
+            <td>{{ contact.name }}</td>
+            <td container="body" placement="left" ngbTooltip="{{contact.address}}">
+              {{ contact.address }}
+            </td>
+            <td>
+              <button type="button" class="btn btn-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
+              triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleAddrCopyTooltip(addrCopyTooltip)" [autoClose]=false placement="top" ngxClipboard [cbContent]="contact.address"><i class="feather icon-copy"></i></button>
+              
+              <button type="button" class="btn btn-icon btn-outline-primary mb-0" (click)="onModifyContactToggle(contact)"><i class="feather icon-edit-1"></i></button>
+              
+              <button type="button" class="btn btn-icon btn-outline-success m-0"><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+
+
+<!-- Modify contact modal -->
+<app-ui-modal #modifyContactModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Modify contact</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modifyContactModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="modifyContactForm" (ngSubmit)="onSubmitModification()" id="modifyContactForm">
+      <div class="form-group">
+        <label for="modify-contact-name">Contact name</label>
+        <input type="text" class="form-control" id="modify-contact-name" formControlName="contactName" [ngClass]="{'is-invalid': contactName.invalid, 'is-valid': !contactName.invalid}">
+        <div *ngIf="contactName.invalid">
+          <small class="form-text text-danger" *ngIf="contactName.errors.required">Contact name is required.</small>
+          <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name contains illegal characters.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="modify-contact-public-address">Contact public address</label>
+        <input type="text" class="form-control" id="modify-contact-public-address" formControlName="contactPublicAddress" [ngClass]="{'is-invalid': contactPublicAddress.invalid, 'is-valid': !contactPublicAddress.invalid}">
+        <div *ngIf="contactPublicAddress.invalid">
+          <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.required">Contact public address is required.</small>
+          <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.pattern">Invalid public address format.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-primary text-center" form="modifyContactForm">Modify contact</button>
+  </div>
+</app-ui-modal>

@@ -26,7 +26,7 @@
       
       <div class="form-group">
         <label for="contact-public-address">Contact public address</label>
-        <input type="text" class="form-control" id="contact-public-address" placeholder="Enter contact public address" formControlName="contactPublicAddress" rows="2" [ngClass]="{'is-invalid': (contactPublicAddress.dirty || contactPublicAddress.touched) && contactPublicAddress.invalid, 'is-valid': (contactPublicAddress.dirty || contactPublicAddress.touched) && !contactPublicAddress.invalid}">
+        <input type="text" class="form-control" id="contact-public-address" placeholder="Enter contact public address" formControlName="contactPublicAddress" [ngClass]="{'is-invalid': (contactPublicAddress.dirty || contactPublicAddress.touched) && contactPublicAddress.invalid, 'is-valid': (contactPublicAddress.dirty || contactPublicAddress.touched) && !contactPublicAddress.invalid}">
         <div *ngIf="(contactPublicAddress.dirty || contactPublicAddress.touched) && contactPublicAddress.invalid">
             <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.required">Contact public address is required.</small>
             <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.pattern">Invalid public address format.</small>
