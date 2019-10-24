@@ -18,7 +18,7 @@ import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-mo
     NgbProgressbarModule,
     NgbDropdownModule,
     NgbTabsetModule,
-    SharedWalletModalModule
+    SharedWalletModalModule,
   ]
 })
 export class WalletDashboardModule { }

@@ -3,14 +3,14 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <div class="row">
-          <div class="col-8">
+        <div class="d-flex justify-content-between">
+          <div>
             <h3>Total Balance</h3>
           </div>
           
-          <div class="col-4 text-right">
-            <button type="button" class="btn btn-primary btn-lg" (click)="createWalletModal1.show();"><i class="feather icon-plus-circle"></i>Create Wallet</button>
-            <button type="button" class="btn btn-primary btn-lg" (click)="importWalletModal1.show();"><i class="feather icon-download"></i>Import Wallet</button>
+          <div>
+            <button type="button" class="btn btn-primary btn-lg mb-0" (click)="createWalletModal1.show();"><i class="feather icon-plus-circle"></i>Create Wallet</button>
+            <button type="button" class="btn btn-secondary btn-lg m-0" (click)="importWalletModal1.show();"><i class="feather icon-download"></i>Import Wallet</button>
           </div>
         </div> 
       </div>

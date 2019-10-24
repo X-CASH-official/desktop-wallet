@@ -123,10 +123,11 @@ export class ContactsTableComponent implements OnInit {
       if (!this.modifyContactForm.invalid) {
         this.modifyContactModal.hide();
         this.fakeContacts.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
+        this.rerender();
+
         setTimeout(() => {
           this.modifyContactForm.reset();
         }, 300); // The time (animation) for the modal to disapear
-        this.rerender();
       }
     }
     

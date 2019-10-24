@@ -24,6 +24,12 @@ import { ConfigurationComponent } from './theme/layout/admin/configuration/confi
 import { variables_and_functions_service } from './services/variables_and_functions.service';
 import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
 
+// Prevent Lazy Loading and preload modules
+import { WalletModule } from './modules/wallet/wallet.module';
+import { ContactsModule } from './modules/contacts/contacts.module';
+import { SettingsModule } from './modules/settings/settings.module';
+import { SharedWalletModalModule } from './modules/shared-wallet-modal/shared-wallet-modal.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +57,11 @@ import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboa
     NgbButtonsModule,
     NgbTabsetModule,
     WalletDashboardModule,
+    // Prevent Lazy Loading and preload modules
+    WalletModule,
+    ContactsModule,
+    SettingsModule,
+    SharedWalletModalModule,
   ],
   providers: [
     NavigationItem,
