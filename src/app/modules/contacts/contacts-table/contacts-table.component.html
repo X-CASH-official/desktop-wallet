@@ -1,93 +1,91 @@
 <div class="card">
   <div class="card-body">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <mat-form-field class="d-flex justify-content-end">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search contact">
     </mat-form-field>
     <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
       
       <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-        
-        <!-- Position Column -->
-        <ng-container matColumnDef="id" >
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-          <td mat-cell *matCellDef="let contact"> {{contact.id}} </td>
-        </ng-container>
-        
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-          <td mat-cell *matCellDef="let contact"> {{contact.name}} </td>
-        </ng-container>
-        
-        <!-- Weight Column -->
-        <ng-container matColumnDef="address">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
-          <td mat-cell *matCellDef="let contact"> {{contact.address | slice:0:10 }}...{{contact.address | slice:-10 }} </td>
-        </ng-container>
-        
-        <!-- Actions buttons -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let contact">
-            <button type="button" class="btn btn-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
-            triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleAddrCopyTooltip(addrCopyTooltip)" [autoClose]=false placement="top" ngxClipboard [cbContent]="contact.address"><i class="feather icon-copy"></i></button>
-            
-            <button type="button" class="btn btn-icon btn-outline-primary mb-0" (click)="onModifyContactToggle(contact)"><i class="feather icon-edit-1"></i></button>
-            
-            <button type="button" class="btn btn-icon btn-outline-danger m-0" (click)="onDeleteContact(contact.id)"><i class="feather icon-trash"></i></button>
-            
-            <!-- Send is not ready yet
-              <button type="button" class="btn btn-icon btn-outline-success m-0" "><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
-            -->
-          </td>
-        </ng-container>
-        
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        
-      </table>
-      <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
-    </div>
+        The actual rendered columns are set as a property on the row definition"
+      -->
+      
+      <!-- Position Column -->
+      <ng-container matColumnDef="id" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+        <td mat-cell *matCellDef="let contact"> {{contact.id}} </td>
+      </ng-container>
+      
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let contact"> {{contact.name}} </td>
+      </ng-container>
+      
+      <!-- Weight Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+        <td mat-cell *matCellDef="let contact"> {{contact.address | slice:0:addrSliceSize }}...{{contact.address | slice:-addrSliceSize }} </td>
+      </ng-container>
+      
+      <!-- Actions buttons -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let contact">
+          <button type="button" class="btn btn-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
+          triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleAddrCopyTooltip(addrCopyTooltip)" [autoClose]=false placement="top" ngxClipboard [cbContent]="contact.address"><i class="feather icon-copy"></i></button>
+          
+          <button type="button" class="btn btn-icon btn-outline-primary mb-0" (click)="onModifyContactToggle(contact)"><i class="feather icon-edit-1"></i></button>
+          
+          <button type="button" class="btn btn-icon btn-outline-danger m-0" (click)="onDeleteContact(contact.id)"><i class="feather icon-trash"></i></button>
+          
+          <!-- Send is not ready yet
+            <button type="button" class="btn btn-icon btn-outline-success m-0" "><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
+          -->
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+    </table>
+    <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+
+<!-- Modify contact modal -->
+<app-ui-modal #modifyContactModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Modify contact</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modifyContactModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="modifyContactForm" (ngSubmit)="onSubmitModification()" id="modifyContactForm">
+      <div class="form-group">
+        <label for="modify-contact-name">Contact name</label>
+        <input type="text" class="form-control" id="modify-contact-name" formControlName="contactName" [ngClass]="{'is-invalid': contactName.invalid, 'is-valid': !contactName.invalid}">
+        <div *ngIf="contactName.invalid">
+          <small class="form-text text-danger" *ngIf="contactName.errors.required">Contact name is required.</small>
+          <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name contains illegal characters.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="modify-contact-public-address">Contact public address</label>
+        <input type="text" class="form-control" id="modify-contact-public-address" formControlName="contactPublicAddress" [ngClass]="{'is-invalid': contactPublicAddress.invalid, 'is-valid': !contactPublicAddress.invalid}">
+        <div *ngIf="contactPublicAddress.invalid">
+          <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.required">Contact public address is required.</small>
+          <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.pattern">Invalid public address format.</small>
+        </div>
+      </div>
+    </form>
+    
   </div>
   
-  
-  
-  
-  <!-- Modify contact modal -->
-  <app-ui-modal #modifyContactModal dialogClass="modal-dialog-centered" containerClick="false">
-    <div class="app-modal-header">
-      
-      <h5 class="modal-title">Modify contact</h5>
-      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modifyContactModal.hide()"><span aria-hidden="true">&times;</span></button>
-      
-    </div>
-    <div class="app-modal-body">
-      
-      <form [formGroup]="modifyContactForm" (ngSubmit)="onSubmitModification()" id="modifyContactForm">
-        <div class="form-group">
-          <label for="modify-contact-name">Contact name</label>
-          <input type="text" class="form-control" id="modify-contact-name" formControlName="contactName" [ngClass]="{'is-invalid': contactName.invalid, 'is-valid': !contactName.invalid}">
-          <div *ngIf="contactName.invalid">
-            <small class="form-text text-danger" *ngIf="contactName.errors.required">Contact name is required.</small>
-            <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name contains illegal characters.</small>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="modify-contact-public-address">Contact public address</label>
-          <input type="text" class="form-control" id="modify-contact-public-address" formControlName="contactPublicAddress" [ngClass]="{'is-invalid': contactPublicAddress.invalid, 'is-valid': !contactPublicAddress.invalid}">
-          <div *ngIf="contactPublicAddress.invalid">
-            <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.required">Contact public address is required.</small>
-            <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.pattern">Invalid public address format.</small>
-          </div>
-        </div>
-      </form>
-      
-    </div>
-    
-    <div class="app-modal-footer">
-      <button class="btn btn-primary text-center" form="modifyContactForm">Modify contact</button>
-    </div>
-  </app-ui-modal>
-  
+  <div class="app-modal-footer">
+    <button class="btn btn-primary text-center" form="modifyContactForm">Modify contact</button>
+  </div>
+</app-ui-modal>
