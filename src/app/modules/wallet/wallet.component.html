@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <div class="row justify-content-between">
+    <div class="d-flex justify-content-between">
       <div class="col-8">
         <!-- Wallet Name -->
         <h3>My Wallet Name</h3>
@@ -24,10 +24,10 @@
       </div>
       
       <!-- Wallet basic functionnalities navbar -->
-      <div class="col-2 text-center">
-        <button class="btn btn-success mr-0 px-4" type="button" (click)="sendModal.show()"><i style="transform: scaleX(-1);" class="fas fa-reply"></i> Send</button>
-        <button class="btn btn-primary mr-0" type="button"><i class="feather icon-edit"></i> Rename</button>
-        <button class="btn btn-danger mr-0" type="button" (click) ="deleteWalletModal.show()"><i class="feather icon-trash-2"></i> Delete</button>
+      <div class="d-flex flex-column">
+        <button class="btn btn-success mr-0 px-4 text-left" type="button" (click)="sendModal.show()"><i style="transform: scaleX(-1);" class="fas fa-reply"></i> Send</button>
+        <button class="btn btn-primary mr-0 text-left" type="button"><i class="feather icon-edit"></i> Rename</button>
+        <button class="btn btn-danger m-0 text-left" type="button" (click) ="deleteWalletModal.show()"><i class="feather icon-trash-2"></i> Delete</button>
       </div>
       
       
