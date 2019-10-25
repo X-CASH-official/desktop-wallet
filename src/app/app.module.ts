@@ -25,12 +25,6 @@ import { variables_and_functions_service } from './services/variables_and_functi
 import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
 import { MaterialModule } from './material.module';
 
-// Prevent Lazy Loading and preload modules
-import { WalletModule } from './modules/wallet/wallet.module';
-import { ContactsModule } from './modules/contacts/contacts.module';
-import { SettingsModule } from './modules/settings/settings.module';
-import { SharedWalletModalModule } from './modules/shared-wallet-modal/shared-wallet-modal.module';
-
 
 @NgModule({
   declarations: [
@@ -60,11 +54,6 @@ import { SharedWalletModalModule } from './modules/shared-wallet-modal/shared-wa
     NgbTabsetModule,
     MaterialModule,
     WalletDashboardModule,
-    // Prevent Lazy Loading and preload modules
-    WalletModule,
-    ContactsModule,
-    SettingsModule,
-    SharedWalletModalModule,
   ],
   providers: [
     NavigationItem,
