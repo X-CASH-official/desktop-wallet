@@ -80,7 +80,7 @@
   
   <div class="app-modal-footer">
     <button class="btn btn-secondary text-center" (click)="createWalletModal2.hide(); createWalletModal1.show()">Back</button>
-    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal2.hide(); confirmSeedRandomWords(exampleSeed, this.NUMBER_SEED_WORDS_TO_CONFIRM);createWalletModal3.show()">Continue</button>
+    <button type="submit" class="btn btn-primary text-center" (click)="seedConfirmationPreparation(); createWalletModal2.hide();createWalletModal3.show()">Continue</button>
   </div>
 </app-ui-modal>
 
@@ -101,22 +101,24 @@
         <div class="font-weight-bold text-center mb-2">Please enter the missing words.</div>
         <div *ngIf="wordsToConfirm === undefined" class="font-weight-bold text-center mb-2 text-danger">Please click on back and generate the random confirmation array</div>
         <div class="px-3">
-          <div class="row">
+          <form id="seedWordsConfirmationForm" class="row" (ngSubmit)="onSubmitMnemonicSeedConfirmationForm()">
             <div *ngFor="let word of exampleSeed; let i=index" class="form-group col-3 px-2 mb-0">
-              <label [ngClass]="{'text-warning': wordsToConfirm !== undefined && wordsToConfirm[i]}" class="col-form-label pb-0">{{ i + 1 }}</label>
-              <input *ngIf="wordsToConfirm !== undefined && wordsToConfirm[i]" type="text" class="form-control-plaintext text-monospace pt-1">
-              <input *ngIf="wordsToConfirm !== undefined && !wordsToConfirm[i]" type="text" readonly class="form-control-plaintext text-monospace text-muted pt-1" [value]="word">
-              <hr class="mt-0 mb-2">
+              <label class="col-form-label pb-0">{{ i + 1 }}</label>
+              <input *ngIf="wordsToConfirm !== undefined && wordsToConfirm[i]" type="text" class="form-control text-monospace pt-1" [formControl]="seedWordsConfirmationForm.controls[i]" [ngClass]="{'is-invalid': (seedWordsConfirmationForm.controls[i].dirty || seedWordsConfirmationForm.controls[i].touched) && seedWordsConfirmationForm.controls[i].invalid, 'is-valid': (seedWordsConfirmationForm.controls[i].dirty || seedWordsConfirmationForm.controls[i].touched) && !seedWordsConfirmationForm.controls[i].invalid}">
+              <div *ngIf="wordsToConfirm !== undefined && !wordsToConfirm[i]">
+                <span class="form-control-plaintext text-monospace text-muted pt-1">{{word}}</span>
+                <hr class="mt-0 mb-2">
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-    </form>    
+    </form>
   </div>
   
   <div class="app-modal-footer">
     <button class="btn btn-secondary text-center" (click)="createWalletModal3.hide(); createWalletModal2.show()">Back</button>
-    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal3.hide(); createWalletModal4.show()">Confirm & continue</button>
+    <button form="seedWordsConfirmationForm" type="submit" class="btn btn-primary text-center">Confirm & continue</button>
   </div>
 </app-ui-modal>
 

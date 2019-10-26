@@ -1,0 +1,10 @@
+// This can be a solution for seedWord visual validation feedback
+.was-validated .form-control:invalid, .form-control.seedWord-is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+}
+
+.was-validated .form-control:valid, .form-control.seedWord-is-valid {
+    border-color: #28a745;
+    padding-right: calc(1.5em + 0.75rem);
+}
