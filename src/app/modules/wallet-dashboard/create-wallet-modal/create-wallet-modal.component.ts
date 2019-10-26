@@ -57,6 +57,10 @@ export class CreateWalletModalComponent implements OnInit {
       this.createWalletModal1.hide();
       console.log(this.NameAndPasswordForm) // The action should take place here
       this.createWalletModal2.show();
+    } else {
+      this.walletName.markAsTouched();
+      this.password.markAsTouched();
+      this.passwordConfirmation.markAsTouched();
     }
   }
   
@@ -88,6 +92,10 @@ export class CreateWalletModalComponent implements OnInit {
       this.createWalletModal3.hide();
       console.log(this.seedWordsConfirmationForm); // The action should take place here
       this.createWalletModal4.show();
+    } else {
+      for (let i = 0; i < this.seedWordsConfirmationForm.length; i++) {
+        this.seedWordsConfirmationForm.controls[i].markAsTouched();
+      }
     }
   }
   
@@ -112,7 +120,6 @@ export class CreateWalletModalComponent implements OnInit {
       }
       numbersToConfirm.push(this.getRandomInt(0, seed.length));
     }
-    
     const wordsToConfirm: boolean[] = [];
     for(let i = 0; i < seed.length; i++) {
       if (numbersToConfirm.includes(i)) {
@@ -121,7 +128,6 @@ export class CreateWalletModalComponent implements OnInit {
         wordsToConfirm[i] = false;
       }
     }
-    
     return wordsToConfirm;
   }
 

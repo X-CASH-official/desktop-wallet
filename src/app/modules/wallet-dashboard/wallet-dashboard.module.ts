@@ -9,6 +9,7 @@ import { WalletDashboardComponent } from './wallet-dashboard.component';
 import { WalletHomeRoutingModule } from './wallet-dashboard-routing.module';
 import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
 import { CreateWalletModalComponent } from './create-wallet-modal/create-wallet-modal.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [WalletDashboardComponent, CreateWalletModalComponent],
@@ -20,6 +21,7 @@ import { CreateWalletModalComponent } from './create-wallet-modal/create-wallet-
     NgbDropdownModule,
     NgbTabsetModule,
     SharedWalletModalModule,
+    ClipboardModule
   ]
 })
 export class WalletDashboardModule { }
