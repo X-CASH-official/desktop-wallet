@@ -8,9 +8,10 @@ import { WalletDashboardComponent } from './wallet-dashboard.component';
 
 import { WalletHomeRoutingModule } from './wallet-dashboard-routing.module';
 import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
+import { CreateWalletModalComponent } from './create-wallet-modal/create-wallet-modal.component';
 
 @NgModule({
-  declarations: [WalletDashboardComponent],
+  declarations: [WalletDashboardComponent, CreateWalletModalComponent],
   imports: [
     CommonModule,
     WalletHomeRoutingModule,

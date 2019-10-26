@@ -19,8 +19,8 @@
         <label for="contact-name">Contact name</label>
         <input type="text" class="form-control" id="contact-name" placeholder="Enter contact name" formControlName="contactName" [ngClass]="{'is-invalid': (contactName.dirty || contactName.touched) && contactName.invalid, 'is-valid': (contactName.dirty || contactName.touched) && !contactName.invalid}">
         <div *ngIf="(contactName.dirty || contactName.touched) && contactName.invalid">
-            <small class="form-text text-danger" *ngIf="contactName.errors.required">Contact name is required.</small>
-            <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name contains illegal characters.</small>
+          <small class="form-text text-danger" *ngIf="contactName.errors.required">Contact name is required.</small>
+          <small class="form-text text-danger" *ngIf="contactName.errors.pattern">Contact name contains illegal characters.</small>
         </div>
       </div>
       
@@ -28,8 +28,8 @@
         <label for="contact-public-address">Contact public address</label>
         <input type="text" class="form-control" id="contact-public-address" placeholder="Enter contact public address" formControlName="contactPublicAddress" [ngClass]="{'is-invalid': (contactPublicAddress.dirty || contactPublicAddress.touched) && contactPublicAddress.invalid, 'is-valid': (contactPublicAddress.dirty || contactPublicAddress.touched) && !contactPublicAddress.invalid}">
         <div *ngIf="(contactPublicAddress.dirty || contactPublicAddress.touched) && contactPublicAddress.invalid">
-            <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.required">Contact public address is required.</small>
-            <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.pattern">Invalid public address format.</small>
+          <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.required">Contact public address is required.</small>
+          <small class="form-text text-danger" *ngIf="contactPublicAddress.errors.pattern">Invalid public address format.</small>
         </div>
       </div>
     </form>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { variables_and_functions_service } from 'src/app/services/variables_and_functions.service';
 
+/*
 declare const AmCharts: any;
 declare const $: any;
+*/
 
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 
 @Component({
   selector: 'app-wallet-dashboard',
@@ -15,22 +16,12 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 export class WalletDashboardComponent implements OnInit {
   
   // Variables
+  /*
   total_wallets: number = 0;
   password: string;
   data: string; $
   isWalletHere = false;
-
-  /* Contains which words of the seed should be confirmed */
-  wordsToConfirm: boolean[];
-
-  /* The number of words to confirm */
-  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 12;
-
-  /* Used to display a "Copied!" badge to copy to clipboard button */
-  seedCopiedToClipboard: boolean = false;
-
-  walletCreationConfirmationLoading: boolean = false;
-  
+  */
   
   constructor(private variables_and_functions_service: variables_and_functions_service, config: NgbDropdownConfig) {
     config.placement = 'bottom-right';
@@ -59,66 +50,12 @@ export class WalletDashboardComponent implements OnInit {
     }
   ];
 
-  exampleSeed: string[] = ["cover", "palace", "renew", "address", "orchard", "derive", "promote", "similar", "artist", "cage", "dial", "forget", "print", "extend", "scissors", "festival", "donor", "peasant", "spawn", "donate", "fever", "olive", "section", "device"];
-
 
   ngOnInit() {
-    this.reset_data();
-  
+    //this.reset_data();
   }
 
-  copySeedToClipboard() {
-    this.seedCopiedToClipboard = true
-    setTimeout(() => {
-      this.seedCopiedToClipboard = false;
-    }, 3000);
-  }
-
-  simulateLoadingThenHide(modalElement: UiModalComponent, loadingTime: number, hidingBooleanName: string) {
-    // I'm sure there's a way to avoid this
-    this[hidingBooleanName] = true;
-    setTimeout(() => {
-      modalElement.hide();
-      setTimeout(() => {
-        this[hidingBooleanName] = false;
-      }, 300); // The time of the modal hiding animation
-    }, loadingTime);
-  }
-
-  /**
-   * This function alter this.wordsToConfirm
-   * @param seed 
-   * @param amountToConfirm 
-   */
-  public confirmSeedRandomWords(seed: string[], amountToConfirm: number) {
-    let numbersToConfirm: number[] = [];
-    for(let i = 0; i < amountToConfirm; i++) {
-      let randomPick: number = this.getRandomInt(0, seed.length);
-      while (numbersToConfirm.includes(randomPick)) {
-        randomPick = this.getRandomInt(0, seed.length);
-      }
-      numbersToConfirm.push(this.getRandomInt(0, seed.length));
-    }
-
-    let wordsToConfirm: boolean[] = [];
-    for(let i = 0; i < seed.length; i++) {
-      if (numbersToConfirm.includes(i)) {
-        wordsToConfirm[i] = true;
-      } else {
-        wordsToConfirm[i] = false;
-      }
-    }
-
-    this.wordsToConfirm = wordsToConfirm;
-  }
-
-  private getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  
+  /*
   reset_data() {
     this.data = "";
   }
@@ -156,5 +93,6 @@ export class WalletDashboardComponent implements OnInit {
     }
     return false;
   }
+  */
   
 }

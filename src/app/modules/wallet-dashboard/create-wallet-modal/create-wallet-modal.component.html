@@ -1,0 +1,163 @@
+<!-- Create new wallet modal 1/4 - Name and password -->
+<app-ui-modal #createWalletModal1 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Create new wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal1.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="NameAndPasswordForm" id="NameAndPasswordForm" (ngSubmit)="onSubmitNameAndPasswordForm()">
+      <div class="form-group">
+        <label for="wallet-name">Name</label>
+        <input type="text" class="form-control" id="wallet-name" placeholder="Enter wallet name" formControlName="walletName" [ngClass]="{'is-invalid': (walletName.dirty || walletName.touched) && walletName.invalid, 'is-valid': (walletName.dirty || walletName.touched) && !walletName.invalid}">
+        <div *ngIf="(walletName.dirty || walletName.touched) && walletName.invalid">
+          <small class="form-text text-danger" *ngIf="walletName.errors.required">A wallet name is required.</small>
+        </div>
+        <small id="wallet-name-help" class="form-text text-muted">This name can be changed later.</small>
+      </div>
+      
+      <div formGroupName="walletPassword">
+        <div class="form-group">
+          <label for="wallet-password">Password</label>
+          <input type="password" class="form-control" id="wallet-password" placeholder="Enter a password" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && password.invalid, 'is-valid': (password.dirty || password.touched) && !password.invalid}">
+          <div *ngIf="(password.dirty || password.touched) && password.invalid">
+            <small class="form-text text-danger" *ngIf="password.errors.required">Password is required.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="wallet-password-confirmation">Confirm password</label>
+          <input type="password" class="form-control" id="wallet-password-confirmation" placeholder="Please confirm the password" formControlName="passwordConfirmation" [ngClass]="{'is-invalid': (passwordConfirmation.dirty || passwordConfirmation.touched) && (passwordConfirmation.invalid || NameAndPasswordForm.controls.walletPassword.errors?.passwordsDoNotMatch), 'is-valid': (passwordConfirmation.dirty || passwordConfirmation.touched) && !passwordConfirmation.invalid && !NameAndPasswordForm.controls.walletPassword.invalid}">
+          <div *ngIf="(passwordConfirmation.dirty || passwordConfirmation.touched) && (passwordConfirmation.invalid || NameAndPasswordForm.controls.walletPassword.invalid)">
+            <small class="form-text text-danger" *ngIf="passwordConfirmation.errors?.required">Password confirmation is required.</small>
+            <small class="form-text text-danger" *ngIf="NameAndPasswordForm.controls.walletPassword.errors?.passwordsDoNotMatch">Passwords don't match.</small>
+          </div>
+          <small id="wallet-password-help" class="form-text text-muted">This password is used to encrypt the private key and can be changed later.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  <div class="app-modal-footer">
+    <button form="NameAndPasswordForm" class="btn btn-primary text-center">Continue</button>
+  </div>
+</app-ui-modal>
+
+
+<!-- Create new wallet modal 2/4 - mnemonic seed -->
+<app-ui-modal #createWalletModal2 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Create new wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal2.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-6 text-left" for="mnemonic-seed">Mnemonic seed</label>
+          <div class="col-6 text-right">
+            <button class="btn btn-icon btn-secondary" type="button" (click)="copySeedToClipboard()"><i class="feather icon-copy"></i><span [hidden]="!seedCopiedToClipboard" class="badge badge-success">Copied!</span></button>
+            
+          </div>
+        </div>
+        <div class="px-3">
+          <div class="row">
+            <div *ngFor="let word of exampleSeed; let i=index" class="form-group col-3 px-2 mb-0">
+              <label class="col-form-label pb-0">{{ i + 1 }}</label>
+              <input type="text" readonly class="form-control-plaintext text-monospace pt-1" [value]="word">
+              <hr class="mt-0 mb-2">
+            </div>
+          </div>
+        </div>
+        <small id="mnemonic-seed-help" class="form-text text-danger">This seed stores all the information to retrieve your private key (thus your wallet). Please keep it private and secure. For example, write it on a piece of paper and keep it secret.</small>
+      </div>
+    </form>    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-secondary text-center" (click)="createWalletModal2.hide(); createWalletModal1.show()">Back</button>
+    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal2.hide(); confirmSeedRandomWords(exampleSeed, this.NUMBER_SEED_WORDS_TO_CONFIRM);createWalletModal3.show()">Continue</button>
+  </div>
+</app-ui-modal>
+
+
+<!-- Create new wallet modal 3/4 - mnemonic seed confirmation -->
+<app-ui-modal #createWalletModal3 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Create new wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal3.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form>
+      <div class="form-group">
+        <label for="mnemonic-seed">Mnemonic seed confirmation</label>
+        <div class="font-weight-bold text-center mb-2">Please enter the missing words.</div>
+        <div *ngIf="wordsToConfirm === undefined" class="font-weight-bold text-center mb-2 text-danger">Please click on back and generate the random confirmation array</div>
+        <div class="px-3">
+          <div class="row">
+            <div *ngFor="let word of exampleSeed; let i=index" class="form-group col-3 px-2 mb-0">
+              <label [ngClass]="{'text-warning': wordsToConfirm !== undefined && wordsToConfirm[i]}" class="col-form-label pb-0">{{ i + 1 }}</label>
+              <input *ngIf="wordsToConfirm !== undefined && wordsToConfirm[i]" type="text" class="form-control-plaintext text-monospace pt-1">
+              <input *ngIf="wordsToConfirm !== undefined && !wordsToConfirm[i]" type="text" readonly class="form-control-plaintext text-monospace text-muted pt-1" [value]="word">
+              <hr class="mt-0 mb-2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-secondary text-center" (click)="createWalletModal3.hide(); createWalletModal2.show()">Back</button>
+    <button type="submit" class="btn btn-primary text-center" (click)="createWalletModal3.hide(); createWalletModal4.show()">Confirm & continue</button>
+  </div>
+</app-ui-modal>
+
+
+<!-- Create new wallet modal 4/4 - recap and confirmation -->
+<app-ui-modal #createWalletModal4 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Create new wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal4.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <div class="form-group row">
+      <label for="wallet-name-recap" class="col-sm-3 col-form-label">Wallet name</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="wallet-name-recap" value="MySalary">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="public-address-recap" class="col-sm-3 col-form-label">Public address</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="public-address-recap" value="XCA1d23js39JDj3Nd...zXi2jZ">
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <div *ngIf="!walletCreationConfirmationLoading">
+      <button class="btn btn-secondary text-center" (click)="createWalletModal4.hide(); createWalletModal3.show()">Back</button>
+      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide(createWalletModal4, 1000, 'walletCreationConfirmationLoading')">Confirm & Create wallet</button>
+    </div>
+    
+    <div *ngIf="walletCreationConfirmationLoading">
+      <button type="submit" class="btn btn-success text-center">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Creating wallet...
+      </button>
+    </div>
+  </div>
+</app-ui-modal>
