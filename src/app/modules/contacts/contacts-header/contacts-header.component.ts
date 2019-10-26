@@ -37,6 +37,9 @@ export class ContactsHeaderComponent implements OnInit {
       this.addContactModal.hide();
       this.newContactEvent.emit(this.addNewContactForm.value);
       this.addNewContactForm.reset();
+    } else {
+      this.contactName.markAsTouched();
+      this.contactPublicAddress.markAsTouched();
     }
   }
 
