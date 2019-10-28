@@ -10,9 +10,9 @@ import { WalletTransactionsComponent } from './wallet-transactions/wallet-transa
 import { WalletAddressesComponent } from './wallet-addresses/wallet-addresses.component';
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
-import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
+import { SharedWalletModalModule } from '../../shared/shared-wallet-modal/shared-wallet-modal.module';
 import { MatTableModule, MatSortModule } from '@angular/material';
-import { XcashCurrencyPipe } from 'src/app/pipes/xcash-currency.pipe';
+import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +20,7 @@ import { XcashCurrencyPipe } from 'src/app/pipes/xcash-currency.pipe';
     WalletTransactionsComponent, 
     WalletAddressesComponent, 
     WalletSignDataComponent, 
-    WalletReserveProofComponent,
-    XcashCurrencyPipe,
+    WalletReserveProofComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +30,7 @@ import { XcashCurrencyPipe } from 'src/app/pipes/xcash-currency.pipe';
     SharedWalletModalModule,
     MatTableModule,
     MatSortModule,
+    SharedPipesModule,
   ]
 })
 export class WalletModule { }

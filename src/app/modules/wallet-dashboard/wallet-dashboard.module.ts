@@ -7,12 +7,16 @@ import {NgbProgressbarModule, NgbDropdownModule, NgbTabsetModule} from '@ng-boot
 import { WalletDashboardComponent } from './wallet-dashboard.component';
 
 import { WalletHomeRoutingModule } from './wallet-dashboard-routing.module';
-import { SharedWalletModalModule } from '../shared-wallet-modal/shared-wallet-modal.module';
+import { SharedWalletModalModule } from '../../shared/shared-wallet-modal/shared-wallet-modal.module';
 import { CreateWalletModalComponent } from './create-wallet-modal/create-wallet-modal.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 
 @NgModule({
-  declarations: [WalletDashboardComponent, CreateWalletModalComponent],
+  declarations: [
+    WalletDashboardComponent, 
+    CreateWalletModalComponent,
+  ],
   imports: [
     CommonModule,
     WalletHomeRoutingModule,
@@ -21,7 +25,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     NgbDropdownModule,
     NgbTabsetModule,
     SharedWalletModalModule,
-    ClipboardModule
+    ClipboardModule,
+    SharedPipesModule,
   ]
 })
 export class WalletDashboardModule { }
