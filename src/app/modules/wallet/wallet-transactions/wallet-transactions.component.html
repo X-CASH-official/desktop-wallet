@@ -1,42 +1,100 @@
-<p>
-  wallet-transactions works!
-</p>
+<table mat-table matSort
+[dataSource]="dataSource" multiTemplateDataRows
+class="mat-elevation-z8">
 
+<!-- Transaction Column -->
+<ng-container matColumnDef="id" >
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+  <td mat-cell *matCellDef="let transaction"> {{transaction.id}} </td>
+</ng-container>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!-- Amount Column -->
+<ng-container matColumnDef="amount">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+  <td mat-cell *matCellDef="let transaction"> {{transaction.amount | xcash}}</td>
+</ng-container>
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+<!-- Recipient Column -->
+<ng-container matColumnDef="recipient">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Recipient </th>
+  <td mat-cell *matCellDef="let transaction"> {{transaction.recipient | slice:0:15 }}...{{transaction.recipient | slice:-15 }} </td>
+</ng-container>
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="position" matSort>
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-  </ng-container>
+<!-- Date Column -->
+<ng-container matColumnDef="date">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+  <td mat-cell *matCellDef="let transaction"> {{transaction.date | date:'medium'}} </td>
+</ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
+<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+<ng-container matColumnDef="expandedDetail">
+  <td mat-cell *matCellDef="let transaction" [attr.colspan]="columnsToDisplay.length">
+    <div class="transaction-detail" [@detailExpand]="transaction == expandedTransaction ? 'expanded' : 'collapsed'">
+      <div class="shadow-none p-3 mb-3 bg-light rounded">
+        
+        <div class="row">
+          <label for="transaction-recipient" class="col-1 col-form-label">Recipient</label>
+          <span class="col-11 form-control-plaintext" id="transaction-recipient">{{transaction.recipient}}</span>
+        </div>
+        
+        <div class="row">
+          <label for="transaction-date" class="col-1 col-form-label">Date</label>
+          <span class="col-11 form-control-plaintext" id="transaction-date">{{transaction.date | date:'full'}}</span>
+        </div>
+        
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <label for="transaction-type" class="col-3 col-form-label">Amount</label>
+              <span class="col-9 form-control-plaintext" id="transaction-type">{{transaction.amount | xcash}}</span>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="row">
+              <label for="transaction-fees" class="col-3 col-form-label">Fees</label>
+              <span class="col-9 form-control-plaintext" id="transaction-fees">{{transaction.fees | xcash}}</span>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="row">
+              <label for="transaction-total" class="col-3 col-form-label">Total</label>
+              <span class="col-9 form-control-plaintext" id="transaction-total">{{transaction.total | xcash}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <label for="transaction-type" class="col-3 col-form-label">Type</label>
+              <span class="col-9 form-control-plaintext" id="transaction-type">{{transaction.type}}</span>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="row">
+              <label for="transaction-block-height" class="col-3 col-form-label">Blockheight</label>
+              <span class="col-9 form-control-plaintext" id="transaction-block-height">{{transaction.blockHeight}}</span>
+            </div>
+          </div>
+          
+          <div class="py-2 col">
+            <a href="https://www.sgat-technologies.com/fr/" target="_blank" rel="noopener noreferrer">See in transaction explorer</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </td>
+</ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+<tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+class="example-element-row"
+[class.example-expanded-row]="expandedTransaction === element"
+(click)="expandedTransaction = expandedTransaction === element ? null : element">
+</tr>
+<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
-
-
-<!-- Copyright 2019 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
