@@ -13,18 +13,10 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
   styleUrls: ['./contacts-table.component.scss']
 })
 export class ContactsTableComponent implements OnInit {
-  
-  contacts: ContactList;
-  
-  readonly addrSliceSize: number = 10;
-  
-  dataSource;
-  displayedColumns: string[] = ['id', 'name', 'address', 'actions'];
-  
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  /* For modifyContact Modal */
+
+  constructor(private validatorRegexService: ValidatorsRegexService) { }
+
+  /* modifyContact Modal */
   @ViewChild('modifyContactModal') modifyContactModal;
   modifyContactForm = new FormGroup({
     contactID: new FormControl(''),
@@ -40,10 +32,15 @@ export class ContactsTableComponent implements OnInit {
   get contactPublicAddress() {
     return this.modifyContactForm.get('contactPublicAddress');
   }
-  
-  
-  constructor(private validatorRegexService: ValidatorsRegexService, private changeDetectorRefs: ChangeDetectorRef) { }
-  
+
+  /* Data table */
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  contacts: ContactList;
+  dataSource;
+  displayedColumns: string[] = ['id', 'name', 'address', 'actions'];
+
   ngOnInit() {  
     this.contacts = new ContactList(FAKE_CONTACTS);
     this.dataSource = new MatTableDataSource(this.contacts.contactList);

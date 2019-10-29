@@ -1,3 +1,47 @@
-<p>
-  wallet-addresses works!
-</p>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+</mat-form-field>
+<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+  
+  <!-- Index Column -->
+  <ng-container matColumnDef="id" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+  
+  <!-- PaymentID Column -->
+  <ng-container matColumnDef="paymentID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Payment ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.paymentID}} </td>
+  </ng-container>
+  
+  <!-- Address Column -->
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+    <td mat-cell *matCellDef="let element"> {{ element.address | xcashPublicAddress:10 }} </td>
+  </ng-container>
+  
+  <!-- Actions buttons COlumn -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button type="button" class="btn btn-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
+      triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleAddrCopyTooltip(addrCopyTooltip)" [autoClose]=false placement="top" ngxClipboard [cbContent]="element.address"><i class="feather icon-copy"></i></button>
+      
+      <!-- Other buttons
+        <button type="button" class="btn btn-icon btn-outline-primary mb-0" (click)="onModifyContactToggle(contact)"><i class="feather icon-edit-1"></i></button>
+        
+        <button type="button" class="btn btn-icon btn-outline-danger m-0" (click)="onDeleteContact(contact.id)"><i class="feather icon-trash"></i></button>
+        
+        
+        <button type="button" class="btn btn-icon btn-outline-success m-0" "><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
+      -->
+    </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+</table>
+<mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
