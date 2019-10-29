@@ -13,6 +13,7 @@ import { ContactsComponent } from './contacts.component';
 import { ContactsHeaderComponent } from './contacts-header/contacts-header.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatPaginatorModule } from '@angular/material';
+import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 
 @NgModule({
   declarations: [ContactsTableComponent, ContactsComponent, ContactsHeaderComponent],
@@ -29,7 +30,8 @@ import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatP
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    SharedPipesModule,
     
   ]
 })

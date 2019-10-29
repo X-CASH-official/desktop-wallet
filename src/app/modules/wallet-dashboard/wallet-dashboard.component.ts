@@ -30,22 +30,22 @@ export class WalletDashboardComponent implements OnInit {
   walletsList: Array<object> = [
     {
       name: "Wallet name",
-      address: "XCA...3dR",
+      address: "XCA1vVaMrUw7Tjz3Y9beuby7pcEF39gMWc8ZtEvsI8pMlWCo5pGdiTk4imZIeqoIGkRYMWe3tKTuPlOov5UPkphDjDFvUtY1m2",
       balance: 123423245
     },
     {
       name: "Salary",
-      address: "XCA...v2D",
+      address: "XCA1o8eRrUw7Tjz3Y9beuby7pcEF39gMWc8ZtEvsI8pMlWCo5pGdiTk4imZIeqoIGkRYMWe3tKTuPlOov5UPkphDjDFvUtY3pZ",
       balance: 18240890
     },
     {
       name: "Fundings",
-      address: "XCA...b3s",
+      address: "XCA1vpziZUw7Tjz3Y9beuby7pcEF39gMWc8ZtEvsI8pMlWCo5pGdiTk4imZIeqoIGkRYMWe3tKTuPlOov5UPkphDjDFvUtm0sZ",
       balance: 20640789
     },
     {
       name: "Charities",
-      address: "XCA...z4n",
+      address: "XCA1ks9ZrUw7Tjz3Y9beuby7pcEF39gMWc8ZtEvsI8pMlWCo5pGdiTk4imZIeqoIGkRYMWe3tKTuPlOov5UPkphDjDFvUtnx0p",
       balance: 1960740
     }
   ];

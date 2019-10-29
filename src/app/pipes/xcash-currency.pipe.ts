@@ -7,7 +7,7 @@ import { DecimalPipe } from '@angular/common';
 })
 export class XcashCurrencyPipe extends DecimalPipe implements PipeTransform {
 
-  transform(value: any, args?: any): string {
+  transform(value: number, args?: any): string {
     let formatedByCurrencyPipe = super.transform(value, args);
     return formatedByCurrencyPipe + ' XCASH';
   }
