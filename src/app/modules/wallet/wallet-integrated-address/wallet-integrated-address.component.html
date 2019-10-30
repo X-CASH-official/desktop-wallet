@@ -2,7 +2,7 @@
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
 </mat-form-field>
-<button class="btn btn-primary m-0" type="button" (click)="createIntegratedAddressModal1.show()"><i class=""></i>Create integrated address</button>
+<button class="btn btn-primary m-0" type="button" (click)="createIntegratedAddressModal1.show()"><i class="feather icon-plus-circle"></i>Create integrated address</button>
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
   
   <!-- Index Column -->
@@ -34,7 +34,6 @@
         <button type="button" class="btn btn-icon btn-outline-primary mb-0" (click)="onModifyContactToggle(contact)"><i class="feather icon-edit-1"></i></button>
         
         <button type="button" class="btn btn-icon btn-outline-danger m-0" (click)="onDeleteContact(contact.id)"><i class="feather icon-trash"></i></button>
-        
         
         <button type="button" class="btn btn-icon btn-outline-success m-0" "><i style="transform: scaleX(-1);" class="fas fa-reply"></i></button>
       -->

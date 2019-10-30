@@ -14,6 +14,7 @@ import { SharedWalletModalModule } from '../../shared/shared-wallet-modal/shared
 import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatPaginatorModule } from '@angular/material';
 import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 import { ClipboardModule } from 'ngx-clipboard';
+import { WalletSubAddressComponent } from './wallet-sub-address/wallet-sub-address.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     WalletTransactionsComponent, 
     WalletIntegratedAddressComponent, 
     WalletSignDataComponent, 
-    WalletReserveProofComponent
+    WalletReserveProofComponent, 
+    WalletSubAddressComponent
   ],
   imports: [
     CommonModule,

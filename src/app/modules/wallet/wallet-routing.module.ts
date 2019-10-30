@@ -5,6 +5,7 @@ import { WalletTransactionsComponent } from './wallet-transactions/wallet-transa
 import { WalletIntegratedAddressComponent } from './wallet-integrated-address/wallet-integrated-address.component';
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
+import { WalletSubAddressComponent } from './wallet-sub-address/wallet-sub-address.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'integrated-address',
         component: WalletIntegratedAddressComponent,
+      },
+      {
+        path: 'sub-address',
+        component: WalletSubAddressComponent,
       },
       {
         path: 'sign-data',
