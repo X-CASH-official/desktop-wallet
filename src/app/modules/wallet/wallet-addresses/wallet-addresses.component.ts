@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
+import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 
 
 @Component({
@@ -9,7 +12,29 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class WalletAddressesComponent implements OnInit {
   
-  constructor() { }
+  constructor(private validatorRegexService: ValidatorsRegexService) { }
+
+  /* Create integrated address modal */
+  @ViewChild('createIntegratedAddressModal1') createIntegratedAddressModal1: UiModalComponent;
+  @ViewChild('createIntegratedAddressModal2') createIntegratedAddressModal2: UiModalComponent;
+
+  paymentIDForm = new FormGroup({
+    encryptedPaymentID: new FormControl('', [Validators.pattern(this.validatorRegexService.encrypted_payment_id)]),
+  });
+  get encryptedPaymentID() {
+    return this.paymentIDForm.get('encryptedPaymentID');
+  }
+  onSubmitPaymentID() {
+    if (this.paymentIDForm.valid) {
+      console.log(this.paymentIDForm);
+      // fake creation
+      this.createdIntegratedAddress = "XCB1yBRF4nz4nUD0bA1y7QPwCvGS4PUJbiGMq95xC6cYLBdfGaziuSTFrzZ2SZndgKrQv314sAn0yA1TwsG8vG02YFRGyCli60";
+      this.createIntegratedAddressModal1.hide();
+      this.createIntegratedAddressModal2.show();
+    }
+  }
+
+  createdIntegratedAddress: string;
   
   /* addresses table */
   @ViewChild(MatSort) sort: MatSort;
@@ -23,7 +48,7 @@ export class WalletAddressesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  toggleAddrCopyTooltip(tooltip) {
+  toggleCopyTooltip(tooltip) {
     if (!tooltip.isOpen()) {
       tooltip.open();
       setTimeout(() => {
