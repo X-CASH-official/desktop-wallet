@@ -7,7 +7,7 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { WalletTransactionsComponent } from './wallet-transactions/wallet-transactions.component';
-import { WalletAddressesComponent } from './wallet-addresses/wallet-addresses.component';
+import { WalletIntegratedAddressComponent } from './wallet-integrated-address/wallet-integrated-address.component';
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
 import { SharedWalletModalModule } from '../../shared/shared-wallet-modal/shared-wallet-modal.module';
@@ -19,7 +19,7 @@ import { ClipboardModule } from 'ngx-clipboard';
   declarations: [
     WalletComponent, 
     WalletTransactionsComponent, 
-    WalletAddressesComponent, 
+    WalletIntegratedAddressComponent, 
     WalletSignDataComponent, 
     WalletReserveProofComponent
   ],

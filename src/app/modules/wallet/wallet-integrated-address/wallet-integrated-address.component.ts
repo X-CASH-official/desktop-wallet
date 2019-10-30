@@ -6,11 +6,11 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 
 
 @Component({
-  selector: 'app-wallet-addresses',
-  templateUrl: './wallet-addresses.component.html',
-  styleUrls: ['./wallet-addresses.component.scss']
+  selector: 'app-wallet-integrated-address',
+  templateUrl: './wallet-integrated-address.component.html',
+  styleUrls: ['./wallet-integrated-address.component.scss']
 })
-export class WalletAddressesComponent implements OnInit {
+export class WalletIntegratedAddressComponent implements OnInit {
   
   constructor(private validatorRegexService: ValidatorsRegexService) { }
 
@@ -46,6 +46,10 @@ export class WalletAddressesComponent implements OnInit {
   ngOnInit() {  
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   toggleCopyTooltip(tooltip) {
