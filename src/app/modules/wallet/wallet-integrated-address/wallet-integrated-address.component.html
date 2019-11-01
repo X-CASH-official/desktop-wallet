@@ -1,8 +1,12 @@
+<div class="row justify-content-between mb-2">
+  <div class="col-md-3 col-4">
+    <input type="text" class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary m-0" type="button" (click)="createIntegratedAddressModal1.show()"><i class="feather icon-plus-circle"></i>Create integrated address</button>
+  </div>
+</div>
 
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-</mat-form-field>
-<button class="btn btn-primary m-0" type="button" (click)="createIntegratedAddressModal1.show()"><i class="feather icon-plus-circle"></i>Create integrated address</button>
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
   
   <!-- Index Column -->
