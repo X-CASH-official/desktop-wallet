@@ -28,5 +28,7 @@ export class ValidatorsRegexService {
   
   text_settings:RegExp = new RegExp(`^[a-zA-Z0-9]{1,${this.constantsService.text_settings_length}}$`);
 
+  data_to_sign:RegExp = new RegExp(`^[a-zA-Z0-9]+$`);
+
   contact_name:RegExp = new RegExp("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$")
 }
