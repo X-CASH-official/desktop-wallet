@@ -3,11 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 
 @Component({
-  selector: 'app-contacts-header',
-  templateUrl: './contacts-header.component.html',
-  styleUrls: ['./contacts-header.component.scss']
+  selector: 'app-add-contact-modal',
+  templateUrl: './add-contact-modal.component.html',
+  styleUrls: ['./add-contact-modal.component.scss']
 })
-export class ContactsHeaderComponent implements OnInit {
+export class AddContactModalComponent implements OnInit {
 
   @Output() newContactEvent = new EventEmitter();
 
@@ -41,6 +41,10 @@ export class ContactsHeaderComponent implements OnInit {
       this.contactName.markAsTouched();
       this.contactPublicAddress.markAsTouched();
     }
+  }
+
+  show() {
+    this.addContactModal.show();
   }
 
 }

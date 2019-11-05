@@ -67,7 +67,7 @@ export class WalletReserveProofComponent implements OnInit {
     console.log(this.verifyReserveProofForm);
     if (this.verifyReserveProofForm.valid) {
       this.verifyReserveProofIsSubmitted = true;
-      // TODO: process of signature verification
+      // TODO: process of reserve proof verification
       this.verificationSuccess = true;
     } else {
       this.addressToVerify.markAsTouched();

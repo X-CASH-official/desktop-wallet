@@ -10,13 +10,13 @@ import { ContactsTableComponent } from './contacts-table/contacts-table.componen
 import {DataTablesModule} from 'angular-datatables';
 import {FormsModule} from '@angular/forms';
 import { ContactsComponent } from './contacts.component';
-import { ContactsHeaderComponent } from './contacts-header/contacts-header.component';
+import { AddContactModalComponent } from './contacts-header/add-contact-modal.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatPaginatorModule } from '@angular/material';
 import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 
 @NgModule({
-  declarations: [ContactsTableComponent, ContactsComponent, ContactsHeaderComponent],
+  declarations: [ContactsTableComponent, ContactsComponent, AddContactModalComponent],
   imports: [
     CommonModule,
     ContactsRoutingModule,
