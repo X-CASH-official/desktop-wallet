@@ -1,3 +1,9 @@
+<div class="row justify-content-between mb-2">
+  <div class="col-md-3 col-4">
+    <input type="text" class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </div>
+</div>
+
 <table mat-table matSort
 [dataSource]="dataSource" multiTemplateDataRows
 class="mat-elevation-z8">
@@ -98,3 +104,4 @@ class="example-element-row"
 </tr>
 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+<mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
@@ -17,6 +17,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class WalletTransactionsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   dataSource = new MatTableDataSource(FAKE_TRANSACTIONS);
   columnsToDisplay = ['id', 'amount', 'recipient', 'date'];
@@ -26,6 +27,11 @@ export class WalletTransactionsComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
