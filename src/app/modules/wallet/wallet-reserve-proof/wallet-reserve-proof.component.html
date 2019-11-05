@@ -1,3 +1,171 @@
-<p>
-  wallet-reserve-proof works!
-</p>
+<div class="row justify-content-between mb-2">
+  <div class="col-md-3 col-4">
+    <input type="text" class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary mb-0" type="button" (click)="createReserveProofModal1.show()"><i class="feather icon-feather"></i>Create</button>
+    <button class="btn btn-primary m-0" type="button" (click)="verifyReserveProofModal.show()"><i class="feather icon-check-square"></i>Verify</button>
+  </div>
+</div>
+
+<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+  
+  <!-- Index Column -->
+  <ng-container matColumnDef="id" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+  
+  <!-- Amount Column -->
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.amount | xcash}} </td>
+  </ng-container>
+  
+  <!-- Signature Column -->
+  <ng-container matColumnDef="signature">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Signature </th>
+    <td mat-cell *matCellDef="let element"> {{ element.signature | xcashPublicAddress:10 }} </td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+    <td mat-cell *matCellDef="let element"> {{ element.status }} </td>
+  </ng-container>
+  
+  <!-- Actions buttons Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button type="button" class="btn btn-icon btn-table-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
+      triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrCopyTooltip)" placement="top" ngxClipboard [cbContent]="element.signature"><i class="feather icon-copy"></i></button>
+    </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+</table>
+<mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+
+
+<!-- Create reserve proof modal 1 -->
+<app-ui-modal #createReserveProofModal1 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Amount</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createReserveProofModal1.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="createReserveProofForm" (ngSubmit)="onSubmitCreateReserveProof()" id="createReserveProofForm">
+      <div class="form-group">
+        <label for="amount-to-prove">Amount</label>
+        <input type="text" class="form-control" id="amount-to-prove" placeholder="Enter the amount to prove" formControlName="amountToProve" [ngClass]="{'is-invalid': (amountToProve.dirty || amountToProve.touched) && amountToProve.invalid, 'is-valid': (amountToProve.dirty || amountToProve.touched) && !amountToProve.invalid}">
+        <div *ngIf="(amountToProve.dirty || amountToProve.touched) && amountToProve.invalid">
+          <small class="form-text text-danger" *ngIf="amountToProve.errors.pattern">Invalid amount of XCASH.</small>
+          <small class="form-text text-danger" *ngIf="amountToProve.errors.required">Amount to prove is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message-to-prove">Message (optional)</label>
+        <input type="text" class="form-control" id="message-to-prove" placeholder="Enter the message (optional)" formControlName="messageToProve" [ngClass]="{'is-invalid': (messageToProve.dirty || messageToProve.touched) && messageToProve.invalid, 'is-valid': (messageToProve.dirty || messageToProve.touched) && !messageToProve.invalid}">
+        <small class="form-text text-muted">Add a message to the signature to authenticate the prooving process.</small>
+        <div *ngIf="(messageToProve.dirty || messageToProve.touched) && messageToProve.invalid">
+          <small class="form-text text-danger" *ngIf="messageToProve.errors.pattern">Invalid message.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" form="createReserveProofForm">Create reserve proof</button>
+  </div>
+</app-ui-modal>
+
+
+<!-- Create reserve proof modal 2 -->
+<app-ui-modal #createReserveProofModal2 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Create reserve proof</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createReserveProofModal2.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <div class="form-group">
+      <label for="created-reserve-signature">Reserve signature</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="created-reserve-signature" [value]="createdReserveSignature" readonly>
+        <div class="input-group-append">
+          <button class="btn btn-primary btn-icon" type="button" ngbTooltip="Copied!"
+          triggers="manual" #createReserveProofModalCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(createReserveProofModalCopyTooltip)" ngxClipboard [cbContent]="createdReserveSignature"><i class="feather icon-copy"></i></button>
+        </div>
+      </div>
+      <small class="form-text text-muted">You can later retrieve this newly created reserve signature in the corresponding table.</small>
+    </div>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-primary text-center" (click)="createReserveProofModal2.hide()">Close</button>
+  </div>
+</app-ui-modal>
+
+
+<!-- Verify reserve proof modal -->
+<app-ui-modal #verifyReserveProofModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Verify reserve proof</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="verifyReserveProofModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="verifyReserveProofForm" (ngSubmit)="onSubmitReserveProof()" id="verifyReserveProofForm">
+      <div class="form-group">
+        <label for="address-to-verify">Address</label>
+        <input type="text" class="form-control" id="address-to-verify" placeholder="Enter the address" formControlName="addressToVerify" [ngClass]="{'is-invalid': (addressToVerify.dirty || addressToVerify.touched) && addressToVerify.invalid, 'is-valid': (addressToVerify.dirty || addressToVerify.touched) && !addressToVerify.invalid}">
+        <div *ngIf="(addressToVerify.dirty || addressToVerify.touched) && addressToVerify.invalid">
+          <small class="form-text text-danger" *ngIf="addressToVerify.errors.pattern">Address must a XCASH public address.</small>
+          <small class="form-text text-danger" *ngIf="addressToVerify.errors.required">Address is required.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="message-to-verify">Message</label>
+        <input type="text" class="form-control" id="message-to-verify" placeholder="Enter message (optional)" formControlName="messageToVerify" [ngClass]="{'is-invalid': (messageToVerify.dirty || messageToVerify.touched) && messageToVerify.invalid, 'is-valid': (messageToVerify.dirty || messageToVerify.touched) && !messageToVerify.invalid}">
+        <div *ngIf="(messageToVerify.dirty || messageToVerify.touched) && messageToVerify.invalid">
+          <small class="form-text text-danger" *ngIf="messageToVerify.errors.pattern">Invalid message format.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="signature-to-verify">Signature</label>
+        <input type="text" class="form-control" id="signature-to-verify" placeholder="Enter signature" formControlName="signatureToVerify" [ngClass]="{'is-invalid': (signatureToVerify.dirty || signatureToVerify.touched) && signatureToVerify.invalid, 'is-valid': (signatureToVerify.dirty || signatureToVerify.touched) && !signatureToVerify.invalid}">
+        <div *ngIf="(signatureToVerify.dirty || signatureToVerify.touched) && signatureToVerify.invalid">
+          <small class="form-text text-danger" *ngIf="signatureToVerify.errors.required">Signature is required.</small>
+          <small class="form-text text-danger" *ngIf="signatureToVerify.errors.pattern">Invalid format for signature.</small>
+        </div>
+      </div>
+    </form>
+    
+    <div *ngIf="verifyReserveProofIsSubmitted">
+      <div *ngIf="verificationSuccess" class="alert alert-success" role="alert">
+        Success!
+      </div>
+      <div *ngIf="!verificationSuccess" class="alert alert-danger" role="alert">
+        Failure!
+      </div>
+    </div>
+    
+  </div>
+  <div class="app-modal-footer">
+    <button *ngIf="!verifySignedDataIsSubmitted || !verificationSuccess" class="btn btn-success text-center" form="verifyReserveProofForm">Verify reserve proof</button>
+    <button *ngIf="verifySignedDataIsSubmitted && verificationSuccess" class="btn btn-primary text-center" (click)="onCloseReserveProofVerification()">Close</button>
+  </div>
+</app-ui-modal>

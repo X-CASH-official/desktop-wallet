@@ -64,7 +64,7 @@
     <form [formGroup]="paymentIDForm" (ngSubmit)="onSubmitPaymentID()" id="paymentIDForm">
       <div class="form-group">
         <label for="encrypted-payment-id">Encrypted payment ID (optional)</label>
-        <input type="text" class="form-control" id="encrypted-payment-id" placeholder="Encrypted payment ID (optional)" formControlName="encryptedPaymentID" [ngClass]="{'is-invalid': (encryptedPaymentID.dirty || encryptedPaymentID.touched) && encryptedPaymentID.invalid, 'is-valid': (encryptedPaymentID.dirty || encryptedPaymentID.touched) && !encryptedPaymentID.invalid}">
+        <input type="text" class="form-control" id="encrypted-payment-id" placeholder="Enter an encrypted payment ID (optional)" formControlName="encryptedPaymentID" [ngClass]="{'is-invalid': (encryptedPaymentID.dirty || encryptedPaymentID.touched) && encryptedPaymentID.invalid, 'is-valid': (encryptedPaymentID.dirty || encryptedPaymentID.touched) && !encryptedPaymentID.invalid}">
         <small class="form-text text-muted" *ngIf="encryptedPaymentID.value === ''">If no payment ID is specified, a random ID will be created.</small>
         <div *ngIf="(encryptedPaymentID.dirty || encryptedPaymentID.touched) && encryptedPaymentID.invalid">
           <small class="form-text text-danger" *ngIf="encryptedPaymentID.errors.pattern">Encrypted payment ID is a string of 16 hexadecimal characters.</small>

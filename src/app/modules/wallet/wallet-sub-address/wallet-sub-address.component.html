@@ -65,7 +65,7 @@
     <form [formGroup]="labelForm" (ngSubmit)="onSubmitLabel()" id="labelForm">
       <div class="form-group">
         <label for="sub-address-label">Label (optional)</label>
-        <input type="text" class="form-control" id="sub-address-label" placeholder="Label (optional)" formControlName="label" [ngClass]="{'is-invalid': (label.dirty || label.touched) && label.invalid, 'is-valid': (label.dirty || label.touched) && !label.invalid}">
+        <input type="text" class="form-control" id="sub-address-label" placeholder="Enter a label (optional)" formControlName="label" [ngClass]="{'is-invalid': (label.dirty || label.touched) && label.invalid, 'is-valid': (label.dirty || label.touched) && !label.invalid}">
       </div>
     </form>
     
@@ -96,7 +96,7 @@
           triggers="manual" #addrModalCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrModalCopyTooltip)" ngxClipboard [cbContent]="createdSubAddress"><i class="feather icon-copy"></i></button>
         </div>
       </div>
-      <small class="form-text text-muted" *ngIf="label.value === ''">You can later retrieve this newly created integrated address in the corresponding table.</small>
+      <small class="form-text text-muted">You can later retrieve this newly created sub address in the corresponding table.</small>
     </div>
     
   </div>
