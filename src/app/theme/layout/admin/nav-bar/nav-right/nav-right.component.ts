@@ -3,6 +3,7 @@ import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {DattaConfig} from '../../../../../app-config';
 import {ConfigurationComponent} from '../../configuration/configuration.component';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -34,7 +35,7 @@ export class NavRightComponent implements OnInit, DoCheck {
   public dattaConfig: any;
   public darkTheme: boolean = true;
 
-  constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent) {
+  constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent, private authService: AuthService) {
     config.placement = 'bottom-right';
     this.dattaConfig = DattaConfig.config;
   }

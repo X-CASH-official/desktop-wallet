@@ -5,7 +5,7 @@
     </a>
   </li>
   <li>
-    <a href="javascript:">
+    <a (click)="authService.logout()" [routerLink]="['/login']">
       <i id="logOut" class="icon feather icon-lock"></i>
     </a>
   </li>

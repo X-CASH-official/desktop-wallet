@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
-import { AuthComponent } from './theme/layout/auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: './auth/auth.module#AuthModule'
+  }, 
+  {
     path: '',
     component: AdminComponent,
+    canActivate: [AuthGuard], // Maybe this line is overkill because AdminComponent cannot be called without a child
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
@@ -19,19 +25,22 @@ const routes: Routes = [
       },
       {
         path: 'contacts',
+
         loadChildren: './modules/contacts/contacts.module#ContactsModule'
       },
       {
         path: 'settings',
+
         loadChildren: './modules/settings/settings.module#SettingsModule'
       },
-      {
-        path: '**',
-        redirectTo: 'wallet-dashboard',
-        pathMatch: 'full'
-      }
+      
     ]
-  },
+  }, 
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

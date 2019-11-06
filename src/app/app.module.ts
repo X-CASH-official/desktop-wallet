@@ -24,6 +24,7 @@ import { ConfigurationComponent } from './theme/layout/admin/configuration/confi
 import { variables_and_functions_service } from './services/variables_and_functions.service';
 import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
 import { MaterialModule } from './material.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { MaterialModule } from './material.module';
     NgbTabsetModule,
     MaterialModule,
     WalletDashboardModule,
+    AuthModule,
   ],
   providers: [
     NavigationItem,
