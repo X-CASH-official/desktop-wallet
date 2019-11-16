@@ -12,12 +12,13 @@ import { CreateWalletModalComponent } from './create-wallet-modal/create-wallet-
 import { ClipboardModule } from 'ngx-clipboard';
 import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 import { ImportWalletModalComponent } from './import-wallet-modal/import-wallet-modal.component';
+import { WalletNamePasswordModalComponent } from './wallet-name-password-modal/wallet-name-password-modal.component';
 
 @NgModule({
   declarations: [
     WalletDashboardComponent, 
     CreateWalletModalComponent, 
-    ImportWalletModalComponent,
+    ImportWalletModalComponent, WalletNamePasswordModalComponent,
   ],
   imports: [
     CommonModule,

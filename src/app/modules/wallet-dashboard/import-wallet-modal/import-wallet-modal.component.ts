@@ -58,6 +58,16 @@ export class ImportWalletModalComponent implements OnInit {
     }
   }
 
+  onSubmitNameAndPasswordImportModal(NameAndPasswordValue) {
+    console.log(NameAndPasswordValue);
+  }
+
+  onNameAndPasswordBackButton() {
+    this.importWalletModal2.hide();
+    this.importWalletModal1.show();
+  }
+
+
 
 
 }

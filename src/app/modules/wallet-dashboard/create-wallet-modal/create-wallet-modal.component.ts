@@ -1,14 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
-import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors, FormArray } from '@angular/forms';
-
-// I didn't find how to make cross field validation functions take paramaters in order to make this generic
-export const passwordMatchValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-  const password = control.get('password');
-  const confirmation = control.get('passwordConfirmation');
-  
-  return password.value === confirmation.value ? null : { passwordsDoNotMatch: true };
-};
+import { FormControl, Validators, FormArray } from '@angular/forms';
+import { WalletNamePasswordModalComponent } from '../wallet-name-password-modal/wallet-name-password-modal.component';
 
 @Component({
   selector: 'app-create-wallet-modal',
@@ -17,7 +10,7 @@ export const passwordMatchValidator: ValidatorFn = (control: FormGroup): Validat
 })
 export class CreateWalletModalComponent implements OnInit {
   
-  @ViewChild('createWalletModal1') createWalletModal1: UiModalComponent;
+  @ViewChild('createWalletModal1') createWalletModal1: WalletNamePasswordModalComponent;
   @ViewChild('createWalletModal2') createWalletModal2: UiModalComponent;
   @ViewChild('createWalletModal3') createWalletModal3: UiModalComponent;
   @ViewChild('createWalletModal4') createWalletModal4: UiModalComponent;
@@ -31,37 +24,9 @@ export class CreateWalletModalComponent implements OnInit {
     this.createWalletModal1.show();
   }
   
-  /* Name and Password */
-  NameAndPasswordForm = new FormGroup({
-    walletName: new FormControl('', [Validators.required]),
-    walletPassword: new FormGroup({
-      password: new FormControl('', [Validators.required]),
-      passwordConfirmation: new FormControl('', [Validators.required])
-    }, {
-      validators: passwordMatchValidator,
-    })
-  });
-  
-  get walletName() {
-    return this.NameAndPasswordForm.get('walletName');
-  }
-  get password() {
-    return this.NameAndPasswordForm.get('walletPassword').get('password');
-  }
-  get passwordConfirmation() {
-    return this.NameAndPasswordForm.get('walletPassword').get('passwordConfirmation');
-  }
-  
-  onSubmitNameAndPasswordForm() {
-    if (this.NameAndPasswordForm.valid) {
-      this.createWalletModal1.hide();
-      console.log(this.NameAndPasswordForm) // The action should take place here
-      this.createWalletModal2.show();
-    } else {
-      this.walletName.markAsTouched();
-      this.password.markAsTouched();
-      this.passwordConfirmation.markAsTouched();
-    }
+  onSubmitNameAndPasswordModal(NameAndPasswordValues) {
+    console.log(NameAndPasswordValues); // This is where the action should take place
+    this.createWalletModal2.show();
   }
   
   /* Mnemonic seed */

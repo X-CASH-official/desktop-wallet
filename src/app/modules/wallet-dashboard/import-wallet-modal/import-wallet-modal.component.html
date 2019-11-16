@@ -63,40 +63,9 @@
   </div>
 </app-ui-modal>
 
-<!-- import wallet modal 2/2 - name and password -->
-<app-ui-modal #importWalletModal2 dialogClass="modal-dialog-centered" containerClick="false">
-  <div class="app-modal-header">
-    
-    <h5 class="modal-title">Import wallet</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="importWalletModal2.hide()"><span aria-hidden="true">&times;</span></button>
-    
-  </div>
-  <div class="app-modal-body">
-    
-    <form>
-      <div class="form-group">
-        <label for="import-wallet-name">Name</label>
-        <input type="text" class="form-control" id="import-wallet-name" placeholder="Enter wallet name">
-        <small id="import-wallet-name-help" class="form-text text-muted">This name can be changed later.</small>
-      </div>
-      
-      <div class="form-group">
-        <label for="import-wallet-password">Password</label>
-        <input type="password" class="form-control" id="import-wallet-password" placeholder="Enter a password">
-        
-      </div>
-      
-      <div class="form-group">
-        <label for="import-wallet-password-confirmation">Confirm password</label>
-        <input type="password" class="form-control" id="import-wallet-password-confirmation" placeholder="Please confirm the password">
-        <small id="import-wallet-password-help" class="form-text text-muted">This password is used to encrypt the private key and can be changed later.</small>
-      </div>
-      
-    </form>    
-  </div>
-  
-  <div class="app-modal-footer">
-    <button class="btn btn-secondary text-center" (click)="importWalletModal2.hide(); importWalletModal1.show()">Back</button>
-    <button type="submit" class="btn btn-success text-center" (click)="importWalletModal2.hide()">Confirm & import</button>
-  </div>
-</app-ui-modal>
+<!-- Import wallet 2/2 - name and password -->
+<!-- This operation is shared between create and import modal and has its own component -->
+<app-wallet-name-password-modal #importWalletModal2 modalTitle="Import wallet" createOrImport="import" (onSubmit)="onSubmitNameAndPasswordImportModal($event)" (onBackButton)="onNameAndPasswordBackButton()"></app-wallet-name-password-modal>
+
+
+

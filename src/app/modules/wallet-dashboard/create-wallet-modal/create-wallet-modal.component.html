@@ -1,49 +1,6 @@
-<!-- Create new wallet modal 1/4 - Name and password -->
-<app-ui-modal #createWalletModal1 dialogClass="modal-dialog-centered" containerClick="false">
-  <div class="app-modal-header">
-    
-    <h5 class="modal-title">Create new wallet</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="createWalletModal1.hide()"><span aria-hidden="true">&times;</span></button>
-    
-  </div>
-  <div class="app-modal-body">
-    
-    <form [formGroup]="NameAndPasswordForm" id="NameAndPasswordForm" (ngSubmit)="onSubmitNameAndPasswordForm()">
-      <div class="form-group">
-        <label for="wallet-name">Name</label>
-        <input type="text" class="form-control" id="wallet-name" placeholder="Enter wallet name" formControlName="walletName" [ngClass]="{'is-invalid': (walletName.dirty || walletName.touched) && walletName.invalid, 'is-valid': (walletName.dirty || walletName.touched) && !walletName.invalid}">
-        <div *ngIf="(walletName.dirty || walletName.touched) && walletName.invalid">
-          <small class="form-text text-danger" *ngIf="walletName.errors.required">A wallet name is required.</small>
-        </div>
-        <small id="wallet-name-help" class="form-text text-muted">This name can be changed later.</small>
-      </div>
-      
-      <div formGroupName="walletPassword">
-        <div class="form-group">
-          <label for="wallet-password">Password</label>
-          <input type="password" class="form-control" id="wallet-password" placeholder="Enter a password" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && password.invalid, 'is-valid': (password.dirty || password.touched) && !password.invalid}">
-          <div *ngIf="(password.dirty || password.touched) && password.invalid">
-            <small class="form-text text-danger" *ngIf="password.errors.required">Password is required.</small>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="wallet-password-confirmation">Confirm password</label>
-          <input type="password" class="form-control" id="wallet-password-confirmation" placeholder="Please confirm the password" formControlName="passwordConfirmation" [ngClass]="{'is-invalid': (passwordConfirmation.dirty || passwordConfirmation.touched) && (passwordConfirmation.invalid || NameAndPasswordForm.controls.walletPassword.errors?.passwordsDoNotMatch), 'is-valid': (passwordConfirmation.dirty || passwordConfirmation.touched) && !passwordConfirmation.invalid && !NameAndPasswordForm.controls.walletPassword.invalid}">
-          <div *ngIf="(passwordConfirmation.dirty || passwordConfirmation.touched) && (passwordConfirmation.invalid || NameAndPasswordForm.controls.walletPassword.invalid)">
-            <small class="form-text text-danger" *ngIf="passwordConfirmation.errors?.required">Password confirmation is required.</small>
-            <small class="form-text text-danger" *ngIf="NameAndPasswordForm.controls.walletPassword.errors?.passwordsDoNotMatch">Passwords don't match.</small>
-          </div>
-          <small id="wallet-password-help" class="form-text text-muted">This password is used to encrypt the private key and can be changed later.</small>
-        </div>
-      </div>
-    </form>
-    
-  </div>
-  <div class="app-modal-footer">
-    <button form="NameAndPasswordForm" class="btn btn-primary text-center">Continue</button>
-  </div>
-</app-ui-modal>
-
+<!-- Create new wallet modal 1/4 - name and password -->
+<!-- This operation is shared between create and import modal and has its own component -->
+<app-wallet-name-password-modal #createWalletModal1 modalTitle="Create new wallet" createOrImport="create" (onSubmit)="onSubmitNameAndPasswordModal($event)"></app-wallet-name-password-modal>
 
 <!-- Create new wallet modal 2/4 - mnemonic seed -->
 <app-ui-modal #createWalletModal2 dialogClass="modal-dialog-centered" containerClick="false">
