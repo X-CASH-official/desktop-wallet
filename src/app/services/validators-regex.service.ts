@@ -11,8 +11,10 @@ export class ValidatorsRegexService {
   xcash_address:RegExp = new RegExp(`^(${this.constantsService.xcash_public_address_prefix}[a-zA-Z0-9]{${this.constantsService.xcash_public_address_length_settings}}|${this.constantsService.xcash_integrated_address_prefix}[a-zA-Z0-9]{${this.constantsService.xcash_integrated_address_length_settings}}|${this.constantsService.xcash_sub_address_prefix}[a-zA-Z0-9]{${this.constantsService.xcash_sub_address_length_settings}})$`);
   
   mnemonic_seed_or_private_key:RegExp = new RegExp(`^((?:\\b[a-z]+\\b[ ]*){${this.constantsService.mnemonic_seed_word_length}}|(?:[0-9a-f]{${this.constantsService.private_key_length}}))$`);
+
+  mnemonic_seed:RegExp = new RegExp(`^(\\b[a-z]+\\b[ ]*){${this.constantsService.mnemonic_seed_word_length}}`)
   
-  private_key:RegExp = new RegExp(`^(?:[0-9a-f]{${this.constantsService.private_key_length}})$`);
+  private_key:RegExp = new RegExp(`^([0-9a-f]{${this.constantsService.private_key_length}})$`);
   
   payment_id:RegExp = new RegExp(`^([0-9a-f]{${this.constantsService.unencrypted_payment_id_length}}|[0-9a-f]{${this.constantsService.encrypted_payment_id_length}}|)$`);
   

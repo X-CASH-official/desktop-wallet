@@ -60,7 +60,7 @@
         <div class="row">
           <label class="col-6 text-left" for="mnemonic-seed">Mnemonic seed</label>
           <div class="col-6 text-right">
-            <button class="btn btn-icon btn-secondary" type="button" (click)="copySeedToClipboard()" ngxClipboard [cbContent]="exampleSeed.toString()"><i class="feather icon-copy"></i><span [hidden]="!seedCopiedToClipboard" class="badge badge-success">Copied!</span></button>
+            <button class="btn btn-icon btn-secondary" type="button" (click)="copySeedToClipboard()" ngxClipboard [cbContent]="exampleSeed.join(' ')"><i class="feather icon-copy"></i><span [hidden]="!seedCopiedToClipboard" class="badge badge-success">Copied!</span></button>
           </div>
         </div>
         <div class="px-3">

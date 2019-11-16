@@ -7,10 +7,10 @@ import { tap, delay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn = false;
+  isLoggedIn = true; // TODO this should be positioned to false by default (just to speed up in dev mode)
 
   // store the URL so we can redirect after logging in
-  redirectUrl: string;
+  redirectUrl: string = '/wallet-dashboard';
 
   login(): Observable<boolean> {
     return of(true).pipe(
