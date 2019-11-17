@@ -15,6 +15,7 @@ import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatP
 import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 import { ClipboardModule } from 'ngx-clipboard';
 import { WalletSubAddressComponent } from './wallet-sub-address/wallet-sub-address.component';
+import { WalletSendModalComponent } from './wallet-send-modal/wallet-send-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { WalletSubAddressComponent } from './wallet-sub-address/wallet-sub-addre
     WalletIntegratedAddressComponent, 
     WalletSignDataComponent, 
     WalletReserveProofComponent, 
-    WalletSubAddressComponent
+    WalletSubAddressComponent, WalletSendModalComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { interval } from 'rxjs/observable/interval';
 import { Wallet } from 'src/app/models/wallet-list.models';
 import { WalletListService } from 'src/app/services/wallet-list.service';
+import { XcashPriceIndexService } from 'src/app/services/xcash-price-index.service';
+import { flatMap, takeUntil, switchMap, catchError, startWith } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-wallet-details',
@@ -11,24 +15,21 @@ import { WalletListService } from 'src/app/services/wallet-list.service';
   styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit {
-  maxAmountSwitch: boolean = false;
-
-  sendConfirmationLoading: boolean = false;
-
+  
   selectedWallet: number;
-
-  constructor(private router: Router, private walletListService: WalletListService) {
+  
+  constructor(private router: Router, private walletListService: WalletListService, private xcashPriceIndexService: XcashPriceIndexService) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.selectedWallet = this.router.getCurrentNavigation().extras.state.walletId;
-      console.log("Wallet selected:", this.selectedWallet);
+      //console.log("Wallet selected:", this.selectedWallet);
     } else {
       console.error("Illegal navigation: you must provide a walletId attribute in the state of the route when routing to the wallet module.");
     }
   }
-
+  
   walletData: Wallet;
   walletListSubscription: Subscription;
-
+  
   ngOnInit() {
     this.walletListSubscription = this.walletListService.getWalletList().subscribe((newWalletList) => {
       this.walletData = newWalletList[this.selectedWallet];
@@ -38,22 +39,4 @@ export class WalletComponent implements OnInit {
   ngOnDestroy() {
     this.walletListSubscription.unsubscribe();
   }
-
-  resetModelData() {
-    this.maxAmountSwitch = false;
-  }
-
-  simulateLoadingThenHide(modalElement: UiModalComponent, loadingTime: number, hidingBooleanName: string) {
-    // I'm sure there's a way to avoid this
-    this[hidingBooleanName] = true;
-    setTimeout(() => {
-      modalElement.hide();
-      setTimeout(() => {
-        this[hidingBooleanName] = false;
-      }, 300); // The time of the modal hiding animation
-    }, loadingTime);
-  }
-
-
-
 }

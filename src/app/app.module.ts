@@ -25,6 +25,7 @@ import { variables_and_functions_service } from './services/variables_and_functi
 import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
 import { MaterialModule } from './material.module';
 import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { AuthModule } from './auth/auth.module';
     MaterialModule,
     WalletDashboardModule,
     AuthModule,
+    HttpClientModule,
   ],
   providers: [
     NavigationItem,
