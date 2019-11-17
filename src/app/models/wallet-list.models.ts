@@ -29,6 +29,26 @@ export class WalletList {
         this.walletNumber++;
     }
 
+    public removeWallet(id: number) {
+        if (id > this.walletNumber) {
+            throw new Error("id exceed wallet list size");
+        } else {
+            this.walletList.splice(id, 1);
+            this.walletNumber--;
+            for (let i = id; i < this.walletNumber; i++) {
+                this.walletList[i].id--;
+            }
+        }
+    }
+
+    public renameWallet(id: number, newName: string) {
+        if (id > this.walletNumber) {
+            throw new Error("id exceed wallet list size");
+        } else {
+            this.walletList[id].name = newName;
+        }
+    }
+
     public getWalletList(): Wallet[] {
         return this.walletList;
     }

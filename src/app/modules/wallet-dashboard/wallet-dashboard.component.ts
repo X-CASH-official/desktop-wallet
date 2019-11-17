@@ -13,9 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class WalletDashboardComponent implements OnInit {
   
-  constructor(private variables_and_functions_service: variables_and_functions_service,
-              private walletListService: WalletListService,
-              config: NgbDropdownConfig) {
+  constructor(private walletListService: WalletListService, config: NgbDropdownConfig) {
     config.placement = 'bottom-right';
    }
   
@@ -24,5 +22,5 @@ export class WalletDashboardComponent implements OnInit {
   ngOnInit() {
     this.walletList$ = this.walletListService.getWalletList();
   }
-  
+
 }
