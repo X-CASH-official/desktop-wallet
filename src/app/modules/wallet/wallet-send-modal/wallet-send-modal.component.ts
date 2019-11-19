@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
-import { Wallet } from 'src/app/models/wallet-list.models';
+import { Wallet } from 'src/app/models/wallet.model';
 
 @Component({
   selector: 'app-wallet-send-modal',

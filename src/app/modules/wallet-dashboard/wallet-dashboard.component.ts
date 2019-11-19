@@ -3,8 +3,8 @@ import { variables_and_functions_service } from 'src/app/services/variables_and_
 
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { WalletListService } from 'src/app/services/wallet-list.service';
-import { Wallet } from 'src/app/models/wallet-list.models';
 import { BehaviorSubject } from 'rxjs';
+import { Wallet } from 'src/app/models/wallet.model';
 
 @Component({
   selector: 'app-wallet-dashboard',

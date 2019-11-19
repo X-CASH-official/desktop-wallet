@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ContactList, Contact } from '../models/contact-list.model';
+import { ContactList } from '../models/contact-list.model';
 import { BehaviorSubject } from 'rxjs';
 import { FAKE_CONTACTS } from 'src/fake-data/fake-contacts';
+import { Contact } from '../models/contact.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,16 @@ export class ContactListService {
   private contactList$: BehaviorSubject<Contact[]>;
 
   constructor() {
-    this.contactList = new ContactList(FAKE_CONTACTS);
-    this.contactList$ = new BehaviorSubject<Contact[]>(this.contactList.getContactList());
+    try {
+      this.contactList = new ContactList(FAKE_CONTACTS);
+      this.contactList$ = new BehaviorSubject<Contact[]>(this.contactList.getList());
+    } catch (e) {
+      console.error('Contact list initialization failed', e);
+    }
   }
 
   private update() {
-    this.contactList$.next(this.contactList.getContactList());
+    this.contactList$.next(this.contactList.getList());
   }
 
   public getContactList(): BehaviorSubject<Contact[]> {
@@ -25,7 +30,7 @@ export class ContactListService {
   }
 
   public deleteContact(contactId: number): void {
-    this.contactList.deleteContact(contactId);
+    this.contactList.removeElement(contactId);
     this.update();
   }
 

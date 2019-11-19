@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { WalletList, Wallet } from '../models/wallet-list.models';
+import { WalletList } from '../models/wallet-list.model';
 import { FAKE_WALLET_LIST } from 'src/fake-data/fake-wallet-list';
 import { BehaviorSubject } from 'rxjs';
+import { Wallet } from '../models/wallet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,16 @@ export class WalletListService {
   private walletList$: BehaviorSubject<Wallet[]>;
 
   constructor() {
-    this.walletList = new WalletList(FAKE_WALLET_LIST);
-    this.walletList$ = new BehaviorSubject<Wallet[]>(this.walletList.getWalletList());
+    try {
+      this.walletList = new WalletList(FAKE_WALLET_LIST);
+      this.walletList$ = new BehaviorSubject<Wallet[]>(this.walletList.getList());
+    } catch (e) {
+      console.error('Wallet list initilization failed', e);
+    }
   }
 
   private update() {
-    this.walletList$.next(this.walletList.getWalletList());
+    this.walletList$.next(this.walletList.getList());
   }
 
   public getWalletList(): BehaviorSubject<Wallet[]> {
@@ -30,7 +35,7 @@ export class WalletListService {
   }
 
   public removeWallet(walletId: number): void {
-    this.walletList.removeWallet(walletId);
+    this.walletList.removeElement(walletId);
     this.update();
   }
 

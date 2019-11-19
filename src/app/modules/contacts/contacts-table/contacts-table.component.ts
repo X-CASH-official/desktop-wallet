@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import { FAKE_CONTACTS } from 'src/fake-data/fake-contacts';
-import { ContactList, Contact } from 'src/app/models/contact-list.model';
+import { ContactList } from 'src/app/models/contact-list.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { ContactListService } from 'src/app/services/contact-list.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { Contact } from 'src/app/models/contact.model';
 
 @Component({
   selector: 'app-contacts-table',
