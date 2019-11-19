@@ -54,6 +54,6 @@ export class WalletList {
     }
 
     public getWalletList(): Wallet[] {
-        return this.walletList;
+        return this.walletList.map(x => Object.assign({}, x));
     }
 }

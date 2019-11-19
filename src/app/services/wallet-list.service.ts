@@ -16,20 +16,27 @@ export class WalletListService {
     this.walletList$ = new BehaviorSubject<Wallet[]>(this.walletList.getWalletList());
   }
 
+  private update() {
+    this.walletList$.next(this.walletList.getWalletList());
+  }
+
   public getWalletList(): BehaviorSubject<Wallet[]> {
     return this.walletList$;
   }
 
   public addWallet(): void {
     this.walletList.addWallet('pizza', 'XCA12dzq2123123', 12938494);
+    this.update();
   }
 
   public removeWallet(walletId: number): void {
     this.walletList.removeWallet(walletId);
+    this.update();
   }
 
   public renameWallet(walletId: number, newName: string): void {
     this.walletList.renameWallet(walletId, newName);
+    this.update();
   }
 
 }
