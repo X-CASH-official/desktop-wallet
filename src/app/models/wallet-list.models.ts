@@ -3,7 +3,7 @@ export interface Wallet {
     name: string;
     publicKey: string;
     balance: number;
-  }
+}
 
 export class WalletList {
     private walletList: Wallet[]
@@ -13,13 +13,17 @@ export class WalletList {
         this.walletList = [];
         this.walletNumber = 0;
 
-        for (let i = 0; i < initialWalletList.length; i++) {
-            this.addWallet(initialWalletList[i]['name'], initialWalletList[i]['publicKey'], initialWalletList[i]['balance'])
+        try {
+            for (let i = 0; i < initialWalletList.length; i++) {
+                this.addWallet(initialWalletList[i]['name'], initialWalletList[i]['publicKey'], initialWalletList[i]['balance'])
+            }
+        } catch (e) {
+            throw new Error("Wrong input format for WalletList constructor");
         }
     }
 
     public addWallet(name: string, publicKey: string, balance: number): void {
-        let newWallet = {
+        const newWallet: Wallet = {
             id: this.walletNumber,
             name: name,
             publicKey: publicKey,

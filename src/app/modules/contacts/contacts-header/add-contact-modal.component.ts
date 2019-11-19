@@ -32,7 +32,6 @@ export class AddContactModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.addNewContactForm); // Debug purposes
     if (this.addNewContactForm.valid) {
       this.addContactModal.hide();
       this.newContactEvent.emit(this.addNewContactForm.value);

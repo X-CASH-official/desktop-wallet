@@ -9,15 +9,15 @@ import { BehaviorSubject } from 'rxjs';
 export class WalletListService {
 
   private walletList: WalletList;
-  private observableList: BehaviorSubject<Wallet[]>;
+  private walletList$: BehaviorSubject<Wallet[]>;
 
   constructor() {
     this.walletList = new WalletList(FAKE_WALLET_LIST);
-    this.observableList = new BehaviorSubject<Wallet[]>(this.walletList.getWalletList());
+    this.walletList$ = new BehaviorSubject<Wallet[]>(this.walletList.getWalletList());
   }
 
   public getWalletList(): BehaviorSubject<Wallet[]> {
-    return this.observableList;
+    return this.walletList$;
   }
 
   public addWallet(): void {

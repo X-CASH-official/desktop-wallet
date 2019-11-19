@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import { FAKE_CONTACTS } from 'src/fake-data/fake-contacts';
-import { ContactList } from 'src/app/models/contact-list.model';
-import { Contact } from 'src/app/models/contact.model';
+import { ContactList, Contact } from 'src/app/models/contact-list.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { ContactListService } from 'src/app/services/contact-list.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contacts-table',
@@ -14,7 +15,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 })
 export class ContactsTableComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService, private contactListService: ContactListService) { }
 
   /* modifyContact Modal */
   @ViewChild('modifyContactModal') modifyContactModal;
@@ -37,15 +38,23 @@ export class ContactsTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  contacts: ContactList;
-  dataSource;
+  contactListSubscription: Subscription;
+  dataSource: MatTableDataSource<Contact>;
   displayedColumns: string[] = ['id', 'name', 'address', 'actions'];
 
-  ngOnInit() {  
-    this.contacts = new ContactList(FAKE_CONTACTS);
-    this.dataSource = new MatTableDataSource(this.contacts.contactList);
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource<Contact>();
+    this.contactListSubscription = this.contactListService.getContactList().subscribe(contacts => {
+      this.dataSource.data = contacts;
+    });
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+  }
+
+  ngOnDestroy() {
+    this.contactListSubscription.unsubscribe();
   }
   
   private refreshTable() {
@@ -76,7 +85,7 @@ export class ContactsTableComponent implements OnInit {
   onSubmitModification() {
     if (!this.modifyContactForm.invalid) {
       this.modifyContactModal.hide();
-      this.contacts.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
+      this.contactListService.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
       this.refreshTable();
       
       setTimeout(() => {
@@ -86,12 +95,12 @@ export class ContactsTableComponent implements OnInit {
   }
   
   onNewContact(newContact: object) {
-    this.contacts.add(newContact['contactName'], newContact['contactPublicAddress']);
+    this.contactListService.addContact(newContact['contactName'], newContact['contactPublicAddress']);
     this.refreshTable();
   }
   
   onDeleteContact(contactID: number) {
-    this.contacts.deleteContact(contactID);
+    this.contactListService.deleteContact(contactID);
     this.refreshTable();
   }
   
