@@ -21,7 +21,7 @@ import {NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule} 
 import { NavLeftComponent } from './theme/layout/admin/nav-bar/nav-left/nav-left.component';
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
-import { variables_and_functions_service } from './services/variables_and_functions.service';
+import { variables_and_functions_service } from './services/oldService.service';
 import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
 import { MaterialModule } from './material.module';
 import { AuthModule } from './auth/auth.module';

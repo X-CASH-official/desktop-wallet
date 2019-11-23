@@ -21,7 +21,7 @@ export class WalletComponent implements OnInit {
   constructor(private router: Router, private walletListService: WalletListService, private xcashPriceIndexService: XcashPriceIndexService) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.selectedWallet = this.router.getCurrentNavigation().extras.state.walletId;
-      console.log("Wallet selected:", this.selectedWallet);
+      //console.log("Wallet selected:", this.selectedWallet);
     } else {
       console.error("Illegal navigation: you must provide a walletId attribute in the state of the route when routing to the wallet module.");
     }
@@ -32,7 +32,7 @@ export class WalletComponent implements OnInit {
   
   ngOnInit() {
     this.walletListSubscription = this.walletListService.getWalletList().subscribe((newWalletList) => {
-      console.log(newWalletList);
+      //console.log(newWalletList);
       this.walletData = newWalletList[this.selectedWallet];
     });
   }

@@ -8,6 +8,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { ContactListService } from 'src/app/services/contact-list.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
+import { ActionsService } from 'src/app/services/actions.service';
 
 @Component({
   selector: 'app-contacts-table',
@@ -16,7 +17,7 @@ import { Contact } from 'src/app/models/contact.model';
 })
 export class ContactsTableComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService, private contactListService: ContactListService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService, private contactListService : ContactListService, private actionsService: ActionsService) { }
 
   /* modifyContact Modal */
   @ViewChild('modifyContactModal') modifyContactModal;
@@ -86,7 +87,7 @@ export class ContactsTableComponent implements OnInit {
   onSubmitModification() {
     if (!this.modifyContactForm.invalid) {
       this.modifyContactModal.hide();
-      this.contactListService.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
+      this.actionsService.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
       this.refreshTable();
       
       setTimeout(() => {
@@ -96,12 +97,12 @@ export class ContactsTableComponent implements OnInit {
   }
   
   onNewContact(newContact: object) {
-    this.contactListService.addContact(newContact['contactName'], newContact['contactPublicAddress']);
+    this.actionsService.addContact(newContact['contactName'], newContact['contactPublicAddress']);
     this.refreshTable();
   }
   
-  onDeleteContact(contactID: number) {
-    this.contactListService.deleteContact(contactID);
+  onRemoveContact(contactID: number) {
+    this.actionsService.removeContact(contactID);
     this.refreshTable();
   }
   

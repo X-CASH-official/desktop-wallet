@@ -18,7 +18,8 @@ import { WalletNamePasswordModalComponent } from './wallet-name-password-modal/w
   declarations: [
     WalletDashboardComponent, 
     CreateWalletModalComponent, 
-    ImportWalletModalComponent, WalletNamePasswordModalComponent,
+    ImportWalletModalComponent, 
+    WalletNamePasswordModalComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { variables_and_functions_service } from 'src/app/services/variables_and_functions.service';
+import { variables_and_functions_service } from 'src/app/services/oldService.service';
 
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { WalletListService } from 'src/app/services/wallet-list.service';
