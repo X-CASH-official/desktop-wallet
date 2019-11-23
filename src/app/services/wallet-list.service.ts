@@ -27,6 +27,7 @@ export class WalletListService {
 
   /**
    * Get the wallet list.
+   * @return a `BehaviorSubject<Wallet[]>` of the wallet list
    */
   public getWalletList(): BehaviorSubject<Wallet[]> {
     return this.walletList$;

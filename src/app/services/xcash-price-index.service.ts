@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +20,14 @@ export class XcashPriceIndexService {
   
   reqUrl: string = 'https://api.coingecko.com/api/v3/simple/price?ids=x-cash&vs_currencies=usd&include_last_updated_at=true';
   
-
-  // TODO work in progress: where can I intercept the error
   // For the moment this service is really simple and only uses coingecko API
-  getPrice() {
-    console.log('price fetched!');
-    return this.http.get(this.reqUrl, this.reqOptions);
+  /**
+   * Get the XCASH price index in USD via CoinGecko
+   * @return an `Observable` every 5min
+   */
+  getPrice(): Observable<object> {
+    return Observable.timer(0, 5 * 60 * 1000).flatMap(() => {
+      return this.http.get(this.reqUrl, this.reqOptions)
+    });
   }
 }

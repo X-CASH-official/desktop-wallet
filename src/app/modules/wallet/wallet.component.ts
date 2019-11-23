@@ -1,12 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
-import { interval } from 'rxjs/observable/interval';
+import { Subscription } from 'rxjs';
 import { WalletListService } from 'src/app/services/wallet-list.service';
 import { XcashPriceIndexService } from 'src/app/services/xcash-price-index.service';
-import { flatMap, takeUntil, switchMap, catchError, startWith } from 'rxjs/operators';
-import { of, Subject } from 'rxjs';
 import { Wallet } from 'src/app/models/wallet.model';
 
 @Component({
@@ -29,15 +25,31 @@ export class WalletComponent implements OnInit {
   
   walletData: Wallet;
   walletListSubscription: Subscription;
+
+  xcashPriceIndexSub: Subscription;
+  USDforXCASH: number;
+
   
   ngOnInit() {
     this.walletListSubscription = this.walletListService.getWalletList().subscribe((newWalletList) => {
       //console.log(newWalletList);
       this.walletData = newWalletList[this.selectedWallet];
     });
+
+    this.xcashPriceIndexSub = this.xcashPriceIndexService.getPrice().subscribe(
+      (value) => {
+        // We should store the last balance in dollar in the the wallet data and refresh it here
+        // in order to avoid having to wait for the http request before displaying anything 
+        this.USDforXCASH = value['x-cash']['usd'];
+      }, 
+      (err) => {
+        console.error("Could not reach CoinGecko for XCASH price index in USD.", err);
+      }
+    )
   }
 
   ngOnDestroy() {
     this.walletListSubscription.unsubscribe();
+    this.xcashPriceIndexSub.unsubscribe();
   }
 }

@@ -27,6 +27,7 @@ export class ContactListService {
 
   /**
    * Get the contact list.
+   * @return a `BehaviorSubject<Contact[]>` of the contact list  
    */
   public getContactList(): BehaviorSubject<Contact[]> {
     return this.contactList$;

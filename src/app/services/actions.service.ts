@@ -56,7 +56,7 @@ export class ActionsService {
    * @param name name of the wallet to import
    * @param password password of the wallet to import
    */
-  public importWallet(name: string, password: string) { 
+  public importWallet(name: string, password: string): void { 
     // RPC CALL PROMISE, on success then ->
     const balanceReturnedByRPCCall = 12;
     this.walletListService.addWallet(name, 'keyProvidedByRPCWalletCreation', balanceReturnedByRPCCall);
@@ -67,7 +67,7 @@ export class ActionsService {
    * @param name name of the contact to add
    * @param address address of the contact to add
    */
-  public addContact(name: string, address: string) {
+  public addContact(name: string, address: string): void {
     // RPC CALL PROMISE, on success then ->
     this.contactListService.addContact(name, address);
   }
@@ -76,7 +76,7 @@ export class ActionsService {
    * Remove a contact from the address book.
    * @param id id of the contact to remove
    */
-  public removeContact(id: number) {
+  public removeContact(id: number): void {
     // RPC CALL PROMISE, on success then ->
     this.contactListService.removeContact(id);
   }
@@ -87,7 +87,7 @@ export class ActionsService {
    * @param newName new name of the contact to modify
    * @param newAddress new address of the contact to modify
    */
-  public modifyContact(id: number, newName?: string, newAddress?: string) {
+  public modifyContact(id: number, newName?: string, newAddress?: string): void {
     // RPC CALL PROMISE, on success then ->
     this.contactListService.modifyContact(id, newName, newAddress);
   }
