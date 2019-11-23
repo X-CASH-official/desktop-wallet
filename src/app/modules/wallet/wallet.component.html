@@ -17,7 +17,7 @@
         <!-- Balance in XCASH, USD and SEND button-->
         <div class="d-flex align-items-end">
           <h4 class="mb-0 mr-2">{{ walletData?.balance | xcash }}</h4>
-          <span>{{ walletData?.balance * USDforXCASH | currency:'USD' }}</span>
+          <h5 class="mb-0 text-muted">{{ walletData?.balance * USDforXCASH | currency:'USD' }}</h5>
         </div>
       </div>
       
