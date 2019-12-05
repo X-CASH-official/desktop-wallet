@@ -9,6 +9,7 @@ import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ContactListService } from 'src/app/services/contact-list.service';
 import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { ConstantsService } from 'src/app/services/constants.service';
+import { XcashPriceIndexService } from 'src/app/services/xcash-price-index.service';
 
 @Component({
   selector: 'app-wallet-send-modal',
@@ -26,6 +27,7 @@ export class WalletSendModalComponent implements OnInit {
   }
 
   @Input() walletData: Wallet;
+  @Input() USDforXCASH: number;
 
   @ViewChild('sendModal') sendModal: UiModalComponent;
   @ViewChild('sendConfirmationModal') sendConfirmationModal: UiModalComponent;
@@ -76,11 +78,14 @@ export class WalletSendModalComponent implements OnInit {
       distinctUntilChanged(),
       map(term => {
         // We want to search the address of the contact list only if the input is long enough to prevent strange suggestion when typing just some letters
-        if (term.length < this.constantsService.xcash_public_address_length) {
+        if (term.length > 0 && term.length < this.constantsService.xcash_public_address_length) {
           return this.contacts.filter(contact => (contact.name).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
-        } else {
+        } else if (term.length > 0) {
           // This is to signal the user that the address he/she probably copy paste is in his/her contact list
           return this.contacts.filter(contact => (contact.name+contact.address).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
+        } else {
+          // without this case, if the user inputs things then delete them, they are presented with all the contact list
+          return []
         }
       }),
     )

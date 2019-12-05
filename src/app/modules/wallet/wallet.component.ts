@@ -41,6 +41,7 @@ export class WalletComponent implements OnInit {
         // We should store the last balance in dollar in the the wallet data and refresh it here
         // in order to avoid having to wait for the http request before displaying anything 
         this.USDforXCASH = value['x-cash']['usd'];
+        console.log('update on xcash index')
       }, 
       (err) => {
         console.error("Could not reach CoinGecko for XCASH price index in USD.", err);

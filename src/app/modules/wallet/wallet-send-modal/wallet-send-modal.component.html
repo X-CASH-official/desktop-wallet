@@ -55,7 +55,7 @@
           
           <!-- Readonly USD converter - Should be implemented with a service that returns xcash value in usd -->
           <div class="input-group">
-            <input type="text" class="form-control" id="amount-usd" readonly>
+            <input type="text" class="form-control" id="amount-usd" [value]="amount?.value * USDforXCASH | number:'1.8-8'" readonly>
             <div class="input-group-append">
               <span class="input-group-text">USD</span>
             </div>
@@ -64,6 +64,7 @@
         <div *ngIf="(amount.dirty || amount.touched) && amount.invalid">
           <small class="form-text text-danger" *ngIf="amount.errors.required">A amount is required.</small>
         </div>
+        <small class="form-text text-muted">The conversion in USD is an approximation and may not be up to date.</small>
       </div>
       
       <!-- Priority choice has been retired for the moment
