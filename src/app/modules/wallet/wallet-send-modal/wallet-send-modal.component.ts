@@ -3,6 +3,12 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { Wallet } from 'src/app/models/wallet.model';
+import { Contact } from 'src/app/models/contact.model';
+import { Observable, Subscription } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ContactListService } from 'src/app/services/contact-list.service';
+import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { ConstantsService } from 'src/app/services/constants.service';
 
 @Component({
   selector: 'app-wallet-send-modal',
@@ -11,7 +17,13 @@ import { Wallet } from 'src/app/models/wallet.model';
 })
 export class WalletSendModalComponent implements OnInit {
 
-  constructor(private validatorsRegexService: ValidatorsRegexService) { }
+  contacts: Contact[];
+  contactListSubscription: Subscription;
+
+  constructor(private validatorsRegexService: ValidatorsRegexService, 
+    private contactListService: ContactListService, 
+    private constantsService: ConstantsService) {
+  }
 
   @Input() walletData: Wallet;
 
@@ -19,7 +31,7 @@ export class WalletSendModalComponent implements OnInit {
   @ViewChild('sendConfirmationModal') sendConfirmationModal: UiModalComponent;
 
   sendForm = new FormGroup({
-    recipient: new FormControl('', [Validators.required]),
+    recipient: new FormControl('', [Validators.required, Validators.pattern(this.validatorsRegexService.xcash_address)]),
     paymentId: new FormControl('', [Validators.pattern(this.validatorsRegexService.payment_id)]),
     maxAmount: new FormControl(false, [Validators.required]),
     amount: new FormControl('', [Validators.required, Validators.pattern(this.validatorsRegexService.xcash_amount)]),
@@ -42,7 +54,36 @@ export class WalletSendModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.contactListSubscription = this.contactListService.getContactList().subscribe(contacts => {
+      this.contacts = contacts;
+    });
   }
+
+  ngOnDestroy() {
+    this.contactListSubscription.unsubscribe();
+  }
+
+  // This is trigger right before an item is selected from the result list and prevent the default behavior
+  onSelectionContact(selectedItem: NgbTypeaheadSelectItemEvent) {
+    // Prevent the default behavior, normally the input will be setValue to the Object
+    selectedItem.preventDefault();
+    this.recipient.setValue(selectedItem.item.address);
+  }
+  
+  searchContact = (text$: Observable<string>) =>
+    text$.pipe(
+      //debounceTime(200), // We can introduce a slight delay here, this is a question of user experience
+      distinctUntilChanged(),
+      map(term => {
+        // We want to search the address of the contact list only if the input is long enough to prevent strange suggestion when typing just some letters
+        if (term.length < this.constantsService.xcash_public_address_length) {
+          return this.contacts.filter(contact => (contact.name).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
+        } else {
+          // This is to signal the user that the address he/she probably copy paste is in his/her contact list
+          return this.contacts.filter(contact => (contact.name+contact.address).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
+        }
+      }),
+    )
 
   savedAmountValue: string = '';
 

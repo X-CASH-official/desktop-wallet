@@ -8,6 +8,7 @@ export class ContactList extends List<Contact> {
     }
 
     public addContact(name: string, address: string) {
+        // We should check if the contact was already added (address is already in the contact list)
         const newContact: Contact = new Contact(this.getElementIndex(), name, address);
         this.addElement(newContact);
     }
