@@ -6,6 +6,7 @@ import { SettingsComponent } from './settings.component';
 import { SettingsGeneralComponent } from './settings-general/settings-general.component';
 import { SettingsConnectionComponent } from './settings-connection/settings-connection.component';
 import { SettingsAboutComponent } from './settings-about/settings-about.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SettingsAboutComponent } from './settings-about/settings-about.componen
   ],
   imports: [
     CommonModule,
-    SettingsRoutingModule
+    SettingsRoutingModule,
+    NgbDropdownModule,
   ]
 })
 export class SettingsModule { }

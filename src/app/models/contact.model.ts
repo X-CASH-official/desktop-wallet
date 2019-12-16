@@ -9,4 +9,4 @@ export class Contact extends Item {
         this.name = name;
         this.address = address;
     }
-}
+} 

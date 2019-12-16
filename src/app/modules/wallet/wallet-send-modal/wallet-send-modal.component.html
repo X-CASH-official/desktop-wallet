@@ -18,7 +18,7 @@
         <label for="recipient">Recipient</label>
         <input type="text" [ngbTypeahead]="searchContact" (selectItem)="onSelectionContact($event)" [resultTemplate]="rt" class="form-control" id="recipient" placeholder="Search contacts or enter address" formControlName="recipient" [ngClass]="{'is-invalid': (recipient.dirty || recipient.touched) && recipient.invalid, 'is-valid': (recipient.dirty || recipient.touched) && !recipient.invalid}">
         <div *ngIf="(recipient.dirty || recipient.touched) && recipient.invalid">
-          <small class="form-text text-danger" *ngIf="recipient.errors.required">A recipient is required.</small>
+          <small class="form-text text-danger" *ngIf="recipient.errors.required">A recipient is XCASH address required.</small>
         </div>
         
         <ng-template #rt let-r="result" let-t="term">

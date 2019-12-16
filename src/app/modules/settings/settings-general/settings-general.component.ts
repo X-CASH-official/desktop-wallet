@@ -8,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsGeneralComponent implements OnInit {
   public version: string = '0.0.0';
 
+  durationToInactivity: string = "never";
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onInactivityDurationSelect(duration: string): void {
+    this.durationToInactivity = duration;
   }
 
 }

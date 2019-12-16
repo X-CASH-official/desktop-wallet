@@ -9,7 +9,6 @@ import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ContactListService } from 'src/app/services/contact-list.service';
 import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { ConstantsService } from 'src/app/services/constants.service';
-import { XcashPriceIndexService } from 'src/app/services/xcash-price-index.service';
 
 @Component({
   selector: 'app-wallet-send-modal',

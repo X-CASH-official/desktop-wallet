@@ -4,13 +4,16 @@
     <p class="text-muted mb-0">Automatically lock X-CASH GUI Wallet after inactivity.</p>
   </div>
   <div>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1 minute</option>
-      <option selected>10 minutes</option>
-      <option>30 minutes</option>
-      <option>1 hour</option>
-      <option>never</option>
-    </select>
+    <div ngbDropdown class="d-inline-block" placement="bottom">
+      <button class="btn btn-outline-primary m-0" id="dropdownTimeInactivity" ngbDropdownToggle>{{ durationToInactivity }}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownTimeInactivity">
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">1 minute</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">10 minutes</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">30 minutes</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">1 hour</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">never</button>
+      </div>
+    </div>
   </div>
 </div>
 <hr>
