@@ -13,8 +13,8 @@ export class WalletSubAddressComponent implements OnInit {
   constructor() { }
 
   /* Create integrated address modal */
-  @ViewChild('createSubAddressModal1') createSubAddressModal1: UiModalComponent;
-  @ViewChild('createSubAddressModal2') createSubAddressModal2: UiModalComponent;
+  @ViewChild('createSubAddressModal1', { static: true }) createSubAddressModal1: UiModalComponent;
+  @ViewChild('createSubAddressModal2', { static: true }) createSubAddressModal2: UiModalComponent;
 
   createdSubAddress: string;
 
@@ -35,8 +35,8 @@ export class WalletSubAddressComponent implements OnInit {
   }
 
   /* addresses table */
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
   dataSource = new MatTableDataSource(FAKE_SUB_ADDRESSES);
   displayedColumns: string[] = ['id', 'label', 'address', 'actions'];

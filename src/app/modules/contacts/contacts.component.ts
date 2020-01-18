@@ -7,7 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ContactsComponent implements OnInit {
 
-  @ViewChild('contactsTable') contactsTableChildComponent;
+  @ViewChild('contactsTable', { static: true }) contactsTableChildComponent;
 
   constructor() { }
 

@@ -14,8 +14,8 @@ export class ImportWalletModalComponent implements OnInit {
 
   activeTab = 'mnemonicSeedTab';
 
-  @ViewChild('importWalletModal1') importWalletModal1: UiModalComponent;
-  @ViewChild('importWalletModal2') importWalletModal2: UiModalComponent;
+  @ViewChild('importWalletModal1', { static: true }) importWalletModal1: UiModalComponent;
+  @ViewChild('importWalletModal2', { static: true }) importWalletModal2: UiModalComponent;
 
   importMnemonicSeedForm = new FormGroup({
     mnemonicSeed: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.mnemonic_seed)]),

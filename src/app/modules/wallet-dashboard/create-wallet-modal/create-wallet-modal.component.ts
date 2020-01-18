@@ -10,10 +10,10 @@ import { WalletNamePasswordModalComponent } from '../wallet-name-password-modal/
 })
 export class CreateWalletModalComponent implements OnInit {
   
-  @ViewChild('createWalletModal1') createWalletModal1: WalletNamePasswordModalComponent;
-  @ViewChild('createWalletModal2') createWalletModal2: UiModalComponent;
-  @ViewChild('createWalletModal3') createWalletModal3: UiModalComponent;
-  @ViewChild('createWalletModal4') createWalletModal4: UiModalComponent;
+  @ViewChild('createWalletModal1', { static: true }) createWalletModal1: WalletNamePasswordModalComponent;
+  @ViewChild('createWalletModal2', { static: true }) createWalletModal2: UiModalComponent;
+  @ViewChild('createWalletModal3', { static: true }) createWalletModal3: UiModalComponent;
+  @ViewChild('createWalletModal4', { static: true }) createWalletModal4: UiModalComponent;
 
   constructor() { }
   

@@ -21,8 +21,8 @@ export class NavContentComponent implements OnInit, AfterViewInit {
   public scrollWidth: any;
   public windowWidth: number;
 
-  @ViewChild('navbarContent') navbarContent: ElementRef;
-  @ViewChild('navbarWrapper') navbarWrapper: ElementRef;
+  @ViewChild('navbarContent', { static: true }) navbarContent: ElementRef;
+  @ViewChild('navbarWrapper', { static: true }) navbarWrapper: ElementRef;
 
   constructor(private route: ActivatedRoute, public nav: NavigationItem, private zone: NgZone, private location: Location) {
     this.dattaConfig = DattaConfig.config;

@@ -14,8 +14,8 @@ export class WalletReserveProofComponent implements OnInit {
   constructor(private validatorRegexService: ValidatorsRegexService) { }
 
   /* Create reserve proof */
-  @ViewChild('createReserveProofModal1') createReserveProofModal1: UiModalComponent;
-  @ViewChild('createReserveProofModal2') createReserveProofModal2: UiModalComponent;
+  @ViewChild('createReserveProofModal1', { static: true }) createReserveProofModal1: UiModalComponent;
+  @ViewChild('createReserveProofModal2', { static: true }) createReserveProofModal2: UiModalComponent;
 
   createReserveProofForm = new FormGroup({
     amountToProve: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.xcash_reserve_proof_amount)]), // could add the max amount of this wallet
@@ -43,7 +43,7 @@ export class WalletReserveProofComponent implements OnInit {
   createdReserveSignature: string;
 
   /* Verify reserve proof modal */
-  @ViewChild('verifyReserveProofModal') verifySignedDataModal: UiModalComponent;
+  @ViewChild('verifyReserveProofModal', { static: true }) verifySignedDataModal: UiModalComponent;
 
   verifyReserveProofForm = new FormGroup({
     addressToVerify: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.xcash_address)]),
@@ -86,8 +86,8 @@ export class WalletReserveProofComponent implements OnInit {
   }
 
   /* Signed data table */
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
   dataSource = new MatTableDataSource(FAKE_RESERVE_PROOF);
   displayedColumns: string[] = ['id', 'amount', 'signature', 'status', 'actions'];

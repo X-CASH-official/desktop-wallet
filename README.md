@@ -16,7 +16,8 @@ This is the new GUI wallet for XCASH. Currently this wallet supports Windows, Ma
 * [Installing Packages Globally Using NPM](#installing-packages-globally-using-npm)  
 * [Cloning the Repository](#cloning-the-repository)  
 * [Updating node_modules](#updating-node_modules)  
-* [Build XCASH_GUI_Wallet](#build-xcash_gui_wallet)
+* [Build XCASH_GUI_Wallet](#build-xcash_gui_wallet)  
+* [Updating to the latest angular](#updating-to-the-latest-angular)  
 
 
 ## System Requirements
@@ -94,3 +95,16 @@ Now you need to install all of the dependencies. Navigate to the folder with the
 
 To build XCASH_DPOPS - Delegates Website, naviagte to the folder with the package.json file, and then run  
 `ng build --prod --aot`
+
+
+### Updating to the Latest Angular
+
+If there is a new angular version out and you want to update the program to it, before we have officially updated to it run these following steps:
+
+`ng update @angular/cli @angular/core`
+
+This might give Package A has an incompatible peer dependency to B. If this is the case run the following for each B package
+
+`npm install --save-dev B@latest` where B is the string for the package name
+
+You should then be able to update with no warnings about packages.

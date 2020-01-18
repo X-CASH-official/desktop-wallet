@@ -15,8 +15,8 @@ export class WalletIntegratedAddressComponent implements OnInit {
   constructor(private validatorRegexService: ValidatorsRegexService) { }
 
   /* Create integrated address modal */
-  @ViewChild('createIntegratedAddressModal1') createIntegratedAddressModal1: UiModalComponent;
-  @ViewChild('createIntegratedAddressModal2') createIntegratedAddressModal2: UiModalComponent;
+  @ViewChild('createIntegratedAddressModal1', { static: true }) createIntegratedAddressModal1: UiModalComponent;
+  @ViewChild('createIntegratedAddressModal2', { static: true }) createIntegratedAddressModal2: UiModalComponent;
 
   paymentIDForm = new FormGroup({
     encryptedPaymentID: new FormControl('', [Validators.pattern(this.validatorRegexService.encrypted_payment_id)]),
@@ -37,8 +37,8 @@ export class WalletIntegratedAddressComponent implements OnInit {
   createdIntegratedAddress: string;
   
   /* addresses table */
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
   dataSource = new MatTableDataSource(FAKE_INTEGRATED_ADDRESSES);
   displayedColumns: string[] = ['id', 'paymentID', 'address', 'actions'];

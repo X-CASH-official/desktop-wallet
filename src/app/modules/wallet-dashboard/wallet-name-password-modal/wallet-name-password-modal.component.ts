@@ -21,7 +21,7 @@ export class WalletNamePasswordModalComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
   @Output() onBackButton = new EventEmitter();
 
-  @ViewChild('nameAndPasswordModal') nameAndPasswordModal: UiModalComponent;
+  @ViewChild('nameAndPasswordModal', { static: true }) nameAndPasswordModal: UiModalComponent;
 
   constructor() { }
 

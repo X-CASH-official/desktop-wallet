@@ -28,8 +28,8 @@ export class WalletSendModalComponent implements OnInit {
   @Input() walletData: Wallet;
   @Input() USDforXCASH: number;
 
-  @ViewChild('sendModal') sendModal: UiModalComponent;
-  @ViewChild('sendConfirmationModal') sendConfirmationModal: UiModalComponent;
+  @ViewChild('sendModal', { static: true }) sendModal: UiModalComponent;
+  @ViewChild('sendConfirmationModal', { static: true }) sendConfirmationModal: UiModalComponent;
 
   sendForm = new FormGroup({
     recipient: new FormControl('', [Validators.required, Validators.pattern(this.validatorsRegexService.xcash_address)]),

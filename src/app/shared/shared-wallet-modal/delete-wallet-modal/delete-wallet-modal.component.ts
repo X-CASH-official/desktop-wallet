@@ -8,7 +8,7 @@ import { ActionsService } from 'src/app/services/actions.service';
   styleUrls: ['./delete-wallet-modal.component.scss']
 })
 export class DeleteWalletModalComponent implements OnInit {
-  @ViewChild('deleteWalletModal1') deleteWalletModal1;
+  @ViewChild('deleteWalletModal1', { static: true }) deleteWalletModal1;
 
   walletIdToDelete: number;
 

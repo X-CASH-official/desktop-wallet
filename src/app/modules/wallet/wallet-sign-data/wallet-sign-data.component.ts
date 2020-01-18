@@ -14,8 +14,8 @@ export class WalletSignDataComponent implements OnInit {
   constructor(private validatorRegexService: ValidatorsRegexService) { }
 
   /* Sign data modal */
-  @ViewChild('signDataModal1') signDataModal1: UiModalComponent;
-  @ViewChild('signDataModal2') signDataModal2: UiModalComponent;
+  @ViewChild('signDataModal1', { static: true }) signDataModal1: UiModalComponent;
+  @ViewChild('signDataModal2', { static: true }) signDataModal2: UiModalComponent;
 
   dataToSignForm = new FormGroup({
     dataToSign: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.data_to_sign)]),
@@ -39,7 +39,7 @@ export class WalletSignDataComponent implements OnInit {
 
 
   /* Verify signed data modal */
-  @ViewChild('verifySignedDataModal') verifySignedDataModal: UiModalComponent;
+  @ViewChild('verifySignedDataModal', { static: true }) verifySignedDataModal: UiModalComponent;
 
   verifySignedDataForm = new FormGroup({
     dataToVerify: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.data_to_sign)]),
@@ -82,8 +82,8 @@ export class WalletSignDataComponent implements OnInit {
   }
 
   /* Signed data table */
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
   dataSource = new MatTableDataSource(FAKE_SIGNED_DATA);
   displayedColumns: string[] = ['id', 'data', 'signature', 'actions'];

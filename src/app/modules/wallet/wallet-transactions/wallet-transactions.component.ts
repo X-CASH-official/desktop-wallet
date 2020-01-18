@@ -16,8 +16,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class WalletTransactionsComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   dataSource = new MatTableDataSource(FAKE_TRANSACTIONS);
   columnsToDisplay = ['id', 'amount', 'recipient', 'date'];

@@ -11,7 +11,7 @@ import { ActionsService } from 'src/app/services/actions.service';
   styleUrls: ['./rename-wallet-modal.component.scss']
 })
 export class RenameWalletModalComponent implements OnInit {
-  @ViewChild('renameWalletModal') renameWalletModal: UiModalComponent;
+  @ViewChild('renameWalletModal', { static: true }) renameWalletModal: UiModalComponent;
 
   constructor(private actionsService: ActionsService, private validatorRegexService: ValidatorsRegexService) { }
 

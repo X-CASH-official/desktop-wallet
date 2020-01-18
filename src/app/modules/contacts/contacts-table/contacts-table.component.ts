@@ -20,7 +20,7 @@ export class ContactsTableComponent implements OnInit {
   constructor(private validatorRegexService: ValidatorsRegexService, private contactListService : ContactListService, private actionsService: ActionsService) { }
 
   /* modifyContact Modal */
-  @ViewChild('modifyContactModal') modifyContactModal;
+  @ViewChild('modifyContactModal', { static: true }) modifyContactModal;
   modifyContactForm = new FormGroup({
     contactID: new FormControl(''),
     contactName: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.contact_name)]),
@@ -37,8 +37,8 @@ export class ContactsTableComponent implements OnInit {
   }
 
   /* Data table */
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   contactListSubscription: Subscription;
   dataSource: MatTableDataSource<Contact>;

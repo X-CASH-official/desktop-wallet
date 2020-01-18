@@ -11,7 +11,7 @@ export class AddContactModalComponent implements OnInit {
 
   @Output() newContactEvent = new EventEmitter();
 
-  @ViewChild('addContactModal') addContactModal: any;
+  @ViewChild('addContactModal', { static: true }) addContactModal: any;
 
   addNewContactForm = new FormGroup({
     contactName: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.contact_name)]),
