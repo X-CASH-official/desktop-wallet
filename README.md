@@ -40,7 +40,7 @@ The following table summarizes the tools and libraries required to run XCASH_GUI
 
 | Dependencies                                 | Min. version  | Ubuntu package            |
 | -------------------------------------------- | ------------- | ------------------------- |
-| Node.js                                      | 12             |  install from binaries    | 
+| Node.js                                      | 13             |  install from binaries    | 
 | Angular                                      | 8             |  install from NPM         |
 | XCASH_DPOPS                                  | latest version | [build from source](https://github.com/X-CASH-official/XCASH_DPOPS) or [download the latest release](https://github.com/X-CASH-official/X-CASH/releases)
 
@@ -93,9 +93,11 @@ Now you need to install all of the dependencies. Navigate to the folder with the
 
 ### Build XCASH_GUI_Wallet
 
-To build XCASH_DPOPS - Delegates Website, naviagte to the folder with the package.json file, and then run  
-`ng build --prod --aot`
+To build XCASH_GUI_Wallet, naviagte to the folder with the package.json file. Then run the following command to build the wallet using Just in time compilation mode  
+`npm run start`
 
+To build using a production mode and ahead of time compilation mode run  
+`npm run build`
 
 ### Updating to the Latest Angular
 
