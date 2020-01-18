@@ -35,7 +35,7 @@ export class NavRightComponent implements OnInit, DoCheck {
   public dattaConfig: any;
   public darkTheme: boolean = true;
 
-  constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent, private authService: AuthService) {
+  constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent, public authService: AuthService) {
     config.placement = 'bottom-right';
     this.dattaConfig = DattaConfig.config;
   }

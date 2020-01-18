@@ -4,8 +4,8 @@
   "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --base-href ./ && electron .",
+    "start": "ng build --base-href ./ && electron .",
+    "build": "ng build --prod --aot --base-href ./ && electron .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
