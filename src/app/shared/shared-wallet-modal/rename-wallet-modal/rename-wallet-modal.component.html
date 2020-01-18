@@ -1,0 +1,27 @@
+<!-- Rename a wallet -->
+<app-ui-modal #renameWalletModal>
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Rename wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="renameWalletModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="renameWalletForm" (ngSubmit)="onSubmitRenameWalletForm()" id="renameWalletForm">
+      <div class="form-group">
+        <label for="wallet-new-name">New wallet name</label>
+        <input type="text" class="form-control" id="wallet-new-name" placeholder="Enter a new wallet name" formControlName="newName" [ngClass]="{'is-invalid': (newName.dirty || newName.touched) && newName.invalid, 'is-valid': (newName.dirty || newName.touched) && !newName.invalid}">
+        <div *ngIf="(newName.dirty || newName.touched) && newName.invalid">
+          <small class="form-text text-danger" *ngIf="newName.errors.required">A new name is required.</small>
+          <small class="form-text text-danger" *ngIf="newName.errors.pattern">The format of the new name is invalid.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button form="renameWalletForm" class="btn btn-primary text-center">Continue</button>
+  </div>
+</app-ui-modal>

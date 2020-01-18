@@ -1,1 +1,0 @@
-export { DeleteIconComponent } from './icon';

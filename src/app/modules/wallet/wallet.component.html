@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <div class="col-8">
+        <!-- Wallet Name -->
+        <h3>{{ walletData?.name }}</h3>
+        
+        <!-- Public address -->
+        <div class="input-group my-3">
+          <input type="text" class="form-control" [value]="walletData?.publicKey" aria-label="Wallet's public key" aria-describedby="public-key" readonly>
+          <div class="input-group-append">
+            <button class="btn btn-icon btn-secondary" type="button"><i class="feather icon-copy"></i></button>
+            <button class="btn btn-icon btn-primary" type="button"><i class="fas fa-qrcode"></i></button>
+          </div>
+        </div>
+        
+        <!-- Balance in XCASH, USD and SEND button-->
+        <div class="d-flex align-items-end">
+          <h4 class="mb-0 mr-2">{{ walletData?.balance | xcash }}</h4>
+          <h5 class="mb-0 text-muted">{{ walletData?.balance * USDforXCASH | currency:'USD' }}</h5>
+        </div>
+      </div>
+      
+      <!-- Wallet basic functionnalities navbar -->
+      <div class="d-flex flex-column">
+        <button class="btn btn-success mr-0 px-4 text-left" type="button" (click)="sendModal.show()"><i style="transform: scaleX(-1);" class="fas fa-reply"></i> Send</button>
+        <button class="btn btn-primary mr-0 text-left" type="button" (click)="renameWalletModal.show(walletData?.id)"><i class="feather icon-edit"></i> Rename</button>
+        <button class="btn btn-danger m-0 text-left" type="button" (click)="deleteWalletModal.show(walletData?.id)"><i class="feather icon-trash-2"></i> Delete</button>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./transactions']" routerLinkActive="active" id="transactions-tab">Transactions</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./integrated-address']" routerLinkActive="active" id="addresses-tab">Integrated address</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./sub-address']" routerLinkActive="active" id="addresses-tab">Sub address</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./sign-data']" routerLinkActive="active" id="sign-data-tab">Sign Data</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./reserve-proof']" routerLinkActive="active" id="reserve-proof-tab">Reserve Proof</a>
+  </li>
+</ul>
+<div class="tab-content" id="router-tab">
+  <router-outlet></router-outlet>
+</div>
+
+<app-wallet-send-modal #sendModal [walletData]="walletData" [USDforXCASH]="USDforXCASH"></app-wallet-send-modal>
+
+<app-delete-wallet-modal #deleteWalletModal></app-delete-wallet-modal>
+
+<app-rename-wallet-modal #renameWalletModal></app-rename-wallet-modal>

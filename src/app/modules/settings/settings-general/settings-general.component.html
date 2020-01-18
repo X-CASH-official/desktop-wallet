@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Auto-Lock</h6>
+    <p class="text-muted mb-0">Automatically lock X-CASH GUI Wallet after inactivity.</p>
+  </div>
+  <div>
+    <div ngbDropdown class="d-inline-block" placement="bottom-right">
+      <button class="btn btn-outline-primary m-0" id="dropdownTimeInactivity" ngbDropdownToggle>{{ durationToInactivity }}</button>
+      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownTimeInactivity">
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">1 minute</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">10 minutes</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">30 minutes</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">1 hour</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">never</button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Change Password</h6>
+    <p class="text-muted mb-0">Set a password to prevent unauthorized access to X-CASH GUI Wallet.</p>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary m-0"><i class="feather icon-lock"></i>Change password</button>
+  </div>
+</div>
+<hr>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Reset all data (in case of SWATTING)</h6>
+    <p class="text-muted mb-0">Erase all the GUI Wallet data, including allets data, transaction history and settings.</p>
+  </div>
+  <div>
+    <button type="button" class="btn btn-danger m-0"><i class="feather icon-x-circle"></i>Reset all</button>
+  </div>
+</div>

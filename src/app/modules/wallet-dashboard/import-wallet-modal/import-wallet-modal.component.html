@@ -1,0 +1,71 @@
+<!-- import wallet modal 1/2 - Choose way of import  -->
+<app-ui-modal #importWalletModal1 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Import wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="importWalletModal1.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <div class="pb-3">
+      <ngb-tabset type='pills' justify='center' [activeId]="activeTab" (tabChange)="activeTab = $event.nextId"> 
+        
+        <ngb-tab title="Mnemonic seed" id="mnemonicSeedTab">
+          <ng-template ngbTabContent>
+            <form [formGroup]="importMnemonicSeedForm" id="importMnemonicSeedForm" (ngSubmit)="onSubmitMnemonicSeed()">
+              <div class="form-group">
+                <label for="import-mnemonic-seed">Mnemonic seed</label>
+                <textarea (keydown.enter)="onSubmitMnemonicSeed();false" style="resize: none;" class="form-control text-monospace" id="import-mnemonic-seed" rows="5" placeholder="Enter your mnemonic seed, words separated by space" formControlName="mnemonicSeed" [ngClass]="{'is-invalid': (mnemonicSeed.dirty || mnemonicSeed.touched) && mnemonicSeed.invalid, 'is-valid': (mnemonicSeed.dirty || mnemonicSeed.touched) && !mnemonicSeed.invalid}"></textarea>
+                <div *ngIf="(mnemonicSeed.dirty || mnemonicSeed.touched) && mnemonicSeed.invalid">
+                  <small class="form-text text-danger" *ngIf="mnemonicSeed.errors.required">The mnemonic seed is required.</small>
+                  <small class="form-text text-danger" *ngIf="mnemonicSeed.errors.pattern">The mnnemonic seed format is incorrect, please enter the 25 words separated by space.</small>
+                </div>
+                <small id="import-mnemonic-seed-help" class="form-text text-muted">Enter the 25 words of your mnemonic seed separated by space.</small>
+              </div>
+            </form>
+          </ng-template>
+        </ngb-tab>
+        
+        <ngb-tab title="Private key" id="privateSendKeyTab">
+          <ng-template ngbTabContent>
+            <form [formGroup]="importPrivateSendKeyForm" id="importPrivateSendKeyForm" (ngSubmit)="onSubmitPrivateSendKey()">
+              <div class="form-group">
+                <label for="import-private-send-key">Private send key restore</label>
+                <textarea (keydown.enter)="onSubmitPrivateSendKey();false" style="resize: none;" class="form-control text-monospace" id="import-private-send-key" rows="2" placeholder="Enter your private send key" formControlName="privateSendKey" [ngClass]="{'is-invalid': (privateSendKey.dirty || privateSendKey.touched) && privateSendKey.invalid, 'is-valid': (privateSendKey.dirty || privateSendKey.touched) && !privateSendKey.invalid}"></textarea>
+                <div *ngIf="(privateSendKey.dirty || privateSendKey.touched) && privateSendKey.invalid">
+                  <small class="form-text text-danger" *ngIf="privateSendKey.errors.required">The private send key is required.</small>
+                  <small class="form-text text-danger" *ngIf="privateSendKey.errors.pattern">The private send key is a string of 64 hexadecimal characters.</small>
+                </div>
+                <small id="import-mnemonic-seed-help" class="form-text text-muted">The private send key is a string of 64 hexadecimal characters.</small>
+              </div>
+            </form>
+          </ng-template>
+        </ngb-tab>
+        
+        <ngb-tab title="Key file" id="keyFileTab">
+          <ng-template ngbTabContent>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" i d="validatedCustomFile" required>
+              <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+              <small id="import-private-key-help" class="form-text text-muted">This is not implemented yet.</small>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        
+      </ngb-tabset> 
+    </div>
+  </div>
+  
+  <div class="app-modal-footer">
+    <button *ngIf="activeTab === 'mnemonicSeedTab'" class="btn btn-primary text-center" form="importMnemonicSeedForm">Continue</button>
+    <button *ngIf="activeTab === 'privateSendKeyTab'" class="btn btn-primary text-center" form="importPrivateSendKeyForm">Continue</button>
+  </div>
+</app-ui-modal>
+
+<!-- Import wallet 2/2 - name and password -->
+<!-- This operation is shared between create and import modal and has its own component -->
+<app-wallet-name-password-modal #importWalletModal2 modalTitle="Import wallet" createOrImport="import" (onSubmit)="onSubmitNameAndPasswordImportModal($event)" (onBackButton)="onNameAndPasswordBackButton()"></app-wallet-name-password-modal>
+
+
+

@@ -27,7 +27,7 @@ export class NavContentComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, public nav: NavigationItem, private zone: NgZone, private location: Location) {
     this.dattaConfig = DattaConfig.config;
     this.windowWidth = window.innerWidth;
-    this.navigation = this.nav.get(window.location.pathname);
+    this.navigation = this.nav.get();
     this.prevDisabled = 'disabled';
     this.nextDisabled = '';
     this.scrollWidth = 0;

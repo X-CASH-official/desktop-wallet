@@ -1,0 +1,41 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="mb-4">
+          <i class="feather icon-unlock auth-icon"></i>
+        </div>
+        <h3 class="mb-4">Welcome</h3>
+        <h6 class="mb-4">Enter your password to continue</h6>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmitPassword()" id="loginForm">
+          <div class="input-group">
+            <input type="password" class="form-control" placeholder="Type your password" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && password.invalid, 'is-valid': (password.dirty || password.touched) && !password.invalid}">
+          </div>
+          <div *ngIf="(password.dirty || password.touched) && password.invalid">
+            <small class="form-text text-danger" *ngIf="password.errors.required">Password is required.</small>
+          </div>
+        </form>
+        <!--
+          <div class="form-group text-left">
+            <div class="checkbox checkbox-fill d-inline">
+              <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+              <label for="checkbox-fill-a1" class="cr"> Save Details</label>
+            </div>
+          </div>
+        -->
+        <button class="btn btn-primary mt-4 mb-4" form="loginForm">Login</button>
+        
+        <p class="mb-2 text-muted">Forgot password? <a [routerLink]="['/auth/reset-password']">Reset</a></p>
+        <!--
+          <p class="mb-0 text-muted">Don’t have an account? <a [routerLink]="['/auth/signup']">Sign up</a></p>
+        -->
+      </div>
+    </div>
+  </div>
+</div>

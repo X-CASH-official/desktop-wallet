@@ -3,6 +3,7 @@ import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {DattaConfig} from '../../../../../app-config';
 import {ConfigurationComponent} from '../../configuration/configuration.component';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -31,29 +32,28 @@ import {ConfigurationComponent} from '../../configuration/configuration.componen
   ]
 })
 export class NavRightComponent implements OnInit, DoCheck {
-  public visibleUserList: boolean;
-  public chatMessage: boolean;
-  public friendId: boolean;
   public dattaConfig: any;
+  public darkTheme: boolean = true;
 
-  constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent) {
+  constructor(config: NgbDropdownConfig, private Configuration_Component: ConfigurationComponent, private authService: AuthService) {
     config.placement = 'bottom-right';
-    this.visibleUserList = false;
-    this.chatMessage = false;
     this.dattaConfig = DattaConfig.config;
   }
 
   ngOnInit() {
   }
 
+  toggleTheme(darkTheme: boolean) {
+    if (darkTheme) {
+      this.Configuration_Component.setLayout('dark');
+    } else {
+      this.Configuration_Component.setLayout('light');
+    }
+  }
+
   change_theme(data:string)
   {
     this.Configuration_Component.setLayout(data);
-  }
-
-  onChatToggle(friend_id) {
-    this.friendId = friend_id;
-    this.chatMessage = !this.chatMessage;
   }
 
   ngDoCheck() {

@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+}
+
+tr.example-detail-row {
+    height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: #777;
+    cursor: pointer;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.transaction-detail {
+    overflow: hidden;
+ 
+}

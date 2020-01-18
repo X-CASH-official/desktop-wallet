@@ -3,11 +3,11 @@ export class DattaConfig {
     'layout': 'vertical', // vertical, horizontal
     'pre-layout': null, // null, layout-2, layout-2-2, layout-3, layout-4, layout-4-2, layout-6, layout-8
     'collapse-menu': false,
-    'layout-type': 'menu-dark', // menu-dark, menu-light, dark
+    'layout-type': 'dark', // menu-dark, menu-light, dark
     'nav-icon-color': false,
-    'header-back-color': 'header-default', // header-default, header-blue, header-red, header-purple, header-lightblue, header-dark
-    'nav-back-color': 'navbar-default', // navbar-default, navbar-blue, navbar-red, navbar-purple, navbar-lightblue, navbar-dark
-    'nav-brand-color': 'brand-default', // brand-default, brand-blue, brand-red, brand-purple, brand-lightblue, brand-dark
+    'header-back-color': 'header-dark', // header-default, header-blue, header-red, header-purple, header-lightblue, header-dark
+    'nav-back-color': 'navbar-dark', // navbar-default, navbar-blue, navbar-red, navbar-purple, navbar-lightblue, navbar-dark
+    'nav-brand-color': 'brand-red', // brand-default, brand-blue, brand-red, brand-purple, brand-lightblue, brand-dark
     'nav-back-image': false, // false, navbar-image-1, navbar-image-2, navbar-image-3, navbar-image-4, navbar-image-5
     'rtl-layout': false,
     'nav-fixed-layout': true,

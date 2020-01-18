@@ -19,13 +19,14 @@ import { NavBarComponent } from './theme/layout/admin/nav-bar/nav-bar.component'
 import {ToggleFullScreenDirective} from './theme/shared/full-screen/toggle-full-screen';
 import {NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavLeftComponent } from './theme/layout/admin/nav-bar/nav-left/nav-left.component';
-import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-search/nav-search.component';
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
-import {ChatUserListComponent} from './theme/layout/admin/nav-bar/nav-right/chat-user-list/chat-user-list.component';
-import { FriendComponent } from './theme/layout/admin/nav-bar/nav-right/chat-user-list/friend/friend.component';
-import {ChatMsgComponent} from './theme/layout/admin/nav-bar/nav-right/chat-msg/chat-msg.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
-import {variables_and_functions_service} from './services/variables_and_functions.service';
+import { variables_and_functions_service } from './services/oldService.service';
+import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboard.module';
+import { MaterialModule } from './material.module';
+import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -41,12 +42,8 @@ import {variables_and_functions_service} from './services/variables_and_function
     NavBarComponent,
     ToggleFullScreenDirective,
     NavLeftComponent,
-    NavSearchComponent,
     NavRightComponent,
-    ChatUserListComponent,
-    FriendComponent,
-    ChatMsgComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -56,7 +53,11 @@ import {variables_and_functions_service} from './services/variables_and_function
     NgbDropdownModule,
     NgbTooltipModule,
     NgbButtonsModule,
-    NgbTabsetModule
+    NgbTabsetModule,
+    MaterialModule,
+    WalletDashboardModule,
+    AuthModule,
+    HttpClientModule,
   ],
   providers: [
     NavigationItem,

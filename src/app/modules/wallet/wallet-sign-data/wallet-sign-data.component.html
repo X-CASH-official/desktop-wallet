@@ -1,0 +1,157 @@
+<div class="row justify-content-between mb-2">
+  <div class="col-md-3 col-4">
+    <input type="text" class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary mb-0" type="button" (click)="signDataModal1.show()"><i class="feather icon-feather"></i>Sign</button>
+    <button class="btn btn-primary m-0" type="button" (click)="verifySignedDataModal.show()"><i class="feather icon-check-square"></i>Verify</button>
+  </div>
+</div>
+
+<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+  
+  <!-- Index Column -->
+  <ng-container matColumnDef="id" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+  
+  <!-- Data Column -->
+  <ng-container matColumnDef="data">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+    <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+  </ng-container>
+  
+  <!-- Signature Column -->
+  <ng-container matColumnDef="signature">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Signature </th>
+    <td mat-cell *matCellDef="let element"> {{ element.signature | xcashPublicAddress:10 }} </td>
+  </ng-container>
+  
+  <!-- Actions buttons Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button type="button" class="btn btn-icon btn-table-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
+      triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrCopyTooltip)" placement="top" ngxClipboard [cbContent]="element.signature"><i class="feather icon-copy"></i></button>
+    </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+</table>
+<mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+
+
+<!-- Sign data modal 1 -->
+<app-ui-modal #signDataModal1 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Sign data</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="signDataModal1.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="dataToSignForm" (ngSubmit)="onSubmitDataToSign()" id="dataToSignForm">
+      <div class="form-group">
+        <label for="data-to-sign">Data</label>
+        <textarea style="resize: none;" rows="3" type="text" class="form-control" id="data-to-sign" placeholder="Enter the data to sign" formControlName="dataToSign" [ngClass]="{'is-invalid': (dataToSign.dirty || dataToSign.touched) && dataToSign.invalid, 'is-valid': (dataToSign.dirty || dataToSign.touched) && !dataToSign.invalid}"></textarea>
+        <div *ngIf="(dataToSign.dirty || dataToSign.touched) && dataToSign.invalid">
+          <small class="form-text text-danger" *ngIf="dataToSign.errors.pattern">Data must be a string of latin lowercase and uppercase characters and numbers.</small>
+          <small class="form-text text-danger" *ngIf="dataToSign.errors.required">Data to sign is required.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" form="dataToSignForm">Sign data</button>
+  </div>
+</app-ui-modal>
+
+
+<!-- Sign data modal 2 -->
+<app-ui-modal #signDataModal2 dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Sign data</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="signDataModal2.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <div class="form-group">
+      <label for="signature">Signature</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="created-signature" [value]="createdSignature" readonly>
+        <div class="input-group-append">
+          <button class="btn btn-primary btn-icon" type="button" ngbTooltip="Copied!"
+          triggers="manual" #signModalCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(signModalCopyTooltip)" ngxClipboard [cbContent]="createdSignature"><i class="feather icon-copy"></i></button>
+        </div>
+      </div>
+      <small class="form-text text-muted">You can later retrieve this signature in the corresponding table.</small>
+    </div>
+    
+  </div>
+  <div class="app-modal-footer">
+    <button class="btn btn-primary text-center" (click)="signDataModal2.hide()">Close</button>
+  </div>
+</app-ui-modal>
+
+
+<!-- Verify signed data modal -->
+<app-ui-modal #verifySignedDataModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Verify signed data</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="verifySignedDataModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="verifySignedDataForm" (ngSubmit)="onSubmitVerifySignedData()" id="verifySignedDataForm">
+      <div class="form-group">
+        <label for="signed-data">Data to verify</label>
+        <textarea style="resize: none;" rows="3" type="text" class="form-control" id="signed-data" placeholder="Enter the data to verify" formControlName="dataToVerify" [ngClass]="{'is-invalid': (dataToVerify.dirty || dataToVerify.touched) && dataToVerify.invalid, 'is-valid': (dataToVerify.dirty || dataToVerify.touched) && !dataToVerify.invalid}"></textarea>
+        <div *ngIf="(dataToVerify.dirty || dataToVerify.touched) && dataToVerify.invalid">
+          <small class="form-text text-danger" *ngIf="dataToVerify.errors.pattern">Data must be a string of latin lowercase and uppercase characters and numbers.</small>
+          <small class="form-text text-danger" *ngIf="dataToVerify.errors.required">Data to verify is required.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="signatory-address">Signatory address</label>
+        <input type="text" class="form-control" id="signatory-address" placeholder="Enter signatory address" formControlName="signatoryAddress" [ngClass]="{'is-invalid': (signatoryAddress.dirty || signatoryAddress.touched) && signatoryAddress.invalid, 'is-valid': (signatoryAddress.dirty || signatoryAddress.touched) && !signatoryAddress.invalid}">
+        <div *ngIf="(signatoryAddress.dirty || signatoryAddress.touched) && signatoryAddress.invalid">
+          <small class="form-text text-danger" *ngIf="signatoryAddress.errors.required">Signatory address is required.</small>
+          <small class="form-text text-danger" *ngIf="signatoryAddress.errors.pattern">Must be a XCASH public address.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="signature-to-verify">Signature</label>
+        <input type="text" class="form-control" id="signature-to-verify" placeholder="Enter signature" formControlName="signatureToVerify" [ngClass]="{'is-invalid': (signatureToVerify.dirty || signatureToVerify.touched) && signatureToVerify.invalid, 'is-valid': (signatureToVerify.dirty || signatureToVerify.touched) && !signatureToVerify.invalid}">
+        <div *ngIf="(signatureToVerify.dirty || signatureToVerify.touched) && signatureToVerify.invalid">
+          <small class="form-text text-danger" *ngIf="signatureToVerify.errors.required">Signature is required.</small>
+          <small class="form-text text-danger" *ngIf="signatureToVerify.errors.pattern">Invalid format for signature.</small>
+        </div>
+      </div>
+    </form>
+    
+    <div *ngIf="verifySignedDataIsSubmitted">
+      <div *ngIf="verificationSuccess" class="alert alert-success" role="alert">
+        Success!
+      </div>
+      <div *ngIf="!verificationSuccess" class="alert alert-danger" role="alert">
+        Failure!
+      </div>
+    </div>
+    
+  </div>
+  <div class="app-modal-footer">
+    <button *ngIf="!verifySignedDataIsSubmitted || !verificationSuccess" class="btn btn-success text-center" form="verifySignedDataForm">Verify signed data</button>
+    <button *ngIf="verifySignedDataIsSubmitted && verificationSuccess" class="btn btn-primary text-center" (click)="onCloseSignatureVerification()">Close</button>
+  </div>
+</app-ui-modal>

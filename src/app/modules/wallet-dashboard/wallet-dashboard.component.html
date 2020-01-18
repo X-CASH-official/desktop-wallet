@@ -1,0 +1,58 @@
+<div class="row">
+  <!-- Total Balance -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h3>Total Balance</h3>
+          </div>
+          
+          <div>
+            <button type="button" class="btn btn-primary btn-lg mb-0" (click)="createWalletModal.show();"><i class="feather icon-plus-circle"></i>Create Wallet</button>
+            <button type="button" class="btn btn-secondary btn-lg m-0" (click)="importWalletModal.show();"><i class="feather icon-download"></i>Import Wallet</button>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+  
+  <!-- Wallet cards -->
+  <div *ngFor="let wallet of walletList$ | async" class="col-lg-4 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4><a [routerLink]="['./wallet']" [state]="{walletId: wallet.id}">{{ wallet.name }}</a></h4>
+        <div class="card-header-right">
+          <div class="btn-group card-option dropdown" ngbDropdown>
+            <button type="button" class="btn dropdown-toggle btn-icon" ngbDropdownToggle>
+              <i class="feather icon-more-horizontal"></i>
+            </button>
+            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+              <li class="dropdown-item reload-card" (click)="renameWalletModal.show(wallet.id)"><a href="javascript:"><i class="feather icon-edit"></i> Rename</a></li>
+              <li class="dropdown-item close-card" (click)="deleteWalletModal.show(wallet.id)"><a href="javascript:"><i class="feather icon-trash"></i> Delete</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <a [routerLink]="['./wallet']" [state]="{walletId: wallet.id}" class="card-body">
+        
+        <h5>{{ wallet.publicKey | xcashPublicAddress:10 }}</h5>
+        <h5>{{ wallet.balance | xcash}}</h5>
+        <small id="amount-help" class="form-text text-muted">Amount (since last refresh).</small>
+        
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<app-create-wallet-modal #createWalletModal></app-create-wallet-modal>
+
+<app-import-wallet-modal #importWalletModal></app-import-wallet-modal>
+
+<!-- Delete wallet modal -->
+<app-delete-wallet-modal #deleteWalletModal></app-delete-wallet-modal>
+
+
+<!-- Rename wallet modal -->
+<app-rename-wallet-modal #renameWalletModal></app-rename-wallet-modal>

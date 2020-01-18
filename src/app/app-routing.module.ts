@@ -1,119 +1,53 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
-import { AuthComponent } from './theme/layout/auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: './auth/auth.module#AuthModule'
+  }, 
+  {
     path: '',
     component: AdminComponent,
+    canActivate: [AuthGuard], // Maybe this line is overkill because AdminComponent cannot be called without a child
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: 'wallet_menu/main_menu',
+        redirectTo: 'wallet-dashboard',
         pathMatch: 'full'
       },
       {
-        path: 'wallet_menu',
-        loadChildren: './demo/wallet_menu/wallet_menu.module#wallet_menuModule'
+        path: 'wallet-dashboard',
+        loadChildren: './modules/wallet-dashboard/wallet-dashboard.module#WalletDashboardModule'
       },
       {
-        path: 'basic_wallet_functions',
-        loadChildren: './demo/basic_wallet_functions/basic_wallet_functions.module#basic_wallet_functionsModule'
+        path: 'contacts',
+
+        loadChildren: './modules/contacts/contacts.module#ContactsModule'
       },
       {
-        path: 'advanced_wallet_functions',
-        loadChildren: './demo/advanced_wallet_functions/advanced_wallet_functions.module#advanced_wallet_functionsModule'
+        path: 'settings',
+
+        loadChildren: './modules/settings/settings.module#SettingsModule'
       },
-      {
-        path: 'basic',
-        loadChildren: './demo/ui-elements/ui-basic/ui-basic.module#UiBasicModule'
-      },
-      {
-        path: 'advance',
-        loadChildren: './demo/ui-elements/ui-adv/ui-adv.module#UiAdvModule'
-      },
-      {
-        path: 'forms',
-        loadChildren: './demo/pages/form-elements/form-elements.module#FormElementsModule'
-      },
-      {
-        path: 'tables',
-        loadChildren: './demo/pages/tables/tables.module#TablesModule'
-      },
-      {
-        path: 'charts',
-        loadChildren: './demo/pages/core-chart/core-chart.module#CoreChartModule'
-      },
-      {
-        path: 'maps',
-        loadChildren: './demo/pages/core-maps/core-maps.module#CoreMapsModule'
-      },
-      {
-        path: 'message',
-        loadChildren: './demo/app/inline-chat/inline-chat.module#InlineChatModule'
-      },
-      {
-        path: 'task',
-        loadChildren: './demo/app/task/task.module#TaskModule'
-      },
-      {
-        path: 'todo',
-        loadChildren: './demo/app/todo/todo.module#TodoModule'
-      },
-      {
-        path: 'gallery',
-        loadChildren: './demo/app/gallery/gallery.module#GalleryModule'
-      },
-      {
-        path: 'editor',
-        loadChildren: './demo/extension/editor/editor.module#EditorModule'
-      },
-      {
-        path: 'invoice',
-        loadChildren: './demo/extension/invoice/invoice.module#InvoiceModule'
-      },
-      {
-        path: 'full-calendar',
-        loadChildren: './demo/extension/full-event-calendar/full-event-calendar.module#FullEventCalendarModule'
-      },
-      {
-        path: 'file-upload',
-        loadChildren: './demo/extension/files-upload/files-upload.module#FilesUploadModule'
-      },
-      {
-        path: 'sample-page',
-        loadChildren: './demo/extra/sample-page/sample-page.module#SamplePageModule'
-      },
-      {
-        path: '**',
-        redirectTo: 'wallet_menu/main_menu',
-        pathMatch: 'full'
-      }
+      
     ]
-  },
+  }, 
   {
-    path: '',
-    component: AuthComponent,
-    children: [
-      {
-        path: 'maintenance',
-        loadChildren: './demo/pages/maintenance/maintenance.module#MaintenanceModule'
-      },
-      {
-        path: 'auth',
-        loadChildren: './demo/pages/authentication/authentication.module#AuthenticationModule'
-      },
-      {
-        path: 'landing',
-        loadChildren: './demo/pages/landing/landing.module#LandingModule'
-      }
-    ]
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // Pre-Loading of modules : modules will be loaded in the background asynchronously just after the application is started
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

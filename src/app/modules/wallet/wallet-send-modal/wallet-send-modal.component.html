@@ -1,0 +1,177 @@
+<!-- Send Modal -->
+<app-ui-modal #sendModal dialogClass="modal-dialog-centered">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Send</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="sendForm" id="sendForm" (ngSubmit)="onSubmitSendForm()">
+      <div class="form-group">
+        <label for="sender">Sender</label>
+        <input type="text" class="form-control" id="sender" [value]="walletData?.name" readonly>
+      </div>
+      
+      <div class="form-group">
+        <label for="recipient">Recipient</label>
+        <input type="text" [ngbTypeahead]="searchContact" (selectItem)="onSelectionContact($event)" [resultTemplate]="rt" class="form-control" id="recipient" placeholder="Search contacts or enter address" formControlName="recipient" [ngClass]="{'is-invalid': (recipient.dirty || recipient.touched) && recipient.invalid, 'is-valid': (recipient.dirty || recipient.touched) && !recipient.invalid}">
+        <div *ngIf="(recipient.dirty || recipient.touched) && recipient.invalid">
+          <small class="form-text text-danger" *ngIf="recipient.errors.required">A recipient is XCASH address required.</small>
+        </div>
+        
+        <ng-template #rt let-r="result" let-t="term">
+          <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+        </ng-template>
+      </div>
+      
+      <div class="form-group">
+        <label for="payment-id">Payment ID (optional)</label>
+        <input type="text" class="form-control" id="payment-id" placeholder="Enter payment ID (optional)" formControlName="paymentId" [ngClass]="{'is-invalid': (paymentId.dirty || paymentId.touched) && paymentId.invalid, 'is-valid': (paymentId.dirty || paymentId.touched) && !paymentId.invalid}">
+        <div *ngIf="(paymentId.dirty || paymentId.touched) && paymentId.invalid">
+          <small class="form-text text-danger" *ngIf="paymentId.errors.pattern">The payment ID format is incorrect.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="d-flex">
+          <label class="pr-2" for="amount">Amount |</label>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="max-amount-switch" name="max-amount-switch" (change)="onMaxAmountSwitchClick($event.target.checked)" formControlName="maxAmount">
+            <label class="custom-control-label" for="max-amount-switch">Max</label>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <!-- XCASH amount entry -->
+          <div class="input-group">
+            <input type="text" class="form-control" id="amount" placeholder="Enter amount" formControlName="amount" [ngClass]="{'is-invalid': (amount.dirty || amount.touched) && amount.invalid, 'is-valid': (amount.dirty || amount.touched) && !amount.invalid}">
+            <div class="input-group-append">
+              <span class="input-group-text">XCASH</span>
+            </div>
+          </div>
+          
+          <span class="px-2">=</span>
+          
+          <!-- Readonly USD converter - Should be implemented with a service that returns xcash value in usd -->
+          <div class="input-group">
+            <input type="text" class="form-control" id="amount-usd" [value]="amount?.value * USDforXCASH | number:'1.8-8'" readonly>
+            <div class="input-group-append">
+              <span class="input-group-text">USD</span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(amount.dirty || amount.touched) && amount.invalid">
+          <small class="form-text text-danger" *ngIf="amount.errors.required">A amount is required.</small>
+        </div>
+        <small class="form-text text-muted">The conversion in USD is an approximation and may not be up to date.</small>
+      </div>
+      
+      <!-- Priority choice has been retired for the moment
+        <div class="form-group">
+          <label class="pr-4" for="priority">Priority</label>
+          <div class="radio radio-primary d-inline pr-3">
+            <input type="radio" name="radio-priority" id="radio-priority-high" checked>
+            <label for="radio-priority-high" class="cr">High</label>
+          </div>
+          <div class="radio radio-primary d-inline pr-3">
+            <input type="radio" name="radio-priority" id="radio-priority-medium">
+            <label for="radio-priority-medium" class="cr">Medium</label>
+          </div>
+          <div class="radio radio-primary d-inline">
+            <input type="radio" name="radio-priority" id="radio-priority-low">
+            <label for="radio-priority-low" class="cr">Low</label>
+          </div>
+        </div>
+      -->
+      
+      <div class="form-group">
+        <label class="pr-4" for="privacy">Privacy</label>
+        <div class="radio radio-primary d-inline pr-3">
+          <input type="radio" id="radio-privacy-private" value="private" checked formControlName="privacy">
+          <label for="radio-privacy-private" class="cr">Private</label>
+        </div>
+        <div class="radio radio-primary d-inline">
+          <input type="radio" id="radio-privacy-public" value="public" formControlName="privacy">
+          <label for="radio-privacy-public" class="cr">Public</label>
+        </div>
+      </div>
+      
+    </form>    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button form="sendForm" class="btn btn-primary text-center">Continue</button>
+  </div>
+  
+</app-ui-modal>
+
+
+<!-- Send Confirmation Modal -->
+<app-ui-modal #sendConfirmationModal id="sendConfirmationModal" containerClick="false" dialogClass="modal-dialog-centered">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Transaction confirmation</h5>
+    <!--
+      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendConfirmationModal.hide()"><span aria-hidden="true">&times;</span></button>
+    -->
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <div class="form-group row">
+      <label for="sending-amount" class="col-sm-3 col-form-label">Amount sent</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-amount" [value]="amount?.valid ? amount?.value : null | xcash">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="sending-recipient" class="col-sm-3 col-form-label">To</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-recipient" [value]="recipient?.value">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="sending-privacy" class="col-sm-3 col-form-label">Privacy</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-privacy" [value]="privacy?.value | titlecase">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="sending-fees" class="col-sm-3 col-form-label">Fees</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-fees" value="533,260 XCASH">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="sending-total" class="col-sm-3 col-form-label">Total</label>
+      
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="sending-total" value="125,066,520 XCASH">
+      </div>
+    </div>
+    <small id="total-sent-help" class="form-text text-muted">The recipient will receive the amount sent and you will be charged the total.</small>
+    
+  </div>
+  
+  <div class="app-modal-footer" >
+    <div *ngIf="!sendConfirmationLoading">
+      <button class="btn btn-danger text-center" (click)="sendConfirmationModal.hide();">Cancel</button>
+      <button class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
+      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide(sendConfirmationModal, 1500, 'sendConfirmationLoading')">
+        Confirm & Send
+      </button>
+    </div>
+    <div *ngIf="sendConfirmationLoading">
+      <button type="submit" class="btn btn-success text-center">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Sending...
+      </button>
+    </div>
+  </div>
+  
+</app-ui-modal>

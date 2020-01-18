@@ -1,3 +1,14 @@
+.dataTables_filter{
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+.dataTables_length{
+  margin-top: 3px;
+}
+
+/* Mess up with official datatables bs4
+
 table.dataTable tbody th, table.dataTable tbody td {
   padding: 1.05rem .75rem;
 }
@@ -80,3 +91,5 @@ table.dataTable tbody th, table.dataTable tbody td {
 table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
   background-color: #dceff7;
 }
+
+*/

@@ -1,0 +1,4 @@
+// Footer (for actions)
+.modal-footer-centered {
+    justify-content: center; // Right align buttons with flex property because text-align doesn't work on flex items
+  }

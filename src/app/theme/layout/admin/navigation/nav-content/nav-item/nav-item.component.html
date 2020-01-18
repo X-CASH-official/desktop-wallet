@@ -20,7 +20,8 @@
     </a>
   </li>
   <ng-template #itemIcon>
-    <span *ngIf="item.icon" class="pcoded-micon"><i class="feather" [ngClass]="item.icon"></i></span>
+    <!-- I corrected the class="feather" to class="" in order to allow fas icon too -->
+    <span *ngIf="item.icon" class="pcoded-micon"><i class="" [ngClass]="item.icon"></i></span>
   </ng-template>
   <ng-template #itemBadge>
     <span *ngIf="item.badge" class="pcoded-badge label" [ngClass]="item.badge.type">
