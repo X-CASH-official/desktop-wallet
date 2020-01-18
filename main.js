@@ -6,6 +6,9 @@ let win;
 
 function createWindow() {
   win = new BrowserWindow({ webPreferences: {nodeIntegration: true}, icon: path.join(__dirname, '/src/assets/images/xcash_logo.png') });
+  
+  // make the window full screen
+  win.maximize();
 
   // load the dist folder from Angular
   win.loadURL(
