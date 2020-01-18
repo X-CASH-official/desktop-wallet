@@ -5,7 +5,7 @@ const url = require("url");
 let win;
 
 function createWindow() {
-  win = new BrowserWindow({ webPreferences: {nodeIntegration: true} });
+  win = new BrowserWindow({ webPreferences: {nodeIntegration: true}, icon: path.join(__dirname, '/src/assets/images/xcash_logo.png') });
 
   // load the dist folder from Angular
   win.loadURL(
