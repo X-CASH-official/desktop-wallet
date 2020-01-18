@@ -4,8 +4,8 @@
   "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng build --base-href ./ && electron .",
-    "build": "ng build --prod --aot --base-href ./ && electron .",
+    "start": "tsc main.ts && ng build --base-href ./ && electron .",
+    "build": "tsc main.ts && ng build --prod --aot --base-href ./ && electron .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -105,7 +105,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/jquery": "^3.3.31",
     "@types/mousetrap": "^1.6.3",
-    "@types/node": "^13.1.8",
+    "@types/node": "^12.12.21",
     "codelyzer": "~4.5.0",
     "electron": "^7.1.9",
     "jasmine-core": "~2.99.1",

@@ -1,44 +1,30 @@
-const { app, BrowserWindow } = require("electron");
-const path = require("path");
-const url = require("url");
-
-let win;
-
+"use strict";
+exports.__esModule = true;
+var electron_1 = require("electron");
+var path = require("path");
+var mainWindow;
 function createWindow() {
-  win = new BrowserWindow({ webPreferences: {nodeIntegration: true}, icon: path.join(__dirname, '/src/assets/images/xcash_logo.png') });
-  
-  // make the window full screen
-  win.maximize();
-
-  // load the dist folder from Angular
-  win.loadURL(
-    url.format({
-      pathname: path.join(__dirname, `/dist/index.html`),
-      protocol: "file:",
-      slashes: true
-    })
-  );
-
-  // The following is optional and will open the DevTools:
-  // win.webContents.openDevTools()
-
-  win.on("closed", () => {
-    win = null;
-  });
+    // Create the browser window.
+    mainWindow = new electron_1.BrowserWindow({ webPreferences: { nodeIntegration: true }, icon: path.join(__dirname, '/src/assets/images/xcash_logo.png') });
+    // make the window full screen
+    mainWindow.maximize();
+    // load the dist folder from Angular
+    mainWindow.loadFile(path.join(__dirname, "/dist/index.html"));
+    mainWindow.on("closed", function () { return mainWindow = null; });
 }
-
-app.on("ready", createWindow);
-
-// on macOS, closing the window doesn't quit the app
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+electron_1.app.on("ready", createWindow);
+// Quit when all windows are closed.
+electron_1.app.on("window-all-closed", function () {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== "darwin") {
+        electron_1.app.quit();
+    }
 });
-
-// initialize the app's main window
-app.on("activate", () => {
-  if (win === null) {
-    createWindow();
-  }
+electron_1.app.on("activate", function () {
+    // On OS X it"s common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+        createWindow();
+    }
 });
