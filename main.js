@@ -10,6 +10,7 @@ function createWindow() {
     mainWindow.maximize();
     // load the dist folder from Angular
     mainWindow.loadFile(path.join(__dirname, "/dist/index.html"));
+    mainWindow.webContents.openDevTools();
     mainWindow.on("closed", function () { return mainWindow = null; });
 }
 electron_1.app.on("ready", createWindow);

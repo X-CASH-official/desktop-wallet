@@ -13,6 +13,8 @@ function createWindow() {
   // load the dist folder from Angular
   mainWindow.loadFile(path.join(__dirname, "/dist/index.html"));
 
+ mainWindow.webContents.openDevTools();
+
   mainWindow.on("closed", () => mainWindow = null);
 }
 

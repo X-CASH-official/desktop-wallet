@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { variables_and_functions_service } from 'src/app/services/oldService.service';
+import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { WalletListService } from 'src/app/services/wallet-list.service';
@@ -13,14 +13,14 @@ import { Wallet } from 'src/app/models/wallet.model';
 })
 export class WalletDashboardComponent implements OnInit {
   
-  constructor(private walletListService: WalletListService, config: NgbDropdownConfig) {
+  constructor(private walletListService: WalletListService, config: NgbDropdownConfig, private RpcCallsService: RpcCallsService) {
     config.placement = 'bottom-right';
-   }
-  
+   }  
   walletList$: BehaviorSubject<Wallet[]>;
 
-  ngOnInit() {
-    this.walletList$ = this.walletListService.getWalletList();
+  async ngOnInit() {
+    this.walletList$ = this.walletListService.getWalletList();    
+    console.log(await this.RpcCallsService.getCurrentBlockHeight());
   }
 
 }
