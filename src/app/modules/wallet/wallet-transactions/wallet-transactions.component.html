@@ -21,9 +21,15 @@ class="mat-elevation-z8">
 </ng-container>
 
 <!-- Recipient Column -->
-<ng-container matColumnDef="recipient">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Recipient </th>
-  <td mat-cell *matCellDef="let transaction"> {{transaction.recipient | xcashPublicAddress:15 }} </td>
+<ng-container matColumnDef="Transaction ID">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction ID </th>
+  <td mat-cell *matCellDef="let transaction"> {{transaction.txid | xcashPublicAddress:15 }} </td>
+</ng-container>
+
+<!-- Type Column -->
+<ng-container matColumnDef="Transaction Type">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Type </th>
+  <td mat-cell *matCellDef="let transaction"> {{transaction.transactionType}} </td>
 </ng-container>
 
 <!-- Date Column -->
@@ -39,8 +45,8 @@ class="mat-elevation-z8">
       <div class="shadow-none p-3 mb-3 bg-light rounded">
         
         <div class="row">
-          <label for="transaction-recipient" class="col-1 col-form-label">Recipient</label>
-          <span class="col-11 form-control-plaintext" id="transaction-recipient">{{transaction.recipient}}</span>
+          <label for="transaction-recipient" class="col-1 col-form-label">Transaction ID</label>
+          <span class="col-11 form-control-plaintext" id="transaction-recipient">{{transaction.txid}}</span>
         </div>
         
         <div class="row">
@@ -65,8 +71,8 @@ class="mat-elevation-z8">
           
           <div class="col">
             <div class="row">
-              <label for="transaction-total" class="col-3 col-form-label">Total</label>
-              <span class="col-9 form-control-plaintext" id="transaction-total">{{transaction.total | xcash}}</span>
+              <label for="transaction-total" class="col-3 col-form-label">Payment ID</label>
+              <span class="col-9 form-control-plaintext" id="transaction-total">{{transaction.paymentid}}</span>
             </div>
           </div>
         </div>

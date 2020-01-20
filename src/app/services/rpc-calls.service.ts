@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Transaction } from 'electron';
 const exec = (<any>window).require('child_process').exec;
 const crypto = (<any>window).require("crypto");
 const fs = (<any>window).require('fs');
@@ -174,6 +175,66 @@ export class RpcCallsService {
     });
   }
 
+  public async getTransactions(): Promise<Transaction[]> {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_transfers","params":{"in":true,"out":true}}';
+    const XCASH_DECIMAL_PLACES:number = 1000000;
+
+   // Variables
+   let data;
+   let transactions: any[] = [];
+   let count = 0;
+
+   try
+   {
+     data = await this.getPostRequestData(URL);
+     data.result.in.forEach(item => {
+       count++;
+      transactions.push({
+        id: count,
+        amount: item.amount / XCASH_DECIMAL_PLACES,
+        txid: item.txid,
+        date: new Date(item.timestamp*1000),
+        transactionType: "in",
+        type: 'private',
+        fees: item.fee / XCASH_DECIMAL_PLACES,
+        paymentid: item.payment_id,
+        blockHeight: item.height,
+      });
+     });
+
+     data.result.out.forEach(item => {
+      count++;
+     transactions.push({
+       id: count,
+       amount: item.amount / XCASH_DECIMAL_PLACES,
+       txid: item.txid,
+       date: new Date(item.timestamp*1000),
+       transactionType: "out",
+       type: 'private',
+       fees: item.fee / XCASH_DECIMAL_PLACES,
+       paymentid: item.payment_id,
+       blockHeight: item.height,
+     });
+    });
+
+    // sort the data by date
+    transactions.sort((a,b)=>b.date-a.date);
+
+    // re item the transactions
+    count = 0;
+    transactions.forEach(item => {
+      count++
+      item.id = count
+    });
+    return transactions;
+   }
+   catch(error)
+   {
+     return transactions;
+   }
+  }
+
   public async getCurrentBlockHeight(): Promise<any> {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_height"}';
@@ -264,9 +325,10 @@ export class RpcCallsService {
     }
   }
 
-  public async sendPayment(sendType:string, paymentID:string, amount:number, address:string, sendSettings:string): Promise<string> {
+  public async sendPayment(sendPaymentData:any): Promise<string> {
     // Constants
-    const URL:string = `{"jsonrpc":"2.0","id":"0","method":${sendType},"params":{"destinations":[{"amount":${amount},"address":${address}}],"priority":0,"ring_size":21,"get_tx_keys": true, "payment_id":${paymentID} "do_not_relay":${sendSettings}}}`;
+    const sendType = sendPaymentData.maxAmount === true ? "sweep_all" : "transfer_split";
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"${sendType}","params":{"destinations":[{"amount":${sendPaymentData.amount},"address":"${sendPaymentData.recipient}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "payment_id":"${sendPaymentData.paymentId}", "tx_privacy_settings":"${sendPaymentData.privacy}"}}`;
    
     // Variables
     let data;
@@ -290,3 +352,5 @@ export class RpcCallsService {
     return "OK";
   }
 }
+
+

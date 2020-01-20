@@ -9,6 +9,7 @@ import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ContactListService } from 'src/app/services/contact-list.service';
 import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { ConstantsService } from 'src/app/services/constants.service';
+import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 
 @Component({
   selector: 'app-wallet-send-modal',
@@ -19,10 +20,13 @@ export class WalletSendModalComponent implements OnInit {
 
   contacts: Contact[];
   contactListSubscription: Subscription;
+  sendPaymentData:object;
+  data:string;
 
   constructor(private validatorsRegexService: ValidatorsRegexService, 
     private contactListService: ContactListService, 
-    private constantsService: ConstantsService) {
+    private constantsService: ConstantsService,
+    private RpcCallsService: RpcCallsService) {
   }
 
   @Input() walletData: Wallet;
@@ -30,6 +34,7 @@ export class WalletSendModalComponent implements OnInit {
 
   @ViewChild('sendModal', { static: true }) sendModal: UiModalComponent;
   @ViewChild('sendConfirmationModal', { static: true }) sendConfirmationModal: UiModalComponent;
+  @ViewChild('sendPaymentModalError', { static: true }) sendPaymentModalError: UiModalComponent;
 
   sendForm = new FormGroup({
     recipient: new FormControl('', [Validators.required, Validators.pattern(this.validatorsRegexService.xcash_address)]),
@@ -109,12 +114,27 @@ export class WalletSendModalComponent implements OnInit {
   onSubmitSendForm() {
     if (this.sendForm.valid) {
       this.sendModal.hide();
-      console.log(this.sendForm);
+      this.sendPaymentData = this.sendForm.value;
       // Do some stuff before recap?
       // Treat the max amount case here please : enable amount and set it to the max
       this.sendConfirmationModal.show();
     } else {
       this.recipient.markAsTouched();
+    }
+  }
+
+  async sendTransaction(walletData:any) {
+    // Variables
+    let data2:string;
+    try
+    {
+      data2 = await this.RpcCallsService.sendPayment(this.sendPaymentData);
+      // refresh the balance
+    }
+    catch (error)
+    {
+      this.data = data2;
+      this.sendPaymentModalError.show();
     }
   }
 
