@@ -13,6 +13,7 @@ export class RpcCallsService {
 
   // Variables
   rpcUserAgent:string = fs.readFileSync("useragent.txt","utf8");
+  XCASH_DECIMAL_PLACES:number = 1000000;
 
   sleep(milliseconds)
   {
@@ -178,7 +179,6 @@ export class RpcCallsService {
   public async getTransactions(): Promise<Transaction[]> {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_transfers","params":{"in":true,"out":true}}';
-    const XCASH_DECIMAL_PLACES:number = 1000000;
 
    // Variables
    let data;
@@ -192,12 +192,12 @@ export class RpcCallsService {
        count++;
       transactions.push({
         id: count,
-        amount: item.amount / XCASH_DECIMAL_PLACES,
+        amount: item.amount / this.XCASH_DECIMAL_PLACES,
         txid: item.txid,
         date: new Date(item.timestamp*1000),
         transactionType: "in",
         type: 'private',
-        fees: item.fee / XCASH_DECIMAL_PLACES,
+        fees: item.fee / this.XCASH_DECIMAL_PLACES,
         paymentid: item.payment_id,
         blockHeight: item.height,
       });
@@ -207,12 +207,12 @@ export class RpcCallsService {
       count++;
      transactions.push({
        id: count,
-       amount: item.amount / XCASH_DECIMAL_PLACES,
+       amount: item.amount / this.XCASH_DECIMAL_PLACES,
        txid: item.txid,
        date: new Date(item.timestamp*1000),
        transactionType: "out",
        type: 'private',
-       fees: item.fee / XCASH_DECIMAL_PLACES,
+       fees: item.fee / this.XCASH_DECIMAL_PLACES,
        paymentid: item.payment_id,
        blockHeight: item.height,
      });
@@ -325,6 +325,24 @@ export class RpcCallsService {
     }
   }
 
+  public async getTxKey(txid:string): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"get_tx_key","params":{"txid":"${txid}"}}`;
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.tx_key;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
   public async getBalance(): Promise<number> {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
@@ -335,7 +353,7 @@ export class RpcCallsService {
     try
     {
       data = await this.getPostRequestData(URL);
-      return data.result.balance / 1000000;
+      return data.result.balance / this.XCASH_DECIMAL_PLACES;
     }
     catch(error)
     {
@@ -343,22 +361,21 @@ export class RpcCallsService {
     }
   }
 
-  public async sendPayment(sendPaymentData:any): Promise<string> {
+  public async sendPayment(sendPaymentData:any, settings:boolean): Promise<object> {
     // Constants
     const sendType = sendPaymentData.maxAmount === true ? "sweep_all" : "transfer_split";
-    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"${sendType}","params":{"destinations":[{"amount":${sendPaymentData.amount},"address":"${sendPaymentData.recipient}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "payment_id":"${sendPaymentData.paymentId}", "tx_privacy_settings":"${sendPaymentData.privacy}"}}`;
-   
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"${sendType}","params":{"destinations":[{"amount":${sendPaymentData.amount * this.XCASH_DECIMAL_PLACES},"address":"${sendPaymentData.recipient}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "payment_id":"${sendPaymentData.paymentId}", "tx_privacy_settings":"${sendPaymentData.privacy}", "do_not_relay":${settings}}}`;
     // Variables
     let data;
 
     try
     {
       data = await this.getPostRequestData(URL);
-      return data.result.address;
+      return {"status":"success","txid":data.result.tx_hash_list[0],"txkey":data.result.tx_key_list[0],"fee":data.result.fee_list[0] / this.XCASH_DECIMAL_PLACES,"total":(data.result.fee_list[0] + data.result.amount_list[0]) / this.XCASH_DECIMAL_PLACES};
     }
     catch(error)
     {
-      return data.error.message;
+      return {"status":data.error.message};
     }
   }
 

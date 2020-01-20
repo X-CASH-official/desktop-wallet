@@ -80,8 +80,8 @@ class="mat-elevation-z8">
         <div class="row">
           <div class="col">
             <div class="row">
-              <label for="transaction-type" class="col-3 col-form-label">Type</label>
-              <span class="col-9 form-control-plaintext" id="transaction-type">{{transaction.type}}</span>
+              <label for="transaction-type" class="col-3 col-form-label">Transaction Type</label>
+              <span class="col-9 form-control-plaintext" id="transaction-type">{{transaction.transactionType}}</span>
             </div>
           </div>
           
@@ -93,7 +93,9 @@ class="mat-elevation-z8">
           </div>
           
           <div class="py-2 col">
-            <a href="https://www.sgat-technologies.com/fr/" target="_blank" rel="noopener noreferrer">See in transaction explorer</a>
+            <a [href]="'https://explorer.x-cash.org/Transaction?data=' + transaction.txid" target="_blank" rel="noopener noreferrer">View in transaction explorer</a>
+            <br>
+            <a href="javascript:void(0);" (click)="getTXKey(transaction.txid)">Get TX Key</a>
           </div>
         </div>
         
@@ -111,3 +113,20 @@ class="example-element-row"
 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
 <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+
+<app-ui-modal #TXKeyModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">TX Key</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="TXKeyModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <p style="word-wrap: break-word">{{TXKey}}</p>
+  </div>
+  
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-primary text-center" (click)="TXKeyModal.hide()">Close</button>
+  </div>
+</app-ui-modal>

@@ -22,6 +22,9 @@ export class WalletSendModalComponent implements OnInit {
   contactListSubscription: Subscription;
   sendPaymentData:object;
   data:string;
+  fee:number;
+  total:number;
+  tx:any = {};
 
   constructor(private validatorsRegexService: ValidatorsRegexService, 
     private contactListService: ContactListService, 
@@ -35,6 +38,7 @@ export class WalletSendModalComponent implements OnInit {
   @ViewChild('sendModal', { static: true }) sendModal: UiModalComponent;
   @ViewChild('sendConfirmationModal', { static: true }) sendConfirmationModal: UiModalComponent;
   @ViewChild('sendPaymentModalError', { static: true }) sendPaymentModalError: UiModalComponent;
+  @ViewChild('sendPaymentModalSuccess', { static: true }) sendPaymentModalSuccess: UiModalComponent;
 
   sendForm = new FormGroup({
     recipient: new FormControl('', [Validators.required, Validators.pattern(this.validatorsRegexService.xcash_address)]),
@@ -111,31 +115,35 @@ export class WalletSendModalComponent implements OnInit {
     }
   }
 
-  onSubmitSendForm() {
+  async onSubmitSendForm() {
     if (this.sendForm.valid) {
       this.sendModal.hide();
       this.sendPaymentData = this.sendForm.value;
-      // Do some stuff before recap?
-      // Treat the max amount case here please : enable amount and set it to the max
-      this.sendConfirmationModal.show();
+      
+      // get the transaction fee and total
+      console.log(this.sendPaymentData);
+      let data2:any = await this.RpcCallsService.sendPayment(this.sendPaymentData,true);
+      console.log(data2);
+      if (data2.status === "success")
+      {
+        this.fee = data2.fee;
+        this.total = data2.total;
+        this.sendConfirmationModal.show();
+      }
+      else
+      {
+        this.data = data2.status;
+        this.sendPaymentModalError.show();
+      }
     } else {
       this.recipient.markAsTouched();
     }
   }
 
-  async sendTransaction(walletData:any) {
-    // Variables
-    let data2:string;
-    try
-    {
-      data2 = await this.RpcCallsService.sendPayment(this.sendPaymentData);
-      // refresh the balance
-    }
-    catch (error)
-    {
-      this.data = data2;
-      this.sendPaymentModalError.show();
-    }
+  async sendPayment()
+  {
+   this.tx = await this.RpcCallsService.sendPayment(this.sendPaymentData,false);
+   this.sendPaymentModalSuccess.show();
   }
 
   sendConfirmationLoading: boolean = false;

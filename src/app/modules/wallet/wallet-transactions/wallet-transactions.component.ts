@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
@@ -19,16 +20,19 @@ export class WalletTransactionsComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild('TXKeyModal', { static: true }) TXKeyModal: UiModalComponent;
 
   dataSource;
   columnsToDisplay = ['id', 'amount', 'Transaction ID', 'Transaction Type', 'date'];
   expandedTransaction: Transaction | null;
 
+  TXKey:string;
+
   constructor(private RpcCallsService: RpcCallsService) { }
 
   ngOnInit() { 
     this.loadTransactions();  
-    setInterval(() => this.loadTransactions(), 60000);
+    setInterval(() => this.loadTransactions(), 300000);
   }
 
   async loadTransactions()
@@ -42,6 +46,11 @@ export class WalletTransactionsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  async getTXKey(txid:string)
+  {
+    this.TXKey = await this.RpcCallsService.getTxKey(txid);
+    this.TXKeyModal.show();
+  }
 }
 
 export interface Transaction {

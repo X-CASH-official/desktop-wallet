@@ -37,6 +37,9 @@ export class WalletComponent implements OnInit {
       this.walletData = newWalletList[this.selectedWallet];
     });
 
+    // get the public address
+    this.walletData.publicKey = await this.RpcCallsService.getPublicAddress();
+
     // Update the balance
     this.walletData.balance = await this.RpcCallsService.getBalance();
     setInterval(async() => this.walletData.balance = await this.RpcCallsService.getBalance(), 60000);

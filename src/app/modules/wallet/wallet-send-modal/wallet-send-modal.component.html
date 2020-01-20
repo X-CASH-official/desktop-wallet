@@ -143,7 +143,7 @@
     <div class="form-group row">
       <label for="sending-fees" class="col-sm-3 col-form-label">Fees</label>
       <div class="col-sm-9">
-        <input type="text" readonly class="form-control-plaintext" id="sending-fees" value="533,260 XCASH">
+        <input type="text" readonly class="form-control-plaintext" id="sending-fees" [value]="fee">
       </div>
     </div>
     
@@ -151,7 +151,7 @@
       <label for="sending-total" class="col-sm-3 col-form-label">Total</label>
       
       <div class="col-sm-9">
-        <input type="text" readonly class="form-control-plaintext" id="sending-total" value="125,066,520 XCASH">
+        <input type="text" readonly class="form-control-plaintext" id="sending-total" [value]="total">
       </div>
     </div>
     <small id="total-sent-help" class="form-text text-muted">The recipient will receive the amount sent and you will be charged the total.</small>
@@ -162,7 +162,7 @@
     <div *ngIf="!sendConfirmationLoading">
       <button class="btn btn-danger text-center" (click)="sendConfirmationModal.hide();">Cancel</button>
       <button class="btn btn-secondary text-center" (click)="sendConfirmationModal.hide(); sendModal.show()">Modify</button>
-      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide(sendConfirmationModal, 1500, 'sendConfirmationLoading');sendTransaction();">
+      <button type="submit" class="btn btn-success text-center" (click)="simulateLoadingThenHide(sendConfirmationModal, 1500, 'sendConfirmationLoading'); sendPayment();">
         Confirm & Send
       </button>
     </div>
@@ -190,5 +190,26 @@
   
   <div class="app-modal-footer">
     <button type="button" class="btn btn-primary text-center" (click)="sendPaymentModalError.hide()">Close</button>
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #sendPaymentModalSuccess dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Send Payment</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="sendPaymentModalSuccess.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <p>The payment has been sent successfully</p>
+    <br>
+    <p style="word-wrap: break-word">Transaction ID: {{tx.txid}}</p>
+    <br>
+    <p style="word-wrap: break-word">Transaction Key: {{tx.txkey}}</p>
+  </div>
+  
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-primary text-center" (click)="sendPaymentModalSuccess.hide()">Close</button>
   </div>
 </app-ui-modal>
