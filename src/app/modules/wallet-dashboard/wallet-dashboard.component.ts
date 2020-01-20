@@ -19,8 +19,7 @@ export class WalletDashboardComponent implements OnInit {
   walletList$: BehaviorSubject<Wallet[]>;
 
   async ngOnInit() {
-    this.walletList$ = this.walletListService.getWalletList();    
-    console.log(await this.RpcCallsService.getCurrentBlockHeight());
+    this.walletList$ = this.walletListService.getWalletList(); 
   }
 
 }

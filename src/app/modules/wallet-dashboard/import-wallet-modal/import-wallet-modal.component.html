@@ -63,6 +63,23 @@
   </div>
 </app-ui-modal>
 
+<app-ui-modal #importWalletModalError dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Import wallet</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="importWalletModalError.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    {{data}}
+  </div>
+  
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-primary text-center" (click)="importWalletModalError.hide()">Close</button>
+  </div>
+</app-ui-modal>
+
 <!-- Import wallet 2/2 - name and password -->
 <!-- This operation is shared between create and import modal and has its own component -->
 <app-wallet-name-password-modal #importWalletModal2 modalTitle="Import wallet" createOrImport="import" (onSubmit)="onSubmitNameAndPasswordImportModal($event)" (onBackButton)="onNameAndPasswordBackButton()"></app-wallet-name-password-modal>

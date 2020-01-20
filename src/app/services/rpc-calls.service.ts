@@ -49,7 +49,7 @@ export class RpcCallsService {
 
   private async getPostRequestDataNoErrors(json_data: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      try {  
+      try {
       // Constants
         const requestHeaders: HeadersInit = new Headers();
         const URL = "http://localhost:18285/json_rpc";
@@ -67,11 +67,11 @@ export class RpcCallsService {
         // send the post request
         fetch(URL, settings)
         .then(res => res.json())
-        .then(res => resolve(res))
-        .catch(error => resolve(error));
+        .then(res => resolve("OK"))
+        .catch(error => resolve("OK"));
       } catch (error) {
-        resolve(error);
-      }      
+        resolve("OK");
+      } 
     });
   }
 
@@ -95,46 +95,83 @@ export class RpcCallsService {
     const CREATE_WALLET_URL:string = `{"jsonrpc":"2.0","id":"0","method":"create_wallet","params":{"filename":"${walletData.walletName}","password":"${walletData.walletPassword.password}","language":"English"}}`;
     
     return new Promise(async(resolve, reject) => {
-    // close the wallet if it is already running
-    console.log("Closing window");
-    await this.closeWindow();
+    try
+    {
+      // close the wallet if it is already running
+      console.log("Closing window");
+      await this.closeWindow();
 
-    //try
-    //{
-    // open the wallet in create wallet mode
-    console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
-    exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
-    await this.sleep(20000);
-    console.log("creating window");
-    console.log(CREATE_WALLET_URL);
-    await this.getPostRequestData(CREATE_WALLET_URL);
-    await this.sleep(20000);
-
-    // at this point the wallet will try to sync if we let it
+      // open the wallet in create wallet mode
+      console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
+      await this.sleep(20000);
+      console.log("creating window");
+      console.log(CREATE_WALLET_URL);
+      await this.getPostRequestData(CREATE_WALLET_URL);
+      await this.sleep(20000);
+ 
+      // at this point the wallet will try to sync if we let it
     
-    // close the wallet
-    console.log("Closing window");
-    await this.closeWindow();
+      // close the wallet
+      console.log("Closing window");
+      await this.closeWindow();
 
-    // start the wallet
-    console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
-    exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
-    await this.sleep(20000);
-    let publicAddress:string = await this.getPublicAddress();
-    let mnemonicSeed:string = await this.getMnenonicSeed();
+      // start the wallet
+      console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      await this.sleep(20000);
+      let publicAddress:string = await this.getPublicAddress();
+      let mnemonicSeed:string = await this.getMnenonicSeed();
 
-    console.log(publicAddress);
-    console.log(mnemonicSeed);
+      console.log(publicAddress);
+      console.log(mnemonicSeed);
 
-    // close the wallet
-    console.log("Closing window");
-    await this.closeWindow();
+      // close the wallet
+      console.log("Closing window");
+      await this.closeWindow();
 
-    resolve({"public_address":publicAddress, "mnemonic_seed":mnemonicSeed});
-    /*} catch (error) {
+      resolve({"public_address":publicAddress, "mnemonic_seed":mnemonicSeed});
+    } catch (error) {
     reject({"status":"error"});
-    }*/
-  });
+    }
+    });
+  }
+
+  public async importWallet(walletData:any): Promise<object> {
+    // Constants
+    const IMPORT_WALLET_DATA:string = `{"version":1,"filename":"${__dirname}/../${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","seed":"${walletData.seed}"}`;
+    const IMPORT_WALLET_FILE:string = "importwallet.txt";
+
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // close the wallet if it is already running
+      console.log("Closing window");
+      await this.closeWindow();
+
+      // create the importwallet.txt file
+      fs.writeFileSync(IMPORT_WALLET_FILE, IMPORT_WALLET_DATA);
+      await this.sleep(10000);
+
+      // open the wallet in import mode
+      console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      await this.sleep(20000);
+ 
+      // at this point the wallet will try to sync if we let it
+    
+      // close the wallet
+      console.log("Closing window");
+      await this.closeWindow();
+
+      // delete the importwallet.txt file
+      fs.unlinkSync(IMPORT_WALLET_FILE);
+
+      resolve({"status":"success"});
+    } catch (error) {
+    reject({"status":"error"});
+    }
+    });
   }
 
   public async getCurrentBlockHeight(): Promise<any> {
