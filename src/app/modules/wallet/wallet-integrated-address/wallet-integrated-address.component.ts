@@ -19,6 +19,7 @@ export class WalletIntegratedAddressComponent implements OnInit {
   @ViewChild('createIntegratedAddressModal2', { static: true }) createIntegratedAddressModal2: UiModalComponent;
 
   paymentIDForm = new FormGroup({
+    label: new FormControl('', []),
     encryptedPaymentID: new FormControl('', [Validators.pattern(this.validatorRegexService.encrypted_payment_id)]),
   });
   get encryptedPaymentID() {
@@ -41,7 +42,7 @@ export class WalletIntegratedAddressComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
   dataSource = new MatTableDataSource(FAKE_INTEGRATED_ADDRESSES);
-  displayedColumns: string[] = ['id', 'paymentID', 'address', 'actions'];
+  displayedColumns: string[] = ['id', 'label', 'paymentID', 'address', 'actions'];
   
   ngOnInit() {  
     this.dataSource.sort = this.sort;
@@ -64,6 +65,7 @@ export class WalletIntegratedAddressComponent implements OnInit {
 
 export interface IntegratedAddress {
   id: number;
+  label: string;
   paymentID: string;
   address: string;
 }
@@ -71,26 +73,31 @@ export interface IntegratedAddress {
 const FAKE_INTEGRATED_ADDRESSES: IntegratedAddress[] = [
   {
     id: 1,
+    label: 'label',
     paymentID: '69b88ef07cf4ca44',
     address: 'XCB1sTI1FRP0tfjs98pK8L6gLJ2kxkSJjDtyQ2xoCiChG2cubBzGFrbfbz1lkbhsei6HGb3LTvHQ5i49QjdRIwacaOTe6TyFdR'
   },
   {
     id: 2,
+    label: 'label',
     paymentID: '521ba4cfc00e7d02',
     address: 'XCB1yBRF4nz4nUD0bA1y7QPwCvGS4PUJbiGMq95xC6cYLBdfGaziuSTFrzZ2SZndgKrQv314sAn0yA1TwsG8vG02YFRGyCli60'
   },
   {
     id: 3,
+    label: 'label',
     paymentID: 'c469978784485152',
     address: 'XCB1CDvRlFT49UkTxs5LEsdRKzAGUFzhibJK9q8wdzvLEihrUjIp6L01Aot1SGZNQmwm0t9Ik5j08feBFFigVbtnUtftzPY49N'
   },
   {
     id: 4,
+    label: 'label',
     paymentID: 'd231e9143784a720',
     address: 'XCB1dthsFrvTxnRzbH5huCDMnvJbyUa2C2SVl6EcjMqU6qLb03RxOcvBwx3FZkpwQ9XP6gJb55qQkPsXpqnGABLdC1DwyDvJSt'
   },
   {
     id: 5,
+    label: 'label',
     paymentID: 'd37c63b87bfbe340',
     address: 'XCB1lN164JLRntr5v6IklmuagfbQb1bZ34xhXE7iBFaHFM6V3WyNLbAI5XkfRS4xWcFlElKg0U01CupyVK1SMgqI99VsMUCKqO'
   },

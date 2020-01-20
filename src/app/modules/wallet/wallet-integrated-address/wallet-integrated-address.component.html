@@ -14,6 +14,12 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
+
+   <!-- Label Column -->
+   <ng-container matColumnDef="label">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
+    <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+  </ng-container>
   
   <!-- PaymentID Column -->
   <ng-container matColumnDef="paymentID">
@@ -63,6 +69,8 @@
     
     <form [formGroup]="paymentIDForm" (ngSubmit)="onSubmitPaymentID()" id="paymentIDForm">
       <div class="form-group">
+        <label for="encrypted-payment-id">Label</label>
+        <input type="text" class="form-control" id="label" placeholder="Enter a label" formControlName="label" [ngClass]="'is-invalid'" required>
         <label for="encrypted-payment-id">Encrypted payment ID (optional)</label>
         <input type="text" class="form-control" id="encrypted-payment-id" placeholder="Enter an encrypted payment ID (optional)" formControlName="encryptedPaymentID" [ngClass]="{'is-invalid': (encryptedPaymentID.dirty || encryptedPaymentID.touched) && encryptedPaymentID.invalid, 'is-valid': (encryptedPaymentID.dirty || encryptedPaymentID.touched) && !encryptedPaymentID.invalid}">
         <small class="form-text text-muted" *ngIf="encryptedPaymentID.value === ''">If no payment ID is specified, a random ID will be created.</small>
