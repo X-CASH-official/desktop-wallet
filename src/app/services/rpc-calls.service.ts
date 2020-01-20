@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+const exec = (<any>window).require('child_process').exec;
+const crypto = (<any>window).require("crypto");
+const fs = (<any>window).require('fs');
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +10,21 @@ export class RpcCallsService {
 
   constructor() { }
 
+  // Variables
+  rpcUserAgent:string = fs.readFileSync("useragent.txt","utf8");
+
+  sleep(milliseconds)
+  {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  }
+
   private async getPostRequestData(json_data: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const error:object = {'result':{'status':'error'}};
-
       try {
 
         // Constants
         const requestHeaders: HeadersInit = new Headers();
-        const URL = "http://localhost:18281/json_rpc";
+        const URL = "http://localhost:18285/json_rpc";
      
         // Variables
         let result:string;
@@ -23,46 +32,224 @@ export class RpcCallsService {
         
         requestHeaders.set('Content-Type', 'application/json');
         requestHeaders.set('Accept', 'application/json'); 
+        requestHeaders.set('User-Agent', this.rpcUserAgent); 
+
         settings = {method:"post", headers: requestHeaders, body: json_data};
 
         // send the post request
         fetch(URL, settings)
         .then(res => res.json())
         .then(res => resolve(res)) 
-       .catch(error => resolve(error));
-      } catch (e) {
-        resolve(error);
+       .catch(error => reject(error));
+      } catch (error) {
+        reject(error);
       }
     });
   }
 
-  public async getCurrentBlockHeight() {
-    // Constants
-    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"get_block_count"}' -H 'Content-Type: application/json`;
-
-    let data = await this.getPostRequestData(URL);
-    if (data.result.hasOwnProperty("status") && data.result.status === "OK")
-    {
-      return data.result.count;
-    }
-    else if (data.result.hasOwnProperty("status") && data.result.status !== "OK")
-    {
-      return data.result.status;
-    }
-    else
-    {
-      return data;
-    } 
-  }
-
-  public createWallet(args: object): Promise<object> {
+  private async getPostRequestDataNoErrors(json_data: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      try {
-        // RPC call
-        resolve({result: 'ofTheRPC'});
-      } catch (e) {
-        reject('Error reason');
-      }
+      try {  
+      // Constants
+        const requestHeaders: HeadersInit = new Headers();
+        const URL = "http://localhost:18285/json_rpc";
+     
+        // Variables
+        let result:string;
+        let settings:object;   
+        
+        requestHeaders.set('Content-Type', 'application/json');
+        requestHeaders.set('Accept', 'application/json'); 
+        requestHeaders.set('User-Agent', this.rpcUserAgent); 
+
+        settings = {method:"post", headers: requestHeaders, body: json_data};
+
+        // send the post request
+        fetch(URL, settings)
+        .then(res => res.json())
+        .then(res => resolve(res))
+        .catch(error => resolve(error));
+      } catch (error) {
+        resolve(error);
+      }      
     });
+  }
+
+  private async closeWindow():Promise<string>
+  {
+    return new Promise(async (resolve, reject) => {
+      // Constants
+      const CLOSE_WALLET_URL:string = '{"jsonrpc":"2.0","id":"0","method":"close_wallet"}';
+
+      await this.getPostRequestDataNoErrors(CLOSE_WALLET_URL);
+      await this.sleep(20000);
+      exec("taskkill /f /im xcash-wallet-rpc*");
+      exec("killall -9 'xcash-wallet-rpc'");
+      await this.sleep(20000);
+      resolve("success");
+  });
+  }
+
+  public async createWallet(walletData:any): Promise<object> {
+    // Constants
+    const CREATE_WALLET_URL:string = `{"jsonrpc":"2.0","id":"0","method":"create_wallet","params":{"filename":"${walletData.walletName}","password":"${walletData.walletPassword.password}","language":"English"}}`;
+    
+    return new Promise(async(resolve, reject) => {
+    // close the wallet if it is already running
+    console.log("Closing window");
+    await this.closeWindow();
+
+    //try
+    //{
+    // open the wallet in create wallet mode
+    console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
+    exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
+    await this.sleep(20000);
+    console.log("creating window");
+    console.log(CREATE_WALLET_URL);
+    await this.getPostRequestData(CREATE_WALLET_URL);
+    await this.sleep(20000);
+
+    // at this point the wallet will try to sync if we let it
+    
+    // close the wallet
+    console.log("Closing window");
+    await this.closeWindow();
+
+    // start the wallet
+    console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+    exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+    await this.sleep(20000);
+    let publicAddress:string = await this.getPublicAddress();
+    let mnemonicSeed:string = await this.getMnenonicSeed();
+
+    console.log(publicAddress);
+    console.log(mnemonicSeed);
+
+    // close the wallet
+    console.log("Closing window");
+    await this.closeWindow();
+
+    resolve({"public_address":publicAddress, "mnemonic_seed":mnemonicSeed});
+    /*} catch (error) {
+    reject({"status":"error"});
+    }*/
+  });
+  }
+
+  public async getCurrentBlockHeight(): Promise<any> {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_height"}';
+
+   // Variables
+   let data;
+
+   try
+   {
+     data = await this.getPostRequestData(URL);
+     return data.result.height;
+   }
+   catch(error)
+   {
+     return data.error.message;
+   }
+  }
+
+  public async getPublicAddress(): Promise<string> {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_address"}';
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.address;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async getMnenonicSeed(): Promise<string> {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"mnemonic"}}';
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.key;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async getViewKey(): Promise<string>  {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"view_key"}}';
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.key;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async getSpendKey(): Promise<string> {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"mnemonic"}}';
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.key;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async sendPayment(sendType:string, paymentID:string, amount:number, address:string, sendSettings:string): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":${sendType},"params":{"destinations":[{"amount":${amount},"address":${address}}],"priority":0,"ring_size":21,"get_tx_keys": true, "payment_id":${paymentID} "do_not_relay":${sendSettings}}}`;
+   
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.address;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async rescanBlockchain(): Promise<string> {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"rescan_blockchain"}';
+
+    await this.getPostRequestData(URL);
+    return "OK";
   }
 }

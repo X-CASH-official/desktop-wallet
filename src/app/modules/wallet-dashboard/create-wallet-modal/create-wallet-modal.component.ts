@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { FormControl, Validators, FormArray } from '@angular/forms';
 import { WalletNamePasswordModalComponent } from '../wallet-name-password-modal/wallet-name-password-modal.component';
+import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 
 @Component({
   selector: 'app-create-wallet-modal',
@@ -14,8 +15,15 @@ export class CreateWalletModalComponent implements OnInit {
   @ViewChild('createWalletModal2', { static: true }) createWalletModal2: UiModalComponent;
   @ViewChild('createWalletModal3', { static: true }) createWalletModal3: UiModalComponent;
   @ViewChild('createWalletModal4', { static: true }) createWalletModal4: UiModalComponent;
+  @ViewChild('createWalletModalError', { static: true }) createWalletModalError: UiModalComponent;
 
-  constructor() { }
+  constructor(private RpcCallsService: RpcCallsService) { }
+
+  // Variables
+  exampleSeed: string[] = ["cover", "palace", "renew", "address", "orchard", "derive", "promote", "similar", "artist", "cage", "dial", "forget", "print", "extend", "scissors", "festival", "donor", "peasant", "spawn", "donate", "fever", "olive", "section", "device"];
+  publicAddress:string;
+  WalletName:string;
+  data:string;
   
   ngOnInit() {
   }
@@ -24,14 +32,29 @@ export class CreateWalletModalComponent implements OnInit {
     this.createWalletModal1.show();
   }
   
-  onSubmitNameAndPasswordModal(NameAndPasswordValues) {
+  async onSubmitNameAndPasswordModal(NameAndPasswordValues) {
     console.log(NameAndPasswordValues); // This is where the action should take place
-    this.createWalletModal2.show();
+    this.WalletName = NameAndPasswordValues.walletName;
+    try
+    {
+      this.data = "The wallet is being created and synced. This might take a long time";
+      this.createWalletModalError.show();
+      let data:any = await this.RpcCallsService.createWallet(NameAndPasswordValues);
+      // At this point the wallet is created, and synced
+      this.publicAddress = data.public_address;
+      this.exampleSeed = data.mnemonic_seed.split(" ");
+      this.createWalletModal2.show();
+      // save the wallet data to the database
+    }
+    catch (error)
+    {
+      this.data = error;
+      this.createWalletModalError.show();
+    }
   }
   
   /* Mnemonic seed */
   /* Used to display a "Copied!" badge to copy to clipboard button */
-  exampleSeed: string[] = ["cover", "palace", "renew", "address", "orchard", "derive", "promote", "similar", "artist", "cage", "dial", "forget", "print", "extend", "scissors", "festival", "donor", "peasant", "spawn", "donate", "fever", "olive", "section", "device"];
 
   seedCopiedToClipboard: boolean = false;
   
@@ -45,7 +68,7 @@ export class CreateWalletModalComponent implements OnInit {
   /* Mnemonic seed confirmation */
   seedWordsConfirmationForm: FormArray;
   wordsToConfirm: boolean[];
-  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 12;
+  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 0;
   
   seedConfirmationPreparation() {
     this.wordsToConfirm = this.chooseRandomWordsToConfirm(this.exampleSeed, this.NUMBER_SEED_WORDS_TO_CONFIRM);

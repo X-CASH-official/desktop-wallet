@@ -36,20 +36,7 @@ export class ActionsService {
     this.walletListService.removeWallet(walletId);
   }
   
-  /**
-   * Create a wallet.
-   * @param name label of the wallet to create
-   * @param password password of the wallet to create
-   */
-  public createWallet(name: string, password: string): void {
-    this.rpcCallsService.createWallet({args: 'toCreateWallet'})
-      .then((res) => {
-        this.walletListService.addWallet(name, 'ok', 12);
-      })
-      .catch((err) => {
-        console.error('error');
-      });
-  }
+  
   
   /**
    * Import a wallet.

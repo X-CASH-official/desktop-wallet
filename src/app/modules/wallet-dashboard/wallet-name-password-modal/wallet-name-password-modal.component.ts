@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
+import {oldService} from 'src/app/services/oldService.service';
 
 export const passwordMatchValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const password = control.get('password');
@@ -23,7 +24,7 @@ export class WalletNamePasswordModalComponent implements OnInit {
 
   @ViewChild('nameAndPasswordModal', { static: true }) nameAndPasswordModal: UiModalComponent;
 
-  constructor() { }
+  constructor(private oldService: oldService) {  }
 
   ngOnInit() {
   }
