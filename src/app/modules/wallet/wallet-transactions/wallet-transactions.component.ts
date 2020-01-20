@@ -27,7 +27,7 @@ export class WalletTransactionsComponent implements OnInit {
   constructor(private RpcCallsService: RpcCallsService) { }
 
   ngOnInit() { 
-    this.loadTransactions();   
+    this.loadTransactions();  
     setInterval(() => this.loadTransactions(), 60000);
   }
 

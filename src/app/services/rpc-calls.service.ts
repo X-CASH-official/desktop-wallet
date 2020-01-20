@@ -325,6 +325,24 @@ export class RpcCallsService {
     }
   }
 
+  public async getBalance(): Promise<number> {
+    // Constants
+    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.balance / 1000000;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
   public async sendPayment(sendPaymentData:any): Promise<string> {
     // Constants
     const sendType = sendPaymentData.maxAmount === true ? "sweep_all" : "transfer_split";
