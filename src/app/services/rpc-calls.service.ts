@@ -343,6 +343,24 @@ export class RpcCallsService {
     }
   }
 
+  public async createIntegratedAddress(paymentid:string): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"make_integrated_address","params":{"payment_id":"${paymentid}"}}`;
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.integrated_address;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
   public async getBalance(): Promise<number> {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';

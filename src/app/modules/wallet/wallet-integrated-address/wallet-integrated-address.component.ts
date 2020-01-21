@@ -3,6 +3,7 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
+import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 })
 export class WalletIntegratedAddressComponent implements OnInit {
   
-  constructor(private validatorRegexService: ValidatorsRegexService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService) { }
 
   /* Create integrated address modal */
   @ViewChild('createIntegratedAddressModal1', { static: true }) createIntegratedAddressModal1: UiModalComponent;
@@ -25,13 +26,14 @@ export class WalletIntegratedAddressComponent implements OnInit {
   get encryptedPaymentID() {
     return this.paymentIDForm.get('encryptedPaymentID');
   }
-  onSubmitPaymentID() {
+  async onSubmitPaymentID() {
     if (this.paymentIDForm.valid) {
-      console.log(this.paymentIDForm);
       // fake creation
-      this.createdIntegratedAddress = "XCB1yBRF4nz4nUD0bA1y7QPwCvGS4PUJbiGMq95xC6cYLBdfGaziuSTFrzZ2SZndgKrQv314sAn0yA1TwsG8vG02YFRGyCli60";
+      this.createdIntegratedAddress = await this.RpcCallsService.createIntegratedAddress(this.paymentIDForm.value.encryptedPaymentID);
       this.createIntegratedAddressModal1.hide();
       this.createIntegratedAddressModal2.show();
+      this.paymentIDForm.setValue({label: '', encryptedPaymentID: ''});
+      this.loadTransactions();
     }
   }
 
@@ -45,12 +47,18 @@ export class WalletIntegratedAddressComponent implements OnInit {
   displayedColumns: string[] = ['id', 'label', 'paymentID', 'address', 'actions'];
   
   ngOnInit() {  
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.loadTransactions();
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  async loadTransactions()
+  {
+    this.dataSource = new MatTableDataSource(FAKE_INTEGRATED_ADDRESSES);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   toggleCopyTooltip(tooltip) {
