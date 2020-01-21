@@ -32,8 +32,9 @@ export class WalletIntegratedAddressComponent implements OnInit {
       this.createdIntegratedAddress = await this.RpcCallsService.createIntegratedAddress(this.paymentIDForm.value.encryptedPaymentID);
       this.createIntegratedAddressModal1.hide();
       this.createIntegratedAddressModal2.show();
+      // save the data to the database
       this.paymentIDForm.setValue({label: '', encryptedPaymentID: ''});
-      this.loadTransactions();
+      this.loadIntegratedAddresses();
     }
   }
 
@@ -47,14 +48,14 @@ export class WalletIntegratedAddressComponent implements OnInit {
   displayedColumns: string[] = ['id', 'label', 'paymentID', 'address', 'actions'];
   
   ngOnInit() {  
-    this.loadTransactions();
+    this.loadIntegratedAddresses();
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  async loadTransactions()
+  async loadIntegratedAddresses()
   {
     this.dataSource = new MatTableDataSource(FAKE_INTEGRATED_ADDRESSES);
     this.dataSource.sort = this.sort;

@@ -361,6 +361,80 @@ export class RpcCallsService {
     }
   }
 
+  public async createSubAddress(label:string): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"create_address","params":{"account_index":0,"label":"${label}"}}`;
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.address;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async getSubAddressCount(): Promise<number> {
+    // Constants
+    const MAXIMUM_SUB_ADDRESS_COUNT = 100000;
+
+    // Variables
+    let data;
+    let count:number;
+
+    for (count = 1; count < MAXIMUM_SUB_ADDRESS_COUNT; count++)
+    {
+      if (JSON.stringify(await this.getPostRequestData(`{"jsonrpc":"2.0","id":"0","method":"get_address","params":{"account_index":0,"address_index":[${count}]}}`)).includes("address index is out of bound"))
+      {
+        count--;
+        break;
+      }
+    }
+    return count;
+  }
+
+  public async getSubAddresses(subAddressCount:number): Promise<any> {
+    // create the sub address list
+    let subAddressList:string = "";
+    let count;
+
+    for (count = 1; count <= subAddressCount; count++)
+    {
+      subAddressList += `${count},`;
+    }
+    subAddressList = subAddressList.slice(0, -1); 
+
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"get_balance","params":{"account_index":0,"address_indices":[${subAddressList}]}}`;
+
+    // Variables
+    let data;
+    let subAddresses: any[] = [];
+
+   try
+   {
+     data = await this.getPostRequestData(URL);
+     data.result.per_subaddress.forEach(item => {
+       subAddresses.push({
+        id: item.address_index,
+        label: item.label,
+        address: item.address,
+        balance: item.balance / this.XCASH_DECIMAL_PLACES,
+      });
+     });
+     return subAddresses;
+    }
+    catch(error)
+    {
+      return subAddresses;
+    }
+   }
+
   public async getBalance(): Promise<number> {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';
