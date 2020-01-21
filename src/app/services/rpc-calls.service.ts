@@ -456,6 +456,43 @@ export class RpcCallsService {
   public async verifySignedData(signedData:any): Promise<boolean> {
     // Constants
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"verify","params":{"data":"${signedData.data}","address":"${signedData.public_address}","signature":"${signedData.signature}"}}`;
+    
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.good;
+    }
+    catch(error)
+    {
+      return false;
+    }
+  }
+
+  public async createReserveproof(reserveproofData:any): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"get_reserve_proof","params":{"all":false,"account_index":0,"amount":${reserveproofData.amount},"message":"${reserveproofData.message}"}}`;
+    console.log(URL);
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.signature;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async verifyReserveproof(reserveproofData:any): Promise<boolean> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"check_reserve_proof","params":{"address":"${reserveproofData.public_address}","message":"${reserveproofData.message}","signature":"${reserveproofData.reserveproof}"}}`;
+    
     // Variables
     let data;
 
@@ -463,7 +500,7 @@ export class RpcCallsService {
     {
       data = await this.getPostRequestData(URL);
       console.log(data);
-      return data.result.good;
+      return data.result.good === true && data.result.spent === 0 ? true : false;
     }
     catch(error)
     {

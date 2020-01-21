@@ -29,16 +29,19 @@ export class WalletReserveProofComponent implements OnInit {
     return this.createReserveProofForm.get('messageToProve');
   }
 
-  onSubmitCreateReserveProof() {
+  async onSubmitCreateReserveProof() {
     if (this.createReserveProofForm.valid) {
+      this.createReserveProofForm.get('amountToProve');
+      this.createReserveProofForm.get('messageToProve');
       console.log(this.createReserveProofForm);
-      this.createdReserveSignature = "SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz"
-      this.createReserveProofModal1
-      
+      this.createdReserveSignature = await this.RpcCallsService.createReserveproof({"amount":this.createReserveProofForm.value.amountToProve * 1000000,"message":this.createReserveProofForm.value.messageToProve});
+      this.createReserveProofModal1.hide();
+      this.createReserveProofModal2.show();
+      this.createReserveProofForm.setValue({amountToProve: '', messageToProve: ''});
+      this.loadReserveproofs();      
     } else {
       this.amountToProve.markAsTouched();
     }
-    console.log(this.createReserveProofForm);
   }
 
   createdReserveSignature: string;
@@ -49,7 +52,7 @@ export class WalletReserveProofComponent implements OnInit {
   verifyReserveProofForm = new FormGroup({
     addressToVerify: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.xcash_address)]),
     messageToVerify: new FormControl('', [Validators.pattern(this.validatorRegexService.text_settings)]),
-    signatureToVerify: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.signature)])
+    signatureToVerify: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.reserve_proof)])
   });
   get addressToVerify() {
     return this.verifyReserveProofForm.get('addressToVerify');
@@ -64,12 +67,12 @@ export class WalletReserveProofComponent implements OnInit {
   verifyReserveProofIsSubmitted: boolean = false;
   verificationSuccess: boolean = false;
 
-  onSubmitReserveProof() {
+  async onSubmitReserveProof() {
     console.log(this.verifyReserveProofForm);
     if (this.verifyReserveProofForm.valid) {
       this.verifyReserveProofIsSubmitted = true;
       // TODO: process of reserve proof verification
-      this.verificationSuccess = true;
+      this.verificationSuccess = await this.RpcCallsService.verifyReserveproof({"public_address":this.verifyReserveProofForm.value.addressToVerify,"message":this.verifyReserveProofForm.value.messageToVerify,"reserveproof":this.verifyReserveProofForm.value.signatureToVerify});
     } else {
       this.addressToVerify.markAsTouched();
       this.messageToVerify.markAsTouched();
