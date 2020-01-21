@@ -4,6 +4,7 @@
       "wallet_name": "name",
       "public_address": "XCA1kzoR3ZLNg5zxNmxrY8FYKtgEvPZqC2xoRpm1axCpQcrrZfoKTSkSNsASDspdt3j1WcEnQJyuuB5VPSB56WWy36A4sQtQhe",
       "balance": 125,
+      "sub_address_count": 3,
       "integrated_addresses": [
         {
           "label": "label",
@@ -41,6 +42,7 @@
       "wallet_name": "name",
       "public_address": "XCA",
       "balance": 125,
+      "sub_address_count": 100,
       "integrated_addresses": [
         {
           "label": "label",

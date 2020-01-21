@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
-import {oldService} from 'src/app/services/oldService.service';
+import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 
 export const passwordMatchValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const password = control.get('password');
@@ -24,16 +24,16 @@ export class WalletNamePasswordModalComponent implements OnInit {
 
   @ViewChild('nameAndPasswordModal', { static: true }) nameAndPasswordModal: UiModalComponent;
 
-  constructor(private oldService: oldService) {  }
+  constructor(private validatorRegexService: ValidatorsRegexService) {  }
 
   ngOnInit() {
   }
 
   NameAndPasswordForm = new FormGroup({
-    walletName: new FormControl('', [Validators.required]),
+    walletName: new FormControl('', [Validators.pattern(this.validatorRegexService.text_settings)]),
     walletPassword: new FormGroup({
-      password: new FormControl('', [Validators.required]),
-      passwordConfirmation: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.pattern(this.validatorRegexService.text_settings)]),
+      passwordConfirmation: new FormControl('', [Validators.pattern(this.validatorRegexService.text_settings)]),
     }, {
       validators: passwordMatchValidator,
     })

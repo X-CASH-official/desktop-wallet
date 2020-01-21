@@ -3,6 +3,7 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-wallet-sub-address',
@@ -11,7 +12,7 @@ import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 })
 export class WalletSubAddressComponent implements OnInit {
   
-  constructor(private RpcCallsService: RpcCallsService) { }
+  constructor(private RpcCallsService: RpcCallsService,private DatabaseService: DatabaseService) { }
 
   /* Create integrated address modal */
   @ViewChild('createSubAddressModal1', { static: true }) createSubAddressModal1: UiModalComponent;
@@ -29,6 +30,7 @@ export class WalletSubAddressComponent implements OnInit {
   async onSubmitLabel() {
     if (this.labelForm.valid) {
       this.createdSubAddress = await this.RpcCallsService.createSubAddress(this.labelForm.value.label);
+      await this.DatabaseService.updateSubAddressCount();
       this.createSubAddressModal1.hide();
       this.createSubAddressModal2.show();
       this.labelForm.setValue({label: ''});
@@ -55,7 +57,7 @@ export class WalletSubAddressComponent implements OnInit {
   {
     try
     {
-    this.dataSource = new MatTableDataSource(await this.RpcCallsService.getSubAddresses(await this.RpcCallsService.getSubAddressCount()));
+    this.dataSource = new MatTableDataSource(await this.RpcCallsService.getSubAddresses(await this.DatabaseService.getSubAddressCount()));
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

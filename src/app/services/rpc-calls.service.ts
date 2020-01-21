@@ -404,28 +404,6 @@ export class RpcCallsService {
   });
   }
 
-  public async getSubAddressCount(): Promise<number> {
-    return new Promise(async(resolve, reject) => {
-    // Constants
-    const MAXIMUM_SUB_ADDRESS_COUNT = 100000;
-
-    // Variables
-    let data;
-    let count:number;
-
-    for (count = 1; count < MAXIMUM_SUB_ADDRESS_COUNT; count++)
-    {
-      if (JSON.stringify(await this.getPostRequestData(`{"jsonrpc":"2.0","id":"0","method":"get_address","params":{"account_index":0,"address_index":[${count}]}}`)).includes("address index is out of bound"))
-      {
-        count--;
-        break;
-      }
-    }
-    console.log(count);
-    resolve(count);
-  });
-  }
-
   public async getSubAddresses(subAddressCount:number): Promise<any> {
     return new Promise(async(resolve, reject) => {
     // create the sub address list
