@@ -508,7 +508,6 @@ export class RpcCallsService {
   public async verifyReserveproof(reserveproofData:any): Promise<boolean> {
     // Constants
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"check_reserve_proof","params":{"address":"${reserveproofData.public_address}","message":"${reserveproofData.message}","signature":"${reserveproofData.reserveproof}"}}`;
-    
     // Variables
     let data;
 
@@ -517,12 +516,11 @@ export class RpcCallsService {
       try
       {
       data = await this.getPostRequestData(URL);
-      console.log(data);
       resolve(data.result.good === true && data.result.spent === 0 ? true : false);
     }
     catch(error)
     {
-      reject(false);
+      resolve(false);
     }
   });
   }

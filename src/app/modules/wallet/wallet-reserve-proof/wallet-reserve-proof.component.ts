@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-wallet-reserve-proof',
@@ -12,7 +13,7 @@ import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 })
 export class WalletReserveProofComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService,private RpcCallsService: RpcCallsService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService,private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
   /* Create reserve proof */
   @ViewChild('createReserveProofModal1', { static: true }) createReserveProofModal1: UiModalComponent;
@@ -33,8 +34,9 @@ export class WalletReserveProofComponent implements OnInit {
     if (this.createReserveProofForm.valid) {
       this.createReserveProofForm.get('amountToProve');
       this.createReserveProofForm.get('messageToProve');
-      console.log(this.createReserveProofForm);
       this.createdReserveSignature = await this.RpcCallsService.createReserveproof({"amount":this.createReserveProofForm.value.amountToProve * 1000000,"message":this.createReserveProofForm.value.messageToProve});
+      // save the data to the database
+      await this.DatabaseService.saveReserveproof({"reserve_proof":this.createdReserveSignature,"balance":this.createReserveProofForm.value.amountToProve * 1000000,"message":this.createReserveProofForm.value.messageToProve});
       this.createReserveProofModal1.hide();
       this.createReserveProofModal2.show();
       this.createReserveProofForm.setValue({amountToProve: '', messageToProve: ''});
@@ -93,7 +95,7 @@ export class WalletReserveProofComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
-  dataSource = new MatTableDataSource(FAKE_RESERVE_PROOF);
+  dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'amount', 'signature', 'status', 'actions'];
   
   ngOnInit() {  
@@ -106,15 +108,16 @@ export class WalletReserveProofComponent implements OnInit {
 
   async loadReserveproofs()
   {
+    let data = await this.DatabaseService.getReserveproof();
     try
     {
-    this.dataSource = new MatTableDataSource(FAKE_RESERVE_PROOF);
+    this.dataSource = new MatTableDataSource(data);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
   catch(error)
   {
-
+    
   }
   }
 
@@ -135,36 +138,3 @@ export interface ReserveProof {
   signature: string;
   status: string;
 }
-
-const FAKE_RESERVE_PROOF: ReserveProof[] = [
-  {
-    id: 1,
-    amount: 1000000,
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz',
-    status: 'valid',
-  },
-  {
-    id: 2,
-    amount: 1000000,
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz',
-    status: 'valid',
-  },
-  {
-    id: 3,
-    amount: 1000000,
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz',
-    status: 'valid',
-  },
-  {
-    id: 4,
-    amount: 1000000,
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz',
-    status: 'valid',
-  },
-  {
-    id: 5,
-    amount: 1000000,
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz',
-    status: 'valid',
-  },
-]

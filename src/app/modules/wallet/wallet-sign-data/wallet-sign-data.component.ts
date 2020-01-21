@@ -4,6 +4,7 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-wallet-sign-data',
@@ -12,7 +13,7 @@ import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 })
 export class WalletSignDataComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService,private RpcCallsService: RpcCallsService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService,private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
   createdSignature: string = "SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz";
 
@@ -31,6 +32,8 @@ export class WalletSignDataComponent implements OnInit {
     if (this.dataToSignForm.valid) {
       console.log(this.dataToSignForm);
       this.createdSignature = await this.RpcCallsService.createSignedData(this.dataToSignForm.value.dataToSign);
+      // save the data to the database
+      await this.DatabaseService.saveSignedData({"data":this.dataToSignForm.value.dataToSign,"signature":this.createdSignature});
       this.signDataModal1.hide();
       this.signDataModal2.show();
       this.dataToSignForm.setValue({dataToSign: ''});
@@ -88,7 +91,7 @@ export class WalletSignDataComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
-  dataSource = new MatTableDataSource(FAKE_SIGNED_DATA);
+  dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'data', 'signature', 'actions'];
   
   ngOnInit() {  
@@ -103,7 +106,7 @@ export class WalletSignDataComponent implements OnInit {
   {
     try
     {
-    this.dataSource = new MatTableDataSource(FAKE_SIGNED_DATA);
+    this.dataSource = new MatTableDataSource(await this.DatabaseService.getSignedData());
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -129,31 +132,3 @@ export interface SignedData {
   data: string;
   signature: string;
 }
-
-const FAKE_SIGNED_DATA: SignedData[] = [
-  {
-    id: 1,
-    data: 'myImportantData',
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz'
-  },
-  {
-    id: 2,
-    data: 'myImportantData',
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz'
-  },
-  {
-    id: 3,
-    data: 'myImportantData',
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz'
-  },
-  {
-    id: 4,
-    data: 'myImportantData',
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz'
-  },
-  {
-    id: 5,
-    data: 'myImportantData',
-    signature: 'SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz'
-  },
-]
