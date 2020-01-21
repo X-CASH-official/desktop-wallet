@@ -7,6 +7,9 @@ const crypto = require("crypto");
 let mainWindow: Electron.BrowserWindow;
 
 function createWindow() {
+  // Constants
+  const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": "settings","remote_node": "settings"}}';
+
   // Create the browser window.
   mainWindow = new BrowserWindow({ webPreferences: {nodeIntegration: true}, icon: path.join(__dirname, '/src/assets/images/xcash_logo.png') });
 
@@ -24,6 +27,12 @@ function createWindow() {
   mainWindow.webContents.openDevTools();
 
   mainWindow.on("closed", () => mainWindow = null);
+
+  // check if the start DB is created
+  if (!fs.existsSync("database.txt"))
+  {
+    fs.writeFileSync("database.txt", DATABASE);
+  }
 }
 
 app.on("ready", createWindow);

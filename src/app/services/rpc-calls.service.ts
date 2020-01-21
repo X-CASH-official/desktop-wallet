@@ -343,22 +343,23 @@ export class RpcCallsService {
     }
   }
 
-  public async createIntegratedAddress(paymentid:string): Promise<string> {
-    // Constants
+  public async createIntegratedAddress(paymentid:string): Promise<any> {
+    return new Promise(async(resolve, reject) => {
+      // Constants
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"make_integrated_address","params":{"payment_id":"${paymentid}"}}`;
-
+      
     // Variables
-    let data;
-
-    try
-    {
+       let data;
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.integrated_address;
+      resolve({"payment_id":data.result.payment_id,"integrated_address":data.result.integrated_address});
     }
     catch(error)
     {
-      return data.error.message;
+      reject({"error":data.error.message});
     }
+  });
   }
 
   public async createSubAddress(label:string): Promise<string> {
@@ -474,7 +475,6 @@ export class RpcCallsService {
   public async createReserveproof(reserveproofData:any): Promise<string> {
     // Constants
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"get_reserve_proof","params":{"all":false,"account_index":0,"amount":${reserveproofData.amount},"message":"${reserveproofData.message}"}}`;
-    console.log(URL);
     // Variables
     let data;
 

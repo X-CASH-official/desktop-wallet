@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 })
 export class WalletIntegratedAddressComponent implements OnInit {
   
-  constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
   /* Create integrated address modal */
   @ViewChild('createIntegratedAddressModal1', { static: true }) createIntegratedAddressModal1: UiModalComponent;
@@ -28,13 +29,25 @@ export class WalletIntegratedAddressComponent implements OnInit {
   }
   async onSubmitPaymentID() {
     if (this.paymentIDForm.valid) {
-      // fake creation
-      this.createdIntegratedAddress = await this.RpcCallsService.createIntegratedAddress(this.paymentIDForm.value.encryptedPaymentID);
+      try
+      {
+      // create the integrated address
+      let data = await this.RpcCallsService.createIntegratedAddress(this.paymentIDForm.value.encryptedPaymentID);
+      let payment_id:string = data.payment_id;
+      this.createdIntegratedAddress = data.integrated_address;
+      
+      // save the data to the database
+      await this.DatabaseService.saveIntegratedAddresses({"label":this.paymentIDForm.value.label,"payment_id":payment_id,"integrated_address":this.createdIntegratedAddress});
+      
       this.createIntegratedAddressModal1.hide();
       this.createIntegratedAddressModal2.show();
-      // save the data to the database
       this.paymentIDForm.setValue({label: '', encryptedPaymentID: ''});
       this.loadIntegratedAddresses();
+      }
+      catch
+      {
+        
+      }
     }
   }
 
@@ -44,7 +57,7 @@ export class WalletIntegratedAddressComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
-  dataSource = new MatTableDataSource(FAKE_INTEGRATED_ADDRESSES);
+  dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'label', 'paymentID', 'address', 'actions'];
   
   ngOnInit() {  
@@ -57,9 +70,16 @@ export class WalletIntegratedAddressComponent implements OnInit {
 
   async loadIntegratedAddresses()
   {
-    this.dataSource = new MatTableDataSource(FAKE_INTEGRATED_ADDRESSES);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    try
+    {
+      this.dataSource = new MatTableDataSource(await this.DatabaseService.getIntegratedAddresses());
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    }
+    catch(error)
+    {
+
+    }
   }
 
   toggleCopyTooltip(tooltip) {
