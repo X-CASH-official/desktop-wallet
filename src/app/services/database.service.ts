@@ -95,6 +95,48 @@ export class DatabaseService {
    });
   }
 
+  /*public async getSubAddressCount(): Promise<number> {
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // Constants
+      const DATABASE_DATA:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+      const PUBLIC_ADDRESS = await this.RpcCallsService.getPublicAddress();
+    
+      // Variables
+      let wallet_count;
+      let count;
+
+      for (wallet_count = 0; wallet_count < DATABASE_DATA.wallet_data.length; wallet_count++)
+      {
+        if (DATABASE_DATA.wallet_data[wallet_count].public_address === PUBLIC_ADDRESS)
+        {
+          break;
+        }
+      }
+
+      if (wallet_count === DATABASE_DATA.wallet_data.length)
+      {
+        reject();
+      }
+    
+      count = 0;
+      DATABASE_DATA.wallet_data[wallet_count].integrated_addresses.forEach(item => {
+         count++;
+        IntegratedAddress.push({
+          id: count,
+          label: item.label,
+          paymentID: item.payment_id,
+          address: item.integrated_address,
+        });
+     }); 
+      resolve(IntegratedAddress);
+    } catch (error) {
+      reject(error);
+    }
+   });
+  }*/
+
   
 }
 

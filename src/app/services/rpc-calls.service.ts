@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Transaction } from 'electron';
+import { resolve } from 'q';
 const exec = (<any>window).require('child_process').exec;
 const crypto = (<any>window).require("crypto");
 const fs = (<any>window).require('fs');
@@ -184,6 +185,7 @@ export class RpcCallsService {
    let data;
    let transactions: any[] = [];
    let count = 0;
+   return new Promise(async(resolve, reject) => {
 
    try
    {
@@ -227,12 +229,13 @@ export class RpcCallsService {
       count++
       item.id = count
     });
-    return transactions;
+    resolve(transactions);
    }
    catch(error)
    {
-     return transactions;
+     reject();
    }
+  });
   }
 
   public async getCurrentBlockHeight(): Promise<any> {
@@ -242,15 +245,17 @@ export class RpcCallsService {
    // Variables
    let data;
 
+   return new Promise(async(resolve, reject) => {
    try
    {
      data = await this.getPostRequestData(URL);
-     return data.result.height;
+     resolve(data.result.height);
    }
    catch(error)
    {
-     return data.error.message;
+     reject(data.error.message);
    }
+  });
   }
 
   public async getPublicAddress(): Promise<string> {
@@ -260,15 +265,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.address;
+      resolve(data.result.address);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async getMnenonicSeed(): Promise<string> {
@@ -278,15 +286,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.key;
+      resolve(data.result.key);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async getViewKey(): Promise<string>  {
@@ -296,15 +307,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.key;
+      resolve(data.result.key);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async getSpendKey(): Promise<string> {
@@ -314,15 +328,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.key;
+      resolve(data.result.key);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async getTxKey(txid:string): Promise<string> {
@@ -332,15 +349,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.tx_key;
+      resolve(data.result.tx_key);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async createIntegratedAddress(paymentid:string): Promise<any> {
@@ -349,7 +369,8 @@ export class RpcCallsService {
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"make_integrated_address","params":{"payment_id":"${paymentid}"}}`;
       
     // Variables
-       let data;
+    let data;
+
       try
       {
       data = await this.getPostRequestData(URL);
@@ -369,18 +390,22 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.address;
+      resolve(data.result.address);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async getSubAddressCount(): Promise<number> {
+    return new Promise(async(resolve, reject) => {
     // Constants
     const MAXIMUM_SUB_ADDRESS_COUNT = 100000;
 
@@ -396,10 +421,13 @@ export class RpcCallsService {
         break;
       }
     }
-    return count;
+    console.log(count);
+    resolve(count);
+  });
   }
 
   public async getSubAddresses(subAddressCount:number): Promise<any> {
+    return new Promise(async(resolve, reject) => {
     // create the sub address list
     let subAddressList:string = "";
     let count;
@@ -428,12 +456,13 @@ export class RpcCallsService {
         balance: item.balance / this.XCASH_DECIMAL_PLACES,
       });
      });
-     return subAddresses;
+     resolve(subAddresses);
     }
     catch(error)
     {
-      return subAddresses;
+      reject(subAddresses);
     }
+  });
    }
 
   public async createSignedData(signedData:string): Promise<string> {
@@ -443,15 +472,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.signature;
+      resolve(data.result.signature);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async verifySignedData(signedData:any): Promise<boolean> {
@@ -461,15 +493,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.good;
+      resolve(data.result.good);
     }
     catch(error)
     {
-      return false;
+      reject(false);
     }
+  });
   }
 
   public async createReserveproof(reserveproofData:any): Promise<string> {
@@ -478,15 +513,18 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.signature;
+      resolve(data.result.signature);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async verifyReserveproof(reserveproofData:any): Promise<boolean> {
@@ -496,16 +534,19 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
       console.log(data);
-      return data.result.good === true && data.result.spent === 0 ? true : false;
+      resolve(data.result.good === true && data.result.spent === 0 ? true : false);
     }
     catch(error)
     {
-      return false;
+      reject(false);
     }
+  });
   }
 
   public async getBalance(): Promise<number> {
@@ -515,41 +556,49 @@ export class RpcCallsService {
     // Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return data.result.balance / this.XCASH_DECIMAL_PLACES;
+      resolve(data.result.balance / this.XCASH_DECIMAL_PLACES);
     }
     catch(error)
     {
-      return data.error.message;
+      reject(data.error.message);
     }
+  });
   }
 
   public async sendPayment(sendPaymentData:any, settings:boolean): Promise<object> {
     // Constants
     const sendType = sendPaymentData.maxAmount === true ? "sweep_all" : "transfer_split";
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"${sendType}","params":{"destinations":[{"amount":${sendPaymentData.amount * this.XCASH_DECIMAL_PLACES},"address":"${sendPaymentData.recipient}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "payment_id":"${sendPaymentData.paymentId}", "tx_privacy_settings":"${sendPaymentData.privacy}", "do_not_relay":${settings}}}`;
-    // Variables
+    /// Variables
     let data;
 
-    try
-    {
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
       data = await this.getPostRequestData(URL);
-      return {"status":"success","txid":data.result.tx_hash_list[0],"txkey":data.result.tx_key_list[0],"fee":data.result.fee_list[0] / this.XCASH_DECIMAL_PLACES,"total":(data.result.fee_list[0] + data.result.amount_list[0]) / this.XCASH_DECIMAL_PLACES};
+      resolve({"status":"success","txid":data.result.tx_hash_list[0],"txkey":data.result.tx_key_list[0],"fee":data.result.fee_list[0] / this.XCASH_DECIMAL_PLACES,"total":(data.result.fee_list[0] + data.result.amount_list[0]) / this.XCASH_DECIMAL_PLACES});
     }
     catch(error)
     {
-      return {"status":data.error.message};
+      reject({"status":data.error.message});
     }
+  });
   }
 
   public async rescanBlockchain(): Promise<string> {
+    return new Promise(async(resolve, reject) => {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"rescan_blockchain"}';
 
     await this.getPostRequestData(URL);
-    return "OK";
+    resolve("OK");
+  });
   }
 }
 

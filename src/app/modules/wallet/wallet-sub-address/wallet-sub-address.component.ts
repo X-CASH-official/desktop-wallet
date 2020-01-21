@@ -53,9 +53,16 @@ export class WalletSubAddressComponent implements OnInit {
 
   async loadSubAddresses()
   {
+    try
+    {
     this.dataSource = new MatTableDataSource(await this.RpcCallsService.getSubAddresses(await this.RpcCallsService.getSubAddressCount()));
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+  catch(error)
+  {
+
+  }
   }
   
   toggleCopyTooltip(tooltip) {

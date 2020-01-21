@@ -101,9 +101,16 @@ export class WalletSignDataComponent implements OnInit {
 
   async loadSignedData()
   {
+    try
+    {
     this.dataSource = new MatTableDataSource(FAKE_SIGNED_DATA);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+  catch(error)
+  {
+
+  }
   }
 
   toggleCopyTooltip(tooltip) {

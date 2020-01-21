@@ -37,9 +37,16 @@ export class WalletTransactionsComponent implements OnInit {
 
   async loadTransactions()
   {
-    this.dataSource = new MatTableDataSource(await this.RpcCallsService.getTransactions());
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    try
+    {
+      this.dataSource = new MatTableDataSource(await this.RpcCallsService.getTransactions());
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    }
+    catch(error)
+    {
+  
+    }
   }
 
   applyFilter(filterValue: string) {

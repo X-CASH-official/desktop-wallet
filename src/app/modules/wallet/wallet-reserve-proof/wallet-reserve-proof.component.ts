@@ -106,9 +106,16 @@ export class WalletReserveProofComponent implements OnInit {
 
   async loadReserveproofs()
   {
+    try
+    {
     this.dataSource = new MatTableDataSource(FAKE_RESERVE_PROOF);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+  catch(error)
+  {
+
+  }
   }
 
   toggleCopyTooltip(tooltip) {
