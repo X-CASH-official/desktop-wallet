@@ -3,6 +3,7 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
+import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 
 @Component({
   selector: 'app-wallet-sign-data',
@@ -11,7 +12,9 @@ import { ValidatorsRegexService } from 'src/app/services/validators-regex.servic
 })
 export class WalletSignDataComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService,private RpcCallsService: RpcCallsService) { }
+
+  createdSignature: string = "SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz";
 
   /* Sign data modal */
   @ViewChild('signDataModal1', { static: true }) signDataModal1: UiModalComponent;
@@ -24,18 +27,18 @@ export class WalletSignDataComponent implements OnInit {
     return this.dataToSignForm.get('dataToSign');
   }
 
-  onSubmitDataToSign() {
+  async onSubmitDataToSign() {
     if (this.dataToSignForm.valid) {
       console.log(this.dataToSignForm);
-      // fake creation
+      this.createdSignature = await this.RpcCallsService.createSignedData(this.dataToSignForm.value.dataToSign);
       this.signDataModal1.hide();
       this.signDataModal2.show();
+      this.dataToSignForm.setValue({dataToSign: ''});
+      this.loadSignedData();
     } else {
       this.dataToSign.markAsTouched();
     }
   }
-
-  createdSignature: string = "SigV13jebbGm9a1H4PbfXd1SZyPPmRtnJAJaoyf6Q3pE1ABsCT1MmiG3VyALNYmHEnjYhx71Z5Yx2TQenjb18C3DKRkGz";
 
 
   /* Verify signed data modal */
@@ -59,12 +62,12 @@ export class WalletSignDataComponent implements OnInit {
   verifySignedDataIsSubmitted: boolean = false;
   verificationSuccess: boolean = false;
 
-  onSubmitVerifySignedData() {
+  async onSubmitVerifySignedData() {
     console.log(this.verifySignedDataForm);
     if (this.verifySignedDataForm.valid) {
       this.verifySignedDataIsSubmitted = true;
       // TODO: process of signature verification
-      this.verificationSuccess = true;
+      this.verificationSuccess = await this.RpcCallsService.verifySignedData({"data":this.verifySignedDataForm.value.dataToVerify,"public_address":this.verifySignedDataForm.value.signatoryAddress,"signature":this.verifySignedDataForm.value.signatureToVerify});
     } else {
       this.dataToVerify.markAsTouched();
       this.signatoryAddress.markAsTouched();
@@ -89,12 +92,18 @@ export class WalletSignDataComponent implements OnInit {
   displayedColumns: string[] = ['id', 'data', 'signature', 'actions'];
   
   ngOnInit() {  
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.loadSignedData();
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  async loadSignedData()
+  {
+    this.dataSource = new MatTableDataSource(FAKE_SIGNED_DATA);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   toggleCopyTooltip(tooltip) {

@@ -435,6 +435,42 @@ export class RpcCallsService {
     }
    }
 
+  public async createSignedData(signedData:string): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"sign","params":{"data":"${signedData}"}}`;
+
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      return data.result.signature;
+    }
+    catch(error)
+    {
+      return data.error.message;
+    }
+  }
+
+  public async verifySignedData(signedData:any): Promise<boolean> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"verify","params":{"data":"${signedData.data}","address":"${signedData.public_address}","signature":"${signedData.signature}"}}`;
+    // Variables
+    let data;
+
+    try
+    {
+      data = await this.getPostRequestData(URL);
+      console.log(data);
+      return data.result.good;
+    }
+    catch(error)
+    {
+      return false;
+    }
+  }
+
   public async getBalance(): Promise<number> {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_balance"}';

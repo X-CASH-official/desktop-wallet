@@ -3,6 +3,7 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
+import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 
 @Component({
   selector: 'app-wallet-reserve-proof',
@@ -11,7 +12,7 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 })
 export class WalletReserveProofComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService,private RpcCallsService: RpcCallsService) { }
 
   /* Create reserve proof */
   @ViewChild('createReserveProofModal1', { static: true }) createReserveProofModal1: UiModalComponent;
@@ -93,12 +94,18 @@ export class WalletReserveProofComponent implements OnInit {
   displayedColumns: string[] = ['id', 'amount', 'signature', 'status', 'actions'];
   
   ngOnInit() {  
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.loadReserveproofs();
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  async loadReserveproofs()
+  {
+    this.dataSource = new MatTableDataSource(FAKE_RESERVE_PROOF);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   toggleCopyTooltip(tooltip) {
