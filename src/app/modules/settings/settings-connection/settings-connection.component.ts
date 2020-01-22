@@ -46,7 +46,6 @@ export class SettingsConnectionComponent implements OnInit {
       ]);
 
        this.best_node_settings.sort((a,b)=>a.item-b.item);
-       console.log(this.best_node_settings);
        this.remoteNode = this.best_node_settings[0].remote_node;
        this.custom_remote_node.nativeElement.value = "";
     }
