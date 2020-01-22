@@ -3,6 +3,7 @@ import { IntegratedAddress } from 'src/app/modules/wallet/wallet-integrated-addr
 import { SignedData } from 'src/app/modules/wallet/wallet-sign-data/wallet-sign-data.component';
 import { ReserveProof } from 'src/app/modules/wallet/wallet-reserve-proof/wallet-reserve-proof.component';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { Wallet } from 'src/app/models/wallet.model';
 const fs = (<any>window).require('fs');
 
 @Injectable({
@@ -284,6 +285,55 @@ export class DatabaseService {
       database_data.wallet_settings.remote_node = remote_node;
       fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
       
+      resolve();
+    } catch (error) {
+      reject();
+    }
+   });
+  }
+
+  public async getWalletData(): Promise<Wallet[]> {
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // Constants
+      const DATABASE_DATA:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+    
+      // variables
+      let Wallet:Wallet[] = [];
+      let count = 0;
+
+      DATABASE_DATA.wallet_data.forEach(item => {
+         Wallet.push({
+          id: count,
+          name: item.wallet_name,
+          publicKey: item.public_address,
+          balance: item.balance,
+        });
+        count++;
+     }); 
+      resolve(Wallet);
+    } catch (error) {
+      reject(error);
+    }
+   });
+  }
+
+  public async saveWalletData(data:any): Promise<any> {
+    return new Promise(async(resolve, reject) => {
+    try
+    { 
+      // Variables
+      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+
+      database_data.wallet_data.push({
+        wallet_name: data.wallet_name,
+        public_address: data.public_address,
+        balance: data.balance
+        });
+
+      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+        
       resolve();
     } catch (error) {
       reject();

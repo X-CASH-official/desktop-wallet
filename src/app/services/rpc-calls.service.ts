@@ -177,6 +177,16 @@ export class RpcCallsService {
     });
   }
 
+  private async openWallet(walletData:any):Promise<string>
+  {
+    return new Promise(async (resolve, reject) => {
+      // Constants
+
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      resolve("success");
+  });
+  }
+
   public async getTransactions(): Promise<Transaction[]> {
     // Constants
     const URL:string = '{"jsonrpc":"2.0","id":"0","method":"get_transfers","params":{"in":true,"out":true}}';

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { WalletList } from '../models/wallet-list.model';
-import { FAKE_WALLET_LIST } from 'src/fake-data/fake-wallet-list';
 import { BehaviorSubject } from 'rxjs';
 import { Wallet } from '../models/wallet.model';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,20 @@ export class WalletListService {
   private walletList: WalletList;
   private walletList$: BehaviorSubject<Wallet[]>;
 
-  constructor() {
-    try {
-      this.walletList = new WalletList(FAKE_WALLET_LIST);
+  constructor(private DatabaseService: DatabaseService) {
+    this.loadWallets();
+  }
+
+  async loadWallets()
+  {
+    let data = await this.DatabaseService.getWalletData();
+    try
+    {
+      this.walletList = new WalletList(data);
       this.walletList$ = new BehaviorSubject<Wallet[]>(this.walletList.getList());
-    } catch (e) {
-      console.error('Wallet list initilization failed', e);
+    } catch (error)
+    {
+      
     }
   }
 
