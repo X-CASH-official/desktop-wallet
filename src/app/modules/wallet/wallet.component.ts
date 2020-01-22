@@ -5,6 +5,7 @@ import { WalletListService } from 'src/app/services/wallet-list.service';
 import { XcashPriceIndexService } from 'src/app/services/xcash-price-index.service';
 import { Wallet } from 'src/app/models/wallet.model';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-wallet-details',
@@ -15,7 +16,7 @@ export class WalletComponent implements OnInit {
   
   selectedWallet: number;
   
-  constructor(private router: Router, private walletListService: WalletListService, private xcashPriceIndexService: XcashPriceIndexService, private RpcCallsService: RpcCallsService) {
+  constructor(private router: Router, private walletListService: WalletListService, private xcashPriceIndexService: XcashPriceIndexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.selectedWallet = this.router.getCurrentNavigation().extras.state.walletId;
       //console.log("Wallet selected:", this.selectedWallet);
@@ -42,7 +43,10 @@ export class WalletComponent implements OnInit {
 
     // Update the balance
     this.walletData.balance = await this.RpcCallsService.getBalance();
-    setInterval(async() => this.walletData.balance = await this.RpcCallsService.getBalance(), 60000);
+    setInterval(async() => {
+      this.walletData.balance = await this.RpcCallsService.getBalance();
+      await this.DatabaseService.updateWalletBalance(this.walletData.balance);
+    }, 360000);
 
     this.xcashPriceIndexSub = this.xcashPriceIndexService.getPrice().subscribe(
       (value) => {
@@ -55,11 +59,6 @@ export class WalletComponent implements OnInit {
         console.error("Could not reach CoinGecko for XCASH price index in USD.", err);
       }
     )
-  }
-
-  getBalance()
-  {
-
   }
 
   ngOnDestroy() {

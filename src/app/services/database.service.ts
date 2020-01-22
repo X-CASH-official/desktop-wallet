@@ -341,6 +341,26 @@ export class DatabaseService {
    });
   }
 
+  public async updateWalletBalance(balance:number): Promise<string> {
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // Constants
+      const WALLET_COUNT:number = await this.getCurrentWallet();
+
+      // Variables
+      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+
+      database_data.wallet_data[WALLET_COUNT].balance = balance;
+      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+      
+      resolve();
+    } catch (error) {
+      reject();
+    }
+   });
+  }
+
   
 }
 
