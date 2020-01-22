@@ -260,6 +260,37 @@ export class DatabaseService {
    });
   }
 
+  public async getRemoteNode(): Promise<string> {
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // Constants
+      const DATABASE_DATA:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+      
+      resolve(DATABASE_DATA.wallet_settings.remote_node);
+    } catch (error) {
+      reject();
+    }
+   });
+  }
+
+  public async updateRemoteNode(remote_node:string): Promise<any> {
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // Variables
+      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+
+      database_data.wallet_settings.remote_node = remote_node;
+      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+      
+      resolve();
+    } catch (error) {
+      reject();
+    }
+   });
+  }
+
   
 }
 

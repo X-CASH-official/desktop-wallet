@@ -5,11 +5,13 @@
   </div>
   <div>
     <div class="input-group">
-      <select class="custom-select" id="inputGroupSelect04">
-        <ng-container *ngFor="let remoteNode of remoteNodes">
-          <option>{{ remoteNode.name }}:{{ remoteNode.port }}</option>
-        </ng-container>
-        <option selected>Choose the right connection node...</option>
+      <select class="custom-select" id="inputGroupSelect04" (change)="onChange($event)">
+          <option [selected]='remoteNode=="Custom node"'>Custom node</option>
+        <option [selected]='remoteNode=="USSEED1.X-CASH.ORG:18280"'>USSEED1.X-CASH.ORG:18280</option>
+        <option [selected]='remoteNode=="USSEED2.X-CASH.ORG:18280"'>USSEED2.X-CASH.ORG:18280</option>
+        <option [selected]='remoteNode=="EUSEED1.X-CASH.ORG:18280"'>EUSEED1.X-CASH.ORG:18280</option>
+        <option [selected]='remoteNode=="EUSEED3.X-CASH.ORG:18280"'>EUSEED3.X-CASH.ORG:18280</option>
+        <option [selected]='remoteNode=="ASIASEED2.X-CASH.ORG:18280"'>ASIASEED2.X-CASH.ORG:18280</option>        
       </select>
       <div class="input-group-append">
         <button class="btn btn-success" type="button">Choose best</button>
@@ -25,7 +27,7 @@
     <p class="text-muted mb-0">Choose a custom node to connect to (not recommended).</p>
   </div>
   <div>
-    <input type="text" class="form-control" placeholder="Enter custom node">
+    <input type="text" class="form-control" placeholder="Enter custom node" #custom_remote_node>
   </div>
 </div>
 <hr>
