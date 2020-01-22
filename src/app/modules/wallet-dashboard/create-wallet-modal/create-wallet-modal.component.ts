@@ -3,6 +3,7 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 import { FormControl, Validators, FormArray } from '@angular/forms';
 import { WalletNamePasswordModalComponent } from '../wallet-name-password-modal/wallet-name-password-modal.component';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-create-wallet-modal',
@@ -17,7 +18,7 @@ export class CreateWalletModalComponent implements OnInit {
   @ViewChild('createWalletModal4', { static: true }) createWalletModal4: UiModalComponent;
   @ViewChild('createWalletModalError', { static: true }) createWalletModalError: UiModalComponent;
 
-  constructor(private RpcCallsService: RpcCallsService) { }
+  constructor(private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
   // Variables
   exampleSeed: string[] = ["cover", "palace", "renew", "address", "orchard", "derive", "promote", "similar", "artist", "cage", "dial", "forget", "print", "extend", "scissors", "festival", "donor", "peasant", "spawn", "donate", "fever", "olive", "section", "device"];
@@ -43,6 +44,10 @@ export class CreateWalletModalComponent implements OnInit {
       // At this point the wallet is created, and synced
       this.createWalletModalError.hide();
       this.publicAddress = data.public_address;
+
+      // save the wallet to the database
+      await this.DatabaseService.saveWalletData({"wallet_name":this.WalletName,"public_address":this.publicAddress,"balance":0});
+      
       this.exampleSeed = data.mnemonic_seed.split(" ");
       this.createWalletModal2.show();
       // save the wallet data to the database

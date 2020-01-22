@@ -3,6 +3,7 @@ import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-import-wallet-modal',
@@ -11,7 +12,7 @@ import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 })
 export class ImportWalletModalComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
   Walletdata:any = {"walletName":"walletName","password":"password","seed":"seed"};
   data:string;
@@ -75,7 +76,9 @@ export class ImportWalletModalComponent implements OnInit {
       this.RpcCallsService.sleep(5000);
       this.importWalletModalError.hide();
       // At this point the wallet is created, and synced
-      // save the wallet data to the database
+
+      // save the wallet to the database
+      await this.DatabaseService.saveWalletData({"wallet_name":this.Walletdata.walletName,"public_address":data.public_address,"balance":data.balance});
     }
     catch (error)
     {

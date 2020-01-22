@@ -79,7 +79,7 @@ export class RpcCallsService {
     });
   }
 
-  private async closeWindow():Promise<string>
+  private async closeWallet():Promise<string>
   {
     return new Promise(async (resolve, reject) => {
       // Constants
@@ -103,7 +103,7 @@ export class RpcCallsService {
     {
       // close the wallet if it is already running
       console.log("Closing window");
-      await this.closeWindow();
+      await this.closeWallet();
 
       // open the wallet in create wallet mode
       console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
@@ -117,7 +117,7 @@ export class RpcCallsService {
     
       // close the wallet
       console.log("Closing window");
-      await this.closeWindow();
+      await this.closeWallet();
 
       // start the wallet
       console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
@@ -131,7 +131,7 @@ export class RpcCallsService {
 
       // close the wallet
       console.log("Closing window");
-      await this.closeWindow();
+      await this.closeWallet();
 
       resolve({"public_address":publicAddress, "mnemonic_seed":mnemonicSeed});
     } catch (error) {
@@ -150,7 +150,7 @@ export class RpcCallsService {
     {
       // close the wallet if it is already running
       console.log("Closing window");
-      await this.closeWindow();
+      await this.closeWallet();
 
       // create the importwallet.txt file
       fs.writeFileSync(IMPORT_WALLET_FILE, IMPORT_WALLET_DATA);
@@ -165,12 +165,21 @@ export class RpcCallsService {
     
       // close the wallet
       console.log("Closing window");
-      await this.closeWindow();
+      await this.closeWallet();
+
+      // start the wallet
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      await this.sleep(20000);
+      let publicAddress:string = await this.getPublicAddress();
+      let balance:number = await this.getBalance();
+
+      // close the wallet
+      await this.closeWallet();
 
       // delete the importwallet.txt file
       fs.unlinkSync(IMPORT_WALLET_FILE);
 
-      resolve({"status":"success"});
+      resolve({"public_address":publicAddress,"balance":balance});
     } catch (error) {
     reject({"status":"error"});
     }

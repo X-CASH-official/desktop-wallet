@@ -23,9 +23,10 @@ export class WalletListService {
     {
       this.walletList = new WalletList(data);
       this.walletList$ = new BehaviorSubject<Wallet[]>(this.walletList.getList());
-    } catch (error)
+    }
+    catch (error)
     {
-      
+
     }
   }
 
