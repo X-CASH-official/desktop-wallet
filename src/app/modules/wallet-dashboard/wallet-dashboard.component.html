@@ -21,7 +21,7 @@
   <div *ngFor="let wallet of walletList$ | async" class="col-lg-4 col-md-6">
     <div class="card">
       <div class="card-header">
-        <h4><a [routerLink]="['./wallet']" [state]="{walletId: wallet.id}">{{ wallet.name }}</a></h4>
+        <h4><a (click)="RpcCallsService.currentWalletName = wallet.name" [routerLink]="['./wallet']" [state]="{walletId: wallet.id}">{{ wallet.name }}</a></h4>
         <div class="card-header-right">
           <div class="btn-group card-option dropdown" ngbDropdown>
             <button type="button" class="btn dropdown-toggle btn-icon" ngbDropdownToggle>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <a [routerLink]="['./wallet']" [state]="{walletId: wallet.id}" class="card-body">
+      <a (click)="RpcCallsService.currentWalletName = wallet.name" [routerLink]="['./wallet']" [state]="{walletId: wallet.id}" class="card-body">
         
         <h5>{{ wallet.publicKey | xcashPublicAddress:10 }}</h5>
         <h5>{{ wallet.balance | xcash}}</h5>

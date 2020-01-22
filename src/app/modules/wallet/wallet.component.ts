@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WalletListService } from 'src/app/services/wallet-list.service';
@@ -6,6 +6,7 @@ import { XcashPriceIndexService } from 'src/app/services/xcash-price-index.servi
 import { Wallet } from 'src/app/models/wallet.model';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 import { DatabaseService } from 'src/app/services/database.service';
+import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 
 @Component({
   selector: 'app-wallet-details',
@@ -13,13 +14,16 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit {
+
+  @ViewChild('wallet_password', {static: true}) wallet_password: ElementRef;
+  @ViewChild('openwalletmodal', { static: true }) openwalletmodal: UiModalComponent;
+  @ViewChild('openwalletloadingmodal', { static: true }) openwalletloadingmodal: UiModalComponent;
   
   selectedWallet: number;
   
   constructor(private router: Router, private walletListService: WalletListService, private xcashPriceIndexService: XcashPriceIndexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.selectedWallet = this.router.getCurrentNavigation().extras.state.walletId;
-      //console.log("Wallet selected:", this.selectedWallet);
     } else {
       console.error("Illegal navigation: you must provide a walletId attribute in the state of the route when routing to the wallet module.");
     }
@@ -30,11 +34,35 @@ export class WalletComponent implements OnInit {
 
   xcashPriceIndexSub: Subscription;
   USDforXCASH: number;
+  data:string = "Open Wallet";
 
   
- async ngOnInit() {
+ ngOnInit() {
+    this.openwalletmodal.show();    
+  }
+
+  async openWallet()
+  {  
+    try
+    {
+      this.openwalletmodal.hide();
+      this.openwalletloadingmodal.show(); 
+      await this.RpcCallsService.openWallet(this.wallet_password.nativeElement.value);
+      this.openwalletloadingmodal.hide();
+      this.loadWallet();
+    }
+    catch(error)
+    {
+      this.data = "Open Wallet - Invalid Password";
+      this.openwalletloadingmodal.hide()
+      this.openwalletmodal.show();
+      this.wallet_password.nativeElement.value = "";
+    }
+  }
+
+  async loadWallet()
+  {
     this.walletListSubscription = this.walletListService.getWalletList().subscribe((newWalletList) => {
-      //console.log(newWalletList);
       this.walletData = newWalletList[this.selectedWallet];
     });
 

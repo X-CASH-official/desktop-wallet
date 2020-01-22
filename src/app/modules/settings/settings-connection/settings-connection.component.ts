@@ -12,7 +12,7 @@ export class SettingsConnectionComponent implements OnInit {
   @ViewChild('custom_remote_node', {static: true}) custom_remote_node: ElementRef;
 
   blockHeight: number = 4223210;
-  remoteNode:string = "USSEED1.X-CASH.ORG:18280";
+  remoteNode:string = "USSEED1.X-CASH.ORG:18281";
   best_node_settings:any[] = [];
 
   onChange($event){
@@ -27,11 +27,11 @@ export class SettingsConnectionComponent implements OnInit {
         let start = performance.now();
         fetch(`http://${remote_node}:18281`)
         .then(res => {
-          this.best_node_settings.push({"remote_node":`${remote_node}:18280`,"time":performance.now()-start});
+          this.best_node_settings.push({"remote_node":`${remote_node}:18281`,"time":performance.now()-start});
           resolve();
         })
         .catch(error => {
-           this.best_node_settings.push({"remote_node":`${remote_node}:18280`,"time":"1000000"});
+           this.best_node_settings.push({"remote_node":`${remote_node}:18281`,"time":"1000000"});
            resolve();
         });
       });
@@ -57,7 +57,7 @@ export class SettingsConnectionComponent implements OnInit {
   {
     // overwrite the selection if they specifed a custom node
     this.remoteNode = this.custom_remote_node.nativeElement.value != "" ? this.custom_remote_node.nativeElement.value : this.remoteNode;
-    this.remoteNode = this.remoteNode === "Custom node" ? "USSEED1.X-CASH.ORG:18280" : this.remoteNode;
+    this.remoteNode = this.remoteNode === "Custom node" ? "USSEED1.X-CASH.ORG:18281" : this.remoteNode;
     this.RpcCallsService.Remote_Node = this.remoteNode; 
     // save the remote node connection
     await this.DatabaseService.updateRemoteNode(this.remoteNode);
@@ -74,7 +74,7 @@ export class SettingsConnectionComponent implements OnInit {
     // load the current remote node
     this.remoteNode = await this.DatabaseService.getRemoteNode();
     this.RpcCallsService.Remote_Node = this.remoteNode; 
-    if (this.remoteNode !== "USSEED1.X-CASH.ORG:18280" && this.remoteNode !== "USSEED2.X-CASH.ORG:18280" && this.remoteNode !== "EUSEED1.X-CASH.ORG:18280" && this.remoteNode !== "EUSEED3.X-CASH.ORG:18280" && this.remoteNode !== "ASIASEED2.X-CASH.ORG:18280")
+    if (this.remoteNode !== "USSEED1.X-CASH.ORG:18281" && this.remoteNode !== "USSEED2.X-CASH.ORG:18281" && this.remoteNode !== "EUSEED1.X-CASH.ORG:18281" && this.remoteNode !== "EUSEED3.X-CASH.ORG:18281" && this.remoteNode !== "ASIASEED2.X-CASH.ORG:18281")
     {
       this.custom_remote_node.nativeElement.value = this.remoteNode;
     }

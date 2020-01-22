@@ -15,6 +15,7 @@ export class RpcCallsService {
   rpcUserAgent:string = fs.readFileSync("useragent.txt","utf8");
   Remote_Node:string = JSON.parse(fs.readFileSync("database.txt","utf8")).wallet_settings.remote_node;
   XCASH_DECIMAL_PLACES:number = 1000000;
+  currentWalletName:string = "";
 
   public sleep(milliseconds)
   {
@@ -45,7 +46,7 @@ export class RpcCallsService {
         .then(res => resolve(res)) 
        .catch(error => reject(error));
       } catch (error) {
-        reject(error);
+        reject();
       }
     });
   }
@@ -105,7 +106,7 @@ export class RpcCallsService {
       await this.closeWallet();
 
       // open the wallet in create wallet mode
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       console.log("creating window");
       console.log(CREATE_WALLET_URL);
@@ -118,7 +119,7 @@ export class RpcCallsService {
       await this.closeWallet();
 
       // start the wallet
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       let publicAddress:string = await this.getPublicAddress();
       let mnemonicSeed:string = await this.getMnenonicSeed();
@@ -154,7 +155,7 @@ export class RpcCallsService {
       await this.sleep(10000);
 
       // open the wallet in import mode
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
  
       // at this point the wallet will try to sync if we let it
@@ -164,7 +165,7 @@ export class RpcCallsService {
       await this.closeWallet();
 
       // start the wallet
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --daemon-address "${this.rpcUserAgent}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --daemon-address "${this.Remote_Node}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       let publicAddress:string = await this.getPublicAddress();
       let balance:number = await this.getBalance();
@@ -182,13 +183,25 @@ export class RpcCallsService {
     });
   }
 
-  private async openWallet(walletData:any):Promise<string>
+  public async openWallet(password:string):Promise<string>
   {
     return new Promise(async (resolve, reject) => {
-      // Constants
-
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword}" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
-      resolve("success");
+      try
+      {
+        console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${this.currentWalletName}"" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+        exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${this.currentWalletName}"" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+        await this.sleep(20000);
+        let publicAddress:string = await this.getPublicAddress();
+        if (publicAddress.substr(0,3) != "XCA")
+        {
+          reject();
+        }
+        resolve();
+      }
+      catch (error)
+      {
+        reject();
+      }
   });
   }
 
@@ -268,7 +281,7 @@ export class RpcCallsService {
    }
    catch(error)
    {
-     reject(data.error.message);
+    try {reject(data.error.message);}catch(error){reject();}
    }
   });
   }
@@ -289,7 +302,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -310,7 +323,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -331,7 +344,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -352,7 +365,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -373,7 +386,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -393,7 +406,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject({"error":data.error.message});
+      try {reject({"status":data.error.message});}catch(error){reject({"status":"error"});}
     }
   });
   }
@@ -414,7 +427,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -474,7 +487,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -515,7 +528,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -556,7 +569,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject(data.error.message);
+      try {reject(data.error.message);}catch(error){reject();}
     }
   });
   }
@@ -577,7 +590,7 @@ export class RpcCallsService {
     }
     catch(error)
     {
-      reject({"status":data.error.message});
+      try {reject({"status":data.error.message});}catch(error){reject({"status":"error"});}
     }
   });
   }
