@@ -41,6 +41,7 @@ export class CreateWalletModalComponent implements OnInit {
       this.createWalletModalError.show();
       let data:any = await this.RpcCallsService.createWallet(NameAndPasswordValues);
       // At this point the wallet is created, and synced
+      this.createWalletModalError.hide();
       this.publicAddress = data.public_address;
       this.exampleSeed = data.mnemonic_seed.split(" ");
       this.createWalletModal2.show();

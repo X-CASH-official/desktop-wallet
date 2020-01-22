@@ -13,10 +13,11 @@ export class RpcCallsService {
   constructor() { }
 
   // Variables
+  walletsyncprogress:number = 0;
   rpcUserAgent:string = fs.readFileSync("useragent.txt","utf8");
   XCASH_DECIMAL_PLACES:number = 1000000;
 
-  sleep(milliseconds)
+  public sleep(milliseconds)
   {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   }
@@ -112,7 +113,6 @@ export class RpcCallsService {
       console.log(CREATE_WALLET_URL);
       await this.getPostRequestData(CREATE_WALLET_URL);
       await this.sleep(20000);
- 
       // at this point the wallet will try to sync if we let it
     
       // close the wallet

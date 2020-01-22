@@ -72,7 +72,8 @@ export class ImportWalletModalComponent implements OnInit {
       this.importWalletModalError.show();
       let data:any = await this.RpcCallsService.importWallet(this.Walletdata);
       this.data = "The wallet has been imported successfully";
-      this.importWalletModalError.show();
+      this.RpcCallsService.sleep(5000);
+      this.importWalletModalError.hide();
       // At this point the wallet is created, and synced
       // save the wallet data to the database
     }
