@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Transaction } from 'electron';
-import { resolve } from 'q';
 const exec = (<any>window).require('child_process').exec;
-const crypto = (<any>window).require("crypto");
 const fs = (<any>window).require('fs');
 
 @Injectable({
@@ -15,6 +13,7 @@ export class RpcCallsService {
   // Variables
   walletsyncprogress:number = 0;
   rpcUserAgent:string = fs.readFileSync("useragent.txt","utf8");
+  Remote_Node:string = JSON.parse(fs.readFileSync("database.txt","utf8")).wallet_settings.remote_node;
   XCASH_DECIMAL_PLACES:number = 1000000;
 
   public sleep(milliseconds)
@@ -106,8 +105,7 @@ export class RpcCallsService {
       await this.closeWallet();
 
       // open the wallet in create wallet mode
-      console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       console.log("creating window");
       console.log(CREATE_WALLET_URL);
@@ -120,8 +118,7 @@ export class RpcCallsService {
       await this.closeWallet();
 
       // start the wallet
-      console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       let publicAddress:string = await this.getPublicAddress();
       let mnemonicSeed:string = await this.getMnenonicSeed();
@@ -157,8 +154,7 @@ export class RpcCallsService {
       await this.sleep(10000);
 
       // open the wallet in import mode
-      console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --rpc-user-agent "${this.rpcUserAgent}"`);
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
  
       // at this point the wallet will try to sync if we let it
@@ -168,7 +164,7 @@ export class RpcCallsService {
       await this.closeWallet();
 
       // start the wallet
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --daemon-address "${this.rpcUserAgent}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       let publicAddress:string = await this.getPublicAddress();
       let balance:number = await this.getBalance();
@@ -191,7 +187,7 @@ export class RpcCallsService {
     return new Promise(async (resolve, reject) => {
       // Constants
 
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword}" --daemon-address "${this.rpcUserAgent}" --rpc-user-agent "${this.rpcUserAgent}"`);
       resolve("success");
   });
   }

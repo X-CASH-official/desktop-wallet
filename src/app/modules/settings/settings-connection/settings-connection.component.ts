@@ -1,4 +1,5 @@
 import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
+import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class SettingsConnectionComponent implements OnInit {
 
   onChange($event){
     this.remoteNode = $event.target.options[$event.target.options.selectedIndex].text;
+    this.RpcCallsService.Remote_Node = this.remoteNode; 
     this.custom_remote_node.nativeElement.value = "";
     }
 
@@ -47,6 +49,7 @@ export class SettingsConnectionComponent implements OnInit {
 
        this.best_node_settings.sort((a,b)=>a.item-b.item);
        this.remoteNode = this.best_node_settings[0].remote_node;
+       this.RpcCallsService.Remote_Node = this.remoteNode; 
        this.custom_remote_node.nativeElement.value = "";
     }
 
@@ -55,11 +58,12 @@ export class SettingsConnectionComponent implements OnInit {
     // overwrite the selection if they specifed a custom node
     this.remoteNode = this.custom_remote_node.nativeElement.value != "" ? this.custom_remote_node.nativeElement.value : this.remoteNode;
     this.remoteNode = this.remoteNode === "Custom node" ? "USSEED1.X-CASH.ORG:18280" : this.remoteNode;
+    this.RpcCallsService.Remote_Node = this.remoteNode; 
     // save the remote node connection
     await this.DatabaseService.updateRemoteNode(this.remoteNode);
   }
 
-  constructor(private DatabaseService: DatabaseService) { }
+  constructor(private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
   ngOnInit()
   {
@@ -69,6 +73,7 @@ export class SettingsConnectionComponent implements OnInit {
   async ngAfterViewInit() {
     // load the current remote node
     this.remoteNode = await this.DatabaseService.getRemoteNode();
+    this.RpcCallsService.Remote_Node = this.remoteNode; 
     if (this.remoteNode !== "USSEED1.X-CASH.ORG:18280" && this.remoteNode !== "USSEED2.X-CASH.ORG:18280" && this.remoteNode !== "EUSEED1.X-CASH.ORG:18280" && this.remoteNode !== "EUSEED3.X-CASH.ORG:18280" && this.remoteNode !== "ASIASEED2.X-CASH.ORG:18280")
     {
       this.custom_remote_node.nativeElement.value = this.remoteNode;
