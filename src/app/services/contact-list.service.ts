@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ContactList } from '../models/contact-list.model';
 import { BehaviorSubject } from 'rxjs';
-import { FAKE_CONTACTS } from 'src/fake-data/fake-contacts';
 import { Contact } from '../models/contact.model';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,20 @@ export class ContactListService {
   public contactList: ContactList;
   private contactList$: BehaviorSubject<Contact[]>;
 
-  constructor() {
-    try {
-      this.contactList = new ContactList(FAKE_CONTACTS);
+  constructor(private DatabaseService: DatabaseService) {
+    this.loadContacts();
+  }
+
+  async loadContacts()
+  {
+    try
+    {
+      this.contactList = new ContactList(await this.DatabaseService.getContacts());
       this.contactList$ = new BehaviorSubject<Contact[]>(this.contactList.getList());
-    } catch (e) {
-      console.error('Contact list initialization failed', e);
+    }
+    catch (error)
+    {
+
     }
   }
 

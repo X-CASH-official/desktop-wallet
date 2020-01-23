@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-
-import { FAKE_CONTACTS } from 'src/fake-data/fake-contacts';
 import { ContactList } from 'src/app/models/contact-list.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
@@ -9,6 +7,7 @@ import { ContactListService } from 'src/app/services/contact-list.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { ActionsService } from 'src/app/services/actions.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-contacts-table',
@@ -17,7 +16,7 @@ import { ActionsService } from 'src/app/services/actions.service';
 })
 export class ContactsTableComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService, private contactListService : ContactListService, private actionsService: ActionsService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService, private contactListService : ContactListService, private actionsService: ActionsService, private DatabaseService: DatabaseService) { }
 
   /* modifyContact Modal */
   @ViewChild('modifyContactModal', { static: true }) modifyContactModal;
@@ -84,10 +83,11 @@ export class ContactsTableComponent implements OnInit {
     this.modifyContactModal.show();
   }
   
-  onSubmitModification() {
+  async onSubmitModification() {
     if (!this.modifyContactForm.invalid) {
-      this.modifyContactModal.hide();
+      this.modifyContactModal.hide();      
       this.actionsService.modifyContact(this.modifyContactForm.value.contactID, this.modifyContactForm.value.contactName, this.modifyContactForm.value.contactPublicAddress);
+      await this.DatabaseService.editContacts({"id":this.modifyContactForm.value.contactID,"name":this.modifyContactForm.value.contactName,"public_address":this.modifyContactForm.value.contactPublicAddress});
       this.refreshTable();
       
       setTimeout(() => {
@@ -96,13 +96,15 @@ export class ContactsTableComponent implements OnInit {
     }
   }
   
-  onNewContact(newContact: object) {
+  async onNewContact(newContact: object) {
     this.actionsService.addContact(newContact['contactName'], newContact['contactPublicAddress']);
+    await this.DatabaseService.addContacts({"name":newContact['contactName'],"public_address":newContact['contactPublicAddress']});
     this.refreshTable();
   }
   
-  onRemoveContact(contactID: number) {
+  async onRemoveContact(contactID: number) {
     this.actionsService.removeContact(contactID);
+    await this.DatabaseService.deleteContacts(contactID);
     this.refreshTable();
   }
   

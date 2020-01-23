@@ -19,7 +19,7 @@ function createWindow() {
   // create and set the user agent
   let rpcUserAgent:string = crypto.randomBytes(100).toString('hex');
   fs.writeFileSync("useragent.txt", rpcUserAgent);
-  mainWindow.webContents.setUserAgent(rpcUserAgent);
+  mainWindow.webContents.userAgent = rpcUserAgent;
 
   // load the dist folder from Angular
   mainWindow.loadFile(path.join(__dirname, "/dist/index.html"));

@@ -84,7 +84,7 @@
   "contact_data": [
     {
       "name": "name",
-      "public_address": "XCA"
+      "public_address": "XCA1kzoR3ZLNg5zxNmxrY8FYKtgEvPZqC2xoRpm1axCpQcrrZfoKTSkSNsASDspdt3j1WcEnQJyuuB5VPSB56WWy36A4sQtQhe"
     },
     {
       "name": "name",

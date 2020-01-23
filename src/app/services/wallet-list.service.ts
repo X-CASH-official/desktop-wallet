@@ -18,10 +18,9 @@ export class WalletListService {
 
   async loadWallets()
   {
-    let data = await this.DatabaseService.getWalletData();
     try
     {
-      this.walletList = new WalletList(data);
+      this.walletList = new WalletList(await this.DatabaseService.getWalletData());
       this.walletList$ = new BehaviorSubject<Wallet[]>(this.walletList.getList());
     }
     catch (error)
