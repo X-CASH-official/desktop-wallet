@@ -30,7 +30,11 @@ export class WalletTransactionsComponent implements OnInit {
 
   constructor(private RpcCallsService: RpcCallsService) { }
 
-  ngOnInit() { 
+  async ngOnInit() { 
+    while (this.RpcCallsService.wallet_status === false)
+    {
+      await this.RpcCallsService.sleep(1000);
+    }
     this.loadTransactions();  
     setInterval(() => this.loadTransactions(), 300000);
   }

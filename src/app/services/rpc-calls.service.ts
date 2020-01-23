@@ -16,6 +16,7 @@ export class RpcCallsService {
   Remote_Node:string = JSON.parse(fs.readFileSync("database.txt","utf8")).wallet_settings.remote_node;
   XCASH_DECIMAL_PLACES:number = 1000000;
   currentWalletName:string = "";
+  wallet_status:boolean = false;
 
   public sleep(milliseconds)
   {
@@ -124,12 +125,11 @@ export class RpcCallsService {
       let publicAddress:string = await this.getPublicAddress();
       let mnemonicSeed:string = await this.getMnenonicSeed();
 
-      console.log(publicAddress);
-      console.log(mnemonicSeed);
-
       // close the wallet
       console.log("Closing window");
       await this.closeWallet();
+
+      this.wallet_status = true;
 
       resolve({"public_address":publicAddress, "mnemonic_seed":mnemonicSeed});
     } catch (error) {
@@ -176,6 +176,8 @@ export class RpcCallsService {
       // delete the importwallet.txt file
       fs.unlinkSync(IMPORT_WALLET_FILE);
 
+      this.wallet_status = true;
+
       resolve({"public_address":publicAddress,"balance":balance});
     } catch (error) {
     reject({"status":"error"});
@@ -188,7 +190,6 @@ export class RpcCallsService {
     return new Promise(async (resolve, reject) => {
       try
       {
-        console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${this.currentWalletName}"" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
         exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${this.currentWalletName}"" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
         await this.sleep(20000);
         let publicAddress:string = await this.getPublicAddress();
@@ -196,6 +197,7 @@ export class RpcCallsService {
         {
           reject();
         }
+        this.wallet_status = true;
         resolve();
       }
       catch (error)
