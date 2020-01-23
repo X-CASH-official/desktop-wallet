@@ -74,7 +74,7 @@ export class CreateWalletModalComponent implements OnInit {
   /* Mnemonic seed confirmation */
   seedWordsConfirmationForm: FormArray;
   wordsToConfirm: boolean[];
-  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 0;
+  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 12;
   
   seedConfirmationPreparation() {
     this.wordsToConfirm = this.chooseRandomWordsToConfirm(this.exampleSeed, this.NUMBER_SEED_WORDS_TO_CONFIRM);
@@ -84,7 +84,7 @@ export class CreateWalletModalComponent implements OnInit {
   onSubmitMnemonicSeedConfirmationForm() {
     if (this.seedWordsConfirmationForm.valid) {
       this.createWalletModal3.hide();
-      console.log(this.seedWordsConfirmationForm); // The action should take place here
+      console.log("refresh wallet list1"); // The action should take place here
       this.createWalletModal4.show();
     } else {
       for (let i = 0; i < this.seedWordsConfirmationForm.length; i++) {

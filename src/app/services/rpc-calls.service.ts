@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Transaction } from 'electron';
+import { WalletDashboardComponent } from '../modules/wallet-dashboard/wallet-dashboard.component';
 const exec = (<any>window).require('child_process').exec;
 const fs = (<any>window).require('fs');
 
@@ -72,7 +73,7 @@ export class RpcCallsService {
         // send the post request
         fetch(URL, settings)
         .then(res => res.json())
-        .then(res => resolve("OK"))
+        .then(res => resolve(res))
         .catch(error => resolve("OK"));
       } catch (error) {
         resolve("OK");
@@ -80,11 +81,32 @@ export class RpcCallsService {
     });
   }
 
-  private async closeWallet():Promise<string>
+  private async closeWallet(settings:number):Promise<string>
   {
     return new Promise(async (resolve, reject) => {
       // Constants
       const CLOSE_WALLET_URL:string = '{"jsonrpc":"2.0","id":"0","method":"close_wallet"}';
+
+      if (settings === 1)
+      {
+        let block_height:number;
+        let current_block_height:number;
+        for(;;)
+        {
+          block_height = await this.getCurrentBlockHeight();
+          await this.sleep(30000);
+          current_block_height = await this.getCurrentBlockHeight();
+          console.log(`block_height = ${block_height} | current block height = ${current_block_height}`);
+          if (block_height === current_block_height && block_height !== 0)
+          {
+            break;
+          }
+          else
+          {
+            await this.sleep(30000);
+          }
+        }
+      }
 
       await this.getPostRequestDataNoErrors(CLOSE_WALLET_URL);
       await this.sleep(20000);
@@ -104,7 +126,7 @@ export class RpcCallsService {
     {
       // close the wallet if it is already running
       console.log("Closing window");
-      await this.closeWallet();
+      await this.closeWallet(0);
 
       // open the wallet in create wallet mode
       exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${__dirname}/../" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
@@ -117,7 +139,7 @@ export class RpcCallsService {
     
       // close the wallet
       console.log("Closing window");
-      await this.closeWallet();
+      await this.closeWallet(1);
 
       // start the wallet
       exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
@@ -127,7 +149,7 @@ export class RpcCallsService {
 
       // close the wallet
       console.log("Closing window");
-      await this.closeWallet();
+      await this.closeWallet(0);
 
       this.wallet_status = true;
 
@@ -140,29 +162,30 @@ export class RpcCallsService {
 
   public async importWallet(walletData:any): Promise<object> {
     // Constants
-    const IMPORT_WALLET_DATA:string = `{"version":1,"filename":"${__dirname}/../${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","seed":"${walletData.seed}"}`;
-    const IMPORT_WALLET_FILE:string = "importwallet.txt";
+    const IMPORT_WALLET_DATA:string = walletData.seed != "" ? `{"version":1,"filename":"${__dirname}/../${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","seed":"${walletData.seed}"}` : `{"version":1,"filename":"${__dirname}/../${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","address":"${walletData.publicaddress}","viewkey":"${walletData.viewkey}","spendkey":"${walletData.privatekey}"}`;
+    const IMPORT_WALLET_FILE:string = `${__dirname}/../importwallet.txt`;
 
     return new Promise(async(resolve, reject) => {
     try
     {
       // close the wallet if it is already running
       console.log("Closing window");
-      await this.closeWallet();
+      await this.closeWallet(0);
 
       // create the importwallet.txt file
       fs.writeFileSync(IMPORT_WALLET_FILE, IMPORT_WALLET_DATA);
       await this.sleep(10000);
 
       // open the wallet in import mode
-      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${__dirname}/../${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      console.log(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
  
       // at this point the wallet will try to sync if we let it
     
       // close the wallet
       console.log("Closing window");
-      await this.closeWallet();
+      await this.closeWallet(1);
 
       // start the wallet
       exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${walletData.walletName}"" --daemon-address "${this.Remote_Node}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
@@ -171,7 +194,7 @@ export class RpcCallsService {
       let balance:number = await this.getBalance();
 
       // close the wallet
-      await this.closeWallet();
+      await this.closeWallet(0);
 
       // delete the importwallet.txt file
       fs.unlinkSync(IMPORT_WALLET_FILE);
@@ -180,7 +203,11 @@ export class RpcCallsService {
 
       resolve({"public_address":publicAddress,"balance":balance});
     } catch (error) {
-    reject({"status":"error"});
+      if (fs.existsSync(IMPORT_WALLET_FILE))
+      {
+        fs.unlinkSync(IMPORT_WALLET_FILE);
+      }
+    reject({"status":error});
     }
     });
   }
@@ -190,7 +217,7 @@ export class RpcCallsService {
     return new Promise(async (resolve, reject) => {
       try
       {
-        exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../"${this.currentWalletName}"" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+        exec(`"${__dirname}/../"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${__dirname}/../${this.currentWalletName}" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
         await this.sleep(20000);
         let publicAddress:string = await this.getPublicAddress();
         if (publicAddress.substr(0,3) != "XCA")
@@ -278,12 +305,13 @@ export class RpcCallsService {
    return new Promise(async(resolve, reject) => {
    try
    {
-     data = await this.getPostRequestData(URL);
+     data = await this.getPostRequestDataNoErrors(URL);
+     console.log(data);
      resolve(data.result.height);
    }
    catch(error)
    {
-    try {reject(data.error.message);}catch(error){reject();}
+    resolve(0);
    }
   });
   }

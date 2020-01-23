@@ -45,7 +45,7 @@
         <div class="d-flex align-items-center">
           <!-- XCASH amount entry -->
           <div class="input-group">
-            <input type="text" class="form-control" id="amount" placeholder="Enter amount" formControlName="amount" [ngClass]="{'is-invalid': (amount.dirty || amount.touched) && amount.invalid, 'is-valid': (amount.dirty || amount.touched) && !amount.invalid}">
+            <input type="text" class="form-control" (focus)="send_settings = 0;" id="amount" placeholder="Enter amount" [value]="data1" formControlName="amount" [ngClass]="{'is-invalid': (amount.dirty || amount.touched) && amount.invalid, 'is-valid': (amount.dirty || amount.touched) && !amount.invalid}" [value]="send_xcash_amount_number | number:'1.0-6'" #send_xcash_amount>
             <div class="input-group-append">
               <span class="input-group-text">XCASH</span>
             </div>
@@ -55,7 +55,7 @@
           
           <!-- Readonly USD converter - Should be implemented with a service that returns xcash value in usd -->
           <div class="input-group">
-            <input type="text" class="form-control" id="amount-usd" [value]="amount?.value * USDforXCASH | number:'1.8-8'" readonly>
+            <input type="text" class="form-control" (focus)="send_settings = 1;" id="amount-usd" placeholder="Enter amount" [ngClass]="{'is-invalid': (amount.dirty || amount.touched) && amount.invalid, 'is-valid': (amount.dirty || amount.touched) && !amount.invalid}" [value]="send_usd_amount_number | number:'1.8-8'" #send_usd_amount>
             <div class="input-group-append">
               <span class="input-group-text">USD</span>
             </div>

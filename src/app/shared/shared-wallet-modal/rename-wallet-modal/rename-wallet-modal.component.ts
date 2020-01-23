@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { WalletListService } from 'src/app/services/wallet-list.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { ActionsService } from 'src/app/services/actions.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-rename-wallet-modal',
@@ -13,7 +13,7 @@ import { ActionsService } from 'src/app/services/actions.service';
 export class RenameWalletModalComponent implements OnInit {
   @ViewChild('renameWalletModal', { static: true }) renameWalletModal: UiModalComponent;
 
-  constructor(private actionsService: ActionsService, private validatorRegexService: ValidatorsRegexService) { }
+  constructor(private actionsService: ActionsService, private validatorRegexService: ValidatorsRegexService, private DatabaseService: DatabaseService) { }
 
   renameWalletForm = new FormGroup({
     newName: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.text_settings)])
@@ -33,9 +33,10 @@ export class RenameWalletModalComponent implements OnInit {
     this.renameWalletModal.show();
   }
 
-  onSubmitRenameWalletForm() {
+  async onSubmitRenameWalletForm() {
     if (this.renameWalletForm.valid) {
       this.actionsService.renameWallet(this.walletIdToRename, this.newName.value);
+      await this.DatabaseService.editWalletData({"id":this.walletIdToRename,"name":this.newName.value});
       this.renameWalletModal.hide();
     } else {
       this.newName.markAsTouched();

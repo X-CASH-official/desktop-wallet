@@ -25,7 +25,7 @@ export class WalletListService {
     }
     catch (error)
     {
-
+      
     }
   }
 

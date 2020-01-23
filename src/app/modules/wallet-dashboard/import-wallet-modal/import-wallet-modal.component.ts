@@ -14,7 +14,7 @@ export class ImportWalletModalComponent implements OnInit {
 
   constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
-  Walletdata:any = {"walletName":"walletName","password":"password","seed":"seed"};
+  Walletdata:any = {"walletName":"walletName","password":"password","seed":"","viewkey":"","privatekey":"","publicaddress":""};
   data:string;
 
   activeTab = 'mnemonicSeedTab';
@@ -31,10 +31,18 @@ export class ImportWalletModalComponent implements OnInit {
   }
 
   importPrivateSendKeyForm = new FormGroup({
+    viewKey: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.private_key)]),
     privateSendKey: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.private_key)]),
+    publicaddress: new FormControl('', [Validators.required, Validators.pattern(this.validatorRegexService.xcash_address)]),
   });
   get privateSendKey() {
     return this.importPrivateSendKeyForm.get('privateSendKey');
+  }
+  get viewKey() {
+    return this.importPrivateSendKeyForm.get('viewKey');
+  }
+  get publicaddress() {
+    return this.importPrivateSendKeyForm.get('publicaddress');
   }
   
   ngOnInit() {
@@ -56,7 +64,9 @@ export class ImportWalletModalComponent implements OnInit {
 
   onSubmitPrivateSendKey() {
     if (this.importPrivateSendKeyForm.valid) {
-      console.log(this.privateSendKey.value);
+      this.Walletdata.privatekey = this.privateSendKey.value;
+      this.Walletdata.viewkey = this.viewKey.value;
+      this.Walletdata.publicaddress = this.publicaddress.value;
       this.importWalletModal1.hide();
       this.importWalletModal2.show();
     } else {
@@ -83,7 +93,8 @@ export class ImportWalletModalComponent implements OnInit {
     catch (error)
     {
       this.data = error;
-      this.importWalletModalError.show();
+      this.RpcCallsService.sleep(5000);
+      this.importWalletModalError.hide();
     }
 
   }

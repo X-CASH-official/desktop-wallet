@@ -43,14 +43,14 @@ export class DatabaseService {
 
       if (wallet_count === DATABASE_DATA.wallet_data.length)
       {
-        reject();
+        reject(0);
       }
       else
       {
         resolve(wallet_count);
       }
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -103,7 +103,7 @@ export class DatabaseService {
         
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -154,7 +154,7 @@ export class DatabaseService {
         
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -222,7 +222,7 @@ export class DatabaseService {
         
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -237,7 +237,7 @@ export class DatabaseService {
       
       resolve(DATABASE_DATA.wallet_data[WALLET_COUNT].sub_address_count);
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -257,7 +257,7 @@ export class DatabaseService {
       
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -271,7 +271,7 @@ export class DatabaseService {
       
       resolve(DATABASE_DATA.wallet_settings.remote_node);
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -288,7 +288,7 @@ export class DatabaseService {
       
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -337,7 +337,52 @@ export class DatabaseService {
         
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
+    }
+   });
+  }
+
+  public async editWalletData(data:any): Promise<any> {
+    return new Promise(async(resolve, reject) => {
+    try
+    { 
+      // update the data in the database
+      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+      let wallet_name = database_data.wallet_data[data.id].wallet_name;
+      database_data.wallet_data[data.id].wallet_name = data.name;
+      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+      // update the wallet files
+      fs.renameSync(`${__dirname}/../${wallet_name}`,`${__dirname}/../${data.name}`);
+      fs.renameSync(`${__dirname}/../${wallet_name}.keys`,`${__dirname}/../${data.name}.keys`);
+        
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+   });
+  }
+
+  public async deleteWalletData(id:number, settings:boolean): Promise<any> {
+    return new Promise(async(resolve, reject) => {
+    try
+    { 
+      // update the data in the database
+      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+      let wallet_name = database_data.wallet_data[id].wallet_name;
+      database_data.wallet_data.splice(id, 1);
+      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+      // update the wallet files
+      if (settings === true)
+      {
+        fs.unlinkSync(`${__dirname}/../${wallet_name}`);
+        fs.unlinkSync(`${__dirname}/../${wallet_name}.keys`);
+      }
+
+      resolve();
+    } catch (error) {
+      reject(error);
     }
    });
   }
@@ -357,7 +402,7 @@ export class DatabaseService {
       
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -405,7 +450,7 @@ export class DatabaseService {
         
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
@@ -416,42 +461,17 @@ export class DatabaseService {
     { 
       // Variables
       let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
-          database_data.contact_data[data.id].name = data.name;
-          database_data.contact_data[data.id].public_address = data.public_address;
+      database_data.contact_data[data.id].name = data.name;
+      database_data.contact_data[data.id].public_address = data.public_address;
 
       fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
         
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }
-
-  /*public async deleteContacts(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    { 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
-      let count = 0;
-
-      database_data.contact_data.forEach((item) => { 
-        if (item.public_address === data.public_address)
-        {
-          database_data.contact_data.splice(count, 1);
-        }
-        count++;
-        });
-
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject();
-    }
-   });
-  }*/
 
   public async deleteContacts(id:number): Promise<any> {
     return new Promise(async(resolve, reject) => {
@@ -464,7 +484,7 @@ export class DatabaseService {
         
       resolve();
     } catch (error) {
-      reject();
+      reject(error);
     }
    });
   }

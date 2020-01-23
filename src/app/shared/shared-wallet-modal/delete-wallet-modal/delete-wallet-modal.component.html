@@ -49,7 +49,7 @@
   
   <div class="app-modal-footer">
     <button type="submit" class="btn btn-secondary text-center" (click)="deleteWalletModal2a.hide()">Cancel</button>
-    <button type="submit" class="btn btn-danger text-center" (click)="onRemoveWallet(); deleteWalletModal2a.hide()">Remove wallet</button>
+    <button type="submit" class="btn btn-danger text-center" (click)="onRemoveWallet(false); deleteWalletModal2a.hide()">Remove wallet</button>
   </div>
 </app-ui-modal>
 
@@ -71,6 +71,6 @@
   
   <div class="app-modal-footer">
     <button type="submit" class="btn btn-secondary text-center" (click)="deleteWalletModal2b.hide()">Cancel</button>
-    <button type="submit" class="btn btn-danger btn-glow-danger text-center" (click)="deleteWalletModal2b.hide()">Delete wallet</button>
+    <button type="submit" class="btn btn-danger btn-glow-danger text-center" (click)="onRemoveWallet(true); deleteWalletModal2b.hide()">Delete wallet</button>
   </div>
 </app-ui-modal>

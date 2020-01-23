@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
@@ -25,6 +25,9 @@ export class WalletSendModalComponent implements OnInit {
   fee:number;
   total:number;
   tx:any = {};
+  send_settings:number;
+  send_usd_amount_number:number = 0;
+  send_xcash_amount_number:number = 0;
 
   constructor(private validatorsRegexService: ValidatorsRegexService, 
     private contactListService: ContactListService, 
@@ -39,6 +42,8 @@ export class WalletSendModalComponent implements OnInit {
   @ViewChild('sendConfirmationModal', { static: true }) sendConfirmationModal: UiModalComponent;
   @ViewChild('sendPaymentModalError', { static: true }) sendPaymentModalError: UiModalComponent;
   @ViewChild('sendPaymentModalSuccess', { static: true }) sendPaymentModalSuccess: UiModalComponent;
+  @ViewChild('send_xcash_amount', {static: true}) send_xcash_amount: ElementRef;
+  @ViewChild('send_usd_amount', {static: true}) send_usd_amount: ElementRef;
 
   sendForm = new FormGroup({
     recipient: new FormControl('', [Validators.required, Validators.pattern(this.validatorsRegexService.xcash_address)]),
@@ -67,6 +72,16 @@ export class WalletSendModalComponent implements OnInit {
     this.contactListSubscription = this.contactListService.getContactList().subscribe(contacts => {
       this.contacts = contacts;
     });
+    setInterval(() => {  
+      if (this.send_settings === 0)   
+      {
+        this.send_usd_amount_number = this.send_xcash_amount.nativeElement.value * this.USDforXCASH;
+      } 
+      else if (this.send_settings === 1)   
+      {
+        this.send_xcash_amount_number = this.send_usd_amount.nativeElement.value / this.USDforXCASH;
+      }
+    },100);
   }
 
   ngOnDestroy() {

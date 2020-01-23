@@ -31,13 +31,29 @@
           <ng-template ngbTabContent>
             <form [formGroup]="importPrivateSendKeyForm" id="importPrivateSendKeyForm" (ngSubmit)="onSubmitPrivateSendKey()">
               <div class="form-group">
-                <label for="import-private-send-key">Private send key restore</label>
+                <label for="import-private-send-key">Private key restore</label>
                 <textarea (keydown.enter)="onSubmitPrivateSendKey();false" style="resize: none;" class="form-control text-monospace" id="import-private-send-key" rows="2" placeholder="Enter your private send key" formControlName="privateSendKey" [ngClass]="{'is-invalid': (privateSendKey.dirty || privateSendKey.touched) && privateSendKey.invalid, 'is-valid': (privateSendKey.dirty || privateSendKey.touched) && !privateSendKey.invalid}"></textarea>
                 <div *ngIf="(privateSendKey.dirty || privateSendKey.touched) && privateSendKey.invalid">
-                  <small class="form-text text-danger" *ngIf="privateSendKey.errors.required">The private send key is required.</small>
-                  <small class="form-text text-danger" *ngIf="privateSendKey.errors.pattern">The private send key is a string of 64 hexadecimal characters.</small>
+                  <small class="form-text text-danger" *ngIf="privateSendKey.errors.required">The private key is required.</small>
+                  <small class="form-text text-danger" *ngIf="privateSendKey.errors.pattern">The private key is a string of 64 hexadecimal characters.</small>
                 </div>
-                <small id="import-mnemonic-seed-help" class="form-text text-muted">The private send key is a string of 64 hexadecimal characters.</small>
+                <small id="import-mnemonic-seed-help" class="form-text text-muted">The private key is a string of 64 hexadecimal characters.</small>
+                <br><br>
+                <label for="import-view-key">View key restore</label>
+                <textarea (keydown.enter)="onSubmitViewKey();false" style="resize: none;" class="form-control text-monospace" id="import-view-key" rows="2" placeholder="Enter your view key" formControlName="viewKey" [ngClass]="{'is-invalid': (viewKey.dirty || viewKey.touched) && viewKey.invalid, 'is-valid': (viewKey.dirty || viewKey.touched) && !viewKey.invalid}"></textarea>
+                <div *ngIf="(viewKey.dirty || viewKey.touched) && viewKey.invalid">
+                  <small class="form-text text-danger" *ngIf="viewKey.errors.required">The view key is required.</small>
+                  <small class="form-text text-danger" *ngIf="viewKey.errors.pattern">The view key is a string of 64 hexadecimal characters.</small>
+                </div>
+                <small id="import-mnemonic-seed-help" class="form-text text-muted">The view key is a string of 64 hexadecimal characters.</small>
+                <br><br>
+                <label for="import-view-key">Public address restore</label>
+                <textarea (keydown.enter)="onSubmitpublicaddress();false" style="resize: none;" class="form-control text-monospace" id="import-publicaddress" rows="2" placeholder="Enter your public address" formControlName="publicaddress" [ngClass]="{'is-invalid': (publicaddress.dirty || publicaddress.touched) && publicaddress.invalid, 'is-valid': (publicaddress.dirty || publicaddress.touched) && !publicaddress.invalid}"></textarea>
+                <div *ngIf="(publicaddress.dirty || publicaddress.touched) && publicaddress.invalid">
+                  <small class="form-text text-danger" *ngIf="publicaddress.errors.required">The public address is required.</small>
+                  <small class="form-text text-danger" *ngIf="publicaddress.errors.pattern">The public address starts with "XCA".</small>
+                </div>
+                <small id="import-mnemonic-seed-help" class="form-text text-muted">The public address starts with "XCA".</small>
               </div>
             </form>
           </ng-template>
@@ -46,7 +62,7 @@
         <ngb-tab title="Key file" id="keyFileTab">
           <ng-template ngbTabContent>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" i d="validatedCustomFile" required>
+              <input type="file" class="custom-file-input" id="validatedCustomFile" #file required>
               <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
               <small id="import-private-key-help" class="form-text text-muted">This is not implemented yet.</small>
             </div>
@@ -72,6 +88,7 @@
   <div class="app-modal-body">
     
     {{data}}
+    <br><br>
     <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
       </div>

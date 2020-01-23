@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionsService } from 'src/app/services/actions.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-delete-wallet-modal',
@@ -12,7 +13,7 @@ export class DeleteWalletModalComponent implements OnInit {
 
   walletIdToDelete: number;
 
-  constructor(private actionsService: ActionsService, private router: Router) { }
+  constructor(private actionsService: ActionsService, private router: Router, private DatabaseService: DatabaseService) { }
 
   ngOnInit() {
   }
@@ -22,11 +23,12 @@ export class DeleteWalletModalComponent implements OnInit {
     this.deleteWalletModal1.show();
   }
 
-  onRemoveWallet() {
+  async onRemoveWallet(settings:boolean) {
     if (this.router.url.startsWith('/wallet-dashboard/wallet/')) {
       this.router.navigate(['/wallet-dashboard']);
     }
     this.actionsService.removeWallet(this.walletIdToDelete);
+    await this.DatabaseService.deleteWalletData(this.walletIdToDelete, settings);
   }
 
 }
