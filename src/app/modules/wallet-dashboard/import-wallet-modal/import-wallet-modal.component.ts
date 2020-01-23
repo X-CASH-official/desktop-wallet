@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorsRegexService } from 'src/app/services/validators-regex.service';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 import { DatabaseService } from 'src/app/services/database.service';
+import { WalletListService } from 'src/app/services/wallet-list.service';
 
 @Component({
   selector: 'app-import-wallet-modal',
@@ -12,7 +13,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class ImportWalletModalComponent implements OnInit {
 
-  constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
+  constructor(private validatorRegexService: ValidatorsRegexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService, private walletListService: WalletListService) { }
 
   Walletdata:any = {"walletName":"walletName","password":"password","seed":"","viewkey":"","privatekey":"","publicaddress":""};
   data:string;
@@ -89,6 +90,7 @@ export class ImportWalletModalComponent implements OnInit {
 
       // save the wallet to the database
       await this.DatabaseService.saveWalletData({"wallet_name":this.Walletdata.walletName,"public_address":data.public_address,"balance":data.balance});
+      this.walletListService.addWallet(this.Walletdata.walletName,data.public_address,data.balance);
     }
     catch (error)
     {
