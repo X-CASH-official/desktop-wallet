@@ -18,8 +18,16 @@ export class WalletComponent implements OnInit {
   @ViewChild('wallet_password', {static: true}) wallet_password: ElementRef;
   @ViewChild('openwalletmodal', { static: true }) openwalletmodal: UiModalComponent;
   @ViewChild('openwalletloadingmodal', { static: true }) openwalletloadingmodal: UiModalComponent;
+  @ViewChild('wallet_password_view_private_keys', {static: true}) wallet_password_view_private_keys: ElementRef;
+  @ViewChild('confirmopenwalletmodal', { static: true }) confirmopenwalletmodal: UiModalComponent;
+  @ViewChild('viewprivatekeyswalletmodal', { static: true }) viewprivatekeyswalletmodal: UiModalComponent;
+  @ViewChild('current_wallet_password', {static: true}) current_wallet_password: ElementRef;
+  @ViewChild('new_wallet_password', {static: true}) new_wallet_password: ElementRef;
+  @ViewChild('changepasswordmodal', { static: true }) changepasswordmodal: UiModalComponent;
+  @ViewChild('changepasswordstatusmodal', { static: true }) changepasswordstatusmodal: UiModalComponent;
   
   selectedWallet: number;
+  privatekeys:any = {"seed":"","viewkey":"","spendkey":""};
   
   constructor(private router: Router, private walletListService: WalletListService, private xcashPriceIndexService: XcashPriceIndexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) {
     if (this.router.getCurrentNavigation().extras.state) {
@@ -35,6 +43,7 @@ export class WalletComponent implements OnInit {
   xcashPriceIndexSub: Subscription;
   USDforXCASH: number;
   data:string = "Open Wallet";
+  changepassworddata:string = "";
 
   
  ngOnInit() {
@@ -87,6 +96,42 @@ export class WalletComponent implements OnInit {
         console.error("Could not reach CoinGecko for XCASH price index in USD.", err);
       }
     )
+  }
+
+  async viewprivatekeys()
+  {
+    try
+    {
+      await this.RpcCallsService.changePassword(this.wallet_password_view_private_keys.nativeElement.value,this.wallet_password_view_private_keys.nativeElement.value);
+      this.privatekeys = await this.RpcCallsService.getPrivateKeys();
+      this.confirmopenwalletmodal.hide();
+      this.viewprivatekeyswalletmodal.show();
+      this.wallet_password_view_private_keys.nativeElement.value = "";
+    }
+    catch(error)
+    {
+      this.wallet_password_view_private_keys.nativeElement.value = "Invalid Password";
+    }
+  }
+
+  async changepassword()
+  {
+    try
+    {
+      await this.RpcCallsService.changePassword(this.current_wallet_password.nativeElement.value,this.new_wallet_password.nativeElement.value);
+      this.changepassworddata = "The password was successfully changed";
+    }
+    catch(error)
+    {
+      this.changepassworddata = "The password could not be changed";
+    }
+    finally
+    {
+      this.changepasswordmodal.hide();
+      this.changepasswordstatusmodal.show();
+      this.current_wallet_password.nativeElement.value = "";
+      this.new_wallet_password.nativeElement.value = "";
+    }
   }
 
   ngOnDestroy() {

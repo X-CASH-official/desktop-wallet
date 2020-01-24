@@ -24,8 +24,8 @@
       <!-- Wallet basic functionnalities navbar -->
       <div class="d-flex flex-column">
         <button class="btn btn-success mr-0 px-4 text-left" type="button" (click)="sendModal.show()"><i style="transform: scaleX(-1);" class="fas fa-reply"></i> Send</button>
-        <button class="btn btn-primary mr-0 text-left" type="button" (click)="renameWalletModal.show(walletData?.id)"><i class="feather icon-edit"></i> Rename</button>
-        <button class="btn btn-danger m-0 text-left" type="button" (click)="deleteWalletModal.show(walletData?.id)"><i class="feather icon-trash-2"></i> Delete</button>
+        <button class="btn btn-primary mr-0 text-left" type="button" (click)="confirmopenwalletmodal.show()"><i class="feather icon-edit"></i> View Private Keys</button>
+        <button class="btn btn-primary mr-0 text-left" type="button" (click)="changepasswordmodal.show()"><i class="feather icon-edit"></i> Change Password</button>
       </div>
       
     </div>
@@ -97,5 +97,100 @@
     
     <div class="app-modal-footer">
      
+    </div>
+  </app-ui-modal>
+
+
+
+  <app-ui-modal #confirmopenwalletmodal dialogClass="modal-dialog-centered" containerClick="false">
+    <div class="app-modal-header">
+      
+      <h5 class="modal-title">Confirm Password</h5>
+      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="confirmopenwalletmodal.hide()"><span aria-hidden="true">&times;</span></button>
+      
+    </div>
+    <div class="app-modal-body">
+          
+     
+       
+          <label >Password</label>
+          <input type="text" class="form-control" placeholder="Enter wallet password" #wallet_password_view_private_keys>
+      
+    </div>
+    <div class="app-modal-footer">      
+        <button class="btn btn-success text-center" (click)="viewprivatekeys();">View Private Keys</button>
+    </div>
+  </app-ui-modal>
+  
+  
+  
+  <app-ui-modal #viewprivatekeyswalletmodal dialogClass="modal-dialog-centered" containerClick="false">
+    <div class="app-modal-header">
+      
+      <h5 class="modal-title">Private Keys</h5>
+      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="viewprivatekeyswalletmodal.hide()"><span aria-hidden="true">&times;</span></button>
+      
+    </div>
+    <div class="app-modal-body">
+      
+      <label >Private View Key</label>
+      <p style="word-wrap: break-word">{{privatekeys.viewkey}}</p>
+     <br><br> 
+     
+     <label >Private Spend Key</label>
+      <p style="word-wrap: break-word">{{privatekeys.spendkey}}</p>
+     <br><br> 
+  
+     <label >Mnemonic Seed</label>
+      <p style="word-wrap: break-word">{{privatekeys.seed}}</p>
+     <br><br> 
+    </div>
+    
+    <div class="app-modal-footer">
+     
+    </div>
+  </app-ui-modal>
+
+
+
+  <app-ui-modal #changepasswordmodal dialogClass="modal-dialog-centered" containerClick="false">
+    <div class="app-modal-header">
+      
+      <h5 class="modal-title">Change Password</h5>
+      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="changepasswordmodal.hide()"><span aria-hidden="true">&times;</span></button>
+      
+    </div>
+    <div class="app-modal-body">
+          
+     
+       
+          <label >Current Password</label>
+          <input type="text" class="form-control" placeholder="Enter wallet password" #current_wallet_password>
+
+          <label >New Password</label>
+          <input type="text" class="form-control" placeholder="Enter wallet password" #new_wallet_password>
+      
+    </div>
+    <div class="app-modal-footer">      
+        <button class="btn btn-success text-center" (click)="changepassword();">Change Password</button>
+    </div>
+  </app-ui-modal>
+
+
+
+  <app-ui-modal #changepasswordstatusmodal dialogClass="modal-dialog-centered" containerClick="false">
+    <div class="app-modal-header">
+      
+      <h5 class="modal-title">Change Password Status</h5>
+      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="changepasswordstatusmodal.hide()"><span aria-hidden="true">&times;</span></button>
+      
+    </div>
+    <div class="app-modal-body">
+      
+     {{changepassworddata}}
+    </div>
+    
+    <div class="app-modal-footer">
+      <button class="btn btn-primary text-center" (click)="changepasswordstatusmodal.hide()">Close</button>
     </div>
   </app-ui-modal>

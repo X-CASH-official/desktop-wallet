@@ -358,46 +358,54 @@ export class RpcCallsService {
   });
   }
 
-  public async getViewKey(): Promise<string>  {
-    // Constants
-    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"view_key"}}';
-
-    // Variables
-    let data;
-
+  public async getPrivateKeys(): Promise<any> {
     return new Promise(async(resolve, reject) => {
-
+      // Variables
+      let privatekeys:any = {"seed":"","viewkey":"","spendkey":""};
+      let data;
       try
       {
-      data = await this.getPostRequestData(URL);
-      resolve(data.result.key);
-    }
-    catch(error)
-    {
-      try {reject(data.error.message);}catch(error){reject();}
-    }
-  });
+        data = await this.getPostRequestData('{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"mnemonic"}}');
+        privatekeys.seed = data.result.key;
+        data = await this.getPostRequestData('{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"view_key"}}');
+        privatekeys.viewkey = data.result.key;
+        data = await this.getPostRequestData('{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"spend_key"}}');
+        privatekeys.spendkey = data.result.key;
+        resolve(privatekeys);
+      }
+      catch(error)
+      {
+        reject();
+      }
+    });
   }
 
-  public async getSpendKey(): Promise<string> {
-    // Constants
-    const URL:string = '{"jsonrpc":"2.0","id":"0","method":"query_key","params":{"key_type":"mnemonic"}}';
+  public async changePassword(currentpassword:string, newpassword:string): Promise<string> {
+   // Constants
+   const URL:string = `{"jsonrpc":"2.0","id":"0","method":"change_wallet_password","params":{"old_password":"${currentpassword}","new_password":"${newpassword}"}}`;
 
-    // Variables
-    let data;
+   // Variables
+   let data;
 
-    return new Promise(async(resolve, reject) => {
+   return new Promise(async(resolve, reject) => {
 
-      try
-      {
-      data = await this.getPostRequestData(URL);
-      resolve(data.result.key);
-    }
-    catch(error)
-    {
-      try {reject(data.error.message);}catch(error){reject();}
-    }
-  });
+     try
+     {
+     data = await this.getPostRequestData(URL);
+     if (JSON.stringify(data).includes("error"))
+     {
+      reject(data.error.message);
+     }
+     else
+     {
+       resolve();
+     }
+   }
+   catch(error)
+   {
+     reject();
+   }
+ });
   }
 
   public async getTxKey(txid:string): Promise<string> {
