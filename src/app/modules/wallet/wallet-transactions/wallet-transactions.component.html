@@ -8,33 +8,35 @@
 [dataSource]="dataSource" multiTemplateDataRows
 class="mat-elevation-z8">
 
+<caption>Transaction List</caption>
+
 <!-- Transaction Column -->
 <ng-container matColumnDef="id" >
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+  <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
   <td mat-cell *matCellDef="let transaction"> {{transaction.id}} </td>
 </ng-container>
 
 <!-- Amount Column -->
 <ng-container matColumnDef="amount">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+  <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
   <td mat-cell *matCellDef="let transaction"> {{transaction.amount | xcash}}</td>
 </ng-container>
 
 <!-- Recipient Column -->
 <ng-container matColumnDef="Transaction ID">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction ID </th>
+  <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Transaction ID </th>
   <td mat-cell *matCellDef="let transaction"> {{transaction.txid | xcashPublicAddress:15 }} </td>
 </ng-container>
 
 <!-- Type Column -->
 <ng-container matColumnDef="Transaction Type">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Type </th>
+  <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Type </th>
   <td mat-cell *matCellDef="let transaction"> {{transaction.transactionType}} </td>
 </ng-container>
 
 <!-- Date Column -->
 <ng-container matColumnDef="date">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+  <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
   <td mat-cell *matCellDef="let transaction"> {{transaction.date | date:'medium'}} </td>
 </ng-container>
 

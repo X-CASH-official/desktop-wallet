@@ -1,5 +1,5 @@
 <ng-container *ngIf="!item.hidden">
-  <li class="nav-item pcoded-menu-caption"><label>{{item.title}}</label></li>
+ <ul> <li class="nav-item pcoded-menu-caption"><label>{{item.title}}</label></li></ul>
   <ng-container *ngFor="let item of item.children">
     <app-nav-group *ngIf="item.type=='group'" [item]="item"></app-nav-group>
     <app-nav-collapse *ngIf="item.type=='collapse'" [item]="item"></app-nav-collapse>

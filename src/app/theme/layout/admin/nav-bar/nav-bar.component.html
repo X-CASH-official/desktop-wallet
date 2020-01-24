@@ -3,12 +3,12 @@
     <a class="mobile-menu" id="mobile-collapse1" href="javascript:" (click)="this.onNavCollapsedMob.emit();"><span></span></a>
     <a [routerLink]="['/dashboard/default']" class="b-brand">
       <div>
-        <img src="assets/images/xcash_logo.png" width="35px" height="35px">
+        <img src="assets/images/xcash_logo.png" alt="xcash logo" width="35px" height="35px">
       </div>
       <span class="b-title">X-CASH</span>
     </a>
   </div>
-  <a class="mobile-menu" [ngClass]="{'on' : this.menuClass}" id="mobile-header" href="javascript:" (click)="toggleMobOption()"><i class="feather icon-more-horizontal"></i></a>
+  <a class="mobile-menu" [ngClass]="{'on' : this.menuClass}" id="mobile-header" href="javascript:" (click)="toggleMobOption()"><em class="feather icon-more-horizontal"></em></a>
   <div class="collapse navbar-collapse" [style.display]="this.collapseStyle">
     <app-nav-left class="mr-auto" [style.display]="this.headerStyle"></app-nav-left>
     <app-nav-right class="ml-auto"></app-nav-right>

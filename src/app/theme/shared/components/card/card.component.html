@@ -4,14 +4,14 @@
     <div class="card-header-right" *ngIf="this.options && !customHeader">
       <div class="btn-group card-option dropdown" ngbDropdown>
         <button type="button" class="btn dropdown-toggle btn-icon" ngbDropdownToggle>
-          <i class="feather icon-more-horizontal"></i>
+          <em class="feather icon-more-horizontal"><</em>
         </button>
         <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-          <li class="dropdown-item full-card" (click)="fullCardToggle(toAnimate, '', true)"><a href="javascript:"><span><i class="feather" [ngClass]="fullIcon"></i> {{this.cardClass === 'full-card' ? 'Restore' : 'Maximize'}}</span></a></li>
-          <li class="dropdown-item minimize-card" (click)="collapsedCardToggle($event)"><a href="javascript:"><span><i class="feather" [ngClass]="collapsedIcon"></i> {{this.collapsedCard === 'collapsed' ? 'Expand' : 'Collapse'}} </span>
-            <span style="display:none"><i class="feather icon-plus"></i></span></a></li>
-          <li class="dropdown-item reload-card" (click)="cardRefresh($event)"><a href="javascript:"><i class="feather icon-refresh-cw"></i> Reload</a></li>
-          <li class="dropdown-item close-card" (click)="cardRemoveAction()"><a href="javascript:"><i class="feather icon-trash"></i> Remove</a></li>
+          <li class="dropdown-item full-card" (click)="fullCardToggle(toAnimate, '', true)"><a href="javascript:"><span><em class="feather" [ngClass]="fullIcon"><</em> {{this.cardClass === 'full-card' ? 'Restore' : 'Maximize'}}</span></a></li>
+          <li class="dropdown-item minimize-card" (click)="collapsedCardToggle($event)"><a href="javascript:"><span><em class="feather" [ngClass]="collapsedIcon"><</em> {{this.collapsedCard === 'collapsed' ? 'Expand' : 'Collapse'}} </span>
+            <span style="display:none"><em class="feather icon-plus"><</em></span></a></li>
+          <li class="dropdown-item reload-card" (click)="cardRefresh($event)"><a href="javascript:"><em class="feather icon-refresh-cw"><</em> Reload</a></li>
+          <li class="dropdown-item close-card" (click)="cardRemoveAction()"><a href="javascript:"><em class="feather icon-trash"><</em> Remove</a></li>
         </ul>
       </div>
     </div>
@@ -22,5 +22,5 @@
       <ng-content></ng-content>
     </div>
   </div>
-  <div class="card-loader" *ngIf="loadCard"><i class="pct-loader1 anim-rotate"></i></div>
+  <div class="card-loader" *ngIf="loadCard"><em class="pct-loader1 anim-rotate"><</em></div>
 </div>

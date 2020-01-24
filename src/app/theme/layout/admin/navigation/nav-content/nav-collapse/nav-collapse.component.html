@@ -1,19 +1,23 @@
 <ng-container *ngIf="!item.hidden">
+  <ul>
   <li *ngIf="themeLayout === 'horizontal'" (mouseenter)="navCollapse($event)" data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item pcoded-hasmenu" [routerLinkActive]="['active']">
     <a [routerLinkActive]="['active']" href="javascript:" class="nav-link">
       <ng-container *ngTemplateOutlet="itemContent"></ng-container>
     </a>
     <ng-container *ngTemplateOutlet="subMenuContent"></ng-container>
   </li>
+  </ul>
+  <ul>
   <li *ngIf="themeLayout === 'vertical'" data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item pcoded-hasmenu" [routerLinkActive]="['active']">
     <a [routerLinkActive]="['active']" href="javascript:" class="nav-link" (click)="navCollapse($event)">
       <ng-container *ngTemplateOutlet="itemContent"></ng-container>
     </a>
     <ng-container *ngTemplateOutlet="subMenuContent"></ng-container>
   </li>
+  </ul>
   <ng-template #itemContent>
       <span class="pcoded-micon" *ngIf="item.icon">
-        <i class="{{item.icon}}"></i>
+        <em class="{{item.icon}}"></em>
       </span>
     <span class="pcoded-mtext">{{item.title}}</span>
     <span *ngIf="item.badge" class="pcoded-badge label" [ngClass]="item.badge.type">

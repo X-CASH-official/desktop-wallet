@@ -13,7 +13,7 @@
 }
 
 [data-icon]:before {
-  font-family: "pct" !important;
+  font-family: "pct", Serif !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -27,7 +27,7 @@
 
 [class^="pct-"]:before,
 [class*=" pct-"]:before {
-  font-family: "pct" !important;
+  font-family: "pct", Serif !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;

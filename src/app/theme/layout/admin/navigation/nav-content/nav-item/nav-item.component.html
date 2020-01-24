@@ -1,5 +1,5 @@
 <ng-container *ngIf="!item.hidden">
-  <li [ngClass]="item.classes" *ngIf="item.url && !item.external" [routerLinkActive]="['active']">
+  <ul><li [ngClass]="item.classes" *ngIf="item.url && !item.external" [routerLinkActive]="['active']">
     <a class="nav-link" [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]" (click)="closeOtherMenu($event)">
       <ng-container *ngTemplateOutlet="itemIcon"></ng-container>
       <span class="pcoded-mtext" *ngIf="item.icon; else directTitle">{{ item.title }}</span>
@@ -9,7 +9,8 @@
       <ng-container *ngTemplateOutlet="itemBadge"></ng-container>
     </a>
   </li>
-  <li [ngClass]="item.classes" *ngIf="item.url && item.external">
+  </ul>
+  <ul> <li [ngClass]="item.classes" *ngIf="item.url && item.external">
     <a [target]="item.target ? '_blank' : '_self'" [href]="item.url">
       <ng-container *ngTemplateOutlet="itemIcon"></ng-container>
       <span class="pcoded-mtext" *ngIf="item.icon; else directTitle">{{ item.title }}</span>
@@ -19,9 +20,10 @@
       <ng-container *ngTemplateOutlet="itemBadge"></ng-container>
     </a>
   </li>
+  </ul>
   <ng-template #itemIcon>
     <!-- I corrected the class="feather" to class="" in order to allow fas icon too -->
-    <span *ngIf="item.icon" class="pcoded-micon"><i class="" [ngClass]="item.icon"></i></span>
+    <span *ngIf="item.icon" class="pcoded-micon"><em class="" [ngClass]="item.icon"></em></span>
   </ng-template>
   <ng-template #itemBadge>
     <span *ngIf="item.badge" class="pcoded-badge label" [ngClass]="item.badge.type">

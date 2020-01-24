@@ -1,12 +1,12 @@
 <ul class="navbar-nav">
   <li>
     <a href="javascript:" (click)="darkTheme=!darkTheme; toggleTheme(darkTheme)">
-      <i id="themeToggle" [ngClass]="darkTheme ? 'icon feather icon-sun' : 'icon feather icon-moon'"></i>
+      <em id="themeToggle" [ngClass]="darkTheme ? 'icon feather icon-sun' : 'icon feather icon-moon'"></em>
     </a>
   </li>
   <li>
     <a (click)="authService.logout()" [routerLink]="['/login']">
-      <i id="logOut" class="icon feather icon-lock"></i>
+      <em id="logOut" class="icon feather icon-lock"></em>
     </a>
   </li>
 </ul>
