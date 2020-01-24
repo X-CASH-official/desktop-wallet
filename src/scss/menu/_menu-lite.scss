@@ -137,7 +137,6 @@
     display: flex;
     min-height: $header-height;
     padding: 0;
-    position: relative;
     top: 0;
     background: transparent;
     color: $header-light-text-color;
@@ -310,7 +309,7 @@
 
             &:after {
                 content: "\e842";
-                font-family: 'feather';
+                font-family: 'feather',Serif;
                 font-size: 15px;
                 border: none;
                 position: absolute;
@@ -353,7 +352,7 @@
         &.show {
             &:before {
                 content: "\63";
-                font-family: "pct";
+                font-family: "pct",Serif;
                 position: absolute;
                 left: -5px;
                 top: $header-height - 10;
@@ -752,7 +751,7 @@
                 > a {
                     &:after {
                         content: "\e844";
-                        font-family: 'feather';
+                        font-family: 'feather',Serif;
                         font-size: 15px;
                         border: none;
                         position: absolute;
@@ -1279,7 +1278,7 @@
                             position: absolute;
                             bottom: -34px;
                             left: 0;
-                            font-family: "pct";
+                            font-family: "pct",Serif;
                             z-index: 1001;
                             font-size: 50px;
                             line-height: 1;
@@ -1376,7 +1375,7 @@
                             position: absolute;
                             top: 8px;
                             left: -31px;
-                            font-family: "pct";
+                            font-family: "pct",Serif;
                             z-index: 1001;
                             font-size: 50px;
                             line-height: 1;
@@ -1911,7 +1910,7 @@ $style-block-width: 400px;
                 font-size: 120px;
                 position: absolute;
                 right: -45px;
-                font-family: "pct";
+                font-family: "pct",Serif;
                 z-index: 1001;
                 line-height: 0;
                 color: $primary-color;
@@ -1925,7 +1924,7 @@ $style-block-width: 400px;
                 font-size: 18px;
                 position: absolute;
                 right: 4px;
-                font-family: "feather";
+                font-family: "feather",Serif;
                 z-index: 1029;
                 line-height: 1;
                 color: #fff;
@@ -2084,7 +2083,7 @@ $style-block-width: 400px;
                     font-size: 20px;
                     position: absolute;
                     left: 12px;
-                    font-family: "feather";
+                    font-family: "feather",Serif;
                     z-index: 1001;
                     color: $primary-color;
                     transition: 0.3s ease-in-out;
@@ -3127,7 +3126,7 @@ body.box-layout {
         }
 
         .pcoded-inner-navbar li.pcoded-hasmenu .pcoded-submenu li > a:before {
-            font-family: 'feather';
+            font-family: 'feather',Serif;
             font-style: normal;
             padding-right: 4px;
             font-size: 13px;
@@ -3311,7 +3310,7 @@ body.box-layout {
                 font-size: 20px;
                 position: absolute;
                 left: 10px;
-                font-family: "feather";
+                font-family: "feather",Serif;
                 z-index: 1001;
                 color: $primary-color;
                 transition: 0.3s ease-in-out;
