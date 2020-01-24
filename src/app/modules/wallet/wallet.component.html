@@ -9,8 +9,8 @@
         <div class="input-group my-3">
           <input type="text" class="form-control" [value]="walletData?.publicKey" aria-label="Wallet's public key" aria-describedby="public-key" readonly>
           <div class="input-group-append">
-            <button class="btn btn-icon btn-secondary" type="button"><i class="feather icon-copy"></i></button>
-            <button class="btn btn-icon btn-primary" type="button"><i class="fas fa-qrcode"></i></button>
+            <button class="btn btn-icon btn-secondary" type="button"><em class="feather icon-copy"></em></button>
+            <button class="btn btn-icon btn-primary" type="button"><em class="fas fa-qrcode"></em></button>
           </div>
         </div>
         
@@ -23,9 +23,9 @@
       
       <!-- Wallet basic functionnalities navbar -->
       <div class="d-flex flex-column">
-        <button class="btn btn-success mr-0 px-4 text-left" type="button" (click)="sendModal.show()"><i style="transform: scaleX(-1);" class="fas fa-reply"></i> Send</button>
-        <button class="btn btn-primary mr-0 text-left" type="button" (click)="confirmopenwalletmodal.show()"><i class="feather icon-edit"></i> View Private Keys</button>
-        <button class="btn btn-primary mr-0 text-left" type="button" (click)="changepasswordmodal.show()"><i class="feather icon-edit"></i> Change Password</button>
+        <button class="btn btn-success mr-0 px-4 text-left" type="button" (click)="sendModal.show()"><em style="transform: scaleX(-1);" class="fas fa-reply"></em> Send</button>
+        <button class="btn btn-primary mr-0 text-left" type="button" (click)="confirmopenwalletmodal.show()"><em class="feather icon-edit"></em> View Private Keys</button>
+        <button class="btn btn-primary mr-0 text-left" type="button" (click)="changepasswordmodal.show()"><em class="feather icon-edit"></em> Change Password</button>
       </div>
       
     </div>
