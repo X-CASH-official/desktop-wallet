@@ -9,8 +9,8 @@
           </div>
           
           <div>
-            <button type="button" class="btn btn-primary btn-lg mb-0" (click)="createWalletModal.show();"><i class="feather icon-plus-circle"></i>Create Wallet</button>
-            <button type="button" class="btn btn-secondary btn-lg m-0" (click)="importWalletModal.show();"><i class="feather icon-download"></i>Import Wallet</button>
+            <button type="button" class="btn btn-primary btn-lg mb-0" (click)="createWalletModal.show();"><em class="feather icon-plus-circle"></em>Create Wallet</button>
+            <button type="button" class="btn btn-secondary btn-lg m-0" (click)="importWalletModal.show();"><em class="feather icon-download"></em>Import Wallet</button>
           </div>
         </div> 
       </div>
@@ -25,11 +25,11 @@
         <div class="card-header-right">
           <div class="btn-group card-option dropdown" ngbDropdown>
             <button type="button" class="btn dropdown-toggle btn-icon" ngbDropdownToggle>
-              <i class="feather icon-more-horizontal"></i>
+              <em class="feather icon-more-horizontal"></em>
             </button>
             <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-              <li class="dropdown-item reload-card" (click)="renameWalletModal.show(wallet.id)"><a href="javascript:"><i class="feather icon-edit"></i> Rename</a></li>
-              <li class="dropdown-item close-card" (click)="deleteWalletModal.show(wallet.id)"><a href="javascript:"><i class="feather icon-trash"></i> Delete</a></li>
+              <li class="dropdown-item reload-card" (click)="renameWalletModal.show(wallet.id)"><a href="javascript:"><em class="feather icon-edit"></em> Rename</a></li>
+              <li class="dropdown-item close-card" (click)="deleteWalletModal.show(wallet.id)"><a href="javascript:"><em class="feather icon-trash"></em> Delete</a></li>
             </ul>
           </div>
         </div>

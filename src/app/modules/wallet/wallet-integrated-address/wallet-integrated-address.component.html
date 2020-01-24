@@ -3,42 +3,43 @@
     <input type="text" class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search">
   </div>
   <div class="col-auto">
-    <button class="btn btn-primary m-0" type="button" (click)="createIntegratedAddressModal1.show()"><i class="feather icon-plus-circle"></i>Create integrated address</button>
+    <button class="btn btn-primary m-0" type="button" (click)="createIntegratedAddressModal1.show()"><em class="feather icon-plus-circle"></em>Create integrated address</button>
   </div>
 </div>
 
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+    <caption>Integrated Addresses List</caption>
   
   <!-- Index Column -->
   <ng-container matColumnDef="id" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
    <!-- Label Column -->
    <ng-container matColumnDef="label">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
     <td mat-cell *matCellDef="let element"> {{element.label}} </td>
   </ng-container>
   
   <!-- PaymentID Column -->
   <ng-container matColumnDef="paymentID">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Payment ID </th>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Payment ID </th>
     <td mat-cell *matCellDef="let element"> {{element.paymentID}} </td>
   </ng-container>
   
   <!-- Address Column -->
   <ng-container matColumnDef="address">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
     <td mat-cell *matCellDef="let element"> {{ element.address | xcashPublicAddress:10 }} </td>
   </ng-container>
   
   <!-- Actions buttons COlumn -->
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <th scope="col" mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element">
       <button type="button" class="btn btn-icon btn-table-icon btn-outline-secondary mb-0" ngbTooltip="Copied!"
-      triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrCopyTooltip)" placement="top" ngxClipboard [cbContent]="element.address"><i class="feather icon-copy"></i></button>
+      triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrCopyTooltip)" placement="top" ngxClipboard [cbContent]="element.address"><em class="feather icon-copy"></em></button>
       
       <!-- Other buttons
         <button type="button" class="btn btn-icon btn-outline-primary mb-0" (click)="onModifyContactToggle(contact)"><i class="feather icon-edit-1"></i></button>
@@ -104,7 +105,7 @@
         <input type="text" class="form-control" id="created-integrated-address" [value]="createdIntegratedAddress" readonly>
         <div class="input-group-append">
           <button class="btn btn-primary btn-icon" type="button" ngbTooltip="Copied!"
-          triggers="manual" #addrModalCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrModalCopyTooltip)" ngxClipboard [cbContent]="createdIntegratedAddress"><i class="feather icon-copy"></i></button>
+          triggers="manual" #addrModalCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrModalCopyTooltip)" ngxClipboard [cbContent]="createdIntegratedAddress"><em class="feather icon-copy"></em></button>
         </div>
       </div>
       <small class="form-text text-muted">You can later retrieve this newly created integrated address in the corresponding table.</small>
