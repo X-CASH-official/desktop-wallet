@@ -27,6 +27,14 @@ import { WalletDashboardModule } from './modules/wallet-dashboard/wallet-dashboa
 import { MaterialModule } from './material.module';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RpcCallsService } from './services/rpc-calls.service';
+import { ActionsService } from './services/actions.service';
+
+import { ConstantsService } from './services/constants.service';
+import { ContactListService } from './services/contact-list.service';
+import { ValidatorsRegexService } from './services/validators-regex.service';
+import { WalletListService } from './services/wallet-list.service';
+import { XcashPriceIndexService } from './services/xcash-price-index.service';
 
 
 @NgModule({
@@ -63,6 +71,13 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     NavigationItem,
     DatabaseService,
+    RpcCallsService,
+    ActionsService,
+    ConstantsService,
+    ContactListService,
+    ValidatorsRegexService,
+    WalletListService,
+    XcashPriceIndexService,
     oldService
   ],
   bootstrap: [AppComponent]

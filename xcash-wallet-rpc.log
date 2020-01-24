@@ -1,0 +1,5 @@
+2020-01-24 18:17:26.473	    7feb1eed8bc0	INFO 	logging	contrib/epee/src/mlog.cpp:277	New log categories: *:WARNING,net:FATAL,net.http:FATAL,net.p2p:FATAL,net.cn:FATAL,global:INFO,verify:FATAL,stacktrace:INFO,logging:INFO,msgwriter:INFO
+2020-01-24 18:17:26.474	    7feb1eed8bc0	WARN 	wallet.rpc	src/wallet/wallet_rpc_server.cpp:3432	Loading wallet...
+2020-01-24 18:17:26.687	    7feb1eed8bc0	WARN 	wallet.wallet2	src/wallet/wallet2.cpp:4600	Loaded wallet keys file, with public address: XCA1kzoR3ZLNg5zxNmxrY8FYKtgEvPZqC2xoRpm1axCpQcrrZfoKTSkSNsASDspdt3j1WcEnQJyuuB5VPSB56WWy36A4sQtQhe
+2020-01-24 18:17:28.786	    7feb1eed8bc0	INFO 	global	contrib/epee/include/net/http_server_impl_base.h:78	Binding on 127.0.0.1:18285
+2020-01-24 18:17:28.787	    7feb1eed8bc0	WARN 	wallet.rpc	src/wallet/wallet_rpc_server.cpp:3485	Starting wallet RPC server
