@@ -5,14 +5,16 @@
   </div>
   <div>
     <div class="input-group">
-      <select class="custom-select" id="inputGroupSelect04" (change)="onChange($event)">
-          <option [selected]='remoteNode=="Custom node"'>Custom node</option>
-        <option [selected]='remoteNode=="USSEED1.X-CASH.ORG:18281"'>USSEED1.X-CASH.ORG:18281</option>
-        <option [selected]='remoteNode=="USSEED2.X-CASH.ORG:18281"'>USSEED2.X-CASH.ORG:18281</option>
-        <option [selected]='remoteNode=="EUSEED1.X-CASH.ORG:18281"'>EUSEED1.X-CASH.ORG:18281</option>
-        <option [selected]='remoteNode=="EUSEED3.X-CASH.ORG:18281"'>EUSEED3.X-CASH.ORG:18281</option>
-        <option [selected]='remoteNode=="ASIASEED2.X-CASH.ORG:18281"'>ASIASEED2.X-CASH.ORG:18281</option>        
-      </select>
+      <div ngbDropdown class="d-inline-block" placement="bottom-right">
+        <button class="btn btn-outline-primary m-0" id="dropdownTimeInactivity" ngbDropdownToggle>{{ remoteNode }}</button>
+        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownTimeInactivity">
+          <button ngbDropdownItem (click)="updateremotenode('USSEED1.X-CASH.ORG:18281');">USSEED1.X-CASH.ORG:18281</button>
+          <button ngbDropdownItem (click)="updateremotenode('USSEED2.X-CASH.ORG:18281');">USSEED2.X-CASH.ORG:18281</button>
+          <button ngbDropdownItem (click)="updateremotenode('EUSEED1.X-CASH.ORG:18281');">EUSEED1.X-CASH.ORG:18281</button>
+          <button ngbDropdownItem (click)="updateremotenode('EUSEED3.X-CASH.ORG:18281');">EUSEED3.X-CASH.ORG:18281</button>
+          <button ngbDropdownItem (click)="updateremotenode('ASIASEED2.X-CASH.ORG:18281');">ASIASEED2.X-CASH.ORG:18281</button>
+        </div>
+      </div>
       <div class="input-group-append">
         <button class="btn btn-success" type="button" (click)="get_best_remote_node();">Choose best</button>
       </div>

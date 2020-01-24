@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { WalletListService } from 'src/app/services/wallet-list.service';
 import { XcashPriceIndexService } from 'src/app/services/xcash-price-index.service';
 import { Wallet } from 'src/app/models/wallet.model';
@@ -28,6 +28,8 @@ export class WalletComponent implements OnInit {
   
   selectedWallet: number;
   privatekeys:any = {"seed":"","viewkey":"","spendkey":""};
+  userActivity;
+  userInactive: Subject<any> = new Subject();
   
   constructor(private router: Router, private walletListService: WalletListService, private xcashPriceIndexService: XcashPriceIndexService, private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) {
     if (this.router.getCurrentNavigation().extras.state) {
@@ -35,6 +37,14 @@ export class WalletComponent implements OnInit {
     } else {
       console.error("Illegal navigation: you must provide a walletId attribute in the state of the route when routing to the wallet module.");
     }
+    this.setTimeout();
+    this.userInactive.subscribe(async() => {
+      this.walletListSubscription.unsubscribe();
+      this.xcashPriceIndexSub.unsubscribe();
+      this.userInactive.unsubscribe();
+      await this.RpcCallsService.closeWallet(0);
+      this.router.navigate(["/login"]);
+    });
   }
   
   walletData: Wallet;
@@ -44,6 +54,18 @@ export class WalletComponent implements OnInit {
   USDforXCASH: number;
   data:string = "Open Wallet";
   changepassworddata:string = "";
+
+  setTimeout() {
+    if (this.DatabaseService.AUTOLOCKSETTINGS !== 0)
+    {
+      this.userActivity = setTimeout(() => this.userInactive.next(undefined), this.DatabaseService.AUTOLOCKSETTINGS);
+    }
+  }
+
+  @HostListener('window:mousemove') refreshUserState() {
+    clearTimeout(this.userActivity);
+    this.setTimeout();
+  }
 
   
  ngOnInit() {
@@ -134,8 +156,10 @@ export class WalletComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
     this.walletListSubscription.unsubscribe();
     this.xcashPriceIndexSub.unsubscribe();
+    this.userInactive.unsubscribe();
+    await this.RpcCallsService.closeWallet(0);
   }
 }

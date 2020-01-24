@@ -81,7 +81,7 @@ export class RpcCallsService {
     });
   }
 
-  private async closeWallet(settings:number):Promise<string>
+  public async closeWallet(settings:number):Promise<string>
   {
     return new Promise(async (resolve, reject) => {
       // Constants
@@ -109,7 +109,7 @@ export class RpcCallsService {
       }
 
       await this.getPostRequestDataNoErrors(CLOSE_WALLET_URL);
-      await this.sleep(20000);
+      await this.sleep(5000);
       exec("taskkill /f /im xcash-wallet-rpc*");
       exec("killall -9 'xcash-wallet-rpc'");
       await this.sleep(20000);

@@ -9,16 +9,19 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class SettingsConnectionComponent implements OnInit {
 
+  constructor(private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
+
   @ViewChild('custom_remote_node', {static: true}) custom_remote_node: ElementRef;
 
   blockHeight: number = 4223210;
   remoteNode:string = "USSEED1.X-CASH.ORG:18281";
   best_node_settings:any[] = [];
 
-  onChange($event){
-    this.remoteNode = $event.target.options[$event.target.options.selectedIndex].text;
-    this.RpcCallsService.Remote_Node = this.remoteNode; 
-    this.custom_remote_node.nativeElement.value = "";
+    async updateremotenode(settings:string)
+    {
+      this.remoteNode = settings;
+      this.RpcCallsService.Remote_Node = settings; 
+      this.custom_remote_node.nativeElement.value = "";
     }
 
     best_remote_node(remote_node:string): Promise<any>
@@ -62,8 +65,6 @@ export class SettingsConnectionComponent implements OnInit {
     // save the remote node connection
     await this.DatabaseService.updateRemoteNode(this.remoteNode);
   }
-
-  constructor(private RpcCallsService: RpcCallsService, private DatabaseService: DatabaseService) { }
 
   ngOnInit()
   {

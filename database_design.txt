@@ -92,7 +92,7 @@
     }
   ],
   "wallet_settings": {
-    "autolock": "settings",
+    "autolock": 10,
     "remote_node": "settings"
   }
 }

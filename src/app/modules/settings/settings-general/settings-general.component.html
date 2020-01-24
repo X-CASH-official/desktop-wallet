@@ -7,11 +7,11 @@
     <div ngbDropdown class="d-inline-block" placement="bottom-right">
       <button class="btn btn-outline-primary m-0" id="dropdownTimeInactivity" ngbDropdownToggle>{{ durationToInactivity }}</button>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownTimeInactivity">
-        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">1 minute</button>
-        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">10 minutes</button>
-        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">30 minutes</button>
-        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">1 hour</button>
-        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText)">never</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText); updateautolock(1);">1 minute</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText); updateautolock(10);">10 minutes</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText); updateautolock(30);">30 minutes</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText); updateautolock(60);">1 hour</button>
+        <button ngbDropdownItem (click)="onInactivityDurationSelect($event.target.innerText); updateautolock(0);">never</button>
       </div>
     </div>
   </div>

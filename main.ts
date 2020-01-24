@@ -8,7 +8,7 @@ let mainWindow: Electron.BrowserWindow;
 
 function createWindow() {
   // Constants
-  const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": "settings","remote_node": "USSEED1.X-CASH.ORG:18280"}}';
+  const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "USSEED1.X-CASH.ORG:18280"}}';
 
   // Create the browser window.
   mainWindow = new BrowserWindow({ webPreferences: {nodeIntegration: true}, icon: path.join(__dirname, '/src/favicon.ico') });

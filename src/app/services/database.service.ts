@@ -16,6 +16,7 @@ export class DatabaseService {
 
   // Variables
   DATABASE_DATA_FILE:string = "database.txt";
+  AUTOLOCKSETTINGS:number = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8")).wallet_settings.autolock;
 
   sleep(milliseconds)
   {
@@ -282,8 +283,37 @@ export class DatabaseService {
     {
       // Variables
       let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
-
       database_data.wallet_settings.remote_node = remote_node;
+      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+      
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+   });
+  }
+
+  public async getAutoLock(): Promise<number> {
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // Constants
+      const DATABASE_DATA:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+      
+      resolve(DATABASE_DATA.wallet_settings.autolock);
+    } catch (error) {
+      reject();
+    }
+   });
+  }
+
+  public async updateAutoLock(settings:number): Promise<any> {
+    return new Promise(async(resolve, reject) => {
+    try
+    {
+      // Variables
+      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+      database_data.wallet_settings.autolock = settings;
       fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
       
       resolve();
