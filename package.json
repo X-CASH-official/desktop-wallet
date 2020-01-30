@@ -1,5 +1,6 @@
 {
-  "name": "X-CASH-GUI-Wallet",
+  "name": "xcash-desktop-wallet",
+  "productName": "xcash-desktop-wallet",
   "version": "0.1.0",
   "main": "main.js",
   "scripts": {
@@ -8,7 +9,10 @@
     "build": "tsc main.ts && ng build --prod --aot --base-href ./ && electron .",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
+    "package-win": "electron-packager . xcash-desktop-wallet --overwrite --asar=true --platform=win32 --arch=x64 --prune=true --out=release-builds --version-string.CompanyName=XCASH --version-string.FileDescription=\"Desktop Wallet\" --version-string.ProductName=\"Dekstop Wallet\"",    
+    "package-linux": "electron-packager . xcash-desktop-wallet --overwrite --asar=true --platform=linux --arch=x64 --prune=true --out=release-builds"
   },
   "private": true,
   "dependencies": {
@@ -108,6 +112,7 @@
     "@types/node": "^12.12.21",
     "codelyzer": "~4.5.0",
     "electron": "^7.1.9",
+    "electron-packager": "^14.2.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.0.0",
