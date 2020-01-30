@@ -3,10 +3,16 @@ import * as path from "path";
 const exec = require('child_process').exec;
 const fs = require('fs');
 const crypto = require("crypto");
+const setupEvents = require('./installers/setupEvents')
 
 let mainWindow: Electron.BrowserWindow;
 
 function createWindow() {
+  if (setupEvents.handleSquirrelEvent()) {
+    // squirrel event handled and app will exit in 1000ms, so don't do anything else
+    return;
+  }
+
   // Constants
   const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "USSEED1.X-CASH.ORG:18280"}}';
 
