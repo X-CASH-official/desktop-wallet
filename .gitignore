@@ -8,3 +8,7 @@ name
 name.keys
 database.txt
 xcash-wallet-rpc.log
+createwallet1.keys
+createwallet1
+importwallet1.keys
+importwallet1
