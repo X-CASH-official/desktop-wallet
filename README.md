@@ -99,6 +99,9 @@ To build XCASH_GUI_Wallet, naviagte to the folder with the package.json file. Th
 To build using a production mode and ahead of time compilation mode run  
 `npm run build`
 
+
+
+
 ### Updating to the Latest Angular
 
 If there is a new angular version out and you want to update the program to it, before we have officially updated to it run these following steps:

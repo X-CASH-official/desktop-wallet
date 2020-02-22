@@ -17,6 +17,7 @@ export class DatabaseService {
   // Variables
   DATABASE_DATA_FILE:string = "database.txt";
   AUTOLOCKSETTINGS:number = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8")).wallet_settings.autolock;
+  WALLET_DIR = __dirname.split("resources/app.asar/dist").join("").split("dist").join("");
 
   sleep(milliseconds)
   {
@@ -383,8 +384,8 @@ export class DatabaseService {
       fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
 
       // update the wallet files
-      fs.renameSync(`${__dirname}/../${wallet_name}`,`${__dirname}/../${data.name}`);
-      fs.renameSync(`${__dirname}/../${wallet_name}.keys`,`${__dirname}/../${data.name}.keys`);
+      fs.renameSync(`${this.WALLET_DIR}${wallet_name}`,`${this.WALLET_DIR}${data.name}`);
+      fs.renameSync(`${this.WALLET_DIR}${wallet_name}.keys`,`${this.WALLET_DIR}${data.name}.keys`);
         
       resolve();
     } catch (error) {
@@ -406,8 +407,8 @@ export class DatabaseService {
       // update the wallet files
       if (settings === true)
       {
-        fs.unlinkSync(`${__dirname}/../${wallet_name}`);
-        fs.unlinkSync(`${__dirname}/../${wallet_name}.keys`);
+        fs.unlinkSync(`${this.WALLET_DIR}${wallet_name}`);
+        fs.unlinkSync(`${this.WALLET_DIR}${wallet_name}.keys`);
       }
 
       resolve();
