@@ -192,7 +192,7 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
       await this.closeWallet(1);
 
       // start the wallet
-      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}"${walletData.walletName}"" --daemon-address "${this.Remote_Node}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}${walletData.walletName}" --daemon-address "${this.Remote_Node}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       let publicAddress:string = await this.getPublicAddress();
       let balance:number = await this.getBalance();
