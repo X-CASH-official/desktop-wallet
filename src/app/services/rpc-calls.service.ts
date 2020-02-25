@@ -18,7 +18,8 @@ export class RpcCallsService {
   XCASH_DECIMAL_PLACES:number = 1000000;
   currentWalletName:string = "";
   wallet_status:boolean = false;
-  WALLET_DIR = __dirname.split("resources/app.asar/dist").join("").split("dist").join("");
+  WALLET_DIR = __dirname.split("resources/app.asar/dist").join("").split("resources\\app.asar\\").join("").split("dist").join("");
+  WALLET_DIR_CREATE_WALLET = this.WALLET_DIR.slice(0,-1);
 
   public sleep(milliseconds)
   {
@@ -125,12 +126,14 @@ export class RpcCallsService {
     try
     {
 console.log(this.WALLET_DIR);
+console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}${walletData.walletName}" --password "${walletData.walletPassword.password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       // close the wallet if it is already running
       console.log("Closing window");
       await this.closeWallet(0);
 
       // open the wallet in create wallet mode
-      exec(`"${this.WALLET_DIR}"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR_CREATE_WALLET}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR_CREATE_WALLET}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       console.log("creating window");
       console.log(CREATE_WALLET_URL);
@@ -143,7 +146,7 @@ console.log(this.WALLET_DIR);
       await this.closeWallet(1);
 
       // start the wallet
-      exec(`"${this.WALLET_DIR}"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}"${walletData.walletName}"" --password "${walletData.walletPassword.password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}${walletData.walletName}" --password "${walletData.walletPassword.password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       let publicAddress:string = await this.getPublicAddress();
       let mnemonicSeed:string = await this.getMnenonicSeed();
@@ -163,7 +166,7 @@ console.log(this.WALLET_DIR);
 
   public async importWallet(walletData:any): Promise<object> {
     // Constants
-    const IMPORT_WALLET_DATA:string = walletData.seed != "" ? `{"version":1,"filename":"${this.WALLET_DIR}${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","seed":"${walletData.seed}"}` : `{"version":1,"filename":"${this.WALLET_DIR}${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","address":"${walletData.publicaddress}","viewkey":"${walletData.viewkey}","spendkey":"${walletData.privatekey}"}`;
+    const IMPORT_WALLET_DATA:string = walletData.seed != "" ? `{"version":1,"filename":"${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","seed":"${walletData.seed}"}` : `{"version":1,"filename":"${this.WALLET_DIR}${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","address":"${walletData.publicaddress}","viewkey":"${walletData.viewkey}","spendkey":"${walletData.privatekey}"}`;
     const IMPORT_WALLET_FILE:string = `${this.WALLET_DIR}importwallet.txt`;
 
     return new Promise(async(resolve, reject) => {
@@ -178,8 +181,8 @@ console.log(this.WALLET_DIR);
       await this.sleep(10000);
 
       // open the wallet in import mode
-      console.log(`"${this.WALLET_DIR}"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
-      exec(`"${this.WALLET_DIR}"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --generate-from-json "${IMPORT_WALLET_FILE}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
  
       // at this point the wallet will try to sync if we let it
@@ -189,7 +192,7 @@ console.log(this.WALLET_DIR);
       await this.closeWallet(1);
 
       // start the wallet
-      exec(`"${this.WALLET_DIR}"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}"${walletData.walletName}"" --daemon-address "${this.Remote_Node}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}"${walletData.walletName}"" --daemon-address "${this.Remote_Node}" --password "${walletData.password}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       let publicAddress:string = await this.getPublicAddress();
       let balance:number = await this.getBalance();
@@ -218,7 +221,7 @@ console.log(this.WALLET_DIR);
     return new Promise(async (resolve, reject) => {
       try
       {
-        exec(`"${this.WALLET_DIR}"xcash-wallet-rpc --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}${this.currentWalletName}" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+        exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-file "${this.WALLET_DIR}${this.currentWalletName}" --password "${password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
         await this.sleep(20000);
         let publicAddress:string = await this.getPublicAddress();
         if (publicAddress.substr(0,3) != "XCA")
