@@ -32,13 +32,13 @@ Check the [latest release](https://github.com/X-CASH-official-team/desktop-walle
 
 ## Features
 
-### Multi-wallet Dashboard 
+**Multi-wallet Dashboard**  
 From the dashboard, you can import, check, and manage all your XCASH's wallets.
 
-### Address book
+**Address book**  
 Manage your contacts and add wallet addresses from recurrent transfers.
 
-### Vote for your delegate
+**Vote for your delegate**  
 Vote for your desired delegate, instantaneously from your wallet! *(in development)*
 
 ## License
