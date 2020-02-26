@@ -16,7 +16,7 @@
     "package-win": "tsc main.ts && ng build --prod --aot --base-href ./ && electron . && electron-packager . xcash-desktop-wallet --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=release-builds --version-string.CompanyName=XCASH --version-string.FileDescription=\"Desktop Wallet\" --version-string.ProductName=\"Dekstop Wallet\"",
     "create-installer-win": "tsc main.ts && ng build --prod --aot --base-href ./ && electron . && node installers/windows/createinstaller.js",
     "package-linux": "tsc main.ts && ng build --prod --aot --base-href ./ && electron . && electron-packager .  xcash-desktop-wallet --overwrite --asar --platform=linux --arch=x64 --prune=true --out=release-builds",
-    "create-debian-installer": "tsc main.ts && ng build --prod --aot --base-href ./ && electron . && electron-installer-debian --src release-builds/xcash-desktop-wallet-app-linux-x64/ --arch amd64 --config debian.json"
+    "create-installer-linux": ""
   },
   "private": true,
   "dependencies": {

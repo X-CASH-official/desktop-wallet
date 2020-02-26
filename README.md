@@ -99,6 +99,21 @@ To build XCASH_GUI_Wallet, naviagte to the folder with the package.json file. Th
 To build using a production mode and ahead of time compilation mode run  
 `npm run build`
 
+To build for a portable Windows application  
+`npm run package-win`
+
+To build for a portable Mac application  
+`npm run package-mac`
+
+To build for a portable Mac application  
+`npm run create-installer-mac`
+
+To build for a portable Linux application  
+`npm run package-linux`
+
+To build for a portable Linux application  
+`npm run package-linux`
+
 
 
 
