@@ -1,42 +1,76 @@
-# XCASH_GUI_Wallet
+<div align=middle>
 
-## Introduction
+<a align="center" href="https://x-network.io/xcash"><img src="header.png" alt="X-Cash Core"></a>
 
-This is the new GUI wallet for XCASH. Currently this wallet supports Windows, MacOSX, and Linux operating systems, with the goal to support Android and IOS mobile devices in the future. Some features of this wallet are:
+[![Release](https://img.shields.io/github/v/release/X-CASH-official-team/desktop-wallet)](https://github.com/X-CASH-official-team/desktop-wallet/releases)
+[![Gitter](https://badges.gitter.im/xcash-foundation/xcash-core.svg)](https://gitter.im/xcash-foundation/xcash-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![chat](https://img.shields.io/discord/470575102203920395?logo=discord)](https://discordapp.com/invite/4CAahnd)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
+
+</div>
+
+# X-Cash GUI Desktop Wallet
+
+🖥 **Securely store and manage your XCASH** !  
+X-Cash multi-platform GUI wallet. Send XCASH publicly or privately easily, manage your wallets, and more !  
+*Made with **angular** & **electronJS**.*  
 
 ## Table of Contents  
-[System Requirements](#system-requirements)  
-[Dependencies](#dependencies)  
-[Installation Process](#installation-process)  
-* [Installation From Binaries](#installation-from-binaries)  
-* [Installation From Source](#installation-from-source)  
-* [Installing Node.js](#installing-nodejs) 
-* [Configuring NPM If Root](#configuring-npm-if-root)  
-* [Updating NPM](#updating-npm)  
-* [Installing Packages Globally Using NPM](#installing-packages-globally-using-npm)  
-* [Cloning the Repository](#cloning-the-repository)  
-* [Updating node_modules](#updating-node_modules)  
-* [Build XCASH_GUI_Wallet](#build-xcash_gui_wallet)  
-* [Updating to the latest angular](#updating-to-the-latest-angular)  
+- [Table of Contents](#table-of-contents)
+- [Download](#download)
+- [Features](#features)
+- [License](#license)
+- [Contributing](#contributing)
+- [Documentation](#documentation)
+- [Security](#security)
+- [System Requirements](#system-requirements)
+- [Installing from source](#installing-from-source)
 
+## Download
+
+Check the [latest release](https://github.com/X-CASH-official-team/desktop-wallet/releases)
+
+## Features
+
+### Multi-wallet Dashboard 
+From the dashboard, you can import, check, and manage all your XCASH's wallets.
+
+### Address book
+Manage your contacts and add wallet addresses from recurrent transfers.
+
+### Vote for your delegate
+Vote for your desired delegate, instantaneously from your wallet! *(in development)*
+
+## License
+
+**X-Cash GUI Wallet is an open-source project managed by the X-Cash Foundation**.  
+We are operating under the [MIT License](LICENSE).
+
+## Contributing
+
+**Thank you for thinking of contributing! 😃**   
+If you want to help out, check [CONTRIBUTING](https://github.com/X-CASH-official/.github/blob/master/CONTRIBUTING.md) for a set of guidelines and check our [opened issues](https://github.com/X-CASH-official/desktop-wallet/issues).
+
+## Documentation
+
+We are hosting our documentation on **GitBook** 👉 [**docs.xcash.foundation**](https://docs.xcash.foundation/)
+
+> You can contribute directly on our [`gitbook-docs`](https://github.com/X-CASH-official/gitbook-docs) repository.
+
+## Security 
+
+If you discover a security vulnerability, please send an e-mail to [security@xcash.foundation](mailto:security@xcash.foundation).  
+All security vulnerabilities concerning the X-Cash blockchain will be promply addressed.
 
 ## System Requirements
  
-Most systems will be able to use the wallet, given they are on the Windows, MacOSX, or Linux operating system.
+Currently support **Windows**, **OS X**, and **Linux** operating systems.
 
-
-## Installation Process
-
-
-### Installation From Binaries
-It is recommend to install the wallet from the binaries that are provided on the [release page](https://github.com/X-CASH-official-team/XCASH_GUI_Wallet/releases)
-
-### Installation From Source
-You can also build the binaries from source. The following explains how to to do this.
+## Installing from source
 
 ### Dependencies
 
-The following table summarizes the tools and libraries required to run XCASH_GUI_Wallet
+> The following table summarizes the tools and libraries required to run the GUI desktop wallet.
 
 | Dependencies                                 | Min. version  | Ubuntu package            |
 | -------------------------------------------- | ------------- | ------------------------- |
@@ -44,69 +78,59 @@ The following table summarizes the tools and libraries required to run XCASH_GUI
 | Angular                                      | 8             |  install from NPM         |
 | XCASH_DPOPS                                  | latest version | [build from source](https://github.com/X-CASH-official/XCASH_DPOPS) or [download the latest release](https://github.com/X-CASH-official/X-CASH/releases)
 
+### Requirements
 
+#### Node.js 13
 
-
-### Installing Node.js
-
-```
+To download, you can go to Node.js official [release page](https://nodejs.org/en/), or run the following command. 
+```bash
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 sudo apt update
 sudo apt install -y nodejs
 ```
 
+#### npm
 
-### Configuring NPM If Root
-Note if your installing this on a root account then you need to run these additional commands  
-`npm config set user 0`  
-`npm config set unsafe-perm true`
-
-
-
-### Updating NPM
-
-Now you need to update NPM  
-`npm install -g npm`
-
-
-
-### Installing Packages Globally Using NPM
-
-Now you need to install Angular globally  
-`npm install -g @angular/cli@latest`
-
-
-
-### Cloning the Repository
+> Note if your installing on a root account, you need to run these additional commands before upgrading
+```shell
+npm config set user 0 
+npm config set unsafe-perm true
 ```
-git clone https://github.com/X-CASH-official-team/XCASH_GUI_Wallet.git
+
+Update npm globally
+```shell
+npm install -g npm
+```
+
+#### Angular
+
+Install the latest version of Angular globally
+```shell  
+npm install -g @angular/cli@latest
+```
+
+### Develop
+
+#### Clone repository
+```shell
+git clone https://github.com/X-CASH-official/desktop-wallet.git
 ``` 
 
+#### Install dependencies
 
+Go to the folder where you cloned the repository and run:
+```shell
+npm install
+```
 
-### Updating node_modules
+#### Build
 
-Now you need to install all of the dependencies. Navigate to the folder with the package.json file, and then run  
-`npm update`
+To build the wallet using JIT compilation mode run:
+```shell
+npm run start
+```
 
-
-
-### Build XCASH_GUI_Wallet
-
-To build XCASH_GUI_Wallet, naviagte to the folder with the package.json file. Then run the following command to build the wallet using Just in time compilation mode  
-`npm run start`
-
-To build using a production mode and ahead of time compilation mode run  
-`npm run build`
-
-### Updating to the Latest Angular
-
-If there is a new angular version out and you want to update the program to it, before we have officially updated to it run these following steps:
-
-`ng update @angular/cli @angular/core`
-
-This might give Package A has an incompatible peer dependency to B. If this is the case run the following for each B package
-
-`npm install --save-dev B@latest` where B is the string for the package name
-
-You should then be able to update with no warnings about packages.
+To build using a production mode run:
+```shell
+npm run build
+```
