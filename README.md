@@ -125,12 +125,26 @@ npm install
 
 #### Build
 
-To build the wallet using JIT compilation mode run:
-```shell
+<details><summary> Build commands </summary>
+
+```bash
+# Build the wallet using JIT compilation mode run
 npm run start
+
+# Build using a production mode run
+npm run build
+
+# Build electron application for production (Windows)
+npm run package-win
+
+# Build electron application for production (OS X)
+npm run package-mac
+
+# Build electron application installer for production (OS X)
+npm run create-installer-mac
+
+# Build electron application for production (Linux)
+npm run package-linux
 ```
 
-To build using a production mode run:
-```shell
-npm run build
-```
+</details>
