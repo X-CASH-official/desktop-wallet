@@ -4,9 +4,6 @@ xcash-wallet-rpc
 xcashd
 main.js
 useragent.txt
-name
-name.keys
 xcash-wallet-rpc.log
-.git-commit-template.txt
-
-
+database.txt
+release-build/
