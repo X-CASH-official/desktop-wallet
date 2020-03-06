@@ -24,6 +24,13 @@ export class DatabaseService {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   }
 
+  public async checkIfWalletExist(data:string): Promise<any> {
+    return new Promise(async(resolve, reject) => {
+      console.log(`"wallet_name": "${data}"`);
+      fs.readFileSync(this.DATABASE_DATA_FILE,"utf8").includes(`"wallet_name": "${data}"`) ? reject("Wallet name already exists") : resolve("");
+   });
+  }
+
   private async getCurrentWallet(): Promise<number> {
     return new Promise(async(resolve, reject) => {
     try

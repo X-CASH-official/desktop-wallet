@@ -41,6 +41,10 @@ export class CreateWalletModalComponent implements OnInit {
     {
       this.data = "The wallet is being created and synced. This might take a long time";
       this.createWalletModalError.show();
+
+      // check if the wallet already exist
+      await this.DatabaseService.checkIfWalletExist(this.WalletName);
+
       let data:any = await this.RpcCallsService.createWallet(NameAndPasswordValues);
       // At this point the wallet is created, and synced
       this.createWalletModalError.hide();
@@ -57,7 +61,8 @@ export class CreateWalletModalComponent implements OnInit {
     catch (error)
     {
       this.data = error;
-      this.createWalletModalError.show();
+      this.RpcCallsService.sleep(5000);
+      this.createWalletModalError.hide();
     }
   }
   
