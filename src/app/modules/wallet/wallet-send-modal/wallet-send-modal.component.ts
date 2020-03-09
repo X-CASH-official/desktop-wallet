@@ -80,6 +80,7 @@ export class WalletSendModalComponent implements OnInit {
       else if (this.send_settings === 1)   
       {
         this.send_xcash_amount_number = this.send_usd_amount.nativeElement.value / this.USDforXCASH;
+        this.amount.setValue(this.send_xcash_amount_number.toFixed(6));
       }
     },100);
   }

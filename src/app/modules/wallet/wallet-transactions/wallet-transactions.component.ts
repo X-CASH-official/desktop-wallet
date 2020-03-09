@@ -59,7 +59,14 @@ export class WalletTransactionsComponent implements OnInit {
 
   async getTXKey(txid:string)
   {
-    this.TXKey = await this.RpcCallsService.getTxKey(txid);
+    try
+    {
+      this.TXKey = await this.RpcCallsService.getTxKey(txid);
+    }
+    catch(error)
+    {
+      this.TXKey = "No TX Key found for this transaction";
+    }
     this.TXKeyModal.show();
   }
 }

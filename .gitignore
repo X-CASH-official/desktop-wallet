@@ -4,6 +4,7 @@ xcash-wallet-rpc
 xcashd
 main.js
 useragent.txt
-xcash-wallet-rpc.log
 database.txt
-release-build/
+xcash-wallet-rpc.log
+release-builds/
+

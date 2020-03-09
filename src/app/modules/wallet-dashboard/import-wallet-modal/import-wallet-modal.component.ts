@@ -82,6 +82,10 @@ export class ImportWalletModalComponent implements OnInit {
     {
       this.data = "The wallet is being imported and synced. This might take a long time";
       this.importWalletModalError.show();
+
+      // check if the wallet already exist
+      await this.DatabaseService.checkIfWalletExist(this.Walletdata.walletName);
+
       let data:any = await this.RpcCallsService.importWallet(this.Walletdata);
       this.data = "The wallet has been imported successfully";
       this.RpcCallsService.sleep(5000);
@@ -95,6 +99,7 @@ export class ImportWalletModalComponent implements OnInit {
     catch (error)
     {
       this.data = error;
+      this.importWalletModalError.show();
       this.RpcCallsService.sleep(5000);
       this.importWalletModalError.hide();
     }
