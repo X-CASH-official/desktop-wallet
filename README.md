@@ -34,14 +34,16 @@ Check the [latest release](https://github.com/X-CASH-official-team/desktop-walle
 
 **Improved security**  
 When creating a new wallet, the software will verify that you have correctly noted your mnemonic seed.
-
 ![GIF](https://x-network.io/front/images/mnemonic_seed.gif)
 
 **Multi-wallet Dashboard**  
 From the dashboard, you can import, check, and manage all your XCASH's wallets.
+![GIF](https://x-network.io/front/images/multi-wallet.gif)
+
 
 **Address book**  
 Manage your contacts and add wallet addresses from recurrent transfers.
+![GIF](https://x-network.io/front/images/send_payment.gif)
 
 **Vote for your delegate** *(in development)* 
 Vote for your desired delegate, instantaneously from your wallet! 
