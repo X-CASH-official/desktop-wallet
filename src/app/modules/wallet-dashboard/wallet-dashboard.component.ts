@@ -19,7 +19,6 @@ export class WalletDashboardComponent implements OnInit {
   walletList$: BehaviorSubject<Wallet[]>;
 
   async ngOnInit() {
-    console.log(process.env.HOME);
     this.walletList$ = this.walletListService.getWalletList(); 
   }
 

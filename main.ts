@@ -15,8 +15,15 @@ function createWindow() {
 
   // Constants
   const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "USSEED1.X-CASH.ORG:18281"}}';
-  const RPC_FILE:string = process.platform !== "darwin" ? "useragent.txt" : process.env.HOME + "/useragent.txt";
-  const DATABASE_FILE:string = process.platform !== "darwin" ? "database.txt" : process.env.HOME + "/database.txt";
+  const DIR = `${process.env.HOME}/x-network/`;
+  const RPC_FILE:string = `${DIR}useragent.txt`;
+  const DATABASE_FILE:string = `${DIR}database.txt`;
+
+  // create the directory if it does not exist
+  if (!fs.existsSync(DIR))
+  {
+    fs.mkdirSync(DIR);
+  }
 
   // Create the browser window.
   mainWindow = new BrowserWindow({ webPreferences: {nodeIntegration: true}, icon: path.join(__dirname, '/src/favicon.ico') });

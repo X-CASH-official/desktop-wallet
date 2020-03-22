@@ -13,13 +13,13 @@ export class RpcCallsService {
 
   // Variables
   walletsyncprogress:number = 0;
-  rpcUserAgent:string = process.platform !== "darwin" ? fs.readFileSync("useragent.txt","utf8") : fs.readFileSync(process.env.HOME + "/useragent.txt","utf8");
-  Remote_Node:string = process.platform !== "darwin" ? JSON.parse(fs.readFileSync("database.txt","utf8")).wallet_settings.remote_node : JSON.parse(fs.readFileSync(process.env.HOME + "/database.txt","utf8")).wallet_settings.remote_node;
+  WALLET_DIR = `${process.env.HOME}/x-network/`;
+  WALLET_DIR_CREATE_WALLET = this.WALLET_DIR.slice(0,-1);
+  rpcUserAgent:string = fs.readFileSync(`${this.WALLET_DIR}useragent.txt`,"utf8");
+  Remote_Node:string = JSON.parse(fs.readFileSync(`${this.WALLET_DIR}database.txt`,"utf8")).wallet_settings.remote_node;
   XCASH_DECIMAL_PLACES:number = 1000000;
   currentWalletName:string = "";
   wallet_status:boolean = false;
-  WALLET_DIR = process.platform !== "darwin" ? __dirname.split("resources/app.asar/dist").join("").split("resources\\app.asar\\").join("").split("dist").join("") : process.env.HOME + "/";
-  WALLET_DIR_CREATE_WALLET = this.WALLET_DIR.slice(0,-1);
 
   public sleep(milliseconds)
   {
