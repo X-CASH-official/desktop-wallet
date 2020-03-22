@@ -15,6 +15,8 @@ function createWindow() {
 
   // Constants
   const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "USSEED1.X-CASH.ORG:18281"}}';
+  const RPC_FILE:string = process.platform !== "darwin" ? "useragent.txt" : app.getPath('userData') + "/useragent.txt";
+  const DATABASE_FILE:string = process.platform !== "darwin" ? "database.txt" : app.getPath('userData') + "/database.txt";
 
   // Create the browser window.
   mainWindow = new BrowserWindow({ webPreferences: {nodeIntegration: true}, icon: path.join(__dirname, '/src/favicon.ico') });
@@ -24,7 +26,7 @@ function createWindow() {
 
   // create and set the user agent
   let rpcUserAgent:string = crypto.randomBytes(100).toString('hex');
-  fs.writeFileSync("useragent.txt", rpcUserAgent);
+  fs.writeFileSync(RPC_FILE, rpcUserAgent);
   mainWindow.webContents.userAgent = rpcUserAgent;
 
   // load the dist folder from Angular
@@ -35,9 +37,9 @@ function createWindow() {
   mainWindow.on("closed", () => mainWindow = null);
 
   // check if the start DB is created
-  if (!fs.existsSync("database.txt"))
+  if (!fs.existsSync(DATABASE_FILE))
   {
-    fs.writeFileSync("database.txt", DATABASE);
+    fs.writeFileSync(DATABASE_FILE, DATABASE);
   }
 }
 
