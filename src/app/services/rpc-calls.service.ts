@@ -132,8 +132,8 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
       await this.closeWallet(0);
 
       // open the wallet in create wallet mode
-      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR_CREATE_WALLET}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
-      console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR_CREATE_WALLET}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       console.log("creating window");
       console.log(CREATE_WALLET_URL);
@@ -166,7 +166,7 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
 
   public async importWallet(walletData:any): Promise<object> {
     // Constants
-    const IMPORT_WALLET_DATA:string = walletData.seed != "" ? `{"version":1,"filename":"${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","seed":"${walletData.seed}"}` : `{"version":1,"filename":"${this.WALLET_DIR}${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","address":"${walletData.publicaddress}","viewkey":"${walletData.viewkey}","spendkey":"${walletData.privatekey}"}`;
+    const IMPORT_WALLET_DATA:string = walletData.seed != "" ? `{"version":1,"filename":"${this.WALLET_DIR}${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","seed":"${walletData.seed}"}` : `{"version":1,"filename":"${this.WALLET_DIR}${walletData.walletName}","scan_from_height":0,"password":"${walletData.password}","address":"${walletData.publicaddress}","viewkey":"${walletData.viewkey}","spendkey":"${walletData.privatekey}"}`;
     const IMPORT_WALLET_FILE:string = `${this.WALLET_DIR}importwallet.txt`;
 
     return new Promise(async(resolve, reject) => {

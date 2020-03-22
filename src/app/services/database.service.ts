@@ -17,7 +17,7 @@ export class DatabaseService {
   // Variables
   DATABASE_DATA_FILE:string = `${process.env.HOME}/x-network/database.txt`;
   AUTOLOCKSETTINGS:number = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8")).wallet_settings.autolock;
-  WALLET_DIR = __dirname.split("resources/app.asar/dist").join("").split("dist").join("");
+  WALLET_DIR = `${process.env.HOME}/x-network/`;
 
   sleep(milliseconds)
   {
@@ -26,7 +26,6 @@ export class DatabaseService {
 
   public async checkIfWalletExist(data:string): Promise<any> {
     return new Promise(async(resolve, reject) => {
-      console.log(`"wallet_name": "${data}"`);
       fs.readFileSync(this.DATABASE_DATA_FILE,"utf8").includes(`"wallet_name": "${data}"`) ? reject("Wallet name already exists") : resolve("");
    });
   }
