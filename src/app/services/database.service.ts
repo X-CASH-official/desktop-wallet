@@ -15,7 +15,7 @@ export class DatabaseService {
   constructor(private RpcCallsService: RpcCallsService) { }
 
   // Variables
-  DATABASE_DATA_FILE:string = process.platform !== "darwin" ? "database.txt" : app.getPath('userData') + "/database.txt";
+  DATABASE_DATA_FILE:string = process.platform !== "darwin" ? "database.txt" : process.env.HOME + "/database.txt";
   AUTOLOCKSETTINGS:number = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8")).wallet_settings.autolock;
   WALLET_DIR = __dirname.split("resources/app.asar/dist").join("").split("dist").join("");
 
