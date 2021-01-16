@@ -14,8 +14,8 @@ function createWindow() {
   }
 
   // Constants
-  const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "USSEED1.X-CASH.ORG:18281"}}';
-  const DIR = `${process.env.HOME}/x-network/`;
+  const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "us1.xcash.foundation:18281"}}';
+  const DIR = `${process.env.HOME}/xcash-official/`;
   const RPC_FILE:string = `${DIR}useragent.txt`;
   const DATABASE_FILE:string = `${DIR}database.txt`;
 

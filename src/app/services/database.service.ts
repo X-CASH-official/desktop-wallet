@@ -15,9 +15,9 @@ export class DatabaseService {
   constructor(private RpcCallsService: RpcCallsService) { }
 
   // Variables
-  DATABASE_DATA_FILE:string = `${process.env.HOME}/x-network/database.txt`;
+  DATABASE_DATA_FILE:string = `${process.env.HOME}/xcash-official/database.txt`;
   AUTOLOCKSETTINGS:number = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8")).wallet_settings.autolock;
-  WALLET_DIR = `${process.env.HOME}/x-network/`;
+  WALLET_DIR = `${process.env.HOME}/xcash-official/`;
 
   sleep(milliseconds)
   {
