@@ -368,7 +368,9 @@ export class DatabaseService {
         wallet_name: data.wallet_name,
         public_address: data.public_address,
         balance: data.balance,
-        reserve_proofs: []
+        sub_address_count: 0,
+        reserve_proofs: [],
+        signed_data: []
         });
 
       fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
