@@ -576,8 +576,12 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
   }
 
   public async verifyReserveproof(reserveproofData:any): Promise<boolean> {
+
+    reserveproofData.message = reserveproofData.message == null ? "" : reserveproofData.message;
+
     // Constants
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"check_reserve_proof","params":{"address":"${reserveproofData.public_address}","message":"${reserveproofData.message}","signature":"${reserveproofData.reserveproof}"}}`;
+    
     // Variables
     let data;
 

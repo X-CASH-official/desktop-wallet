@@ -34,6 +34,7 @@ export class WalletReserveProofComponent implements OnInit {
     if (this.createReserveProofForm.valid) {
       this.createReserveProofForm.get('amountToProve');
       this.createReserveProofForm.get('messageToProve');
+      console.log(`amount = ${this.createReserveProofForm.value.amountToProve}`);
       this.createdReserveSignature = await this.RpcCallsService.createReserveproof({"amount":this.createReserveProofForm.value.amountToProve * 1000000,"message":this.createReserveProofForm.value.messageToProve});
       // save the data to the database
       await this.DatabaseService.saveReserveproof({"reserve_proof":this.createdReserveSignature,"balance":this.createReserveProofForm.value.amountToProve * 1000000,"message":this.createReserveProofForm.value.messageToProve});
@@ -70,7 +71,6 @@ export class WalletReserveProofComponent implements OnInit {
   verificationSuccess: boolean = false;
 
   async onSubmitReserveProof() {
-    console.log(this.verifyReserveProofForm);
     if (this.verifyReserveProofForm.valid) {
       this.verifyReserveProofIsSubmitted = true;
       // TODO: process of reserve proof verification
