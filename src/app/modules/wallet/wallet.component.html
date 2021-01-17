@@ -9,7 +9,7 @@
         <div class="input-group my-3">
           <input type="text" class="form-control" [value]="walletData?.publicKey" aria-label="Wallet's public key" aria-describedby="public-key" readonly>
           <div class="input-group-append">
-            <button class="btn btn-icon btn-secondary" type="button"><em class="feather icon-copy"></em></button>
+            <button type="button" class="btn btn-icon btn-secondary" ngbTooltip="Copied!" triggers="manual" #addrCopyTooltip="ngbTooltip" (click)="toggleCopyTooltip(addrCopyTooltip)" placement="top" ngxClipboard [cbContent]="walletData?.publicKey"><em class="feather icon-copy"></em></button>
             <button class="btn btn-icon btn-primary" type="button"><em class="fas fa-qrcode"></em></button>
           </div>
         </div>

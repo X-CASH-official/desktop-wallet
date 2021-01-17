@@ -457,6 +457,8 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
     // Constants
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"create_address","params":{"account_index":0,"label":"${label}"}}`;
 
+console.log(URL);
+
     // Variables
     let data;
 
@@ -496,6 +498,7 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
    try
    {
      data = await this.getPostRequestData(URL);
+console.log(data);
      data.result.per_subaddress.forEach(item => {
        subAddresses.push({
         id: item.address_index,

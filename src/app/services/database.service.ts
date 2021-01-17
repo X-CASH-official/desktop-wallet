@@ -369,6 +369,7 @@ export class DatabaseService {
         public_address: data.public_address,
         balance: data.balance,
         sub_address_count: 0,
+        integrated_addresses: [],
         reserve_proofs: [],
         signed_data: []
         });

@@ -136,6 +136,15 @@ export class WalletComponent implements OnInit {
     }
   }
 
+toggleCopyTooltip(tooltip) {
+    if (!tooltip.isOpen()) {
+      tooltip.open();
+      setTimeout(() => {
+        tooltip.close();
+      }, 2000);
+    }
+  }
+
   async changepassword()
   {
     try
