@@ -1,0 +1,36 @@
+<!-- Add a contact modal -->
+<app-ui-modal #UpdateModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Update a delegate</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="UpdateModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="UpdateForm" (ngSubmit)="onSubmit()" id="UpdateForm">
+      <div class="form-group">
+        <label for="delegate-name">Item</label>
+        <input type="text" class="form-control" id="delegate-item" placeholder="Enter an item to update" formControlName="delegateItem" [ngClass]="{'is-invalid': (delegateItem.dirty || delegateItem.touched) && delegateItem.invalid, 'is-valid': (delegateItem.dirty || delegateItem.touched) && !delegateItem.invalid}">
+        <div *ngIf="(delegateItem.dirty || delegateItem.touched) && delegateItem.invalid">
+          <small class="form-text text-danger" *ngIf="delegateItem.errors.required">Delegate item is required.</small>
+          <small class="form-text text-danger" *ngIf="delegateItem.errors.pattern">Delegate item contains illegal characters.</small>
+        </div>
+      </div>
+
+     <div class="form-group">
+        <label for="public-address">Value</label>
+        <input type="text" class="form-control" id="delegate-value" placeholder="Enter a value to update" formControlName="delegateValue" [ngClass]="{'is-invalid': (delegateValue.dirty || delegateValue.touched) && delegateValue.invalid, 'is-valid': (delegateValue.dirty || delegateValue.touched) && !delegateValue.invalid}">
+        <div *ngIf="(delegateValue.dirty || delegateValue.touched) && delegateValue.invalid">
+          <small class="form-text text-danger" *ngIf="delegateValue.errors.required">Delegate value is required.</small>
+          <small class="form-text text-danger" *ngIf="delegateValue.errors.pattern">Delegate value contains illegal characters.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" form="UpdateForm">Update</button>
+  </div>
+</app-ui-modal>

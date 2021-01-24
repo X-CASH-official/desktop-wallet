@@ -32,5 +32,9 @@ export class ValidatorsRegexService {
 
   data_to_sign:RegExp = new RegExp(`^[a-zA-Z0-9]+$`);
 
-  contact_name:RegExp = new RegExp("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$")
+  contact_name:RegExp = new RegExp("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$");
+
+  delegate_name:RegExp = new RegExp(`^[a-zA-Z0-9._-]+$`);
+
+  delegate_item:RegExp = new RegExp(`\\b(IP_address|about|website|team|shared_delegate_status|delegate_fee|server_specs)\\b`);
 }

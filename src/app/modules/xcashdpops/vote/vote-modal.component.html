@@ -1,0 +1,27 @@
+<!-- Add a contact modal -->
+<app-ui-modal #VoteModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Vote for a delegate</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="VoteForm" (ngSubmit)="onSubmit()" id="VoteForm">
+      <div class="form-group">
+        <label for="delegate-name">Delegate name</label>
+        <input type="text" class="form-control" id="delegate-name" placeholder="Enter Delegate Name" formControlName="delegateName" [ngClass]="{'is-invalid': (delegateName.dirty || delegateName.touched) && delegateName.invalid, 'is-valid': (delegateName.dirty || delegateName.touched) && !delegateName.invalid}">
+        <div *ngIf="(delegateName.dirty || delegateName.touched) && delegateName.invalid">
+          <small class="form-text text-danger" *ngIf="delegateName.errors.required">Delegate name is required.</small>
+          <small class="form-text text-danger" *ngIf="delegateName.errors.pattern">Delegate name contains illegal characters.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" form="VoteForm">Vote</button>
+  </div>
+</app-ui-modal>

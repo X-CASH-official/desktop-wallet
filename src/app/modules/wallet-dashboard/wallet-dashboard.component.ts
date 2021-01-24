@@ -22,4 +22,8 @@ export class WalletDashboardComponent implements OnInit {
     this.walletList$ = this.walletListService.getWalletList(); 
   }
 
+async ngOnDestroy() {
+    await this.RpcCallsService.closeWallet(0);
+  }
+
 }

@@ -1,0 +1,27 @@
+<!-- Add a contact modal -->
+<app-ui-modal #RecoverModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Recover a delegate</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="RecoverModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  <div class="app-modal-body">
+    
+    <form [formGroup]="RecoverForm" (ngSubmit)="onSubmit()" id="RecoverForm">
+      <div class="form-group">
+        <label for="delegate-name">Domain Name</label>
+        <input type="text" class="form-control" id="domain-name" placeholder="Enter Domain Name" formControlName="domainName" [ngClass]="{'is-invalid': (domainName.dirty || domainName.touched) && domainName.invalid, 'is-valid': (domainName.dirty || domainName.touched) && !domainName.invalid}">
+        <div *ngIf="(domainName.dirty || domainName.touched) && domainName.invalid">
+          <small class="form-text text-danger" *ngIf="domainName.errors.required">Domain name is required.</small>
+          <small class="form-text text-danger" *ngIf="domainName.errors.pattern">Domain name contains illegal characters.</small>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" form="RecoverForm">Recover</button>
+  </div>
+</app-ui-modal>

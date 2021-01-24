@@ -33,6 +33,11 @@ const routes: Routes = [
 
         loadChildren: './modules/settings/settings.module#SettingsModule'
       },
+      {
+        path: 'xcashdpops',
+
+        loadChildren: './modules/xcashdpops/xcashdpops.module#XcashdpopsModule'
+      },
       
     ]
   }, 

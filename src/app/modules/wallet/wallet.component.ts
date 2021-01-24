@@ -78,6 +78,7 @@ export class WalletComponent implements OnInit {
     {
       this.openwalletmodal.hide();
       this.openwalletloadingmodal.show(); 
+      await this.RpcCallsService.closeWallet(0);      
       await this.RpcCallsService.openWallet(this.wallet_password.nativeElement.value);
       this.openwalletloadingmodal.hide();
       this.loadWallet();
@@ -169,6 +170,6 @@ toggleCopyTooltip(tooltip) {
     this.walletListSubscription.unsubscribe();
     this.xcashPriceIndexSub.unsubscribe();
 //    this.userInactive.unsubscribe();
-    await this.RpcCallsService.closeWallet(0);
+    //await this.RpcCallsService.closeWallet(0);
   }
 }

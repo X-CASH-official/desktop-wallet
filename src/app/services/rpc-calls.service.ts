@@ -627,7 +627,8 @@ console.log(data);
     // Constants
     const sendType = sendPaymentData.maxAmount === true ? "sweep_all" : "transfer_split";
     const URL:string = `{"jsonrpc":"2.0","id":"0","method":"${sendType}","params":{"destinations":[{"amount":${sendPaymentData.amount * this.XCASH_DECIMAL_PLACES},"address":"${sendPaymentData.recipient}"}],"priority":0,"ring_size":21,"get_tx_keys": true, "payment_id":"${sendPaymentData.paymentId}", "tx_privacy_settings":"${sendPaymentData.privacy}", "do_not_relay":${settings}}}`;
-    /// Variables
+    
+    // Variables
     let data;
 
     return new Promise(async(resolve, reject) => {
@@ -651,6 +652,115 @@ console.log(data);
 
     await this.getPostRequestData(URL);
     resolve("OK");
+  });
+  }
+
+public async sweep_all_vote(): Promise<string> {
+
+    // get the wallets public address
+    let public_address = await this.getPublicAddress();
+
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"address":"${public_address}","ring_size":21}}`;
+
+    // Variables
+    let data;
+
+    return new Promise(async(resolve, reject) => {
+      try
+      {
+      data = await this.getPostRequestData(URL);
+      await this.sleep(900000);
+      resolve("OK");
+    }
+    catch(error)
+    {
+      try {reject(data.error.message);}catch(error){reject();}
+    }
+  });
+  }
+
+public async delegate_vote(delegateData:any): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"vote","params":{"delegate_data":"${delegateData.delegateName}"}}`;
+
+    // Variables
+    let data;
+
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
+      data = await this.getPostRequestData(URL);
+      resolve(data.result.vote_status);
+    }
+    catch(error)
+    {
+      try {reject(data.error.message);}catch(error){reject();}
+    }
+  });
+  }
+
+public async delegate_register(delegateData:any): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"delegate_register","params":{"delegate_name":"${delegateData.delegateName}","delegate_IP_address":"${delegateData.ipAddress}","delegates_public_key":"${delegateData.publicKey}"}}`;
+
+    // Variables
+    let data;
+
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
+      data = await this.getPostRequestData(URL);
+      resolve(data.result.delegate_register_status);
+    }
+    catch(error)
+    {
+      try {reject(data.error.message);}catch(error){reject();}
+    }
+  });
+  }
+
+public async delegate_update(delegateData:any): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"delegate_update","params":{"item":"${delegateData.delegateItem}","value":"${delegateData.delegateValue}"}}`;
+
+    // Variables
+    let data;
+
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
+      data = await this.getPostRequestData(URL);
+      resolve(data.result.delegate_update_status);
+    }
+    catch(error)
+    {
+      try {reject(data.error.message);}catch(error){reject();}
+    }
+  });
+  }
+
+public async delegate_recover(delegateData:any): Promise<string> {
+    // Constants
+    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"delegate_recover","params":{"domain_name":"${delegateData.domainName}"}}`;
+
+    // Variables
+    let data;
+
+    return new Promise(async(resolve, reject) => {
+
+      try
+      {
+      data = await this.getPostRequestData(URL);
+      resolve(data.result.status);
+    }
+    catch(error)
+    {
+      try {reject(data.error.message);}catch(error){reject();}
+    }
   });
   }
 }

@@ -1,0 +1,104 @@
+<app-ui-modal #SweepAllVoteModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Click the sweep all vote button and wait until the message closes, then try to revote. This should take about 15 minutes</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="SweepAllVoteModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+  
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" (click)="vote_sweep_all();">Sweep All Vote</button>
+  </div>
+</app-ui-modal>
+
+<div class="card">
+  <div class="card-body">
+    <h3 class="mb-4">XCASH DPOPS</h3>
+    
+    <div class="row justify-content-between mb-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary m-0" (click)="VoteModal.show()"><em class="feather icon-plus-circle"></em>Vote</button>
+      </div>
+    </div>
+
+    <div class="row justify-content-between mb-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary m-0" (click)="SweepAllVoteModal.show()"><em class="feather icon-plus-circle"></em>Sweep All Vote</button>
+      </div>
+    </div>
+    
+
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h3 class="mb-4">Delegate Management</h3>
+    
+    <div class="row justify-content-between mb-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary m-0" (click)="RegisterModal.show()"><em class="feather icon-plus-circle"></em>Register</button>
+      </div>
+    </div>
+
+<div class="row justify-content-between mb-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary m-0" (click)="UpdateModal.show()"><em class="feather icon-plus-circle"></em>Update</button>
+      </div>
+    </div>
+
+<div class="row justify-content-between mb-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary m-0" (click)="RecoverModal.show()"><em class="feather icon-plus-circle"></em>Recover</button>
+      </div>
+    </div>
+    
+    
+
+  </div>
+</div>
+
+
+
+<app-ui-modal #VoteSuccessModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Successful</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteSuccessModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #VoteFailModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Failed</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteFailModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #VoteWaitModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Waiting until two minutes after the top of the hour, please leave this message open and wait</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteWaitModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #DelegateWaitModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Waiting this might take up to five minutes, please leave this message open and wait</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="DelegateWaitModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>
+
+
+
+<app-vote-modal #VoteModal (newVoteEvent)="onNewVote($event)"></app-vote-modal>
+<app-register-modal #RegisterModal (newRegisterEvent)="onNewRegister($event)"></app-register-modal>
+<app-update-modal #UpdateModal (newUpdateEvent)="onNewUpdate($event)"></app-update-modal>
+<app-recover-modal #RecoverModal (newRecoverEvent)="onNewRecover($event)"></app-recover-modal>
