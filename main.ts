@@ -19,10 +19,17 @@ function createWindow() {
   const RPC_FILE:string = `${DIR}useragent.txt`;
   const DATABASE_FILE:string = `${DIR}database.txt`;
 
-  // create the directory if it does not exist
+  // create the directory if it does not exist, and copy the xcash-wallet-rpc binary to it
   if (!fs.existsSync(DIR))
   {
-    fs.mkdirSync(DIR);
+    try
+    {
+      fs.mkdirSync(DIR);    
+      process.platform === "win32" ? fs.copyFileSync("xcash-wallet-rpc.exe",`${DIR}/xcash-wallet-rpc.exe`) : fs.copyFileSync("xcash-wallet-rpc",`${DIR}/xcash-wallet-rpc`);
+    }
+    catch (error)
+    {
+    }    
   }
 
   // Create the browser window.
@@ -59,14 +66,7 @@ app.on("window-all-closed", () => {
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") {
     // close the xcash-wallet-rpc
-    if (process.platform === "win32")
-    {
-      exec("taskkill /f /im xcash-wallet-rpc*");
-    }
-    else
-    {
-      exec("killall -9 'xcash-wallet-rpc'");
-    }
+    process.platform === "win32" ? exec("taskkill /f /im xcash-wallet-rpc*") : exec("killall -9 'xcash-wallet-rpc'");
     app.quit();
   }
 });
