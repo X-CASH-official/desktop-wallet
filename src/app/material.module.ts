@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
 
 import {MatSortModule} from '@angular/material/sort';
-import {MatCardModule} from '@angular/material/';
-import {MatProgressSpinnerModule} from '@angular/material/';
-import {MatMenuModule} from '@angular/material';
-import {MatIconModule} from '@angular/material';
-import {MatToolbarModule} from '@angular/material';
-import {MatButtonModule} from '@angular/material';
-import {MatInputModule} from '@angular/material';
-import {MatTableModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({

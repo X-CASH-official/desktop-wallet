@@ -13,7 +13,11 @@ import { RegisterComponent } from './register/register-modal.component';
 import { UpdateComponent } from './update/update-modal.component';
 import { RecoverComponent } from './recover/recover-modal.component';
 import { ClipboardModule } from 'ngx-clipboard';
-import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatPaginatorModule } from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 
 @NgModule({

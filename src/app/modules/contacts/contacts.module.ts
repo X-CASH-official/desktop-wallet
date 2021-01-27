@@ -12,7 +12,11 @@ import {FormsModule} from '@angular/forms';
 import { ContactsComponent } from './contacts.component';
 import { AddContactModalComponent } from './contacts-header/add-contact-modal.component';
 import { ClipboardModule } from 'ngx-clipboard';
-import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatPaginatorModule } from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 
 @NgModule({

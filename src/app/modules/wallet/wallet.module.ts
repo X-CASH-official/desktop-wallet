@@ -11,7 +11,11 @@ import { WalletIntegratedAddressComponent } from './wallet-integrated-address/wa
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
 import { SharedWalletModalModule } from '../../shared/shared-wallet-modal/shared-wallet-modal.module';
-import { MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatAutocompleteModule, MatOptionModule } from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 import { SharedPipesModule } from 'src/app/shared/shared-pipes/shared-pipes.module';
 import { ClipboardModule } from 'ngx-clipboard';
 import { WalletSubAddressComponent } from './wallet-sub-address/wallet-sub-address.component';

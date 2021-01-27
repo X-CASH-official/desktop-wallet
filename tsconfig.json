@@ -6,11 +6,11 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
+    "module": "ES6",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    "target": "es6",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -18,5 +18,8 @@
       "es2018",
       "dom"
     ]
-  }
+  },
+  "angularCompilerOptions": {
+   "enableIvy": false
+}
 }

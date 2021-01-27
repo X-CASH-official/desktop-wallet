@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UiModalComponent } from 'src/app/theme/shared/components/modal/ui-modal/ui-modal.component';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 
