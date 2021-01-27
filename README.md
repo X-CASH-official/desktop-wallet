@@ -81,17 +81,18 @@ Currently support **Windows**, **OS X**, and **Linux** operating systems.
 
 | Dependencies                                 | Min. version  | Ubuntu package            |
 | -------------------------------------------- | ------------- | ------------------------- |
-| Node.js                                      | 13             |  install from binaries    | 
-| Angular                                      | 8             |  install from NPM         |
+| Node.js                                      | 15             |  install from NodeSource    | 
+| Angular                                      | 9             |  install from NPM         |
+| Python 2                                     |            2.7 | `sudo apt install -y python`|
 | XCASH_DPOPS                                  | latest version | [build from source](https://github.com/X-CASH-official/XCASH_DPOPS) or [download the latest release](https://github.com/X-CASH-official/X-CASH/releases)
 
 ### Requirements
 
-#### Node.js 13
+#### Node.js 15
 
 To download, you can go to Node.js official [release page](https://nodejs.org/en/), or run the following command. 
 ```bash
-curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
 sudo apt update
 sudo apt install -y nodejs
 ```
@@ -107,13 +108,6 @@ npm config set unsafe-perm true
 Update npm globally
 ```shell
 npm install -g npm
-```
-
-#### Angular
-
-Install the latest version of Angular globally
-```shell  
-npm install -g @angular/cli@latest
 ```
 
 ### Develop
