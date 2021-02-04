@@ -1,5 +1,6 @@
 node_modules
 dist
+downloads
 xcash-wallet-rpc
 xcashd
 main.js

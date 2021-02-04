@@ -91,29 +91,28 @@ export class DatabaseService {
    });
   }
 
-  public async saveIntegratedAddresses(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    {    
-      // Constants
-      const WALLET_COUNT:number = await this.getCurrentWallet();
+  public async saveIntegratedAddresses(data: any): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Constants
+        const WALLET_COUNT: number = await this.getCurrentWallet();
 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
 
-      database_data.wallet_data[WALLET_COUNT].integrated_addresses.push({
+        database_data.wallet_data[WALLET_COUNT].integrated_addresses.push({
           label: data.label,
           payment_id: data.payment_id,
           integrated_address: data.integrated_address,
         });
 
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   public async getSignedData(): Promise<SignedData[]> {
@@ -143,28 +142,27 @@ export class DatabaseService {
    });
   }
 
-  public async saveSignedData(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    {    
-      // Constants
-      const WALLET_COUNT:number = await this.getCurrentWallet();
+  public async saveSignedData(data: any): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Constants
+        const WALLET_COUNT: number = await this.getCurrentWallet();
 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
 
-      database_data.wallet_data[WALLET_COUNT].signed_data.push({
+        database_data.wallet_data[WALLET_COUNT].signed_data.push({
           data: data.data,
           signature: data.signature,
         });
 
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   public async getReserveproof(): Promise<ReserveProof[]> {
@@ -210,29 +208,28 @@ export class DatabaseService {
    });
   }
 
-  public async saveReserveproof(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    {    
-      // Constants
-      const WALLET_COUNT:number = await this.getCurrentWallet();
+  public async saveReserveproof(data: any): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Constants
+        const WALLET_COUNT: number = await this.getCurrentWallet();
 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
 
-      database_data.wallet_data[WALLET_COUNT].reserve_proofs.push({
+        database_data.wallet_data[WALLET_COUNT].reserve_proofs.push({
           reserve_proof: data.reserve_proof,
           message: data.message,
           balance: data.balance / 1000000,
         });
 
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   public async getSubAddressCount(): Promise<number> {
@@ -250,24 +247,23 @@ export class DatabaseService {
    });
   }
 
-  public async updateSubAddressCount(): Promise<string> {
-    return new Promise(async(resolve, reject) => {
-    try
-    {
-      // Constants
-      const WALLET_COUNT:number = await this.getCurrentWallet();
+  public async updateSubAddressCount(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Constants
+        const WALLET_COUNT: number = await this.getCurrentWallet();
 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
 
-      database_data.wallet_data[WALLET_COUNT].sub_address_count++;
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-      
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+        database_data.wallet_data[WALLET_COUNT].sub_address_count++;
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   public async getRemoteNode(): Promise<string> {
@@ -284,7 +280,7 @@ export class DatabaseService {
    });
   }
 
-  public async updateRemoteNode(remote_node:string): Promise<any> {
+  public async updateRemoteNode(remote_node:string): Promise<void> {
     return new Promise(async(resolve, reject) => {
     try
     {
@@ -314,7 +310,7 @@ export class DatabaseService {
    });
   }
 
-  public async updateAutoLock(settings:number): Promise<any> {
+  public async updateAutoLock(settings:number): Promise<void> {
     return new Promise(async(resolve, reject) => {
     try
     {
@@ -357,95 +353,90 @@ export class DatabaseService {
    });
   }
 
-  public async saveWalletData(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    { 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+  public async saveWalletData(data: any): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
 
-      database_data.wallet_data.push({
-        wallet_name: data.wallet_name,
-        public_address: data.public_address,
-        balance: data.balance,
-        sub_address_count: 0,
-        integrated_addresses: [],
-        reserve_proofs: [],
-        signed_data: []
+        database_data.wallet_data.push({
+          wallet_name: data.wallet_name,
+          public_address: data.public_address,
+          balance: data.balance,
+          sub_address_count: 0,
+          integrated_addresses: [],
+          reserve_proofs: [],
+          signed_data: []
         });
 
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
-  }
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
 
-  public async editWalletData(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    { 
-      // update the data in the database
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
-      let wallet_name = database_data.wallet_data[data.id].wallet_name;
-      database_data.wallet_data[data.id].wallet_name = data.name;
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-
-      // update the wallet files
-      fs.renameSync(`${this.WALLET_DIR}${wallet_name}`,`${this.WALLET_DIR}${data.name}`);
-      fs.renameSync(`${this.WALLET_DIR}${wallet_name}.keys`,`${this.WALLET_DIR}${data.name}.keys`);
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
-  }
-
-  public async deleteWalletData(id:number, settings:boolean): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    { 
-      // update the data in the database
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
-      let wallet_name = database_data.wallet_data[id].wallet_name;
-      database_data.wallet_data.splice(id, 1);
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-
-      // update the wallet files
-      if (settings === true)
-      {
-        fs.unlinkSync(`${this.WALLET_DIR}${wallet_name}`);
-        fs.unlinkSync(`${this.WALLET_DIR}${wallet_name}.keys`);
+        resolve();
+      } catch (error) {
+        reject(error);
       }
-
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+    });
   }
 
-  public async updateWalletBalance(balance:number): Promise<string> {
-    return new Promise(async(resolve, reject) => {
-    try
-    {
-      // Constants
-      const WALLET_COUNT:number = await this.getCurrentWallet();
+  public async editWalletData(data: any): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // update the data in the database
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
+        let wallet_name = database_data.wallet_data[data.id].wallet_name;
+        database_data.wallet_data[data.id].wallet_name = data.name;
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+        // update the wallet files
+        fs.renameSync(`${this.WALLET_DIR}${wallet_name}`, `${this.WALLET_DIR}${data.name}`);
+        fs.renameSync(`${this.WALLET_DIR}${wallet_name}.keys`, `${this.WALLET_DIR}${data.name}.keys`);
 
-      database_data.wallet_data[WALLET_COUNT].balance = balance;
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-      
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public async deleteWalletData(id: number, settings: boolean): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // update the data in the database
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
+        let wallet_name = database_data.wallet_data[id].wallet_name;
+        database_data.wallet_data.splice(id, 1);
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        // update the wallet files
+        if (settings === true) {
+          fs.unlinkSync(`${this.WALLET_DIR}${wallet_name}`);
+          fs.unlinkSync(`${this.WALLET_DIR}${wallet_name}.keys`);
+        }
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public async updateWalletBalance(balance: number): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Constants
+        const WALLET_COUNT: number = await this.getCurrentWallet();
+
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
+
+        database_data.wallet_data[WALLET_COUNT].balance = balance;
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   public async getContacts(): Promise<Contact[]> {
@@ -475,59 +466,56 @@ export class DatabaseService {
    });
   }
 
-  public async addContacts(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    { 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
+  public async addContacts(data: any): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
 
-      database_data.contact_data.push({
+        database_data.contact_data.push({
           name: data.name,
           public_address: data.public_address,
         });
 
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
-  public async editContacts(data:any): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    { 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
-      database_data.contact_data[data.id].name = data.name;
-      database_data.contact_data[data.id].public_address = data.public_address;
+  public async editContacts(data: any): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
+        database_data.contact_data[data.id].name = data.name;
+        database_data.contact_data[data.id].public_address = data.public_address;
 
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
-  public async deleteContacts(id:number): Promise<any> {
-    return new Promise(async(resolve, reject) => {
-    try
-    { 
-      // Variables
-      let database_data:any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8"));
-      database_data.contact_data.splice(id, 1);
-      fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
-        
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-   });
+  public async deleteContacts(id: number): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Variables
+        let database_data: any = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE, "utf8"));
+        database_data.contact_data.splice(id, 1);
+        fs.writeFileSync(this.DATABASE_DATA_FILE, JSON.stringify(database_data));
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   

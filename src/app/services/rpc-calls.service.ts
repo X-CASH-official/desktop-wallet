@@ -216,7 +216,7 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
     });
   }
 
-  public async openWallet(password:string):Promise<string>
+  public async openWallet(password:string):Promise<void>
   {
     return new Promise(async (resolve, reject) => {
       try
@@ -384,7 +384,7 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
     });
   }
 
-  public async changePassword(currentpassword:string, newpassword:string): Promise<string> {
+  public async changePassword(currentpassword:string, newpassword:string): Promise<void> {
    // Constants
    const URL:string = `{"jsonrpc":"2.0","id":"0","method":"change_wallet_password","params":{"old_password":"${currentpassword}","new_password":"${newpassword}"}}`;
 
