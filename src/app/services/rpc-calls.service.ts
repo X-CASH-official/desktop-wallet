@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Transaction } from 'electron';
-import { WalletDashboardComponent } from '../modules/wallet-dashboard/wallet-dashboard.component';
 const exec = (<any>window).require('child_process').exec;
 const fs = (<any>window).require('fs');
 
@@ -776,5 +775,3 @@ public async delegate_recover(delegateData:any): Promise<string> {
   });
   }
 }
-
-
