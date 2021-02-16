@@ -32,23 +32,29 @@ export class RpcCallsService {
         // Constants
         const requestHeaders: HeadersInit = new Headers();
         const URL = "http://localhost:18285/json_rpc";
-     
-        // Variables
-        let result:string;
-        let settings:object;   
-        
-        requestHeaders.set('Content-Type', 'application/json');
-        requestHeaders.set('Accept', 'application/json'); 
-        requestHeaders.set('User-Agent', this.rpcUserAgent); 
 
-        settings = {method:"post", headers: requestHeaders, body: json_data};
+        // Variables
+        let settings: object;
+
+        requestHeaders.set('Content-Type', 'application/json');
+        requestHeaders.set('Accept', 'application/json');
+        requestHeaders.set('User-Agent', this.rpcUserAgent);
+
+        settings = { method: "post", headers: requestHeaders, body: json_data };
 
         // send the post request
         fetch(URL, settings)
-        .then(res => res.json())
-        .then(res => resolve(res)) 
-       .catch(error => reject(error));
+          .then(res => res.json())
+          .then(res => {
+            console.log("received response:", JSON.stringify(res))
+            resolve(res)
+          })
+          .catch(error => {
+            console.log("received error:", JSON.stringify(error))
+            reject(error)
+          });
       } catch (error) {
+        console.log("received error:", JSON.stringify(error))
         reject();
       }
     });
@@ -57,28 +63,34 @@ export class RpcCallsService {
   private async getPostRequestDataNoErrors(json_data: string): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
-      // Constants
+        // Constants
         const requestHeaders: HeadersInit = new Headers();
         const URL = "http://localhost:18285/json_rpc";
-     
-        // Variables
-        let result:string;
-        let settings:object;   
-        
-        requestHeaders.set('Content-Type', 'application/json');
-        requestHeaders.set('Accept', 'application/json'); 
-        requestHeaders.set('User-Agent', this.rpcUserAgent); 
 
-        settings = {method:"post", headers: requestHeaders, body: json_data};
+        // Variables
+        let settings: object;
+
+        requestHeaders.set('Content-Type', 'application/json');
+        requestHeaders.set('Accept', 'application/json');
+        requestHeaders.set('User-Agent', this.rpcUserAgent);
+
+        settings = { method: "post", headers: requestHeaders, body: json_data };
 
         // send the post request
         fetch(URL, settings)
-        .then(res => res.json())
-        .then(res => resolve(res))
-        .catch(error => resolve("OK"));
+          .then(res => res.json())
+          .then(res => {
+            console.log("received response:", JSON.stringify(res))
+            resolve(res)
+          })
+          .catch(error => {
+            console.log("received error:", JSON.stringify(error))
+            resolve("OK");
+          });
       } catch (error) {
+        console.log("received error:", JSON.stringify(error))
         resolve("OK");
-      } 
+      }
     });
   }
 
@@ -132,7 +144,7 @@ console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disabl
       await this.closeWallet(0);
 
       // open the wallet in create wallet mode
-      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+      exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}" --log-level 2`);
       console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --wallet-dir "${this.WALLET_DIR}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
       await this.sleep(20000);
       console.log("creating window");
