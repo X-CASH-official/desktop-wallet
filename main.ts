@@ -70,8 +70,15 @@ function createWindow() {
     if (process.platform === "win32") {
       fs.copyFileSync(`./downloads/${binariesDir}/xcash-wallet-rpc.exe`, `${DIR}xcash-wallet-rpc.exe`)
     } else {
-      exec(`chmod -R 755 /downloads/${binariesDir}`);
-      fs.copyFileSync(`${__dirname}/downloads/${binariesDir}/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
+      exec(`chmod -R 755 ./downloads`);
+
+      // looks like adm-zip works differently on different platforms
+      if (process.platform === "linux") {
+        fs.copyFileSync(`${__dirname}/downloads/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
+      } else {
+        fs.copyFileSync(`${__dirname}/downloads/${binariesDir}/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
+      }
+
       exec(`chmod +x ${DIR}/xcash-wallet-rpc`)
     }
 
