@@ -108,6 +108,7 @@
     "@angular/language-service": "^9.0.0",
     "@angular/platform-browser": "^9.0.0",
     "@angular/platform-browser-dynamic": "^9.0.0",
+    "@types/adm-zip": "^0.4.33",
     "@types/datatables.net": "^1.10.18",
     "@types/datatables.net-buttons": "^1.4.3",
     "@types/datatables.net-select": "^1.2.6",
