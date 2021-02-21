@@ -1,11 +1,11 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
-const AdmZip = require('adm-zip');
-const axios = require('axios');
-const exec = require('child_process').exec;
-const fs = require('fs');
-const crypto = require("crypto");
-const setupEvents = require('./installers/setupEvents')
+import * as AdmZip from 'adm-zip';
+import axios from 'axios';
+import { exec } from 'child_process'
+import * as fs from 'fs';
+import * as crypto from "crypto";
+import * as setupEvents from './installers/setupEvents'
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -20,10 +20,10 @@ function createWindow() {
   const BINARIES_MAC_OS_DIR_NAME = "xcash-cli-osx-2.0.0"
   const BINARIES_WINDOWS_DIR_NAME = "xcash-cli-windows-2.0.0"
 
-  const DATABASE:string = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "us1.xcash.foundation:18281"}}';
+  const DATABASE = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "us1.xcash.foundation:18281"}}';
   const DIR = `${process.env.HOME}/xcash-official/`;
-  const RPC_FILE:string = `${DIR}useragent.txt`;
-  const DATABASE_FILE:string = `${DIR}database.txt`;
+  const RPC_FILE = `${DIR}useragent.txt`;
+  const DATABASE_FILE = `${DIR}database.txt`;
 
   const downloadBinaries = async (url: string): Promise<void> => {
     const pathToSave = path.resolve(__dirname, 'downloads', 'xcash-2.0.zip')
@@ -63,16 +63,23 @@ function createWindow() {
 
     await downloadBinaries(`https://github.com/X-CASH-official/xcash-core/releases/download/2.0.0/${binariesDir}.zip`);
 
-    var zip = new AdmZip(`${__dirname}/downloads/xcash-2.0.zip`);
+    const zip = new AdmZip(`${__dirname}/downloads/xcash-2.0.zip`);
     zip.extractAllTo(`${__dirname}/downloads`, true);
 
-
-    if (process.platform === "win32") {
-      fs.copyFileSync(`./downloads/${binariesDir}/xcash-wallet-rpc.exe`, `${DIR}xcash-wallet-rpc.exe`)
-    } else {
-      exec(`chmod -R 755 /downloads/${binariesDir}`);
-      fs.copyFileSync(`${__dirname}/downloads/${binariesDir}/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
-      exec(`chmod +x ${DIR}/xcash-wallet-rpc`)
+    switch (process.platform) {
+      case "darwin":
+        exec(`chmod -R 755 ./downloads`);
+        fs.copyFileSync(`${__dirname}/downloads/${binariesDir}/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
+        exec(`chmod +x ${DIR}/xcash-wallet-rpc`)
+        break;
+      case "win32":
+        fs.copyFileSync(`./downloads/${binariesDir}/xcash-wallet-rpc.exe`, `${DIR}xcash-wallet-rpc.exe`)
+        break;
+      default:
+        exec(`chmod -R 755 ./downloads`);
+        fs.copyFileSync(`${__dirname}/downloads/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
+        exec(`chmod +x ${DIR}/xcash-wallet-rpc`)
+        break;
     }
 
     fs.rmdirSync("./downloads", { recursive: true });
@@ -92,7 +99,7 @@ function createWindow() {
   mainWindow.maximize();
 
   // create and set the user agent
-  let rpcUserAgent:string = crypto.randomBytes(100).toString('hex');
+  const rpcUserAgent = crypto.randomBytes(100).toString('hex');
   fs.writeFileSync(RPC_FILE, rpcUserAgent);
   mainWindow.webContents.userAgent = rpcUserAgent;
 
