@@ -21,7 +21,7 @@ function createWindow() {
   const BINARIES_WINDOWS_DIR_NAME = "xcash-cli-windows-2.0.0"
 
   const DATABASE = '{"wallet_data": [],"contact_data": [],"wallet_settings": {"autolock": 10,"remote_node": "us1.xcash.foundation:18281"}}';
-  const DIR = `${process.env.HOME}/xcash-official/`;
+  const DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : `${process.env.USERPROFILE}/xcash-official/`;
   const RPC_FILE = `${DIR}useragent.txt`;
   const DATABASE_FILE = `${DIR}database.txt`;
 

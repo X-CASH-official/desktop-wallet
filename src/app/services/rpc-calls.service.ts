@@ -11,7 +11,7 @@ export class RpcCallsService {
 
   // Variables
   walletsyncprogress = 0;
-  WALLET_DIR = `${process.env.HOME}/xcash-official/`;
+  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : `${process.env.USERPROFILE}/xcash-official/`;
   WALLET_DIR_CREATE_WALLET = this.WALLET_DIR.slice(0, -1);
   rpcUserAgent = fs.readFileSync(`${this.WALLET_DIR}useragent.txt`, 'utf8');
   Remote_Node = JSON.parse(fs.readFileSync(`${this.WALLET_DIR}database.txt`, 'utf8')).wallet_settings.remote_node;
