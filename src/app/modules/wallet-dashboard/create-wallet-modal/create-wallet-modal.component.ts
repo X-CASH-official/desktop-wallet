@@ -5,6 +5,7 @@ import { WalletNamePasswordModalComponent } from '../wallet-name-password-modal/
 import { RpcCallsService } from 'src/app/services/rpc-calls.service';
 import { DatabaseService } from 'src/app/services/database.service';
 import { WalletListService } from 'src/app/services/wallet-list.service';
+const fs = (<any>window).require('fs');
 
 @Component({
   selector: 'app-create-wallet-modal',
@@ -26,12 +27,30 @@ export class CreateWalletModalComponent implements OnInit {
   publicAddress:string;
   WalletName:string;
   data:string;
+  progress: number = 0;
+  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : `${process.env.USERPROFILE}/xcash-official/`;
+  WALLET_RPC_LOG = `${this.WALLET_DIR}xcash-wallet-rpc.log`;
   
   ngOnInit() {
   }
   
   public show() {
     this.createWalletModal1.show();
+  }
+
+public async getProgress()
+  {
+    if (fs.existsSync(`${this.WALLET_RPC_LOG}`))
+    {
+      let data = fs.readFileSync(`${this.WALLET_RPC_LOG}`, 'utf8');
+      let linesInStream = data.split(/[\r\n]+/g);
+      let lastLine = linesInStream[linesInStream.length - 2];
+      let current_block_height = lastLine.substr(lastLine.indexOf(", height ")+9);
+      current_block_height = current_block_height.substr(0,current_block_height.indexOf(","));
+      let current_network_block_height = await this.RpcCallsService.getCurrentNetworkBlockHeight();
+      this.progress = Math.round((parseInt(current_block_height) / parseInt(current_network_block_height)) * 100);
+    }
+    return;
   }
   
   async onSubmitNameAndPasswordModal(NameAndPasswordValues) {
@@ -44,6 +63,9 @@ export class CreateWalletModalComponent implements OnInit {
 
       // check if the wallet already exist
       await this.DatabaseService.checkIfWalletExist(this.WalletName);
+
+      // get the wallets sync progress
+      setTimeout(() => setInterval(() => this.getProgress(),60000), 60000);
 
       let data:any = await this.RpcCallsService.createWallet(NameAndPasswordValues);
       // At this point the wallet is created, and synced
