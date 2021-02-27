@@ -56,6 +56,12 @@ export class SettingsConnectionComponent implements OnInit {
        this.custom_remote_node.nativeElement.value = "";
     }
 
+async get_network_block_height()
+{
+  let current_network_block_height = await this.RpcCallsService.getCurrentNetworkBlockHeight();
+  this.blockHeight = parseInt(current_network_block_height);
+}
+
   async ngOnDestroy()
   {
     // overwrite the selection if they specifed a custom node
@@ -68,7 +74,7 @@ export class SettingsConnectionComponent implements OnInit {
 
   ngOnInit()
   {
-
+    this.get_network_block_height();
   }
 
   async ngAfterViewInit() {
