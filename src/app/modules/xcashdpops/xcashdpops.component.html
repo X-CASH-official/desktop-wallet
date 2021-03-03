@@ -14,6 +14,18 @@
 <div class="card">
   <div class="card-body">
     <h3 class="mb-4">XCASH DPOPS</h3>
+
+    <div class="row justify-content-between mb-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary m-0" (click)="VoteStatusModal.show()"><em class="feather icon-plus-circle"></em>Vote Status</button>
+      </div>
+    </div>
+
+    <div class="row justify-content-between mb-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary m-0" (click)="revote();"><em class="feather icon-plus-circle"></em>Revote</button>
+      </div>
+    </div>
     
     <div class="row justify-content-between mb-2">
       <div class="col-auto">
@@ -66,6 +78,19 @@
     <h5 class="modal-title">Successful</h5>
     <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteSuccessModal.hide()"><span aria-hidden="true">&times;</span></button>
     
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #VoteStatusModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">{{currently_voted_for_delegate}}</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteStatusModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" (click)="get_vote_status();">Check Vote Status</button>
   </div>
 </app-ui-modal>
 

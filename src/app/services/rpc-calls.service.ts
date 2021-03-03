@@ -709,6 +709,50 @@ export class RpcCallsService {
     });
   }
 
+public async check_vote_status(): Promise<string> {
+
+    // Constants
+    const URL = `{"jsonrpc":"2.0","id":"0","method":"vote_status"}`;
+
+    // Variables
+    let data;
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        data = await this.getPostRequestData(URL);
+        resolve(data.result.status);
+      } catch (error) {
+        try {
+          reject(data.error.message);
+        } catch (error) {
+          reject();
+        }
+      }
+    });
+  }
+
+public async revote(): Promise<string> {
+
+    // Constants
+    const URL = `{"jsonrpc":"2.0","id":"0","method":"revote"}`;
+
+    // Variables
+    let data;
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        data = await this.getPostRequestData(URL);
+        resolve(data.result.status);
+      } catch (error) {
+        try {
+          reject(data.error.message);
+        } catch (error) {
+          reject();
+        }
+      }
+    });
+  }
+
   public async delegate_vote(delegateData: any): Promise<string> {
     // Constants
     const URL = `{"jsonrpc":"2.0","id":"0","method":"vote","params":{"delegate_data":"${delegateData.delegateName}"}}`;

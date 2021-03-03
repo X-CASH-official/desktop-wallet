@@ -12,6 +12,9 @@ export class XcashdpopsComponent implements OnInit {
   @ViewChild('VoteWaitModal', { static: true }) VoteWaitModal: any;
   @ViewChild('DelegateWaitModal', { static: true }) DelegateWaitModal: any;
   @ViewChild('SweepAllVoteModal', { static: true }) SweepAllVoteModal: any;
+  @ViewChild('VoteStatusModal', { static: true }) VoteStatusModal: any;
+
+  currently_voted_for_delegate:string = "Vote Status";
 
   constructor(private RpcCallsService: RpcCallsService) { }
 
@@ -114,6 +117,44 @@ async vote_sweep_all()
   {
     await this.RpcCallsService.sweep_all_vote();
     this.SweepAllVoteModal.hide(); 
+  }
+
+async get_vote_status()
+  {
+    try
+    {
+      let data = await this.RpcCallsService.check_vote_status();
+      console.log(data);
+      this.currently_voted_for_delegate = "Currently Voted for: " + data;
+    }
+    catch(error)
+    {
+      this.currently_voted_for_delegate = "You have not voted for a delegate yet";
+    }
+  }
+
+async revote()
+  {
+    try
+    {
+    this.VoteWaitModal.show();
+    let data = await this.RpcCallsService.revote();
+    if (data === "success")
+    {
+      this.VoteWaitModal.hide();
+      this.VoteSuccessModal.show();
+    }
+    else
+    {
+      this.VoteWaitModal.hide();
+      this.VoteFailModal.show();
+    }
+    }
+    catch(error)
+    {
+      this.VoteWaitModal.hide();
+      this.VoteFailModal.show();
+    }
   }
 
 }
