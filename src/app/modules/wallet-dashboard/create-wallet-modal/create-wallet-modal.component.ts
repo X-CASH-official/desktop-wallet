@@ -45,8 +45,7 @@ public async getProgress()
       let data = fs.readFileSync(`${this.WALLET_RPC_LOG}`, 'utf8');
       let linesInStream = data.split(/[\r\n]+/g);
       let lastLine = linesInStream[linesInStream.length - 2];
-      let current_block_height = lastLine.substr(lastLine.indexOf(", height ")+9);
-      current_block_height = current_block_height.substr(0,current_block_height.indexOf(","));
+      let current_block_height = lastLine.substr(lastLine.indexOf("height: ")+8);
       let current_network_block_height = await this.RpcCallsService.getCurrentNetworkBlockHeight();
       this.progress = Math.round((parseInt(current_block_height) / parseInt(current_network_block_height)) * 100);
     }
