@@ -149,17 +149,18 @@ export class RpcCallsService {
 
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(this.WALLET_DIR);
-        console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --log-level 2 --wallet-file "${this.WALLET_DIR}${walletData.walletName}" --password "${walletData.walletPassword.password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
-         
-        // close the wallet if it is already running
-        console.log('Closing window');
-        await this.closeWallet(0);
 
         // remove any wallet rpc log
         if (fs.existsSync(`${this.WALLET_RPC_LOG}`)) {
           fs.unlinkSync(`${this.WALLET_RPC_LOG}`);
         }
+
+        console.log(this.WALLET_DIR);
+        console.log(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --log-level 2 --wallet-file "${this.WALLET_DIR}${walletData.walletName}" --password "${walletData.walletPassword.password}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}"`);
+         
+        // close the wallet if it is already running
+        console.log('Closing window');
+        await this.closeWallet(0);        
 
         // open the wallet in create wallet mode
         exec(`"${this.WALLET_DIR}xcash-wallet-rpc" --rpc-bind-port 18285 --disable-rpc-login --log-level 2 --wallet-dir "${this.WALLET_DIR}" --daemon-address "${this.Remote_Node}" --rpc-user-agent "${this.rpcUserAgent}" --log-level 2`);
@@ -201,14 +202,14 @@ export class RpcCallsService {
 
     return new Promise(async (resolve, reject) => {
       try {
-        // close the wallet if it is already running
-        console.log('Closing window');
-        await this.closeWallet(0);
-
         // remove any wallet rpc log
         if (fs.existsSync(`${this.WALLET_RPC_LOG}`)) {
           fs.unlinkSync(`${this.WALLET_RPC_LOG}`);
         }
+
+        // close the wallet if it is already running
+        console.log('Closing window');
+        await this.closeWallet(0);
 
         // create the importwallet.txt file
         fs.writeFileSync(IMPORT_WALLET_FILE, IMPORT_WALLET_DATA);
