@@ -11,7 +11,7 @@ export class RpcCallsService {
 
   // Variables
   walletsyncprogress = 0;
-  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : `${process.env.USERPROFILE}/xcash-official/`;
+  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : (`${process.env.USERPROFILE}\\xcash-official\\`).replace(/\\/g,"\\\\");
   WALLET_RPC_LOG = `${this.WALLET_DIR}xcash-wallet-rpc.log`;
   WALLET_DIR_CREATE_WALLET = this.WALLET_DIR.slice(0, -1);
   rpcUserAgent = fs.readFileSync(`${this.WALLET_DIR}useragent.txt`, 'utf8');
@@ -90,7 +90,7 @@ export class RpcCallsService {
         // Constants
         const requestHeaders: HeadersInit = new Headers();
         const settings = { method: 'post', headers: requestHeaders, body: json_data };
-        const URL = 'http://officialdelegate.xcash.foundation:18281/json_rpc';
+        const URL = 'http://europe2.xcash.foundation:18281/json_rpc';
 
         requestHeaders.set('Content-Type', 'application/json');
         requestHeaders.set('Accept', 'application/json');
@@ -358,9 +358,9 @@ export class RpcCallsService {
     return new Promise(async (resolve) => {
       try {
         data = await this.getPostRequestDataNoErrorsSeedNodes(URL);
-        console.log(data);
         resolve(data.result.count);
       } catch (error) {
+        try {
         resolve(0);
       }
     });

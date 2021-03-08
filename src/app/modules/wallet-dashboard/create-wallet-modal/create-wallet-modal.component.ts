@@ -28,7 +28,7 @@ export class CreateWalletModalComponent implements OnInit {
   WalletName:string;
   data:string;
   progress: number = 0;
-  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : `${process.env.USERPROFILE}/xcash-official/`;
+  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : (`${process.env.USERPROFILE}\\xcash-official\\`).replace(/\\/g,"\\\\");
   WALLET_RPC_LOG = `${this.WALLET_DIR}xcash-wallet-rpc.log`;
   
   ngOnInit() {
@@ -43,7 +43,7 @@ public async getProgress()
     if (fs.existsSync(`${this.WALLET_RPC_LOG}`))
     {
       let data = fs.readFileSync(`${this.WALLET_RPC_LOG}`, 'utf8');
-      let linesInStream = data.split(/[\r\n]+/g);
+      let linesInStream = process.platform !== "win32" ? data.split(/[\r\n]+/g) : data.split(/[\n]+/g);
       let lastLine = linesInStream[linesInStream.length - 2];
       let current_block_height = lastLine.substr(lastLine.indexOf("height: ")+8);
       let current_network_block_height = await this.RpcCallsService.getCurrentNetworkBlockHeight();

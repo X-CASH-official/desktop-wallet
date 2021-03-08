@@ -15,9 +15,9 @@ export class DatabaseService {
   constructor(private RpcCallsService: RpcCallsService) { }
 
   // Variables
-  DATABASE_DATA_FILE:string = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/database.txt` : `${process.env.USERPROFILE}/xcash-official/database.txt`;
+  DATABASE_DATA_FILE:string = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/database.txt` : (`${process.env.USERPROFILE}\\xcash-official\\database.txt`).replace(/\\/g,"\\\\");
   AUTOLOCKSETTINGS:number = JSON.parse(fs.readFileSync(this.DATABASE_DATA_FILE,"utf8")).wallet_settings.autolock;
-  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : `${process.env.USERPROFILE}/xcash-official/`;
+  WALLET_DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : (`${process.env.USERPROFILE}\\xcash-official\\`).replace(/\\/g,"\\\\");
 
   sleep(milliseconds)
   {
