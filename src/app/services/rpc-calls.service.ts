@@ -360,7 +360,6 @@ export class RpcCallsService {
         data = await this.getPostRequestDataNoErrorsSeedNodes(URL);
         resolve(data.result.count);
       } catch (error) {
-        try {
         resolve(0);
       }
     });
