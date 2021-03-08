@@ -90,7 +90,7 @@ export class RpcCallsService {
         // Constants
         const requestHeaders: HeadersInit = new Headers();
         const settings = { method: 'post', headers: requestHeaders, body: json_data };
-        const URL = 'http://europe2.xcash.foundation:18281/json_rpc';
+        const URL = 'http://usseed1.x-cash.org:18281/json_rpc';
 
         requestHeaders.set('Content-Type', 'application/json');
         requestHeaders.set('Accept', 'application/json');
