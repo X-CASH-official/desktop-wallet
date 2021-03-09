@@ -117,24 +117,23 @@ function createWindow() {
   {
     fs.writeFileSync(DATABASE_FILE, DATABASE);
   }
+  
+  // delete any xcash rpc log
+  if (fs.existsSync(WALLET_RPC_LOG))
+  {
+    fs.unlinkSync(WALLET_RPC_LOG);
+  }
 }
 
 app.on("ready", createWindow);
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
-  const DIR = process.platform !== "win32" ? `${process.env.HOME}/xcash-official/` : `${process.env.USERPROFILE}/xcash-official/`;
-  const WALLET_RPC_LOG = `${DIR}xcash-wallet-rpc.log`;
-
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") {
     // close the xcash-wallet-rpc
     process.platform === "win32" ? exec("taskkill /f /im xcash-wallet-rpc*") : exec("killall -9 'xcash-wallet-rpc'");
-    // delete any xcash rpc log
-    if (fs.existsSync(WALLET_RPC_LOG)) {
-          fs.unlinkSync(WALLET_RPC_LOG);
-        }
     app.quit();
   }
 });
