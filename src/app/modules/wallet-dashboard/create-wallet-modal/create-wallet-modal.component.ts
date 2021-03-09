@@ -38,7 +38,7 @@ export class CreateWalletModalComponent implements OnInit {
     this.createWalletModal1.show();
   }
 
-public async getProgress()
+public async getProgress(timer)
   {
     if (fs.existsSync(`${this.WALLET_RPC_LOG}`))
     {
@@ -48,6 +48,12 @@ public async getProgress()
       let current_block_height = lastLine.substr(lastLine.indexOf("height: ")+8);
       let current_network_block_height = await this.RpcCallsService.getCurrentNetworkBlockHeight();
       this.progress = Math.round((parseInt(current_block_height) / parseInt(current_network_block_height)) * 100);
+
+      if (this.progress > 90)
+      {
+        this.progress = 100;
+        clearInterval(timer);
+      }
     }
     return;
   }
@@ -63,8 +69,10 @@ public async getProgress()
       // check if the wallet already exist
       await this.DatabaseService.checkIfWalletExist(this.WalletName);
 
+      var timer;
+
       // get the wallets sync progress
-      setTimeout(() => setInterval(() => this.getProgress(),60000), 60000);
+      setTimeout(() => timer = setInterval(() => this.getProgress(timer),60000), 60000);
 
       let data:any = await this.RpcCallsService.createWallet(NameAndPasswordValues);
       // At this point the wallet is created, and synced

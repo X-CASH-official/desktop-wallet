@@ -91,7 +91,8 @@ export class ImportWalletModalComponent implements OnInit {
       await this.DatabaseService.checkIfWalletExist(this.Walletdata.walletName);
 
       // get the wallets sync progress
-      setTimeout(() => setInterval(() => this.getProgress(),60000), 60000);
+      var timer;
+      setTimeout(() => timer = setInterval(() => this.getProgress(timer),60000), 60000);
 
       let data:any = await this.RpcCallsService.importWallet(this.Walletdata);
       this.data = "The wallet has been imported successfully";
@@ -113,7 +114,7 @@ export class ImportWalletModalComponent implements OnInit {
 
   }
 
-public async getProgress()
+public async getProgress(timer)
   {
     if (fs.existsSync(`${this.WALLET_RPC_LOG}`))
     {
@@ -124,6 +125,12 @@ public async getProgress()
       current_block_height = current_block_height.substr(0,current_block_height.indexOf(","));
       let current_network_block_height = await this.RpcCallsService.getCurrentNetworkBlockHeight();
       this.progress = Math.round((parseInt(current_block_height) / parseInt(current_network_block_height)) * 100);
+
+      if (this.progress > 90)
+      {
+        this.progress = 100;
+        clearInterval(timer);
+      }
     }
     return;
   }
