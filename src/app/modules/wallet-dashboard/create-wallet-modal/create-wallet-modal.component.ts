@@ -63,7 +63,7 @@ public async getProgress(timer)
     this.WalletName = NameAndPasswordValues.walletName;
     try
     {
-      this.data = "The wallet is being created and synced. This might take a long time";
+      this.data = "The wallet is synchronizing the whole chain to check for transactions. The first synchronization will take a while, depending on your computer CPU and internet connection. Thank you for your patience.";
       this.createWalletModalError.show();
 
       // check if the wallet already exist
@@ -110,7 +110,7 @@ public async getProgress(timer)
   /* Mnemonic seed confirmation */
   seedWordsConfirmationForm: FormArray;
   wordsToConfirm: boolean[];
-  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 12;
+  readonly NUMBER_SEED_WORDS_TO_CONFIRM: number = 3;
   
   seedConfirmationPreparation() {
     this.wordsToConfirm = this.chooseRandomWordsToConfirm(this.exampleSeed, this.NUMBER_SEED_WORDS_TO_CONFIRM);
