@@ -1,3 +1,21 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['../integrated-address']" routerLinkActive="active" id="addresses-tab">Integrated Addresses</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['../sub-address']" routerLinkActive="active" id="addresses-tab">Sub Accounts</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['../sign-data']" routerLinkActive="active" id="sign-data-tab">Sign Data</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['../reserve-proof']" routerLinkActive="active" id="reserve-proof-tab">Reserve Proof</a>
+  </li>
+</ul>
+<div class="tab-content" id="router-tab">
+  <router-outlet></router-outlet>
+</div>
+
 <div class="row justify-content-between mb-2">
   <div class="col-md-3 col-4">
     <input type="text" class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search">
