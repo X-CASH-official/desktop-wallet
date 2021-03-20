@@ -59,7 +59,7 @@ export class ImportWalletModalComponent implements OnInit {
 
   onSubmitMnemonicSeed() {
     if (this.importMnemonicSeedForm.valid) {
-      this.Walletdata.seed = this.mnemonicSeed.value;
+      this.Walletdata.seed = this.mnemonicSeed.value.replace(/(\r\n|\n|\r)/gm, "");
       this.importWalletModal1.hide();
       this.importWalletModal2.show();
     } else {
@@ -69,9 +69,9 @@ export class ImportWalletModalComponent implements OnInit {
 
   onSubmitPrivateSendKey() {
     if (this.importPrivateSendKeyForm.valid) {
-      this.Walletdata.privatekey = this.privateSendKey.value;
-      this.Walletdata.viewkey = this.viewKey.value;
-      this.Walletdata.publicaddress = this.publicaddress.value;
+      this.Walletdata.privatekey = this.privateSendKey.value.replace(/(\r\n|\n|\r)/gm, "");
+      this.Walletdata.viewkey = this.viewKey.value.replace(/(\r\n|\n|\r)/gm, "");
+      this.Walletdata.publicaddress = this.publicaddress.value.replace(/(\r\n|\n|\r)/gm, "");
       this.importWalletModal1.hide();
       this.importWalletModal2.show();
     } else {
