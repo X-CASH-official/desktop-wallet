@@ -55,7 +55,7 @@ const NAVIGATION_ITEMS = [
         url: '/settings',
         classes: 'nav-item',
         icon: 'feather icon-settings'
-      },
+      }/*,
       {
         id: 'xcashdpops',
         title: 'XCASH DPOPS',
@@ -63,7 +63,7 @@ const NAVIGATION_ITEMS = [
         url: '/xcashdpops',
         classes: 'nav-item',
         icon: 'feather icon-users'
-      }
+      }*/
     ]
   }
 ];

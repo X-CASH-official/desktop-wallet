@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WalletComponent } from './wallet.component';
 import { WalletTransactionsComponent } from './wallet-transactions/wallet-transactions.component';
+import { WalletAdvancedComponent } from './wallet-advanced/wallet-advanced.component';
+import { WalletStakingComponent } from './wallet-staking/wallet-staking.component';
 import { WalletIntegratedAddressComponent } from './wallet-integrated-address/wallet-integrated-address.component';
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
@@ -15,6 +17,14 @@ const routes: Routes = [
       {
         path: 'transactions',
         component: WalletTransactionsComponent,
+      },
+      {
+        path: 'staking',
+        component: WalletStakingComponent,
+      },
+      {
+        path: 'advanced',
+        component: WalletAdvancedComponent,
       },
       {
         path: 'integrated-address',

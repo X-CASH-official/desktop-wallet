@@ -752,7 +752,7 @@ public async revote(): Promise<string> {
 
   public async delegate_vote(delegateData: any): Promise<string> {
     // Constants
-    const URL = `{"jsonrpc":"2.0","id":"0","method":"vote","params":{"delegate_data":"${delegateData.delegateName}"}}`;
+    const URL = `{"jsonrpc":"2.0","id":"0","method":"vote","params":{"delegate_data":"${delegateData}"}}`;
 
     // Variables
     let data;

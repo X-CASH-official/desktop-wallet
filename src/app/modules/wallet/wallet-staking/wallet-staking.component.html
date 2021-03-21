@@ -1,0 +1,110 @@
+<app-ui-modal #SweepAllVoteModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Wait until the message closes, then try to revote. This should take about 15 minutes</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="SweepAllVoteModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+
+<div class="app-modal-body">
+    
+    <br><br>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [style.width.%]="progress"></div>
+      </div>
+  </div>
+</app-ui-modal>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Prepare wallet for vote</h6>
+    <p class="text-muted mb-0">Having a lot of transactions in your wallet might render the vote invalid. You can prepare your wallet by aggregating all transactions.</p>
+    <p class="text-muted mb-0">Will take 15 minutes to have your wallet prepared.</p>
+  </div>
+  <div>
+    <div class="input-group">
+      
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" (click)="SweepAllVoteModal.show(); concat_tx();">Concatenate Transactions</button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Vote for a delegate</h6>
+    <p class="text-muted mb-0">Assign the full balance of the wallet to a delegate. Spending any amount from the wallet will cancel the vote.</p>
+  </div>
+  <div>
+    <input type="text" class="form-control" placeholder="Enter delegate" #delegate_vote_data>
+    <button type="button" class="btn btn-primary m-0" (click)="vote(delegate_vote_data.value);"><em class="feather icon-users"></em>Vote</button>
+  </div>
+</div>
+<hr>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h6>Current Staking Information</h6>
+    <p class="text-muted mb-0">{{currently_voted_for_delegate}}</p>
+  </div>
+  <div>
+    <button type="button" class="btn btn-success m-0" (click)="revote();"><em class="feather icon-refresh-ccw"></em>Revote</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+<app-ui-modal #VoteSuccessModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Successful</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteSuccessModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #VoteStatusModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">{{currently_voted_for_delegate}}</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteStatusModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+
+  <div class="app-modal-footer">
+    <button class="btn btn-success text-center" (click)="get_vote_status();">Check Vote Status</button>
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #VoteFailModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Failed</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteFailModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #VoteWaitModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Waiting until three minutes after the top of the hour, please leave this message open and wait until the message closes automatically</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="VoteWaitModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>
+
+<app-ui-modal #DelegateWaitModal dialogClass="modal-dialog-centered" containerClick="false">
+  <div class="app-modal-header">
+    
+    <h5 class="modal-title">Waiting this might take up to five minutes, please leave this message open and wait until the message closes automatically</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="DelegateWaitModal.hide()"><span aria-hidden="true">&times;</span></button>
+    
+  </div>
+</app-ui-modal>

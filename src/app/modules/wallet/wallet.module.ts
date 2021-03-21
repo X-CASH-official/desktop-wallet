@@ -7,6 +7,8 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 import { NgbTabsetModule, NgbTooltipModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { WalletTransactionsComponent } from './wallet-transactions/wallet-transactions.component';
+import { WalletAdvancedComponent } from './wallet-advanced/wallet-advanced.component';
+import { WalletStakingComponent } from './wallet-staking/wallet-staking.component';
 import { WalletIntegratedAddressComponent } from './wallet-integrated-address/wallet-integrated-address.component';
 import { WalletSignDataComponent } from './wallet-sign-data/wallet-sign-data.component';
 import { WalletReserveProofComponent } from './wallet-reserve-proof/wallet-reserve-proof.component';
@@ -26,7 +28,9 @@ import { XcashPublicAddressPipe } from 'src/app/pipes/xcash-public-address.pipe'
   declarations: [
     WalletComponent, 
     WalletTransactionsComponent, 
-    WalletIntegratedAddressComponent, 
+    WalletAdvancedComponent,
+    WalletStakingComponent, 
+    WalletIntegratedAddressComponent,
     WalletSignDataComponent, 
     WalletReserveProofComponent, 
     WalletSubAddressComponent, WalletSendModalComponent
