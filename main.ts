@@ -71,15 +71,16 @@ function createWindow() {
       case "darwin":
         exec(`chmod -R 755 ${DIR}downloads`);
         fs.copyFileSync(`${DIR}downloads/bin/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
-        exec(`chmod +x ${DIR}xcash-wallet-rpc`)
+        exec(`chmod -R 755 ${DIR}`);
+        exec(`chmod +x ${DIR}xcash-wallet-rpc`);
         break;
       case "win32":
-        fs.copyFileSync(`${DIR}downloads/bin/xcash-wallet-rpc.exe`, `${DIR}xcash-wallet-rpc.exe`)
+        fs.copyFileSync(`${DIR}downloads/bin/xcash-wallet-rpc.exe`, `${DIR}xcash-wallet-rpc.exe`);
         break;
       default:
         exec(`chmod -R 755 ${DIR}downloads`);
         fs.copyFileSync(`${DIR}downloads/bin/xcash-wallet-rpc`, `${DIR}xcash-wallet-rpc`);
-        exec(`chmod +x ${DIR}xcash-wallet-rpc`)
+        exec(`chmod +x ${DIR}xcash-wallet-rpc`);
         break;
     }
 
